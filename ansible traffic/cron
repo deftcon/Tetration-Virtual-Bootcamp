@@ -1,0 +1,2 @@
+# /var/spool/cron/root 
+* * * * * /bin/sh /home/ciscolab/ansible_ping.sh >> /home/ciscolab/ansible_ping.log

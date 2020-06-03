@@ -1,0 +1,37 @@
+---
+# Prefer using Env Vars to set AWS Access & Secret Keys named as such:
+# AWS_ACCESS_KEY_ID
+# AWS_SECRET_ACCESS_KEY 
+# This template for Deft Ohio region 10.0 vpc
+aws_access_key: 
+aws_secret_key: 
+aws_region: us-east-2
+
+student_count: 1
+student_prefix: cisco-student
+
+vpc_id: vpc-017dd7e8fc4a4b9de
+internet_gateway_id: igw-0dbfdfc228666cee0
+subnet_range_primary: 10.1.0.0/16
+subnet_range_secondary: 198.18.0.0/16
+
+s3_bucket: 'deft-tetration-hol-cft-template' # << S3 Bucket is global DNS unique name - create S3 bucket first with any arbitrary desired non-overlapping name
+
+ise_server_ip: '172.16.171.49' # << This is your own private on-prem ISE instance - needs VPN with AWS VGW
+
+asav_ami: ami-0f3cca6491d987102 # << Needs subscription from AWS Marketplace (search for ASAv BYOL)
+ldap_ami: ami-0b416df717b448667 # << Simple AMI Copy
+mssql_ami: ami-09782396834215732 # << Simple AMI Copy
+iis_ami: ami-091df3f67b36e2250 # << Simple AMI Copy
+mysql_ami: ami-051ba5822fc02da4b # << Requires Lanuch, Accept Subscription, then AMI Create
+apache_ami: ami-0c85d8851d66cd9f9 # << Requires Lanuch, Accept Subscription, then AMI Create
+ansible_ami: ami-0083b10a007c92d2d # << Requires Lanuch, Accept Subscription, then AMI Create
+tet_data_ami: ami-0cf7fd4e75d7d91ab # << Simple AMI Copy
+tet_edge_ami: ami-05d08946ffda72d18 # << Simple AMI Copy
+employee_ami: ami-032ca0586c1a78e1d # << Simple AMI Copy but most likely remove
+sysadmin_ami: ami-032ca0586c1a78e1d # << Simple AMI Copy but most likely remove
+employee_ubuntu_ami: ami-0af925e340025c9f9 # << Simple AMI Copy 
+sysadmin_ubuntu_ami: ami-0af925e340025c9f9 # << Simple AMI Copy 
+attack_server_ami: ami-04f958d48e22e185c # << Requires Lanuch, Accept Subscription, then AMI Create
+guacamole_ami: ami-007f96a1ed0595540 # << Requires Lanuch, Accept Subscription, then AMI Create
+eks_worker_ami: ami-0c4c60006aa81c29b # << Global AWS Marketplace - will change with region - https://cloud-images.ubuntu.com/docs/aws/eks/
