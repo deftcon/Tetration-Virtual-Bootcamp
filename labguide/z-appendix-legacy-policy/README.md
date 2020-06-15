@@ -17,54 +17,54 @@ That being said, we thought there would innevitably be some older legacy version
 At any rate, enjoy. 
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/08_global_services.mp4" style="font-weight:bold"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Global Services</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/08_global_services.mp4" style="font-weight:bold"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> Global Services</a>
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/09_common_pol_ADM_begin.mp4" style="font-weight:bold"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Common Policy ADM</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/09_common_pol_ADM_begin.mp4" style="font-weight:bold"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> Common Policy ADM</a>
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/10_common_pol_ADM_clusters.mp4" style="font-weight:bold"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Common Policy Clusters</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/10_common_pol_ADM_clusters.mp4" style="font-weight:bold"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> Common Policy Clusters</a>
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/11_common_policy_tuning.mp4" style="font-weight:bold"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Common Policy Tuning</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/11_common_policy_tuning.mp4" style="font-weight:bold"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> Common Policy Tuning</a>
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/12_nopcommerce_adm_clusters.mp4" style="font-weight:bold"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> nopCommerce ADM & Clusters</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/12_nopcommerce_adm_clusters.mp4" style="font-weight:bold"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> nopCommerce ADM & Clusters</a>
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/13_nopcommerce_policy_tuning.mp4" style="font-weight:bold"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> nopCommerce Policy Tuning</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/13_nopcommerce_policy_tuning.mp4" style="font-weight:bold"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> nopCommerce Policy Tuning</a>
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/14_opencart_adm_clusters.mp4" style="font-weight:bold"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> OpenCart ADM & Clusters</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/14_opencart_adm_clusters.mp4" style="font-weight:bold"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> OpenCart ADM & Clusters</a>
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/15_opencart_policy_tuning.mp4" style="font-weight:bold"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> OpenCart Policy Tuning</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/15_opencart_policy_tuning.mp4" style="font-weight:bold"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> OpenCart Policy Tuning</a>
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/16_nopcommerce_policy_analysis.mp4" style="font-weight:bold"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> nopCommerce Policy Analysis</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/16_nopcommerce_policy_analysis.mp4" style="font-weight:bold"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> nopCommerce Policy Analysis</a>
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/17_opencart_policy_analysis.mp4" style="font-weight:bold"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> OpenCart Policy Analysis</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/17_opencart_policy_analysis.mp4" style="font-weight:bold"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> OpenCart Policy Analysis</a>
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/18_common_policy_analysis.mp4" style="font-weight:bold"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Common Policy Analysis</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/18_common_policy_analysis.mp4" style="font-weight:bold"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> Common Policy Analysis</a>
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/19_global_policy_analysis.mp4" style="font-weight:bold"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Global Policy Analysis</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/19_global_policy_analysis.mp4" style="font-weight:bold"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> Global Policy Analysis</a>
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/20_pre_enforcement_checks.mp4" style="font-weight:bold"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Pre-Enforcement Checks</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/20_pre_enforcement_checks.mp4" style="font-weight:bold"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> Pre-Enforcement Checks</a>
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/21_enforcement_nopcommerce.mp4" style="font-weight:bold"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> nopCommerce Enforcement (includes Global and Common enforcement)</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/21_enforcement_nopcommerce.mp4" style="font-weight:bold"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> nopCommerce Enforcement (includes Global and Common enforcement)</a>
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/22_enforcement_opencart.mp4" style="font-weight:bold"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> OpenCart Enforcement</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/22_enforcement_opencart.mp4" style="font-weight:bold"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> OpenCart Enforcement</a>
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/23_enforcement_tuning.mp4" style="font-weight:bold"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Enforcement Policy Tuning</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/23_enforcement_tuning.mp4" style="font-weight:bold"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> Enforcement Policy Tuning</a>
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/24_aws_lambda.mp4" style="font-weight:bold" title="AWS Lambda"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> AWS Lambda when run from within a VPC</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/legacy/24_aws_lambda.mp4" style="font-weight:bold" title="AWS Lambda"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> AWS Lambda when run from within a VPC</a>
 
 
-| [Return to Table of Contents](https://tetration.guru/cisco-tetration-hol/labguide/) | [Go to Top of the Page](https://tetration.guru/cisco-tetration-hol/labguide/module27/) | 
+| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page](https://tetration.guru/labguide/module27/) | 

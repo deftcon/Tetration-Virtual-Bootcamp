@@ -3,12 +3,12 @@
 ## Module05 - Annotations
 Annotations are metadata that can be associated with endpoint IP addresses that are stored in Tetration inventory. Traditionally, IP addresses and/or hostnames of devices have been the primary means of identifying devices in an environment. Annotations provide a mechanism by which we can provide more context about the IP addresses, and build search criteria and policy within the platform using language that is much more consumable and meaningful to humans. Each IP address can be annotated with up to 32 fields of metadata.  With annotations we can build policy that is dynamic; by changing an annotation we can potentially affect the policy that is being applied to a particular machine.  Take for an example a machine that has been identified by the security team as running a highly vulnerable version of software.  By creating a policy that matches an annotation of "Quarantine",  we can annotate the workload with the "Quarantine" annotation to cause it to be removed from the network so that the vulnerability can be patched.
 
-In this module,  we'll configure Static Annotations for the endpoints in the lab environment.  Static Annotations are manually configured by the Tetration administrator by uploading a .CSV file,  or alternatively by configuring one at a time using the Assign Annotations wizard from the Inventory Upload screen.  Annotations can also be populated from external sources,  such as tags in VMware and AWS.  External annotations will be covered in <a href="https://tetration.guru/cisco-tetration-hol/labguide/module06/">Module 06 - External Orchestrators</a>.
+In this module,  we'll configure Static Annotations for the endpoints in the lab environment.  Static Annotations are manually configured by the Tetration administrator by uploading a .CSV file,  or alternatively by configuring one at a time using the Assign Annotations wizard from the Inventory Upload screen.  Annotations can also be populated from external sources,  such as tags in VMware and AWS.  External annotations will be covered in <a href="https://tetration.guru/labguide/module06/">Module 06 - External Orchestrators</a>.
 
 ---
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/05a_annotations.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Click here to view the first of two videos highlighting the creation of static Annotations.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/05a_annotations.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> Click here to view the first of two videos highlighting the creation of static Annotations.</a>
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/05b_verify_static_annotations.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Click here to view the second of two videos highlighting the verification of those Annotations.</a>  
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/05b_verify_static_annotations.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> Click here to view the second of two videos highlighting the verification of those Annotations.</a>  
 
 ---
 ### Steps for this Module  
@@ -33,7 +33,7 @@ In this module,  we'll configure Static Annotations for the endpoints in the lab
 
 Open the provided annotations.csv file in a text editor.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module05/images/module05_001.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module05/images/module05_001.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module05/images/module05_001.png"><img src="https://tetration.guru/labguide/module05/images/module05_001.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -41,7 +41,7 @@ Open the provided annotations.csv file in a text editor.
 
 Change the 1.1.1.x addresses in the annotations file to the provided IP addresses for the lab.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module05/images/module05_002.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module05/images/module05_002.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module05/images/module05_002.png"><img src="https://tetration.guru/labguide/module05/images/module05_002.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -49,7 +49,7 @@ Change the 1.1.1.x addresses in the annotations file to the provided IP addresse
 
 Save the annotations file to the desktop on the lab workstation.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module05/images/module05_003.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module05/images/module05_003.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module05/images/module05_003.png"><img src="https://tetration.guru/labguide/module05/images/module05_003.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -57,7 +57,7 @@ Save the annotations file to the desktop on the lab workstation.
 
 On the Tetration dashboard,  click on Visibility and Inventory Upload.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module05/images/module05_004.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module05/images/module05_004.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module05/images/module05_004.png"><img src="https://tetration.guru/labguide/module05/images/module05_004.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -65,7 +65,7 @@ On the Tetration dashboard,  click on Visibility and Inventory Upload.
 
 Click the Select File button and select the .csv file previously saved to the desktop.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module05/images/module05_005.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module05/images/module05_005.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module05/images/module05_005.png"><img src="https://tetration.guru/labguide/module05/images/module05_005.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -73,7 +73,7 @@ Click the Select File button and select the .csv file previously saved to the de
 
 Click the dropdown arrow and select Add for the operation.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module05/images/module05_006.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module05/images/module05_006.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module05/images/module05_006.png"><img src="https://tetration.guru/labguide/module05/images/module05_006.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -81,7 +81,7 @@ Click the dropdown arrow and select Add for the operation.
 
 Notice the new annotation columns that have been imported into the cluster from the .csv file.  These map to the column headers in the .csv file.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module05/images/module05_007.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module05/images/module05_007.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module05/images/module05_007.png"><img src="https://tetration.guru/labguide/module05/images/module05_007.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -89,7 +89,7 @@ Notice the new annotation columns that have been imported into the cluster from 
 
 Click on Visibility and Inventory Search.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module05/images/module05_008.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module05/images/module05_008.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module05/images/module05_008.png"><img src="https://tetration.guru/labguide/module05/images/module05_008.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -99,7 +99,7 @@ Here we can query for workloads using the annotations that we created.  Click on
 
 > Note: It may take a few minutes for the newly uploaded annotations to show up in the Filters help screen.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module05/images/module05_009.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module05/images/module05_009.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module05/images/module05_009.png"><img src="https://tetration.guru/labguide/module05/images/module05_009.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -107,25 +107,25 @@ Here we can query for workloads using the annotations that we created.  Click on
 
 Enter the query: ```* AppName contains OpenCart``` and click Search. The Linux machine in your lab environment should be shown.   
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module05/images/module05_010.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module05/images/module05_010.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module05/images/module05_010.png"><img src="https://tetration.guru/labguide/module05/images/module05_010.png" style="width:100%;height:100%;"></a>  
 
 <div class="step" id="step-011"><a href="#step-011" style="font-weight:bold">Step 011</a></div>  
 
 Click on the IP address of the Linux machine to go to the Workload Profile screen.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module05/images/module05_011.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module05/images/module05_011.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module05/images/module05_011.png"><img src="https://tetration.guru/labguide/module05/images/module05_011.png" style="width:100%;height:100%;"></a>  
 
 <div class="step" id="step-012"><a href="#step-012" style="font-weight:bold">Step 012</a></div>  
 
 Click on the link under User Annotations to display the list of annotations.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module05/images/module05_012.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module05/images/module05_012.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module05/images/module05_012.png"><img src="https://tetration.guru/labguide/module05/images/module05_012.png" style="width:100%;height:100%;"></a>  
 
 <div class="step" id="step-013"><a href="#step-013" style="font-weight:bold">Step 013</a></div>  
 
 Here you should see the annotations and their values that were entered into the .csv file for this workload.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module05/images/module05_013.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module05/images/module05_013.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module05/images/module05_013.png"><img src="https://tetration.guru/labguide/module05/images/module05_013.png" style="width:100%;height:100%;"></a>  
 
 
-| [Return to Table of Contents](https://tetration.guru/cisco-tetration-hol/labguide/) | [Go to Top of the Page](https://tetration.guru/cisco-tetration-hol/labguide/module05/) | [Continue to the Next Module](https://tetration.guru/cisco-tetration-hol/labguide/module06/) |
+| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page](https://tetration.guru/labguide/module05/) | [Continue to the Next Module](https://tetration.guru/labguide/module06/) |

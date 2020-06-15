@@ -1,12 +1,12 @@
 # Cisco Tetration - Hands-On Lab
 
 ## Module25: Container Policies and Enforcement
-In this module we will configure the policies and enable enforcement on a microservices web application running in Amazon EKS.  Amazon Elastic Kubernetes Service (EKS) provides a Kubernetes master controller and worker node(s) to deploy containerized applications.  During the lab build process, an EKS cluster was brought up and the application was deployed into Kubernetes.  In this module, we will create an application workspace for the microservices application and define the clusters based on queries using the Kubernetes labels that were configured as part of the application deployment, and that are being brought into Tetration via the External Orchestrator configuration that we performed in <a href="https://tetration.guru/cisco-tetration-hol/labguide/module06/">Module 6</a>. We will then create the policies needed to secure traffic between the multiple tiers of the application,  and enable enforcement.  Finally,  we will test to make sure the application is still functioning once moving into enforcement.  
+In this module we will configure the policies and enable enforcement on a microservices web application running in Amazon EKS.  Amazon Elastic Kubernetes Service (EKS) provides a Kubernetes master controller and worker node(s) to deploy containerized applications.  During the lab build process, an EKS cluster was brought up and the application was deployed into Kubernetes.  In this module, we will create an application workspace for the microservices application and define the clusters based on queries using the Kubernetes labels that were configured as part of the application deployment, and that are being brought into Tetration via the External Orchestrator configuration that we performed in <a href="https://tetration.guru/labguide/module06/">Module 6</a>. We will then create the policies needed to secure traffic between the multiple tiers of the application,  and enable enforcement.  Finally,  we will test to make sure the application is still functioning once moving into enforcement.  
 
 ---
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/25a_container_policies_and_enforcement.mp4" style="font-weight:bold" title="Container Policy Definition"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of tasks performed to define policies for a multi-tier microservices appplication.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/25a_container_policies_and_enforcement.mp4" style="font-weight:bold" title="Container Policy Definition"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of tasks performed to define policies for a multi-tier microservices appplication.</a>
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/25b_container_policies_and_enforcement.mp4" style="font-weight:bold" title="Container Policy Enforcement"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of tasks performed to analyze and enforce the policy for a multi-tier microservices appplication.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/25b_container_policies_and_enforcement.mp4" style="font-weight:bold" title="Container Policy Enforcement"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of tasks performed to analyze and enforce the policy for a multi-tier microservices appplication.</a>
 
 ---
 
@@ -48,7 +48,7 @@ Rules will be implemented on the EKS worker node that is running Ubuntu.  Previo
 
 Navigate to Agent Config.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_001.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_001.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module25/images/module25_001.png"><img src="https://tetration.guru/labguide/module25/images/module25_001.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -56,7 +56,7 @@ Navigate to Agent Config.
 
 Click on the Linux Inventory Filter.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_002.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_002.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module25/images/module25_002.png"><img src="https://tetration.guru/labguide/module25/images/module25_002.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -64,7 +64,7 @@ Click on the Linux Inventory Filter.
 
 Edit the Inventory Filter.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_003.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_003.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module25/images/module25_003.png"><img src="https://tetration.guru/labguide/module25/images/module25_003.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -72,7 +72,7 @@ Edit the Inventory Filter.
 
 Edit the query by adding the criteria `or OS contains Ubuntu`.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_004.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_004.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module25/images/module25_004.png"><img src="https://tetration.guru/labguide/module25/images/module25_004.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -80,7 +80,7 @@ Edit the query by adding the criteria `or OS contains Ubuntu`.
 
 Navigate to Applications and create a new Application Workspace.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_005.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_005.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module25/images/module25_005.png"><img src="https://tetration.guru/labguide/module25/images/module25_005.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -88,7 +88,7 @@ Navigate to Applications and create a new Application Workspace.
 
 Enter Sock Shop for the name of the workspace, and select the SockShop scope.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_006.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_006.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module25/images/module25_006.png"><img src="https://tetration.guru/labguide/module25/images/module25_006.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -96,7 +96,7 @@ Enter Sock Shop for the name of the workspace, and select the SockShop scope.
 
 Click on the Clusters tab and then add a new cluster.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_007.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_007.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module25/images/module25_007.png"><img src="https://tetration.guru/labguide/module25/images/module25_007.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -104,7 +104,7 @@ Click on the Clusters tab and then add a new cluster.
 
 Edit the created cluster.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_008.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_008.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module25/images/module25_008.png"><img src="https://tetration.guru/labguide/module25/images/module25_008.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -112,7 +112,7 @@ Edit the created cluster.
 
 Enter the name `Carts` and query `* orchestrator_AppCluster = carts`.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_009.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_009.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module25/images/module25_009.png"><img src="https://tetration.guru/labguide/module25/images/module25_009.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -133,7 +133,7 @@ Name: `Shipping`, Query: `orchestrator_AppCluster = shipping`
 Name: `User`, Query: `orchestrator_AppCluster = user`  
 Name: `User DB`, Query: `orchestrator_AppCluster = user-db`
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_010.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_010.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module25/images/module25_010.png"><img src="https://tetration.guru/labguide/module25/images/module25_010.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -141,7 +141,7 @@ Name: `User DB`, Query: `orchestrator_AppCluster = user-db`
 
 Click on Policies and Add a Manual Policy.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_011.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_011.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module25/images/module25_011.png"><img src="https://tetration.guru/labguide/module25/images/module25_011.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -149,7 +149,7 @@ Click on Policies and Add a Manual Policy.
 
 Enter the policies as shown in the image below.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_012.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_012.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module25/images/module25_012.png"><img src="https://tetration.guru/labguide/module25/images/module25_012.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -157,7 +157,7 @@ Enter the policies as shown in the image below.
 
 Open a web browser to the EKS Sock Shop public URL as listed in the student workbook. This is a microservices application that is deployed into Kubernetes.  Navigate around the site to ensure all is working properly before we go into enforcement.  Register as a new user, and go through the process of buying some socks.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_013.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_013.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module25/images/module25_013.png"><img src="https://tetration.guru/labguide/module25/images/module25_013.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -165,7 +165,7 @@ Open a web browser to the EKS Sock Shop public URL as listed in the student work
 
 Navigate to Inventory Search.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_014.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_014.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module25/images/module25_014.png"><img src="https://tetration.guru/labguide/module25/images/module25_014.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -173,7 +173,7 @@ Navigate to Inventory Search.
 
 Search for `OS contains Ubuntu`.  Your EKS worker node should be listed.  Click on the IP address to enter the Workload Profile.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_015.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_015.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module25/images/module25_015.png"><img src="https://tetration.guru/labguide/module25/images/module25_015.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -181,7 +181,7 @@ Search for `OS contains Ubuntu`.  Your EKS worker node should be listed.  Click 
 
 Click on Container Policies, and note the number of displayed policies. Kubernetes heavily leverages iptables rules, hence the large number of rules already present.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_016.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_016.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module25/images/module25_016.png"><img src="https://tetration.guru/labguide/module25/images/module25_016.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -189,7 +189,7 @@ Click on Container Policies, and note the number of displayed policies. Kubernet
 
 Navigate to the Sock Shop application workspace.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_017.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_017.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module25/images/module25_017.png"><img src="https://tetration.guru/labguide/module25/images/module25_017.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -197,7 +197,7 @@ Navigate to the Sock Shop application workspace.
 
 Click on the Policy Analysis tab.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_018.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_018.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module25/images/module25_018.png"><img src="https://tetration.guru/labguide/module25/images/module25_018.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -207,7 +207,7 @@ Start Policy Analysis.
 
 > We can't actually do Policy Analysis for the Sock Shop application because Tetration does not currently have the ability to see traffic between pods of a containerized application.  We could have enforced the latest policies without enabling Policy Analysis,  however it is best practice to always analyze the latest policies prior to enforcing a new revision of policies.    
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_019.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_019.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module25/images/module25_019.png"><img src="https://tetration.guru/labguide/module25/images/module25_019.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -215,7 +215,7 @@ Start Policy Analysis.
 
 Click on Analyze.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_020.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_020.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module25/images/module25_020.png"><img src="https://tetration.guru/labguide/module25/images/module25_020.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -223,7 +223,7 @@ Click on Analyze.
 
 Click on the Enforcement tab, and select Enforce Policies.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_021.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_021.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module25/images/module25_021.png"><img src="https://tetration.guru/labguide/module25/images/module25_021.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -231,7 +231,7 @@ Click on the Enforcement tab, and select Enforce Policies.
 
 Click Accept and Enforce.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_022.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_022.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module25/images/module25_022.png"><img src="https://tetration.guru/labguide/module25/images/module25_022.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -239,7 +239,7 @@ Click Accept and Enforce.
 
 Navigate to Inventory Search.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_023.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_023.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module25/images/module25_023.png"><img src="https://tetration.guru/labguide/module25/images/module25_023.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -247,7 +247,7 @@ Navigate to Inventory Search.
 
 Filter for `OS contains Ubuntu` and click on the Kubernetes worker node IP address.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_024.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_024.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module25/images/module25_024.png"><img src="https://tetration.guru/labguide/module25/images/module25_024.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -255,7 +255,7 @@ Filter for `OS contains Ubuntu` and click on the Kubernetes worker node IP addre
 
 The message "Provisioned Policies are different from Desired Policies". This is a transient condition that occurs when new policies have been enforced, but they have not yet been implemented on the workload iptables or Windows Firewall rules.  This usually occurs within 60 seconds of enforcement.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_025.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_025.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module25/images/module25_025.png"><img src="https://tetration.guru/labguide/module25/images/module25_025.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -263,7 +263,7 @@ The message "Provisioned Policies are different from Desired Policies". This is 
 
 Click on Container Policies.  In a few minutes, the number of displayed policies should have increased from the number we saw earlier.    
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_026.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_026.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module25/images/module25_026.png"><img src="https://tetration.guru/labguide/module25/images/module25_026.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -271,7 +271,7 @@ Click on Container Policies.  In a few minutes, the number of displayed policies
 
 Filter for the Carts pod by entering the filter `Src Inventory = Carts`.  This displays rules where the Carts cluster is the source.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_027.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_027.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module25/images/module25_027.png"><img src="https://tetration.guru/labguide/module25/images/module25_027.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -279,7 +279,7 @@ Filter for the Carts pod by entering the filter `Src Inventory = Carts`.  This d
 
  Enter another filter `Src Inventory = Front End`. This filters for rules that are associated with the Front End web interface of the application.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_028.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_028.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module25/images/module25_028.png"><img src="https://tetration.guru/labguide/module25/images/module25_028.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -287,10 +287,10 @@ Filter for the Carts pod by entering the filter `Src Inventory = Carts`.  This d
 
 Open a web browser once again to the Sock Shop public URL and refresh the page.  Walk through the same tests done previously to ensure the site is still working. Create a user, and order some socks.  Tetration is now managing the security between the different tiers of this microservices application.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_029.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module25/images/module25_029.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module25/images/module25_029.png"><img src="https://tetration.guru/labguide/module25/images/module25_029.png" style="width:100%;height:100%;"></a>  
 
 
 YOU HAVE COMPLETED THIS MODULE
 
 
-| [Return to Table of Contents](https://tetration.guru/cisco-tetration-hol/labguide/) | [Go to Top of the Page](https://tetration.guru/cisco-tetration-hol/labguide/module25/) | [Continue to the Next Module](https://tetration.guru/cisco-tetration-hol/labguide/module26/) |
+| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page](https://tetration.guru/labguide/module25/) | [Continue to the Next Module](https://tetration.guru/labguide/module26/) |

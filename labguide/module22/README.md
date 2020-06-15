@@ -5,7 +5,7 @@ In this module we will enable Enforcement on the Global Services and Common Poli
 
 ---
 <a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/22_policy_enforcement_global_and_common.mp4
-" style="font-weight:bold" title="Enforcement - nopCommerce"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video showing the necessary tasks to be performed to take the hierarchical Global Policy as well as Common App Policy into full enforcement mode.</a>
+" style="font-weight:bold" title="Enforcement - nopCommerce"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video showing the necessary tasks to be performed to take the hierarchical Global Policy as well as Common App Policy into full enforcement mode.</a>
 
 ---
 
@@ -35,7 +35,7 @@ In this module we will enable Enforcement on the Global Services and Common Poli
 
 Open a session to the Active Directory server.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_001.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_001.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module22/images/module22_001.png"><img src="https://tetration.guru/labguide/module22/images/module22_001.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -43,7 +43,7 @@ Open a session to the Active Directory server.
 
 Click on the Search icon in the toolbar and search for "Firewall".  Open the Windows Defender Firewall control panel.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_002.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_002.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module22/images/module22_002.png"><img src="https://tetration.guru/labguide/module22/images/module22_002.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -51,7 +51,7 @@ Click on the Search icon in the toolbar and search for "Firewall".  Open the Win
 
 Click on Inbound Rules.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_003.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_003.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module22/images/module22_003.png"><img src="https://tetration.guru/labguide/module22/images/module22_003.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -59,7 +59,7 @@ Click on Inbound Rules.
 
 Scroll down to locate the Tetration rules. There will be a few rules that are created by default by Tetration.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_004.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_004.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module22/images/module22_004.png"><img src="https://tetration.guru/labguide/module22/images/module22_004.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -67,7 +67,7 @@ Scroll down to locate the Tetration rules. There will be a few rules that are cr
 
 Navigate to Inventory Search.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_005.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_005.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module22/images/module22_005.png"><img src="https://tetration.guru/labguide/module22/images/module22_005.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -75,7 +75,7 @@ Navigate to Inventory Search.
 
 Enter the Filter `Hostname contains AD` and click on the AD server IP address.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_006.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_006.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module22/images/module22_006.png"><img src="https://tetration.guru/labguide/module22/images/module22_006.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -83,7 +83,7 @@ Enter the Filter `Hostname contains AD` and click on the AD server IP address.
 
 Click on Policies.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_007.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_007.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module22/images/module22_007.png"><img src="https://tetration.guru/labguide/module22/images/module22_007.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -91,7 +91,7 @@ Click on Policies.
 
 Notice there are only two ALLOW rules here with any to allow communication on all ports and protocols.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_008.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_008.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module22/images/module22_008.png"><img src="https://tetration.guru/labguide/module22/images/module22_008.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -99,7 +99,7 @@ Notice there are only two ALLOW rules here with any to allow communication on al
 
 Navigate to the Global Services app workspace and click on the Enforcement tab.  Click on Enforce Policies.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_009.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_009.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module22/images/module22_009.png"><img src="https://tetration.guru/labguide/module22/images/module22_009.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -107,7 +107,7 @@ Navigate to the Global Services app workspace and click on the Enforcement tab. 
 
 Choose the version of policy to be enforced.  Normally this would be the latest analyzed policy,  however this could be used to revert an already enforced policy back to a previous version if needed.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_010.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_010.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module22/images/module22_010.png"><img src="https://tetration.guru/labguide/module22/images/module22_010.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -115,7 +115,7 @@ Choose the version of policy to be enforced.  Normally this would be the latest 
 
 Navigate to the Common Policy application workspace.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_011.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_011.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module22/images/module22_011.png"><img src="https://tetration.guru/labguide/module22/images/module22_011.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -123,7 +123,7 @@ Navigate to the Common Policy application workspace.
 
 Click on the Enforcement tab and click Enforce Policies.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_012.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_012.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module22/images/module22_012.png"><img src="https://tetration.guru/labguide/module22/images/module22_012.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -131,7 +131,7 @@ Click on the Enforcement tab and click Enforce Policies.
 
 Select the latest version of policy and click Accept and Enforce.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_013.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_013.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module22/images/module22_013.png"><img src="https://tetration.guru/labguide/module22/images/module22_013.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -139,7 +139,7 @@ Select the latest version of policy and click Accept and Enforce.
 
 Navigate to Inventory Search.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_014.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_014.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module22/images/module22_014.png"><img src="https://tetration.guru/labguide/module22/images/module22_014.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -147,7 +147,7 @@ Navigate to Inventory Search.
 
 Enter the Filter `Hostname contains AD`,  click Search and then click on the AD server IP address.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_015.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_015.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module22/images/module22_015.png"><img src="https://tetration.guru/labguide/module22/images/module22_015.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -155,7 +155,7 @@ Enter the Filter `Hostname contains AD`,  click Search and then click on the AD 
 
 On the workload profile screen click on Policies.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_016.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_016.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module22/images/module22_016.png"><img src="https://tetration.guru/labguide/module22/images/module22_016.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -163,7 +163,7 @@ On the workload profile screen click on Policies.
 
 There should now be many more rules listed here.  It may take a minute or so before the new policies are shown.  Adjust the time range and refresh the screen as necessary until the new policies show up.  These are a representation of the firewall rules that were created in Windows Firewall.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_017.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_017.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module22/images/module22_017.png"><img src="https://tetration.guru/labguide/module22/images/module22_017.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -171,10 +171,10 @@ There should now be many more rules listed here.  It may take a minute or so bef
 
 Go back to the session to the AD server, and examine the Inbound Rules in Windows Firewall.  There should be many more rules created by Tetration.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_018.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module22/images/module22_018.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module22/images/module22_018.png"><img src="https://tetration.guru/labguide/module22/images/module22_018.png" style="width:100%;height:100%;"></a>  
 
 
 YOU HAVE COMPLETED THIS MODULE
 
 
-| [Return to Table of Contents](https://tetration.guru/cisco-tetration-hol/labguide/) | [Go to Top of the Page](https://tetration.guru/cisco-tetration-hol/labguide/module22/) | [Continue to the Next Module](https://tetration.guru/cisco-tetration-hol/labguide/module23/) |
+| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page](https://tetration.guru/labguide/module22/) | [Continue to the Next Module](https://tetration.guru/labguide/module23/) |

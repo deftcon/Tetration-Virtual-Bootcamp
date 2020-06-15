@@ -5,7 +5,7 @@ In this module we will review key security visibility and monitoring features of
 
 
 ---
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/26_security_visibility_monitoring.mp4" style="font-weight:bold"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video reviewing the Security and Vulnerability Dashboards.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/26_security_visibility_monitoring.mp4" style="font-weight:bold"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video reviewing the Security and Vulnerability Dashboards.</a>
 
 ---
 ### Steps for this Module  
@@ -48,7 +48,7 @@ In this module we will review key security visibility and monitoring features of
 
 Click on the Vulnerability Score on the main dashboard to view Vulnerability Score Help.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_001.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_001.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_001.png"><img src="https://tetration.guru/labguide/module26/images/module26_001.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -56,7 +56,7 @@ Click on the Vulnerability Score on the main dashboard to view Vulnerability Sco
 
 The help screen provides explanation of the vulnerability score, how it is calculated, and details on how to improve the score.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_002.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_002.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_002.png"><img src="https://tetration.guru/labguide/module26/images/module26_002.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -64,7 +64,7 @@ The help screen provides explanation of the vulnerability score, how it is calcu
 
 Scroll down and click on the Process Hash score to reveal Process Hash help.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_003.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_003.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_003.png"><img src="https://tetration.guru/labguide/module26/images/module26_003.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -72,7 +72,7 @@ Scroll down and click on the Process Hash score to reveal Process Hash help.
 
 The help screen provides information on what agents are supported as well as how the score is calculated and how to improve the score.  Each of the vulnerability score sections has a similar help screen.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_004.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_004.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_004.png"><img src="https://tetration.guru/labguide/module26/images/module26_004.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -80,7 +80,7 @@ The help screen provides information on what agents are supported as well as how
 
 By default you are viewing the overall score for all applications and workloads that are installed with Tetration sensors.  It is also possible to drill down to a specific application by changing the Scope.  Change the scope to the nopCommerce application and review how the dashboard has changed to now more specific scores for the nopCommerce application and workloads.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_005.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_005.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_005.png"><img src="https://tetration.guru/labguide/module26/images/module26_005.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -88,7 +88,7 @@ By default you are viewing the overall score for all applications and workloads 
 
 Navigate to the Vulnerability dashboard.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_006.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_006.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_006.png"><img src="https://tetration.guru/labguide/module26/images/module26_006.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -96,7 +96,7 @@ Navigate to the Vulnerability dashboard.
 
 There are three main tabs; CVEs, Packages, and Workloads.  Click on the Packages tab and review the vulnerable packages.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_007.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_007.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_007.png"><img src="https://tetration.guru/labguide/module26/images/module26_007.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -104,14 +104,14 @@ There are three main tabs; CVEs, Packages, and Workloads.  Click on the Packages
 
 Click on the Workloads tab.  This shows all of the workloads in the environment that are installed with Tetration sensors and their CVE score.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_008.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_008.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_008.png"><img src="https://tetration.guru/labguide/module26/images/module26_008.png" style="width:100%;height:100%;"></a>  
 
 
 
 <div class="step" id="step-009"><a href="#step-009" style="font-weight:bold">Step 009</a></div>  
 Go back to the CVEs tab and click on one of the CVEs.  This will launch a web browser to the NIST National Vulnerability Database which includes all of the details about the vulnerability.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_009.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_009.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_009.png"><img src="https://tetration.guru/labguide/module26/images/module26_009.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -119,7 +119,7 @@ Go back to the CVEs tab and click on one of the CVEs.  This will launch a web br
 
 Clicking a CVE will launch a web page similar to the one below.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_010.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_010.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_010.png"><img src="https://tetration.guru/labguide/module26/images/module26_010.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -127,7 +127,7 @@ Clicking a CVE will launch a web page similar to the one below.
 
 It is also possible to filter to a specific application in the vulnerability dashboard by changing the Scope.  Change the scope to the nopCommerce application.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_011.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_011.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_011.png"><img src="https://tetration.guru/labguide/module26/images/module26_011.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -135,7 +135,7 @@ It is also possible to filter to a specific application in the vulnerability das
 
 Click on the Remotely Exploitable Low Complexity indicator on the dashboard.  A list of CVEs will be shown below.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_012.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_012.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_012.png"><img src="https://tetration.guru/labguide/module26/images/module26_012.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -143,7 +143,7 @@ Click on the Remotely Exploitable Low Complexity indicator on the dashboard.  A 
 
 Click on the Workloads tab,  and then click on the IIS web server.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_013.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_013.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_013.png"><img src="https://tetration.guru/labguide/module26/images/module26_013.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -151,7 +151,7 @@ Click on the Workloads tab,  and then click on the IIS web server.
 
 Click on one of the CVEs on the Workload Vulnerability Details screen.  This will once again open a browser to the National Vulnerability Database for the specific details on the vulnerability.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_014.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_014.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_014.png"><img src="https://tetration.guru/labguide/module26/images/module26_014.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -159,7 +159,7 @@ Click on one of the CVEs on the Workload Vulnerability Details screen.  This wil
 
 A page such as the one shown below will be displayed.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_015.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_015.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_015.png"><img src="https://tetration.guru/labguide/module26/images/module26_015.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -167,7 +167,7 @@ A page such as the one shown below will be displayed.
 
 Click on the link to the IIS web server at the top of the Workload Vulnerability Details screen.  This launches into the Workload Profile Vulnerabilities tab.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_016.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_016.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_016.png"><img src="https://tetration.guru/labguide/module26/images/module26_016.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -175,7 +175,7 @@ Click on the link to the IIS web server at the top of the Workload Vulnerability
 
 Here you can view all of the vulnerabilities associated with the server,  and can filter the output based on many factors including severity.  Enter the filter `Score (V2) >= 9` to view vulnerabilities with CVE score of 9 or above.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_017.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_017.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_017.png"><img src="https://tetration.guru/labguide/module26/images/module26_017.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -183,7 +183,7 @@ Here you can view all of the vulnerabilities associated with the server,  and ca
 
 Click on the Packages tab.  A list of all of the packages running on the machine is displayed.  If a package has vulnerabilities,  it will have a warning sign next to it and you can click on the warning sign to view the vulnerabilities for that package.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_018.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_018.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_018.png"><img src="https://tetration.guru/labguide/module26/images/module26_018.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -191,7 +191,7 @@ Click on the Packages tab.  A list of all of the packages running on the machine
 
 Click on the Process Snapshot tab.  The process snapshot shows all of the processes that have been seen and that are currently running on the machine.  It displays processes launched as regular users as well as those launched by privileged users.  Hover your mouse over the dots to view the processes.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_019.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_019.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_019.png"><img src="https://tetration.guru/labguide/module26/images/module26_019.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -199,7 +199,7 @@ Click on the Process Snapshot tab.  The process snapshot shows all of the proces
 
 You can also get more details about a process by clicking on it.  Click on a process to view the details.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_020.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_020.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_020.png"><img src="https://tetration.guru/labguide/module26/images/module26_020.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -207,7 +207,7 @@ You can also get more details about a process by clicking on it.  Click on a pro
 
 Navigate to the Vulnerability Dashboard.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_021.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_021.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_021.png"><img src="https://tetration.guru/labguide/module26/images/module26_021.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -215,7 +215,7 @@ Navigate to the Vulnerability Dashboard.
 
 Change the Scope to OpenCart.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_022.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_022.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_022.png"><img src="https://tetration.guru/labguide/module26/images/module26_022.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -223,7 +223,7 @@ Change the Scope to OpenCart.
 
 Click on the Workloads tab,  and then click on the Apache web server.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_023.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_023.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_023.png"><img src="https://tetration.guru/labguide/module26/images/module26_023.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -231,7 +231,7 @@ Click on the Workloads tab,  and then click on the Apache web server.
 
 Click on the link to the Apache web server.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_024.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_024.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_024.png"><img src="https://tetration.guru/labguide/module26/images/module26_024.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -239,7 +239,7 @@ Click on the link to the Apache web server.
 
 Click on the Process Snapshot tab.  Several of the processes on the Apache web server have vulnerabilities, which are shown on the process tree with an orange triangle.  Click on one of the vulnerabilities.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_025.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_025.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_025.png"><img src="https://tetration.guru/labguide/module26/images/module26_025.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -248,7 +248,7 @@ Click on the Process Snapshot tab.  Several of the processes on the Apache web s
 Clicking on a vulnerable process shows the process details,  along with the links to the vulnerabilities in the CVE database.
 
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_026.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_026.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_026.png"><img src="https://tetration.guru/labguide/module26/images/module26_026.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -256,7 +256,7 @@ Clicking on a vulnerable process shows the process details,  along with the link
 
 Next we will explore the ability of Tetration to send notifications upon detected events.  Navigate to Application Workspaces and select any application workspace.  Then click on the Enforcement tab.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_027.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_027.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_027.png"><img src="https://tetration.guru/labguide/module26/images/module26_027.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -264,7 +264,7 @@ Next we will explore the ability of Tetration to send notifications upon detecte
 
 Click on Manage Alerts.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_028.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_028.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_028.png"><img src="https://tetration.guru/labguide/module26/images/module26_028.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -272,7 +272,7 @@ Click on Manage Alerts.
 
 Here we can configure alerts to be generated when Rejected flows exceed a specified threshold,  or when Escaped or Misdropped flows are reported.  Enter the criteria `Enforcement Rejected Flows > 0` and set the Severity to High.  Optionally,  you can choose to receive flow details with the alerts and/or an hourly or daily summary of all alerts.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_029.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_029.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_029.png"><img src="https://tetration.guru/labguide/module26/images/module26_029.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -280,7 +280,7 @@ Here we can configure alerts to be generated when Rejected flows exceed a specif
 
 To view alerts within Tetration,   click on Alerts and Current Alerts.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_030.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_030.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_030.png"><img src="https://tetration.guru/labguide/module26/images/module26_030.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -288,7 +288,7 @@ To view alerts within Tetration,   click on Alerts and Current Alerts.
 
 Here you can see all of the alerts that have been generated, and can filter the alerts by severity, alert type, alert text, or status.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_031.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_031.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_031.png"><img src="https://tetration.guru/labguide/module26/images/module26_031.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -296,7 +296,7 @@ Here you can see all of the alerts that have been generated, and can filter the 
 
 Click on Alerts and then Configuration.  
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_032.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_032.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_032.png"><img src="https://tetration.guru/labguide/module26/images/module26_032.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -304,10 +304,10 @@ Click on Alerts and then Configuration.
 
 Here you can configure alert destinations for each type of alert.  The internal Kafka data tap is where the alerts we just viewed are stored.  Alerts can also be sent to an External Kafka data tap,  Syslog, E-Mail,  Slack, Pager Duty or Kinesis.
 
-<a href="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_033.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module26/images/module26_033.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/labguide/module26/images/module26_033.png"><img src="https://tetration.guru/labguide/module26/images/module26_033.png" style="width:100%;height:100%;"></a>  
 
 
 YOU HAVE FINISHED THIS MODULE
 
 
-| [Return to Table of Contents](https://tetration.guru/cisco-tetration-hol/labguide/) | [Go to Top of the Page](https://tetration.guru/cisco-tetration-hol/labguide/module26/) | [Continue to the Next Module](https://tetration.guru/cisco-tetration-hol/labguide/z-appendix-legacy-policy/) |
+| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page](https://tetration.guru/labguide/module26/) | [Continue to the Next Module](https://tetration.guru/labguide/z-appendix-legacy-policy/) |
