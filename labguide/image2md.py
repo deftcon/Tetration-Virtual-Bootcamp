@@ -11,7 +11,7 @@ files.sort(key=os.path.getmtime)
 for i,file in enumerate(files):
     new_fn = f'{module}_' + str(i).zfill(3) + '.png'
     os.rename(file,new_fn)
-    url_dict[i] = f'https://onstakinc.github.io/cisco-tetration-hol/labguide/{module}/images/{new_fn}'
+    url_dict[i] = f'https://tetration.guru/cisco-tetration-hol/labguide/{module}/images/{new_fn}'
 
 os.chdir('..')
 
@@ -32,5 +32,5 @@ with open('README.md','w') as f:
         f.write('  \n')
 
     f.write('  \n')
-    f.write('[Return to Table of Contents](https://onstakinc.github.io/cisco-tetration-hol/labguide/)')
+    f.write('[Return to Table of Contents](https://tetration.guru/cisco-tetration-hol/labguide/)')
 

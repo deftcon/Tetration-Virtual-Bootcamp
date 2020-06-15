@@ -5,7 +5,7 @@ In this module we will perform Policy Analysis for the OpenCart application and 
 
 ---
 <a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/20_policy_analysis_opencart.mp4
-" style="font-weight:bold" title="Enforcement - OpenCart"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video showing the necessary tasks to perform Policy Analysis for the Linux-based OpenCart.</a>
+" style="font-weight:bold" title="Enforcement - OpenCart"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video showing the necessary tasks to perform Policy Analysis for the Linux-based OpenCart.</a>
 
 ---
 
@@ -32,7 +32,7 @@ In this module we will perform Policy Analysis for the OpenCart application and 
 
 Navigate to the OpenCart application workspace.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_001.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_001.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_001.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_001.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -40,7 +40,7 @@ Navigate to the OpenCart application workspace.
 
 Click on Policy Analysis.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_002.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_002.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_002.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_002.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -48,7 +48,7 @@ Click on Policy Analysis.
 
 Filter out Permitted flows, and click on the point in the graph where there are Escaped flows (denoted in orange).
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_003.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_003.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_003.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_003.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -56,7 +56,7 @@ Filter out Permitted flows, and click on the point in the graph where there are 
 
 Click on one of the escaped flows,  and select Quick Policy Analysis.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_004.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_004.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_004.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_004.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -67,7 +67,7 @@ Click on Find matching policies.  Note that the Policy Decision is ALLOW.  Why i
 > Hint: We haven't changed the time range!  We are looking at a point in the graph prior to our policy change we made earlier in the OpenCart application workspace to allow the OpenCart scope to talk to Common-GC-DC-DNS on UDP port 53.  
 
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_005.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_005.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_005.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_005.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -75,7 +75,7 @@ Click on Find matching policies.  Note that the Policy Decision is ALLOW.  Why i
 
 Click on the clock icon and note the last time policy was changed and the reason.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_006.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_006.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_006.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_006.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -84,7 +84,7 @@ Click on the clock icon and note the last time policy was changed and the reason
 Click on Policy Analysis and change the time range to 1 hour.  
 
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_007.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_007.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_007.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_007.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -92,7 +92,7 @@ Click on Policy Analysis and change the time range to 1 hour.
 
 Click on a point in the graph past the time when the policy was last published.  Here you should see the flows that were indicated as Escaped showing as Permitted.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_008.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_008.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_008.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_008.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -103,7 +103,7 @@ Click on Run Experiment.
 > An experiment allows you to compare the current policy against historical traffic.  It helps you answer the question, what would have happened to the historical flows if the current policy was applied.
 
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_009.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_009.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_009.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_009.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -114,7 +114,7 @@ Select the last 24 hours for Start Date and End Date, and then select Run.
 > The experiment will take a few minutes to complete.
 
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_010.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_010.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_010.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_010.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -122,7 +122,7 @@ Select the last 24 hours for Start Date and End Date, and then select Run.
 
 Click on Live Policy Analysis to view the status of the experiment.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_011.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_011.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_011.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_011.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -130,7 +130,7 @@ Click on Live Policy Analysis to view the status of the experiment.
 
 Once the experiment is complete, click on it to view the results.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_012.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_012.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_012.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_012.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -138,7 +138,7 @@ Once the experiment is complete, click on it to view the results.
 
 Filter oput Permitted flows.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_013.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_013.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_013.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_013.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -146,7 +146,7 @@ Filter oput Permitted flows.
 
 Notice that there are some rejected flows to TCP port 8080.    
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_014.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_014.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_014.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_014.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -154,7 +154,7 @@ Notice that there are some rejected flows to TCP port 8080.
 
 Click on the flow to TCP port 8080 and select Quick Policy Analysis.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_015.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_015.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_015.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_015.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -162,10 +162,10 @@ Click on the flow to TCP port 8080 and select Quick Policy Analysis.
 
 The Policy Decision is deny.   This is the desired outcome for this traffic because it will block the attacker from coming in on that port to the Apache Struts application.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_016.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/images/module20_016.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_016.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module20/images/module20_016.png" style="width:100%;height:100%;"></a>  
 
 
 YOU HAVE FINISHED THIS MODULE
 
 
-| [Return to Table of Contents](https://onstakinc.github.io/cisco-tetration-hol/labguide/) | [Go to Top of the Page](https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/) | [Continue to the Next Module](https://onstakinc.github.io/cisco-tetration-hol/labguide/module21/) |
+| [Return to Table of Contents](https://tetration.guru/cisco-tetration-hol/labguide/) | [Go to Top of the Page](https://tetration.guru/cisco-tetration-hol/labguide/module20/) | [Continue to the Next Module](https://tetration.guru/cisco-tetration-hol/labguide/module21/) |

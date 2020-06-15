@@ -1218,8 +1218,8 @@ Resources:
           #!/bin/bash
           rm -rf /opt/*
           pip install requests-ntlm --upgrade
-          sh -c 'cd /opt && git clone https://github.com/OnstakInc/ansible-tetration-sensor.git'
-          sh -c 'cd /opt && git clone https://github.com/OnstakInc/ansible_asa.git'
+          sh -c 'cd /opt && git clone https://github.com/deftcon/ansible-tetration-sensor.git'
+          sh -c 'cd /opt && git clone https://github.com/deftcon/ansible_asa.git'
           cat <<EOF > /opt/ansible-tetration-sensor/inventory/hosts
           [centos]
           ${CiscoHOLEC2Apache.PrivateIp}

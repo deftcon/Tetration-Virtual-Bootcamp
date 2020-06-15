@@ -14,7 +14,7 @@ for i,file in enumerate(files):
     pic_nbr = i + 1
     new_fn = f'{module}_' + str(pic_nbr).zfill(3) + '.png'
     os.rename(file,new_fn)
-    url_dict[pic_nbr] = f'https://onstakinc.github.io/cisco-tetration-hol/labguide/{module}/images/{new_fn}'
+    url_dict[pic_nbr] = f'https://tetration.guru/cisco-tetration-hol/labguide/{module}/images/{new_fn}'
     stepnum = str(pic_nbr).zfill(3)
     stepnum_dict[pic_nbr] = f'{stepnum}'
 
@@ -53,4 +53,4 @@ with open('README.md','w') as f:
     module_num_int = int(module_num[1])
     next_module_num = module_num_int + 1
     next_module = 'module' + str(next_module_num).zfill(2)
-    f.write(f'| [Return to Table of Contents](https://onstakinc.github.io/cisco-tetration-hol/labguide/) | [Go to Top of the Page](https://onstakinc.github.io/cisco-tetration-hol/labguide/{module}/) | [Continue to the Next Module](https://onstakinc.github.io/cisco-tetration-hol/labguide/{next_module}/) |')
+    f.write(f'| [Return to Table of Contents](https://tetration.guru/cisco-tetration-hol/labguide/) | [Go to Top of the Page](https://tetration.guru/cisco-tetration-hol/labguide/{module}/) | [Continue to the Next Module](https://tetration.guru/cisco-tetration-hol/labguide/{next_module}/) |')

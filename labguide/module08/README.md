@@ -7,19 +7,19 @@
 
 This diagram depicts the flow of traffic used by various devices to utimately ingest information into the Tetration cluster. The Tetration Edge appliance is used to subscribe to the pxGrid from ISE for SGT and user-based policy. The Tetration Data Ingest appliance is used to collect NetFlow v9 info from the ASAv which is useful in stitching together flows of traffic from outside the firewall all the way through being NAT'd by that ASAv and then traversing to the internal corporate network and making their way to app frontends. This same Tetration Data Ingest appliance is used to collect Flow Logs from an AWS VPC via an S3 bucket. This is useful for collecting traffic from any workload that may not have (or be able to have) a Tetration agent installed on it.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/diagrams/images/diagrams_013.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/diagrams/images/diagrams_013.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/diagrams_013.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/diagrams_013.png" style="width:100%;height:100%;"></a>  
 
 
 
 ---
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/08a_comissioning_tetration_edge_appliance.mp4" style="font-weight:bold" title="Data Ingest Appliance"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video showing the necessary tasks to comission the Tetration Data Ingest appliance to prepare for integration with ASA and AWS.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/08a_comissioning_tetration_edge_appliance.mp4" style="font-weight:bold" title="Data Ingest Appliance"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video showing the necessary tasks to comission the Tetration Data Ingest appliance to prepare for integration with ASA and AWS.</a>
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/08b_tetration_edge_aws_flow_logs.mp4" style="font-weight:bold" title="AWS VPC Flow Logs"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video showing the necessary tasks to configure AWS VPC Flow Logs to be sent to the Tetration Data Ingest appliance and allow Tetration to see traffic in an AWS VPC other than that which has or speaks to a workload with a Tetration Agent.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/08b_tetration_edge_aws_flow_logs.mp4" style="font-weight:bold" title="AWS VPC Flow Logs"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video showing the necessary tasks to configure AWS VPC Flow Logs to be sent to the Tetration Data Ingest appliance and allow Tetration to see traffic in an AWS VPC other than that which has or speaks to a workload with a Tetration Agent.</a>
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/08c_data_ingest_asav.mp4" style="font-weight:bold" title="ASAv NAT Flow Stiching"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video showing the necessary tasks to configure the ASAv to send NetFlow to the Tetration Data Ingest appliance and allow Tetration stich NAT'd flows together (note the appliance IPs in the video may differ based on env taken from).</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/08c_data_ingest_asav.mp4" style="font-weight:bold" title="ASAv NAT Flow Stiching"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video showing the necessary tasks to configure the ASAv to send NetFlow to the Tetration Data Ingest appliance and allow Tetration stich NAT'd flows together (note the appliance IPs in the video may differ based on env taken from).</a>
 
 ---  
 
@@ -90,7 +90,7 @@ This diagram depicts the flow of traffic used by various devices to utimately in
 
 Navigate to Connectors.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_001.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_001.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_001.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_001.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -98,7 +98,7 @@ Navigate to Connectors.
 
 Under Flow Ingest,  select the AWS connector.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_002.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_002.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_002.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_002.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -106,7 +106,7 @@ Under Flow Ingest,  select the AWS connector.
 
 Click Enable to begin deploying the appliance.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_003.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_003.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_003.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_003.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -114,7 +114,7 @@ Click Enable to begin deploying the appliance.
 
 Select Yes to begin deploying the appliance.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_004.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_004.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_004.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_004.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -122,7 +122,7 @@ Select Yes to begin deploying the appliance.
 
 Although the instructions on screen indicate downloading an OVA file, this is not necessary because we have deployed the appliance already in AWS.  Click Next to continue.    
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_005.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_005.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_005.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_005.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -134,7 +134,7 @@ The below information will be used to create a .iso file that we will download, 
 
 Fill in the appropriate details as can be found on your student worksheet.  There are three IP addresses for the appliance because it runs three Docker containers that must each have a routable IP address on the network.  The IP address of the Active Directory server should be entered as the Name Server.   
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_006.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_006.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_006.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_006.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -144,7 +144,7 @@ Scroll down and click Next to continue.
 
 
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_007.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_007.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_007.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_007.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -152,7 +152,7 @@ Scroll down and click Next to continue.
 
 Click Download Configuration Bundle to download the .iso file to your desktop.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_008.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_008.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_008.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_008.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -160,7 +160,7 @@ Click Download Configuration Bundle to download the .iso file to your desktop.
 
 Save the .iso file to your desktop.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_009.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_009.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_009.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_009.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -168,7 +168,7 @@ Save the .iso file to your desktop.
 
 Open a session to the Tetration Data Ingest Appliance.  This opens a session to the already deployed instance of the ingest appliance in AWS.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_010.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_010.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_010.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_010.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -176,7 +176,7 @@ Open a session to the Tetration Data Ingest Appliance.  This opens a session to 
 
 Extract the contents of the .iso file and drag the contents to the ingest appliance window that we opened in step 10.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_011.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_011.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_011.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_011.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -184,7 +184,7 @@ Extract the contents of the .iso file and drag the contents to the ingest applia
 
 Wait for all of the files to fully copy. A status window should be displayed in the lower right hand corner of the screen.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_012.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_012.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_012.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_012.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -192,7 +192,7 @@ Wait for all of the files to fully copy. A status window should be displayed in 
 
 Make sure the appliance has outbound Internet connectivity by pinging well-known web sites such as google.com.  Do an `ls -l` to make sure that the files we copied are present on the appliance.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_013.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_013.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_013.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_013.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -200,7 +200,7 @@ Make sure the appliance has outbound Internet connectivity by pinging well-known
 
 Type `reboot` to reboot the appliance.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_014.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_014.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_014.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_014.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -208,7 +208,7 @@ Type `reboot` to reboot the appliance.
 
 Once the appliance is done rebooting, reconnect to the session.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_015.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_015.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_015.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_015.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -216,7 +216,7 @@ Once the appliance is done rebooting, reconnect to the session.
 
 Copy the resolv.conf file to /etc/resolv.conf.  Use the command `sudo cp resolf.conf /etc/resolv.conf`.    
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_016.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_016.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_016.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_016.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -224,7 +224,7 @@ Copy the resolv.conf file to /etc/resolv.conf.  Use the command `sudo cp resolf.
 
 Type `reboot` to reboot the appliance again.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_017.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_017.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_017.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_017.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -232,7 +232,7 @@ Type `reboot` to reboot the appliance again.
 
 Reconnect to the appliance once it is done rebooting.  Review the log files using the command `cat /local/tetration/logs/tet-controller.log`.  You will at first see error messages as shown in the below image.  Once the messages "registration succeeded" and "controller initialized" appear in the output, we are read to proceed with the next task.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_018.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_018.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_018.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_018.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -240,7 +240,7 @@ Reconnect to the appliance once it is done rebooting.  Review the log files usin
 
 Click Next in the Deploy Virtual Appliance wizard.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_019.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_019.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_019.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_019.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -248,7 +248,7 @@ Click Next in the Deploy Virtual Appliance wizard.
 
 The instructions here once again refer to deployment of an on-prem appliance in VMware.  Click Done to complete the wizard.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_020.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_020.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_020.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_020.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -256,7 +256,7 @@ The instructions here once again refer to deployment of an on-prem appliance in 
 
 Check the status of the Data Ingest Appliance.  It should be Active.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_021.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_021.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_021.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_021.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -264,7 +264,7 @@ Check the status of the Data Ingest Appliance.  It should be Active.
 
 Click on the VM tab to review the configuration.  The information that we entered and downloaded into the .iso file should be displayed.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_022.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_022.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_022.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_022.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -272,7 +272,7 @@ Click on the VM tab to review the configuration.  The information that we entere
 
 Click on the NTP tab and click Start NTP Configuration.   
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_023.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_023.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_023.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_023.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -280,7 +280,7 @@ Click on the NTP tab and click Start NTP Configuration.
 
 Enter the NTP server `time.google.com` and click Verify & Save Configs.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_024.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_024.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_024.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_024.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -288,7 +288,7 @@ Enter the NTP server `time.google.com` and click Verify & Save Configs.
 
 Click on the Log tab and select Start Log Configuration.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_025.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_025.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_025.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_025.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -296,7 +296,7 @@ Click on the Log tab and select Start Log Configuration.
 
 Change the Logging Level to info, and then click Verify & Save Configs.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_026.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_026.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_026.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_026.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -304,7 +304,7 @@ Change the Logging Level to info, and then click Verify & Save Configs.
 
 Click the button to Enable a Connector.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_027.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_027.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_027.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_027.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -312,7 +312,7 @@ Click the button to Enable a Connector.
 
 Choose AWS and enable the connector.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_028.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_028.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_028.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_028.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -320,7 +320,7 @@ Choose AWS and enable the connector.
 
 Click on the AWS tab.  It takes a few minutes for the connector to become active,  so you will likely see the "Connector must be active for any config changes"
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_029.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_029.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_029.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_029.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -328,7 +328,7 @@ Click on the AWS tab.  It takes a few minutes for the connector to become active
 
 Open a session to the Tetration data ingest appliance and use the command `cat /local/tetration/logs/tet-controller.log` to view the log files.  Once messages are seen that indicate "registration succeeded" and "aws_sensor-3.3.2.16-aws image is created",  the connector should be ready.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_030.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_030.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_030.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_030.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -336,7 +336,7 @@ Open a session to the Tetration data ingest appliance and use the command `cat /
 
 You should now have a green checkmark next to the AWS connector.  Click on the AWS connector.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_031.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_031.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_031.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_031.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -344,7 +344,7 @@ You should now have a green checkmark next to the AWS connector.  Click on the A
 
 On the AWS tab,  select Start AWS Configuration.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_032.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_032.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_032.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_032.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -352,7 +352,7 @@ On the AWS tab,  select Start AWS Configuration.
 
 Enter in the AWS details as provided in your student spreadsheet.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_033.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_033.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_033.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_033.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -360,7 +360,7 @@ Enter in the AWS details as provided in your student spreadsheet.
 
 A message should be received "AWS configurations successfully applied"
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_034.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_034.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_034.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_034.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -368,7 +368,7 @@ A message should be received "AWS configurations successfully applied"
 
 Click on the Log tab and select Start Log Configuration.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_035.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_035.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_035.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_035.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -376,7 +376,7 @@ Click on the Log tab and select Start Log Configuration.
 
 Change the Logging Level to debug and click Verify & Save Configs.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_036.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_036.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_036.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_036.png" style="width:100%;height:100%;"></a>  
 
 #### ASA Connector and NAT Stitching
 
@@ -386,7 +386,7 @@ Open a session to the employee desktop machine,  open a terminal session and ent
 
 > REPLACE IMAGE WITH UBUNTU!  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_037.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_037.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_037.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_037.png" style="width:100%;height:100%;"></a>  
 
 
 <div class="step" id="step-038"><a href="#step-038" style="font-weight:bold">Step 038</a></div>  
@@ -395,7 +395,7 @@ Open a web browser and connect to the OpenCart web server outside NAT address as
 
 > REPLACE IMAGE WITH UBUNTU!
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_038.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_038.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_038.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_038.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -403,7 +403,7 @@ Open a web browser and connect to the OpenCart web server outside NAT address as
 
 Navigate to Flow Search,  and enter the a filter where the Provider is the inside IP address of the Apache web server and the Consumer is the IP address of the employee desktop.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_039.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_039.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_039.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_039.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -411,7 +411,7 @@ Navigate to Flow Search,  and enter the a filter where the Provider is the insid
 
 Click on a point in the graph where there is data.  You may need to change the time range to display the last hour, and also may need to wait a few minutes for the traffic we just generated to the web server from the employee desktop to show up.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_040.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_040.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_040.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_040.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -419,7 +419,7 @@ Click on a point in the graph where there is data.  You may need to change the t
 
 Click on one of the flows to bring up Flow Details.  Notice that there is no mention of the outside NAT IP of the Apache web server that we used to connect from the employee desktop.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_041.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_041.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_041.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_041.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -427,7 +427,7 @@ Click on one of the flows to bring up Flow Details.  Notice that there is no men
 
 Navigate to Connectors and select Virtual Appliances.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_042.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_042.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_042.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_042.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -435,7 +435,7 @@ Navigate to Connectors and select Virtual Appliances.
 
 Click on the Tetration Data Ingest heading.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_043.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_043.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_043.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_043.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -443,7 +443,7 @@ Click on the Tetration Data Ingest heading.
 
 Click Enable Another Connector.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_044.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_044.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_044.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_044.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -452,7 +452,7 @@ Click Enable Another Connector.
 Select ASA from the dropdown and then select Enable Selected Connector.
 
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_045.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_045.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_045.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_045.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -460,7 +460,7 @@ Select ASA from the dropdown and then select Enable Selected Connector.
 
 Click on the ASA connector.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_046.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_046.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_046.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_046.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -468,7 +468,7 @@ Click on the ASA connector.
 
 It will take a few minutes for the ASA connector to come online.  Once it does,  an IP bindings tab should become available.  Click on the tab to deplay the target IP address and UDP port for Netflow.  This is the information that is needed to configure the ASA for Netflow.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_047.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_047.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_047.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_047.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -476,7 +476,7 @@ It will take a few minutes for the ASA connector to come online.  Once it does, 
 
 The ASA firewall was configured as part of the lab build process. Open a session to the ASA firewall to view the configuration.   Enter the command `show run | in flow` to view the commands associated with the Netflow configuration.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_048.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_048.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_048.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_048.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -484,7 +484,7 @@ The ASA firewall was configured as part of the lab build process. Open a session
 
 Enter the command `show run | g policy-map flow-export` to view additional configuration that is needed for Netflow.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_049.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_049.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_049.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_049.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -492,7 +492,7 @@ Enter the command `show run | g policy-map flow-export` to view additional confi
 
 Enter the `show flow-export counters` command to display the Netflow statistics.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_050.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_050.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_050.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_050.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -500,7 +500,7 @@ Enter the `show flow-export counters` command to display the Netflow statistics.
 
 Navigate to Flow Search.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_051.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_051.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_051.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_051.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -508,7 +508,7 @@ Navigate to Flow Search.
 
 Change the time range to 1 hr.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_052.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_052.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_052.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_052.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -516,7 +516,7 @@ Change the time range to 1 hr.
 
 Create a filter where the Provider Hostname = the hostname of the Apache web server and Consumer Address = the IP of the employee desktop.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_053.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_053.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_053.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_053.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -524,7 +524,7 @@ Create a filter where the Provider Hostname = the hostname of the Apache web ser
 
 Click on one of the flows returned under Flow Observations. Notice that there is now a field called NAT Direction.  Also there is a new link that says "Related Flow".  Click on the Related Flow link.   
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_054.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_054.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_054.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_054.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -532,10 +532,10 @@ Click on one of the flows returned under Flow Observations. Notice that there is
 
 The original flow details are displayed including the outside NAT IP of the Apache web server.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_055.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/images/module08_055.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_055.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module08/images/module08_055.png" style="width:100%;height:100%;"></a>  
 
 YOU HAVE COMPLETED THIS MODULE
 
 
 
-| [Return to Table of Contents](https://onstakinc.github.io/cisco-tetration-hol/labguide/) | [Go to Top of the Page](https://onstakinc.github.io/cisco-tetration-hol/labguide/module08/) | [Continue to the Next Module](https://onstakinc.github.io/cisco-tetration-hol/labguide/module09/) |
+| [Return to Table of Contents](https://tetration.guru/cisco-tetration-hol/labguide/) | [Go to Top of the Page](https://tetration.guru/cisco-tetration-hol/labguide/module08/) | [Continue to the Next Module](https://tetration.guru/cisco-tetration-hol/labguide/module09/) |

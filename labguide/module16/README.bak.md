@@ -9,18 +9,18 @@ This diagram depicts the flow of traffic that will be used during the lab that h
 
 In this lab diagram, Employees get standard access to the app front-ends and no more - essentially what everyone else gets. 
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/diagrams/images/diagrams_011.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/diagrams/images/diagrams_011.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/diagrams_011.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/diagrams_011.png" style="width:100%;height:100%;"></a>  
   
 
 In this lab diagram, SysAdmins not only get standard access to the app front-ends, but they also gain RDP and/or SSH access to each app's frontend workload as well as the backend databases, so that they can properly perform necessary administration. 
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/diagrams/images/diagrams_012.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/diagrams/images/diagrams_012.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/diagrams_012.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/diagrams_012.png" style="width:100%;height:100%;"></a>  
 
 
 
 ---
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/16_policy_creation_user_based_policy.mp4" style="font-weight:bold" title="Policy Analysis - nopCommerce Policies"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to configure dynamic user-based policy.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/16_policy_creation_user_based_policy.mp4" style="font-weight:bold" title="Policy Analysis - nopCommerce Policies"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to configure dynamic user-based policy.</a>
 
 ---
 
@@ -30,4 +30,4 @@ In this lab diagram, SysAdmins not only get standard access to the app front-end
 --- 
 
 
-| [Return to Table of Contents](https://onstakinc.github.io/cisco-tetration-hol/labguide/) | [Go to Top of the Page](https://onstakinc.github.io/cisco-tetration-hol/labguide/module16/) | [Continue to the Next Module](https://onstakinc.github.io/cisco-tetration-hol/labguide/module17/) |
+| [Return to Table of Contents](https://tetration.guru/cisco-tetration-hol/labguide/) | [Go to Top of the Page](https://tetration.guru/cisco-tetration-hol/labguide/module16/) | [Continue to the Next Module](https://tetration.guru/cisco-tetration-hol/labguide/module17/) |

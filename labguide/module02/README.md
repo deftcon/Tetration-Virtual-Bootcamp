@@ -7,7 +7,7 @@ When configuring Collection rules, we must first delete the IPv6 and IPv4 rules 
 
 ---
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/02_collection_rules.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks being performed to configure Collection Rules.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/02_collection_rules.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks being performed to configure Collection Rules.</a>
 
 ---
 
@@ -32,7 +32,7 @@ Perform the following tasks to configure Collection Rules.
 
 Click on the gear icon in the upper right hand corner and select Collection Rules.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module02/images/module02_001.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module02/images/module02_001.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module02/images/module02_001.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module02/images/module02_001.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -40,7 +40,7 @@ Click on the gear icon in the upper right hand corner and select Collection Rule
 
 Click on Edit.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module02/images/module02_002.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module02/images/module02_002.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module02/images/module02_002.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module02/images/module02_002.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -49,7 +49,7 @@ Click on Edit.
 Click Delete to remove the default ::/0: IPv6 rule.  
 
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module02/images/module02_003.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module02/images/module02_003.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module02/images/module02_003.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module02/images/module02_003.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -57,7 +57,7 @@ Click Delete to remove the default ::/0: IPv6 rule.
 
 Click Delete to remove the default 0.0.0.0/0 IPv4 rule.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module02/images/module02_004.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module02/images/module02_004.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module02/images/module02_004.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module02/images/module02_004.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -65,7 +65,7 @@ Click Delete to remove the default 0.0.0.0/0 IPv4 rule.
 
 Enter ::/0: in the Subnet field,  select "Exclude traffic" and then Add Rule.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module02/images/module02_005.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module02/images/module02_005.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module02/images/module02_005.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module02/images/module02_005.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -74,7 +74,7 @@ Enter ::/0: in the Subnet field,  select "Exclude traffic" and then Add Rule.
  Enter 0.0.0.0/0 in the Subnet field, Select "Exclude traffic" and then Add Rule.  
 
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module02/images/module02_006.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module02/images/module02_006.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module02/images/module02_006.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module02/images/module02_006.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -83,7 +83,7 @@ Enter ::/0: in the Subnet field,  select "Exclude traffic" and then Add Rule.
  Enter 10.0.0.0/8 in the Subnet field,  Select "include traffic" and then Add Rule.  
 
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module02/images/module02_007.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module02/images/module02_007.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module02/images/module02_007.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module02/images/module02_007.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -92,21 +92,21 @@ Enter ::/0: in the Subnet field,  select "Exclude traffic" and then Add Rule.
 Enter 172.16.0.0/12 in the Subnet field,  Select "include traffic" and then Add Rule.  
 
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module02/images/module02_008.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module02/images/module02_008.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module02/images/module02_008.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module02/images/module02_008.png" style="width:100%;height:100%;"></a>  
 
 <div class="step" id="step-009"><a href="#step-009" style="font-weight:bold">Step 009</a></div>
 
 Enter 192.168.0.0/16 in the Subnet field,  Select "include traffic" and then Add Rule.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module02/images/module02_009.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module02/images/module02_009.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module02/images/module02_009.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module02/images/module02_009.png" style="width:100%;height:100%;"></a>  
 
 <div class="step" id="step-010"><a href="#step-010" style="font-weight:bold">Step 010</a></div>
 
 Below is what the ruleset should look like when finished.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module02/images/module02_010.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module02/images/module02_010.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module02/images/module02_010.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module02/images/module02_010.png" style="width:100%;height:100%;"></a>  
 
 
 
 
-| [Return to Table of Contents](https://onstakinc.github.io/cisco-tetration-hol/labguide/) | [Go to Top of the Page](https://onstakinc.github.io/cisco-tetration-hol/labguide/module02/) | [Continue to the Introduction](https://onstakinc.github.io/cisco-tetration-hol/labguide/module03/) |
+| [Return to Table of Contents](https://tetration.guru/cisco-tetration-hol/labguide/) | [Go to Top of the Page](https://tetration.guru/cisco-tetration-hol/labguide/module02/) | [Continue to the Introduction](https://tetration.guru/cisco-tetration-hol/labguide/module03/) |

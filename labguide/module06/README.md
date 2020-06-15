@@ -8,7 +8,7 @@ Follow the below steps to deploy AWS and Kubernetes as External Orchestrators in
 
 ---
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/06_external_orchestrators.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video highlighting the creation of two External Orchestrators providing the ability to drive dynamic policy - namely AWS tags and Kubernetes labels.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/06_external_orchestrators.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video highlighting the creation of two External Orchestrators providing the ability to drive dynamic policy - namely AWS tags and Kubernetes labels.</a>
 
 ---
 
@@ -45,7 +45,7 @@ Follow the below steps to deploy AWS and Kubernetes as External Orchestrators in
 
 Navigate to External Orchestrators.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_001.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_001.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_001.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_001.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -53,7 +53,7 @@ Navigate to External Orchestrators.
 
 Click on Create New Configuration.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_002.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_002.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_002.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_002.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -61,7 +61,7 @@ Click on Create New Configuration.
 
 Enter the type as AWS and fill in the Name field with AWS.  Enter the AWS Access Key ID and Secret from the provided student workbook.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_003.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_003.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_003.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_003.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -69,7 +69,7 @@ Enter the type as AWS and fill in the Name field with AWS.  Enter the AWS Access
 
 Enter the AWS Region as us-east-1.  Uncheck the Secure Connector tunnel and ensure that Insecure is checked.  Then click Create.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_004.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_004.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_004.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_004.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -79,7 +79,7 @@ Initially the configuration will show Failure status, this is normal and expecte
 
 > The connection will take a few minutes to come up. Keep refreshing the page until you see Success for Connection Status.  If Failed continues to be displayed, examine the Configuration Details to ensure that no other errors are being seen.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_005.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_005.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_005.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_005.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -87,7 +87,7 @@ Initially the configuration will show Failure status, this is normal and expecte
 
 No action required here, the Connection Status should be a green Success after a few minutes.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_006.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_006.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_006.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_006.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -95,14 +95,14 @@ No action required here, the Connection Status should be a green Success after a
 
 Click on Create New Configuration and select Kubernetes as the type.  Enter a name and description. It is not required to enter a username, password, or certificate.  We will be using token-based authentication.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_007.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_007.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_007.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_007.png" style="width:100%;height:100%;"></a>  
 
 
 <div class="step" id="step-008"><a href="#step-008" style="font-weight:bold">Step 008</a></div>  
 
 Scroll down and check the Insecure check box.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_008.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_008.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_008.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_008.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -110,7 +110,7 @@ Scroll down and check the Insecure check box.
 
 Open a session to the Ansible machine through Apache Guacamole.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_009.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_009.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_009.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_009.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -118,7 +118,7 @@ Open a session to the Ansible machine through Apache Guacamole.
 
 There should be a file called `eks_credentials` in the home directory,  enter the command `ls` to list the directory and locate the file.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_010.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_010.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_010.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_010.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -126,7 +126,7 @@ There should be a file called `eks_credentials` in the home directory,  enter th
 
 With the focus still on the Ansible console, enter the sequence `CTRL-COMMAND-SHIFT` on a Mac or `CTRL-ALT-SHIFT` on a Windows machine to pop up an input menu on the left-hand side of the browser.  Double-click on Devices.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_011.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_011.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_011.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_011.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -134,7 +134,7 @@ With the focus still on the Ansible console, enter the sequence `CTRL-COMMAND-SH
 
 Double-click on the home folder.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_012.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_012.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_012.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_012.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -142,7 +142,7 @@ Double-click on the home folder.
 
 Double-click on the eks-credentials file and save the file to your desktop.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_013.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_013.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_013.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_013.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -150,7 +150,7 @@ Double-click on the eks-credentials file and save the file to your desktop.
 
 Open the eks_credentials file in a text editor,  and copy the token to the clipboard.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_014.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_014.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_014.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_014.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -158,7 +158,7 @@ Open the eks_credentials file in a text editor,  and copy the token to the clipb
 
 Paste the copied token in the Auth Token field in the External Orchestrator Configuration.  Ensure that there are no blank spaces at the end of the string.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_015.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_015.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_015.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_015.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -166,7 +166,7 @@ Paste the copied token in the Auth Token field in the External Orchestrator Conf
 
 Here we provide the path to the Kubernetes API running on the master node. Click on Hosts List,  and click the + icon to add a new host.  Enter the EKS endpoint, which is provided in the student worksheet.  Enter 443 as the TCP port,  then click Create.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_016.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_016.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_016.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_016.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -174,7 +174,7 @@ Here we provide the path to the Kubernetes API running on the master node. Click
 
 The Connection Status will initial report Failure.  Click on the red Failure status and it should display status of "Waiting to connect".
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_017.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_017.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_017.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_017.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -184,7 +184,7 @@ It will take a few minutes for the connection to become active.  Refresh the scr
 
 > If the Connection Status does not change to Success,  check the messages in the Configuration Details.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_018.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_018.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_018.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_018.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -194,7 +194,7 @@ Now that the External Orchestrators are configured, we can use the annotations t
 
 Click on Visibility and Inventory Search.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_019.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_019.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_019.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_019.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -202,7 +202,7 @@ Click on Visibility and Inventory Search.
 
 Click on Filters to drop down the help for the available annotations that can be used as filter criteria.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_020.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_020.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_020.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_020.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -210,7 +210,7 @@ Click on Filters to drop down the help for the available annotations that can be
 
 Note the annotations coming from external orchestrators or static annotations will be prefixed with a *.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_021.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_021.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_021.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_021.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -218,7 +218,7 @@ Note the annotations coming from external orchestrators or static annotations wi
 
 Enter the search criteria `* orchestrator_AppName = nopCommerce` and select Search. This is matching on the AWS tag AppName,  which has been assigned the value of nopCommerce on the Microsoft IIS and Microsoft SQL servers in the AWS environment.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_022.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_022.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_022.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_022.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -226,7 +226,7 @@ Enter the search criteria `* orchestrator_AppName = nopCommerce` and select Sear
 
 Enter the search criteria `* orchestrator_AppCluster = App` and select Search. This query matches on the AWS tag AppCluster, which has been assiged the value App on the IIS Web Server and the Apache web server.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_023.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_023.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_023.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_023.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -234,7 +234,7 @@ Enter the search criteria `* orchestrator_AppCluster = App` and select Search. T
 
 Enter the search criteria `* orchestrator_system/namespace = sock-shop` and press Search. This query matches the Kubernetes namespace that has been created for the microservices application running on the EKS cluster.  The addresses returned are pods associated with the application tiers.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_024.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_024.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_024.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_024.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -242,10 +242,10 @@ Enter the search criteria `* orchestrator_system/namespace = sock-shop` and pres
 
 Enter the search criteria `* orchestrator_AppCluster = front-end` and select Search.  This query matches the Kubernetes label placed on the pod providing front-end web services for the application.  Notice that in addition to being a Kubernetes label, the name AppCluster is also an AWS tag. The name overlap between the Kubernetes labels and AWS tags does not cause any issues.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_025.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/images/module06_025.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_025.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module06/images/module06_025.png" style="width:100%;height:100%;"></a>  
 
 
 YOU HAVE COMPLETED THIS MODULE
 
 
-| [Return to Table of Contents](https://onstakinc.github.io/cisco-tetration-hol/labguide/) | [Go to Top of the Page](https://onstakinc.github.io/cisco-tetration-hol/labguide/module06/) | [Continue to the Next Module](https://onstakinc.github.io/cisco-tetration-hol/labguide/module07/) |
+| [Return to Table of Contents](https://tetration.guru/cisco-tetration-hol/labguide/) | [Go to Top of the Page](https://tetration.guru/cisco-tetration-hol/labguide/module06/) | [Continue to the Next Module](https://tetration.guru/cisco-tetration-hol/labguide/module07/) |

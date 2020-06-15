@@ -6,7 +6,7 @@ In this module we will begin creating policies that will apply across all of the
 In this module we'll be creating Absolute policies in the Global Services application workspace to permit common traffic that will apply across all applications.   
 
 ---
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/12_policy_creation_global_services.mp4" style="font-weight:bold" title="Policy Analysis - Global Services"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to create hierarchical policy that will later be enforced at a Global level.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/12_policy_creation_global_services.mp4" style="font-weight:bold" title="Policy Analysis - Global Services"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to create hierarchical policy that will later be enforced at a Global level.</a>
 
 ---
 
@@ -33,13 +33,13 @@ First we will create an Inventory Filter to describe IP address space external f
 
 Click on Visibility and select Inventory Filters.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module12/images/module12_001.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module12/images/module12_001.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module12/images/module12_001.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module12/images/module12_001.png" style="width:100%;height:100%;"></a>  
 
 <div class="step" id="step-002"><a href="#step-002" style="font-weight:bold">Step 002</a></div>  
 
 Select Create Filter.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module12/images/module12_002.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module12/images/module12_002.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module12/images/module12_002.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module12/images/module12_002.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -47,14 +47,14 @@ Select Create Filter.
 
 Name the filter Internet, and enter the query `PodSubnet not equal internal`.  Keep the scope set to the root scope,  and select the checkboxes to restrict the query to ownership scope,  and provide a service external of the scope.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module12/images/module12_003.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module12/images/module12_003.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module12/images/module12_003.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module12/images/module12_003.png" style="width:100%;height:100%;"></a>  
 
 
 <div class="step" id="step-004"><a href="#step-004" style="font-weight:bold">Step 004</a></div>  
 
 Click Create.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module12/images/module12_004.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module12/images/module12_004.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module12/images/module12_004.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module12/images/module12_004.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -62,7 +62,7 @@ Click Create.
 
 Navigate to Applications.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module12/images/module12_005.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module12/images/module12_005.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module12/images/module12_005.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module12/images/module12_005.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -70,7 +70,7 @@ Navigate to Applications.
 
 Create a new Application Workspace.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module12/images/module12_006.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module12/images/module12_006.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module12/images/module12_006.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module12/images/module12_006.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -78,7 +78,7 @@ Create a new Application Workspace.
 
 Enter the name "Global Services",  and select the Cloud scope.  Then click Create.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module12/images/module12_007.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module12/images/module12_007.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module12/images/module12_007.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module12/images/module12_007.png" style="width:100%;height:100%;"></a>  
 
 
 <div class="step" id="step-008"><a href="#step-008" style="font-weight:bold">Step 008</a></div>  
@@ -87,7 +87,7 @@ For the Global Services workspace we will create Absolute policies. Absolute pol
 
 Click on the Absolute policies tab.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module12/images/module12_008.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module12/images/module12_008.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module12/images/module12_008.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module12/images/module12_008.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -95,7 +95,7 @@ Click on the Absolute policies tab.
 
 Define a policy to allow Any-Internal to the Internet filter we previously created.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module12/images/module12_009.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module12/images/module12_009.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module12/images/module12_009.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module12/images/module12_009.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -103,7 +103,7 @@ Define a policy to allow Any-Internal to the Internet filter we previously creat
 
 Click on Services and click the Add button to add TCP/UDP ports.    
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module12/images/module12_010.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module12/images/module12_010.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module12/images/module12_010.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module12/images/module12_010.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -111,7 +111,7 @@ Click on Services and click the Add button to add TCP/UDP ports.
 
 Add the services shown in the image below.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module12/images/module12_011.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module12/images/module12_011.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module12/images/module12_011.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module12/images/module12_011.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -119,7 +119,7 @@ Add the services shown in the image below.
 
 Add another rule allowing ICMP within the organization.  Select Any-Internal for both Provider and Consumer and configure ICMP as the Service.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module12/images/module12_012.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module12/images/module12_012.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module12/images/module12_012.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module12/images/module12_012.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -127,7 +127,7 @@ Add another rule allowing ICMP within the organization.  Select Any-Internal for
 
 The Catch-All defines what happens to any traffic that doesn't match any of the specific rules.  For the Global Services policy, we want to set this to Allow.  The reason we set to Allow for Global Services is that this is the rule that all traffic that does not belong to any child scopes will hit.  Setting it to Allow will prevent blocking unexpected flows when moving into enforcement as Tetration is deployed.  Eventually, as Tetration is fully deployed within an organization there should be minimal flows hitting the Catch-All and at that point it can be set to Deny.   
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module12/images/module12_013.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module12/images/module12_013.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module12/images/module12_013.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module12/images/module12_013.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -135,10 +135,10 @@ The Catch-All defines what happens to any traffic that doesn't match any of the 
 
 No action is required here, the image illustrates what the policy should look like when completed.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module12/images/module12_014.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module12/images/module12_014.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module12/images/module12_014.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module12/images/module12_014.png" style="width:100%;height:100%;"></a>  
 
 
 YOU HAVE FINISHED THIS MODULE
 
 
-| [Return to Table of Contents](https://onstakinc.github.io/cisco-tetration-hol/labguide/) | [Go to Top of the Page](https://onstakinc.github.io/cisco-tetration-hol/labguide/module12/) | [Continue to the Next Module](https://onstakinc.github.io/cisco-tetration-hol/labguide/module13/) |
+| [Return to Table of Contents](https://tetration.guru/cisco-tetration-hol/labguide/) | [Go to Top of the Page](https://tetration.guru/cisco-tetration-hol/labguide/module12/) | [Continue to the Next Module](https://tetration.guru/cisco-tetration-hol/labguide/module13/) |

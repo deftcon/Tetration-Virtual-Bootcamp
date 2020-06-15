@@ -9,13 +9,13 @@ In our case, we have the MS-SQL server set to use Domain Authentication rather t
 
 Another common place you may find RPC in use is with NFS. You will likely encounter the usage of RPC in many other environments and should be on the lookout for it and other ephemeral port-range protocols like it. A quick parting thought is that you should look out for other ephemeral port "hopping" protocols besides RPC, when building policy in a production deployment of Tetration. A quick example that comes to mind is "RTP" or "Real Time Protocol". RTP and its sister - RTCP (Real Time Control Protocol) together use a range of UCP ports from 16384-32767, and will likely be found anywhere that VoIP is used - such as with IP Phones and Telepresence units talking to one another as well as a slew of other devices such as voice gateways and call recorders.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/diagrams/images/diagrams_009.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/diagrams/images/diagrams_009.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/diagrams_009.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/diagrams_009.png" style="width:100%;height:100%;"></a>  
 
 
 ---
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/19_policy_analysis_nopcommerce.mp4" style="font-weight:bold" title="Policy Analysis - nopCommerce Policies"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to perform policy analysis for the nopCommerce app.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/19_policy_analysis_nopcommerce.mp4" style="font-weight:bold" title="Policy Analysis - nopCommerce Policies"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to perform policy analysis for the nopCommerce app.</a>
 
 ---
 
@@ -50,7 +50,7 @@ Another common place you may find RPC in use is with NFS. You will likely encoun
 Navigate to the nopCommerce application workspace.
 
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_001.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_001.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_001.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_001.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -58,7 +58,7 @@ Navigate to the nopCommerce application workspace.
 
 Click on Policy Analysis and click to filter out Permitted flows.  Hover your mouse over points in the graph.  A popup will be displaced showing how many Misdropped, Escaped, and Rejected flows were detected at that point on the graph.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_002.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_002.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_002.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_002.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -66,7 +66,7 @@ Click on Policy Analysis and click to filter out Permitted flows.  Hover your mo
 
 You should see some flows that have a disposition of MISDROPPED:PERMITTED.  Click on one of those flows.  This is seen typically on Windows machines and occurs during the end of a connection.  Notice the TCP flags of FIN and RST in the flow details.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_003.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_003.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_003.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_003.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -75,7 +75,7 @@ You should see some flows that have a disposition of MISDROPPED:PERMITTED.  Clic
 The flows with TCP RST and/or FIN flags set can be ignored,  so let's filter them out.  In the Filters field,  enter the following: `not Fwd TCP Flags contain RST` `not Rev TCP Flags contains RST`.  Then click Filter Flows.
 
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_004.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_004.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_004.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_004.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -83,7 +83,7 @@ The flows with TCP RST and/or FIN flags set can be ignored,  so let's filter the
 
 Click on the graph on a point past the point that we last analyzed policy,  and observe any rejected or misdropped flows.  There should be minimal, if any misdropped and some rejected for Netbios traffic.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_005.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_005.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_005.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_005.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -94,7 +94,7 @@ Click on Policies.  To show how Escaped flows can be seen based on changes in th
 > Note that this would break the application under normal circumstances if this was a live version of the polciies. We aren't in enforcement yet so we aren't affecting the application.  In addition, even if we were in enforcement we can safely experiment with policies by modifying them and then analyzing via Policy Analysis.  The changes would not be implemented until we enforced the new version of the policy.  
 
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_006.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_006.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_006.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_006.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -103,7 +103,7 @@ Click on Policies.  To show how Escaped flows can be seen based on changes in th
 Return to Policy Analysis and enter the filter enter `Provider Port = 1433`, then click Filter Flows.  Click the Permitted button to enable viewing of permitted flows.  
 
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_007.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_007.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_007.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_007.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -112,7 +112,7 @@ Return to Policy Analysis and enter the filter enter `Provider Port = 1433`, the
 Click on a point in the graph and then click on one of the flows under Flow Observations.  
 
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_008.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_008.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_008.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_008.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -120,7 +120,7 @@ Click on a point in the graph and then click on one of the flows under Flow Obse
 
 Click on Quick Policy Analysis.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_009.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_009.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_009.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_009.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -128,7 +128,7 @@ Click on Quick Policy Analysis.
 
 Click on Find Matching Policies.  Notice that although the graph is currently showing permitted,  the current policies will Deny the traffic as expected.  This allows us to examine previous traffic against current policy.     
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_010.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_010.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_010.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_010.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -136,7 +136,7 @@ Click on Find Matching Policies.  Notice that although the graph is currently sh
 
 Click on Policy Analysis and select Analyze Latest Policies.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_011.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_011.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_011.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_011.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -144,7 +144,7 @@ Click on Policy Analysis and select Analyze Latest Policies.
 
 Enter a reason.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_012.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_012.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_012.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_012.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -153,7 +153,7 @@ Enter a reason.
 In a few minutes, we should begin to see Escaped flows over on the right side of the graph.  Click on the clock icon and note the time you enabled Policy Analysis.
 
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_013.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_013.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_013.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_013.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -164,7 +164,7 @@ Click back on the graph and filter for Escaped flows by turning off the Permitte
 > You may have to wait a few minutes to see the escaped flows indicated on the graph.  It usually takes the graph about 5 minutes to catch up from the time you publish new policies (by clicking Analyze Latest Policies).  
 
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_014.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_014.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_014.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_014.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -172,7 +172,7 @@ Click back on the graph and filter for Escaped flows by turning off the Permitte
 
 Click on the escaped flow for TCP port 1433.  Notice that this time the Consumer Outbound Policy indicates DENY.  Click Quick Policy Analysis.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_015.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_015.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_015.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_015.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -180,7 +180,7 @@ Click on the escaped flow for TCP port 1433.  Notice that this time the Consumer
 
 Click Find Matching Policies,  and the Policy Decision should be DENY.  The rule denying the traffic is the Catch-All, since we removed TCP 1433 from the ruleset.
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_016.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_016.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_016.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_016.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -188,7 +188,7 @@ Click Find Matching Policies,  and the Policy Decision should be DENY.  The rule
 
 Return to Default Policies and re-add TCP port 1433 to the nopCommerce-App to nopCommerce-DB rule.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_017.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_017.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_017.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_017.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -196,7 +196,7 @@ Return to Default Policies and re-add TCP port 1433 to the nopCommerce-App to no
 
 Click on Policy Analysis, and Analyze Latest Policies.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_018.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_018.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_018.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_018.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -204,7 +204,7 @@ Click on Policy Analysis, and Analyze Latest Policies.
 
 Add a reason.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_019.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_019.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_019.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_019.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -212,7 +212,7 @@ Add a reason.
 
 Click on the Escaped flow in the diagram.  
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_020.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_020.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_020.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_020.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -221,10 +221,10 @@ Click on the Escaped flow in the diagram.
 Click on the flow and do a Quick Policy Analysis.  The Policy Decision should now be ALLOW.  
 
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_021.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/images/module19_021.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_021.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/module19/images/module19_021.png" style="width:100%;height:100%;"></a>  
 
 YOU HAVE FINISHED THIS MODULE
 
 
 
-| [Return to Table of Contents](https://onstakinc.github.io/cisco-tetration-hol/labguide/) | [Go to Top of the Page](https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/) | [Continue to the Next Module](https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/) |
+| [Return to Table of Contents](https://tetration.guru/cisco-tetration-hol/labguide/) | [Go to Top of the Page](https://tetration.guru/cisco-tetration-hol/labguide/module19/) | [Continue to the Next Module](https://tetration.guru/cisco-tetration-hol/labguide/module20/) |

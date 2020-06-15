@@ -11,13 +11,13 @@ In our case, we have the MS-SQL server set to use Domain Authentication rather t
 
 Another common place you may find RPC in use is with NFS. You will likely encounter the usage of RPC in many other environments and should be on the lookout for it and other ephemeral port-range protocols like it. A quick parting thought is that you should look out for other ephemeral port "hopping" protocols besides RPC, when building policy in a production deployment of Tetration. A quick example that comes to mind is "RTP" or "Real Time Protocol". RTP and its sister - RTCP (Real Time Control Protocol) together use a range of UCP ports from 16384-32767, and will likely be found anywhere that VoIP is used - such as with IP Phones and Telepresence units talking to one another as well as a slew of other devices such as voice gateways and call recorders. 
 
-<a href="https://onstakinc.github.io/cisco-tetration-hol/labguide/diagrams/images/diagrams_009.png"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/diagrams/images/diagrams_009.png" style="width:100%;height:100%;"></a>  
+<a href="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/diagrams_009.png"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/diagrams_009.png" style="width:100%;height:100%;"></a>  
   
 
 ---
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/19_policy_analysis_nopcommerce.mp4" style="font-weight:bold" title="Policy Analysis - nopCommerce Policies"><img src="https://onstakinc.github.io/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to perform policy analysis for the nopCommerce app.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/19_policy_analysis_nopcommerce.mp4" style="font-weight:bold" title="Policy Analysis - nopCommerce Policies"><img src="https://tetration.guru/cisco-tetration-hol/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to perform policy analysis for the nopCommerce app.</a>
 
 ---
 
@@ -25,4 +25,4 @@ Another common place you may find RPC in use is with NFS. You will likely encoun
 
 ---
 
-| [Return to Table of Contents](https://onstakinc.github.io/cisco-tetration-hol/labguide/) | [Go to Top of the Page](https://onstakinc.github.io/cisco-tetration-hol/labguide/module19/) | [Continue to the Next Module](https://onstakinc.github.io/cisco-tetration-hol/labguide/module20/) |
+| [Return to Table of Contents](https://tetration.guru/cisco-tetration-hol/labguide/) | [Go to Top of the Page](https://tetration.guru/cisco-tetration-hol/labguide/module19/) | [Continue to the Next Module](https://tetration.guru/cisco-tetration-hol/labguide/module20/) |
