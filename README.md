@@ -2,7 +2,7 @@
 
 ## Student/Learner Lab Guide
 
-Firstly, if you are here for the Lab Guide, it is co-hosted here under the `/labguide/` folder in the repo using [GitHub Pages](https://pages.github.com/), currently with a [Jekyll theme](https://jekyllrb.com/) called 'Slate', and can be found here: [Lab Guide Documentation](https://tetration.guru/labguide/).
+Firstly, if you are here for the Lab Guide, it is co-hosted here under the `/labguide/` folder in the repo using [GitHub Pages](https://pages.github.com/), currently with a [Jekyll theme](https://jekyllrb.com/) called 'Hacker', and can be found here: [Lab Guide Documentation](https://tetration.guru/labguide/).
 
 ## Lab Environment Deployment and Git Repo Usage
 
