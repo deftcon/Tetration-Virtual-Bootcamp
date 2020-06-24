@@ -4,7 +4,7 @@
 Agent Config Intent defines what features will be enabled for a group of sensors.  The Config Intent can be tied to an Inventory Filter, which provides the capability to apply different configurations to different types of hosts.  For example, you could define a profile enabling a specific set of features to all Windows machines,  and a separate profile enabling a different set of features to all Linux machines.  We will see an example of doing just that in the exercise below.  
 
 ---
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/04_agent_config.mp4" style="font-weight:bold" title="Agent Config Intent"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to configure Tetration Agents for Windows and Linux machines.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/04_agent_config.mp4" style="font-weight:bold" title="Agent Config Intent"><img src="images/video_icon_mini.png"> Click here to view a video of the tasks necessary to configure Tetration Agents for Windows and Linux machines.</a>
 
 ---
 
@@ -30,14 +30,14 @@ Agent Config Intent defines what features will be enabled for a group of sensors
 
 Select the Gear icon and select Agent Config.  
 
-<a href="https://tetration.guru/labguide/module04/images/module04_001.png"><img src="https://tetration.guru/labguide/module04/images/module04_001.png" style="width:100%;height:100%;"></a>  
+<a href="images/module04_001.png"><img src="images/module04_001.png" style="width:100%;height:100%;"></a>  
 
 
 <div class="step" id="step-002"><a href="#step-002" style="font-weight:bold">Step 002</a></div>  
 
 Click Create Profile to being creating an Agent Config Profile that we will apply to Windows machines.
 
-<a href="https://tetration.guru/labguide/module04/images/module04_002.png"><img src="https://tetration.guru/labguide/module04/images/module04_002.png" style="width:100%;height:100%;"></a>  
+<a href="images/module04_002.png"><img src="images/module04_002.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -49,7 +49,7 @@ Enter the name Windows for the profile name,  and select to enable Enforcement a
 
 > Preserve Rules - When enabled,  this setting will preserve any manually configured firewall rules that might be present on the servers when going into enforcement.  It is common to set this to enabled, such as to preserve any rules that might have been previously configured.
 
-<a href="https://tetration.guru/labguide/module04/images/module04_003.png"><img src="https://tetration.guru/labguide/module04/images/module04_003.png" style="width:100%;height:100%;"></a>  
+<a href="images/module04_003.png"><img src="images/module04_003.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -63,21 +63,21 @@ Click to enable the following settings and then Save the configuration:
 
 > NOTE: The Auto-Upgrade setting will cause the agents to be upgraded automatically when Tetration code is updated.  It is common to disable this feature in a production environment so that agents can be upgraded in a more controlled manner.
 
-<a href="https://tetration.guru/labguide/module04/images/module04_004.png"><img src="https://tetration.guru/labguide/module04/images/module04_004.png" style="width:100%;height:100%;"></a>  
+<a href="images/module04_004.png"><img src="images/module04_004.png" style="width:100%;height:100%;"></a>  
 
 
 <div class="step" id="step-005"><a href="#step-005" style="font-weight:bold">Step 005</a></div>  
 
 Select Create Profile to create a new Agent Config Profile for Linux machines.
 
-<a href="https://tetration.guru/labguide/module04/images/module04_005.png"><img src="https://tetration.guru/labguide/module04/images/module04_005.png" style="width:100%;height:100%;"></a>  
+<a href="images/module04_005.png"><img src="images/module04_005.png" style="width:100%;height:100%;"></a>  
 
 
 <div class="step" id="step-006"><a href="#step-006" style="font-weight:bold">Step 006</a></div>  
 
 Enter the profile name Linux,  and enable Enforcement and Preserve Rules features.
 
-<a href="https://tetration.guru/labguide/module04/images/module04_006.png"><img src="https://tetration.guru/labguide/module04/images/module04_006.png" style="width:100%;height:100%;"></a>  
+<a href="images/module04_006.png"><img src="images/module04_006.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -85,7 +85,7 @@ Enter the profile name Linux,  and enable Enforcement and Preserve Rules feature
 
 Scroll down and Save the configuration.  
 
-<a href="https://tetration.guru/labguide/module04/images/module04_007.png"><img src="https://tetration.guru/labguide/module04/images/module04_007.png" style="width:100%;height:100%;"></a>  
+<a href="images/module04_007.png"><img src="images/module04_007.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -93,7 +93,7 @@ Scroll down and Save the configuration.
 
 Click Create Intent to begin creating the Windows Agent Config Intent.  
 
-<a href="https://tetration.guru/labguide/module04/images/module04_008.png"><img src="https://tetration.guru/labguide/module04/images/module04_008.png" style="width:100%;height:100%;"></a>  
+<a href="images/module04_008.png"><img src="images/module04_008.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -101,14 +101,14 @@ Click Create Intent to begin creating the Windows Agent Config Intent.
 
 Select to apply the profile that we just created called Windows,  and select to create a new filter.  This will create a new Inventory Filter that we will configure to match on the Windows Operating System.
 
-<a href="https://tetration.guru/labguide/module04/images/module04_009.png"><img src="https://tetration.guru/labguide/module04/images/module04_009.png" style="width:100%;height:100%;"></a>  
+<a href="images/module04_009.png"><img src="images/module04_009.png" style="width:100%;height:100%;"></a>  
 
 
 <div class="step" id="step-010"><a href="#step-010" style="font-weight:bold">Step 010</a></div>  
 
 Enter Windows for the name,  and enter the query "OS contains MS".  Then save the new filter.  This will match any machines with sensors installed that have "MS" in their Operating System name.  Also notice that the filter already matches inventory items (your number of matched items may differ from the image).  
 
-<a href="https://tetration.guru/labguide/module04/images/module04_010.png"><img src="https://tetration.guru/labguide/module04/images/module04_010.png" style="width:100%;height:100%;"></a>  
+<a href="images/module04_010.png"><img src="images/module04_010.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -116,7 +116,7 @@ Enter Windows for the name,  and enter the query "OS contains MS".  Then save th
 
 Make sure the "to filter" field is set to the Windows inventory filter we just created,  and select Save.  We have now applied the new Config Intent.  Any Windows machines matching the inventory filter we created will now have the configuration applied.  
 
-<a href="https://tetration.guru/labguide/module04/images/module04_011.png"><img src="https://tetration.guru/labguide/module04/images/module04_011.png" style="width:100%;height:100%;"></a>  
+<a href="images/module04_011.png"><img src="images/module04_011.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -124,14 +124,14 @@ Make sure the "to filter" field is set to the Windows inventory filter we just c
 
 Create a new Config Intent for Linux machines.
 
-<a href="https://tetration.guru/labguide/module04/images/module04_012.png"><img src="https://tetration.guru/labguide/module04/images/module04_012.png" style="width:100%;height:100%;"></a>  
+<a href="images/module04_012.png"><img src="images/module04_012.png" style="width:100%;height:100%;"></a>  
 
 
 <div class="step" id="step-013"><a href="#step-013" style="font-weight:bold">Step 013</a></div>  
 
 Select to apply the Linux profile that we previously created,  and select Create new filter.
 
-<a href="https://tetration.guru/labguide/module04/images/module04_013.png"><img src="https://tetration.guru/labguide/module04/images/module04_013.png" style="width:100%;height:100%;"></a>  
+<a href="images/module04_013.png"><img src="images/module04_013.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -139,7 +139,7 @@ Select to apply the Linux profile that we previously created,  and select Create
 
 Enter the name Linux and the query "OS contains CentOS".  This will match any machines with sensors installed that are running the CentOS Operating System.  Later we will see how we can add additional OS flavors to this Config Intent.
 
-<a href="https://tetration.guru/labguide/module04/images/module04_014.png"><img src="https://tetration.guru/labguide/module04/images/module04_014.png" style="width:100%;height:100%;"></a>  
+<a href="images/module04_014.png"><img src="images/module04_014.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -147,10 +147,10 @@ Enter the name Linux and the query "OS contains CentOS".  This will match any ma
 
 Ensure that the Inventory Filter we just created called Linux is selected as the "to filter" and Save to apply the Config Intent.  
 
-<a href="https://tetration.guru/labguide/module04/images/module04_015.png"><img src="https://tetration.guru/labguide/module04/images/module04_015.png" style="width:100%;height:100%;"></a>  
+<a href="images/module04_015.png"><img src="images/module04_015.png" style="width:100%;height:100%;"></a>  
 
 
 
 
 
-| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page](https://tetration.guru/labguide/module04/) | [Continue to the Next Module](https://tetration.guru/labguide/module05/) |
+| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page]() | [Continue to the Next Module]() |

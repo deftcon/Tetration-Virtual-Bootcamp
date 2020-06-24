@@ -105,8 +105,8 @@ Say you chose `10.0.0.0/16` as your primary range, and `198.18.0.0/16` as your s
 > Note that the default subnet value for the secondary range is `198.18.0.0/16` and was chosen specifically becuase it both represented a "real internet, non-RFC1918 IP range", and also that it falls in the *'Reserved'* range, specifically that "This block has been allocated for use in benchmark tests of network interconnect devices" per [RFC5735](https://tools.ietf.org/html/rfc5735). It could initially be argued that a range such as `198.51.100.0/24` or `203.0.113.0/24` would seem more appropos as they were created so that "This block is assigned as "TEST-NET-2/3" for use in documentation and example code", but they weren't large enough (/24), so the decision was made soundly to provide a real-world-like environment whilst simultaneously avoiding any blackholing any legitimate internet traffic from within the lab environment. 
 
 Here is a diagram that will help to explain the subnets described above in a bit better visual detail: 
-![Subnet Diagram](https://tetration.guru/labguide/diagrams/images/diagrams_003.png)
-More can be found [here on the Diagrams page](https://tetration.guru/labguide/diagrams/).
+![Subnet Diagram](../bootcamp/labguide/diagrams/images/diagrams_003.png)
+More can be found [here on the Diagrams page](../bootcamp/labguide/diagrams/).
 
 
 #### IAM Role API Credentials - Scope and Permissions

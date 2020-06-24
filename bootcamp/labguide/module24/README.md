@@ -1,10 +1,10 @@
 # Cisco Tetration - Hands-On Lab
 
 ## Module24: Policy Enforcement - OpenCart
-In this module we will enable enforcement for the OpenCart application.  We will review the deployed policies both before and after enabling enforcement to compare the results,  and then once in enforcement test access to the application.  We will also test the user-based policy as defined in <a href="https://tetration.guru/labguide/module16/">Module 16</a> 
+In this module we will enable enforcement for the OpenCart application.  We will review the deployed policies both before and after enabling enforcement to compare the results,  and then once in enforcement test access to the application.  We will also test the user-based policy as defined in <a href="">Module 16</a> 
 
 ---
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/24_policy_enforcement_opencart.mp4" style="font-weight:bold" title="Enforcement - OpenCart"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video showing the necessary tasks to be performed to take the Linux-based OpenCart into full enforcement mode with micro-segmentation.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/24_policy_enforcement_opencart.mp4" style="font-weight:bold" title="Enforcement - OpenCart"><img src="images/video_icon_mini.png"> Click here to view a video showing the necessary tasks to be performed to take the Linux-based OpenCart into full enforcement mode with micro-segmentation.</a>
 
 ---
 
@@ -43,7 +43,7 @@ In this module we will enable enforcement for the OpenCart application.  We will
 
 Navigate to Inventory Search.
 
-<a href="https://tetration.guru/labguide/module24/images/module24_001.png"><img src="https://tetration.guru/labguide/module24/images/module24_001.png" style="width:100%;height:100%;"></a>  
+<a href="images/module24_001.png"><img src="images/module24_001.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -51,7 +51,7 @@ Navigate to Inventory Search.
 
 Filter for the IP address of the Apache web server.  Then click on the IP address under the Address column.
 
-<a href="https://tetration.guru/labguide/module24/images/module24_002.png"><img src="https://tetration.guru/labguide/module24/images/module24_002.png" style="width:100%;height:100%;"></a>  
+<a href="images/module24_002.png"><img src="images/module24_002.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -59,7 +59,7 @@ Filter for the IP address of the Apache web server.  Then click on the IP addres
 
 On the Workload Profile,  click on Policies.
 
-<a href="https://tetration.guru/labguide/module24/images/module24_003.png"><img src="https://tetration.guru/labguide/module24/images/module24_003.png" style="width:100%;height:100%;"></a>  
+<a href="images/module24_003.png"><img src="images/module24_003.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -67,7 +67,7 @@ On the Workload Profile,  click on Policies.
 
 Notice that there are currently 22 policies present.  We will see this increase when we enable enforcement on the OpenCart application workspace.
 
-<a href="https://tetration.guru/labguide/module24/images/module24_004.png"><img src="https://tetration.guru/labguide/module24/images/module24_004.png" style="width:100%;height:100%;"></a>  
+<a href="images/module24_004.png"><img src="images/module24_004.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -75,7 +75,7 @@ Notice that there are currently 22 policies present.  We will see this increase 
 
 Navigate to Applications and select the OpenCart application workspace.
 
-<a href="https://tetration.guru/labguide/module24/images/module24_005.png"><img src="https://tetration.guru/labguide/module24/images/module24_005.png" style="width:100%;height:100%;"></a>  
+<a href="images/module24_005.png"><img src="images/module24_005.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -83,7 +83,7 @@ Navigate to Applications and select the OpenCart application workspace.
 
 Click on the Enforcement tab,  and select Enforce Policies.
 
-<a href="https://tetration.guru/labguide/module24/images/module24_006.png"><img src="https://tetration.guru/labguide/module24/images/module24_006.png" style="width:100%;height:100%;"></a>  
+<a href="images/module24_006.png"><img src="images/module24_006.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -91,7 +91,7 @@ Click on the Enforcement tab,  and select Enforce Policies.
 
 Select the latest version of policy, and then click Accept and Enforce.  Optionally,  a reason can be entered which will show up in the application event log.
 
-<a href="https://tetration.guru/labguide/module24/images/module24_007.png"><img src="https://tetration.guru/labguide/module24/images/module24_007.png" style="width:100%;height:100%;"></a>  
+<a href="images/module24_007.png"><img src="images/module24_007.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -99,7 +99,7 @@ Select the latest version of policy, and then click Accept and Enforce.  Optiona
 
 Navigate to Inventory Search.  
 
-<a href="https://tetration.guru/labguide/module24/images/module24_008.png"><img src="https://tetration.guru/labguide/module24/images/module24_008.png" style="width:100%;height:100%;"></a>  
+<a href="images/module24_008.png"><img src="images/module24_008.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -107,7 +107,7 @@ Navigate to Inventory Search.
 
 Search for the IP address of the Apache web server and then click on the IP address.
 
-<a href="https://tetration.guru/labguide/module24/images/module24_009.png"><img src="https://tetration.guru/labguide/module24/images/module24_009.png" style="width:100%;height:100%;"></a>  
+<a href="images/module24_009.png"><img src="images/module24_009.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -115,7 +115,7 @@ Search for the IP address of the Apache web server and then click on the IP addr
 
 Click on Policies.
 
-<a href="https://tetration.guru/labguide/module24/images/module24_010.png"><img src="https://tetration.guru/labguide/module24/images/module24_010.png" style="width:100%;height:100%;"></a>  
+<a href="images/module24_010.png"><img src="images/module24_010.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -123,7 +123,7 @@ Click on Policies.
 
 Check the number of policies. This number should increase from what we observed previously. It may take a minute for the increased number of policies to be displayed.  
 
-<a href="https://tetration.guru/labguide/module24/images/module24_011.png"><img src="https://tetration.guru/labguide/module24/images/module24_011.png" style="width:100%;height:100%;"></a>  
+<a href="images/module24_011.png"><img src="images/module24_011.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -131,7 +131,7 @@ Check the number of policies. This number should increase from what we observed 
 
 Open a session to the Employee desktop.
 
-<a href="https://tetration.guru/labguide/module24/images/module24_012.png"><img src="https://tetration.guru/labguide/module24/images/module24_012.png" style="width:100%;height:100%;"></a>  
+<a href="images/module24_012.png"><img src="images/module24_012.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -139,7 +139,7 @@ Open a session to the Employee desktop.
 
 In a new tab, also open a session to the SysAdmin desktop.  
 
-<a href="https://tetration.guru/labguide/module24/images/module24_013.png"><img src="https://tetration.guru/labguide/module24/images/module24_013.png" style="width:100%;height:100%;"></a>  
+<a href="images/module24_013.png"><img src="images/module24_013.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -147,7 +147,7 @@ In a new tab, also open a session to the SysAdmin desktop.
 
 In another tab, test connectivity to the Apace web server public IP address.  
 
-<a href="https://tetration.guru/labguide/module24/images/module24_014.png"><img src="https://tetration.guru/labguide/module24/images/module24_014.png" style="width:100%;height:100%;"></a>  
+<a href="images/module24_014.png"><img src="images/module24_014.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -155,7 +155,7 @@ In another tab, test connectivity to the Apace web server public IP address.
 
 From the Employee desktop,  open the Terminal application and use the curl command to attempt an HTTP connection to the IIS web server.  The Terminal application can be opened by clicking the black icon on the menu at the bottom middle of the screen.  The command should return output indicating "The document has moved", which indicates that the traffic is getting there on TCP port 80.  This is attempting a redirect to SSL.  To make the connection with ssl,  type `curl -k https://<APACHE_WEB_SERVER_IP>`.  This should return a text representation of the web site.  
 
-<a href="https://tetration.guru/labguide/module24/images/module24_015.png"><img src="https://tetration.guru/labguide/module24/images/module24_015.png" style="width:100%;height:100%;"></a>  
+<a href="images/module24_015.png"><img src="images/module24_015.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -163,7 +163,7 @@ From the Employee desktop,  open the Terminal application and use the curl comma
 
 Attempt an SSH connection to the Apache web server from the Employee desktop.  This connection should time out,  as SSH is not permitted from Employees to the Apache web server.  
 
-<a href="https://tetration.guru/labguide/module24/images/module24_016.png"><img src="https://tetration.guru/labguide/module24/images/module24_016.png" style="width:100%;height:100%;"></a>  
+<a href="images/module24_016.png"><img src="images/module24_016.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -171,7 +171,7 @@ Attempt an SSH connection to the Apache web server from the Employee desktop.  T
 
 From the SysAdmin desktop,  open the Terminal application and attempt an HTTP connection to the Apache web server using the curl command as shown in the image.  Output should be returned indicating "The document has moved".  Attempt a connection using SSL with the command `curl -k https://<APACHE_WEB_SERVER_IP`.  The text-based web site should be returned.  
 
-<a href="https://tetration.guru/labguide/module24/images/module24_017.png"><img src="https://tetration.guru/labguide/module24/images/module24_017.png" style="width:100%;height:100%;"></a>  
+<a href="images/module24_017.png"><img src="images/module24_017.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -179,7 +179,7 @@ From the SysAdmin desktop,  open the Terminal application and attempt an HTTP co
 
 From the SysAdmin desktop,  attempt to SSH to the Apache web server and the MySQL server.  The connections should both be successful.  
 
-<a href="https://tetration.guru/labguide/module24/images/module24_018.png"><img src="https://tetration.guru/labguide/module24/images/module24_018.png" style="width:100%;height:100%;"></a>  
+<a href="images/module24_018.png"><img src="images/module24_018.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -187,7 +187,7 @@ From the SysAdmin desktop,  attempt to SSH to the Apache web server and the MySQ
 
 Return to the Employee desktop and attempt SSH connections to both the Apache web server and the MySQL servers. Both of these connections should time out because we have not configured rules to allow Employees to SSH to the servers.
 
-<a href="https://tetration.guru/labguide/module24/images/module24_019.png"><img src="https://tetration.guru/labguide/module24/images/module24_019.png" style="width:100%;height:100%;"></a>  
+<a href="images/module24_019.png"><img src="images/module24_019.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -195,7 +195,7 @@ Return to the Employee desktop and attempt SSH connections to both the Apache we
 
 Open a session to the Kali Linux server.  
 
-<a href="https://tetration.guru/labguide/module24/images/module24_020.png"><img src="https://tetration.guru/labguide/module24/images/module24_020.png" style="width:100%;height:100%;"></a>  
+<a href="images/module24_020.png"><img src="images/module24_020.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -203,7 +203,7 @@ Open a session to the Kali Linux server.
 
 Attempt a HTTP session to the Apache web server using the curl command as shown in the image.  Output should be returned for the connection on TCP port 80.   Now attempt a connection on TCP port 8080 using the curl command shown in the image.  This connection should time out, as we have blocked external access to the application on TCP port 8080.    
 
-<a href="https://tetration.guru/labguide/module24/images/module24_021.png"><img src="https://tetration.guru/labguide/module24/images/module24_021.png" style="width:100%;height:100%;"></a>  
+<a href="images/module24_021.png"><img src="images/module24_021.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -211,7 +211,7 @@ Attempt a HTTP session to the Apache web server using the curl command as shown 
 Return to the Employee desktop,  and attempt a curl command to the Apache web server on port 8080 as shown in the image.  This connection should be successful because we have created a rule to explicitly allow employees to connect to the server on port 8080.
 
 
-<a href="https://tetration.guru/labguide/module24/images/module24_022.png"><img src="https://tetration.guru/labguide/module24/images/module24_022.png" style="width:100%;height:100%;"></a>  
+<a href="images/module24_022.png"><img src="images/module24_022.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -219,7 +219,7 @@ Return to the Employee desktop,  and attempt a curl command to the Apache web se
 
 The below image shows the output from the previous curl command.
 
-<a href="https://tetration.guru/labguide/module24/images/module24_023.png"><img src="https://tetration.guru/labguide/module24/images/module24_023.png" style="width:100%;height:100%;"></a>  
+<a href="images/module24_023.png"><img src="images/module24_023.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -227,7 +227,7 @@ The below image shows the output from the previous curl command.
 
 Open a connection to the IIS web server.  
 
-<a href="https://tetration.guru/labguide/module24/images/module24_024.png"><img src="https://tetration.guru/labguide/module24/images/module24_024.png" style="width:100%;height:100%;"></a>  
+<a href="images/module24_024.png"><img src="images/module24_024.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -235,7 +235,7 @@ Open a connection to the IIS web server.
 
 Attempt to connect to the Apache web server in a web browser.  The connection should be blocked as we have not created any rules to allow the IIS web server to talk to the Apache web server, nor would we want to allow the communication.
 
-<a href="https://tetration.guru/labguide/module24/images/module24_025.png"><img src="https://tetration.guru/labguide/module24/images/module24_025.png" style="width:100%;height:100%;"></a>  
+<a href="images/module24_025.png"><img src="images/module24_025.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -243,7 +243,7 @@ Attempt to connect to the Apache web server in a web browser.  The connection sh
 
 Open a session to the Apache web server.  
 
-<a href="https://tetration.guru/labguide/module24/images/module24_026.png"><img src="https://tetration.guru/labguide/module24/images/module24_026.png" style="width:100%;height:100%;"></a>  
+<a href="images/module24_026.png"><img src="images/module24_026.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -251,10 +251,10 @@ Open a session to the Apache web server.
 
 Attempt a connection from the Apache web server to the IIS web server using the curl command.  The connection should time out.
 
-<a href="https://tetration.guru/labguide/module24/images/module24_027.png"><img src="https://tetration.guru/labguide/module24/images/module24_027.png" style="width:100%;height:100%;"></a>  
+<a href="images/module24_027.png"><img src="images/module24_027.png" style="width:100%;height:100%;"></a>  
 
 
 YOU HAVE FINISHED THIS MODULE
 
 
-| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page](https://tetration.guru/labguide/module24/) | [Continue to the Next Module](https://tetration.guru/labguide/module25/) |
+| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page]() | [Continue to the Next Module]() |

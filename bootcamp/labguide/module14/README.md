@@ -6,7 +6,7 @@ In this module we will create an Application Workspace for the NopCommerce appli
 In this module, we'll be configuring rules from the Windows IIS and MSSQL servers to the Common Policy workspace to allow communications such as Microsoft RPC, Kerberos, LDAP, DNS, and etc. The rules will be initially discovered by ADM,  and will be created in the Common Policy workspace using the Policy Request functionality described above.  
 
 ---
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/14_policy_creation_adm_clusters_nopcommerce.mp4" style="font-weight:bold" title="nopCommerce ADM & Clusters"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to setup an Workspace, run ADM, configure Clusters, and customize the security Policy for the Windows-based app called nopCommerce.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/14_policy_creation_adm_clusters_nopcommerce.mp4" style="font-weight:bold" title="nopCommerce ADM & Clusters"><img src="images/video_icon_mini.png"> Click here to view a video of the tasks necessary to setup an Workspace, run ADM, configure Clusters, and customize the security Policy for the Windows-based app called nopCommerce.</a>
 
 ---
 
@@ -56,7 +56,7 @@ In this module, we'll be configuring rules from the Windows IIS and MSSQL server
 
 Navigate to Applications.
 
-<a href="https://tetration.guru/labguide/module14/images/module14_001.png"><img src="https://tetration.guru/labguide/module14/images/module14_001.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_001.png"><img src="images/module14_001.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -64,7 +64,7 @@ Navigate to Applications.
 
 Create a new Application Workspace.
 
-<a href="https://tetration.guru/labguide/module14/images/module14_002.png"><img src="https://tetration.guru/labguide/module14/images/module14_002.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_002.png"><img src="images/module14_002.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -72,7 +72,7 @@ Create a new Application Workspace.
 
 Name the Application Workspace `nopCommerce` and set the Scope to nopCommerce.
 
-<a href="https://tetration.guru/labguide/module14/images/module14_003.png"><img src="https://tetration.guru/labguide/module14/images/module14_003.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_003.png"><img src="images/module14_003.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -80,7 +80,7 @@ Name the Application Workspace `nopCommerce` and set the Scope to nopCommerce.
 
 Select Start ADM Run.
 
-<a href="https://tetration.guru/labguide/module14/images/module14_004.png"><img src="https://tetration.guru/labguide/module14/images/module14_004.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_004.png"><img src="images/module14_004.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -88,7 +88,7 @@ Select Start ADM Run.
 
 Click the Show button under Member workloads to display the associated machines.  The Microsoft IIS and SQL servers should be shown here.
 
-<a href="https://tetration.guru/labguide/module14/images/module14_005.png"><img src="https://tetration.guru/labguide/module14/images/module14_005.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_005.png"><img src="images/module14_005.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -98,7 +98,7 @@ Expand External Dependencies and set the scopes for Common Apps and the Root sco
 
 >  The External Dependencies Coarse/Fine setting controls whether rules that include inventory that exists in other Scopes will be toward the Scope or toward clusters.  Since we have promoted the clusters in the Common Policy scope to Inventory Filters,  it makes sense to change this setting to Fine so any rules will be built toward the individual clusters rather than the entire scope.  Leaving the default setting of Coarse will create a more broad policy which would allow access to all workloads in the target Scope, regardless of the cluster grouping.  
 
-<a href="https://tetration.guru/labguide/module14/images/module14_006.png"><img src="https://tetration.guru/labguide/module14/images/module14_006.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_006.png"><img src="images/module14_006.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -106,7 +106,7 @@ Expand External Dependencies and set the scopes for Common Apps and the Root sco
 
 Expand Advanced Configurations and set the Cluster Granularity to Very Fine.  
 
-<a href="https://tetration.guru/labguide/module14/images/module14_007.png"><img src="https://tetration.guru/labguide/module14/images/module14_007.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_007.png"><img src="images/module14_007.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -115,7 +115,7 @@ Expand Advanced Configurations and set the Cluster Granularity to Very Fine.
 Change the time range for the ADM run to six hours,  and then submit the ADM run.
 
 
-<a href="https://tetration.guru/labguide/module14/images/module14_008.png"><img src="https://tetration.guru/labguide/module14/images/module14_008.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_008.png"><img src="images/module14_008.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -123,7 +123,7 @@ Change the time range for the ADM run to six hours,  and then submit the ADM run
 
 Once the ADM run is complete,  select the ADM results available link.  
 
-<a href="https://tetration.guru/labguide/module14/images/module14_009.png"><img src="https://tetration.guru/labguide/module14/images/module14_009.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_009.png"><img src="images/module14_009.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -131,7 +131,7 @@ Once the ADM run is complete,  select the ADM results available link.
 
 Click to expand the SQLSERVER and WEBSERVER clusters.  The clusters should contain the MS SQL server IP and the IIS server IP addresses respectively.  
 
-<a href="https://tetration.guru/labguide/module14/images/module14_010.png"><img src="https://tetration.guru/labguide/module14/images/module14_010.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_010.png"><img src="images/module14_010.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -139,7 +139,7 @@ Click to expand the SQLSERVER and WEBSERVER clusters.  The clusters should conta
 
 Click on the SQLSERVER cluster and select the pencil icon to edit the cluster.  
 
-<a href="https://tetration.guru/labguide/module14/images/module14_011.png"><img src="https://tetration.guru/labguide/module14/images/module14_011.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_011.png"><img src="images/module14_011.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -147,7 +147,7 @@ Click on the SQLSERVER cluster and select the pencil icon to edit the cluster.
 
 Enter the cluster name and query as shown in the below image.
 
-<a href="https://tetration.guru/labguide/module14/images/module14_012.png"><img src="https://tetration.guru/labguide/module14/images/module14_012.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_012.png"><img src="images/module14_012.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -155,7 +155,7 @@ Enter the cluster name and query as shown in the below image.
 
 Click on the WEBSERVER cluster and select the pencil icon to edit the cluster.
 
-<a href="https://tetration.guru/labguide/module14/images/module14_013.png"><img src="https://tetration.guru/labguide/module14/images/module14_013.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_013.png"><img src="images/module14_013.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -163,7 +163,7 @@ Click on the WEBSERVER cluster and select the pencil icon to edit the cluster.
 
 Enter the cluster name and query as shown in the below image.  
 
-<a href="https://tetration.guru/labguide/module14/images/module14_014.png"><img src="https://tetration.guru/labguide/module14/images/module14_014.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_014.png"><img src="images/module14_014.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -171,7 +171,7 @@ Enter the cluster name and query as shown in the below image.
 
 Click the rocket ship icon to promote the nopCommerce-App cluster to an Inventory Filter.
 
-<a href="https://tetration.guru/labguide/module14/images/module14_015.png"><img src="https://tetration.guru/labguide/module14/images/module14_015.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_015.png"><img src="images/module14_015.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -179,7 +179,7 @@ Click the rocket ship icon to promote the nopCommerce-App cluster to an Inventor
 
 No changes are required here,  select Promote Cluster.
 
-<a href="https://tetration.guru/labguide/module14/images/module14_016.png"><img src="https://tetration.guru/labguide/module14/images/module14_016.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_016.png"><img src="images/module14_016.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -187,7 +187,7 @@ No changes are required here,  select Promote Cluster.
 
 Select the nopCommerce-DB cluster and promote it to an Inventory Filter.
 
-<a href="https://tetration.guru/labguide/module14/images/module14_017.png"><img src="https://tetration.guru/labguide/module14/images/module14_017.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_017.png"><img src="images/module14_017.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -195,7 +195,7 @@ Select the nopCommerce-DB cluster and promote it to an Inventory Filter.
 
 No changes are required here, click on Promote Cluster.
 
-<a href="https://tetration.guru/labguide/module14/images/module14_018.png"><img src="https://tetration.guru/labguide/module14/images/module14_018.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_018.png"><img src="images/module14_018.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -205,7 +205,7 @@ We will now begin manually tuning the policies that were generated by the ADM ru
 
 Delete all services from the rule with nopCommerce-App as Consumer and the Root scope as Provider.
 
-<a href="https://tetration.guru/labguide/module14/images/module14_019.png"><img src="https://tetration.guru/labguide/module14/images/module14_019.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_019.png"><img src="images/module14_019.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -213,7 +213,7 @@ Delete all services from the rule with nopCommerce-App as Consumer and the Root 
 
 Click to edit the rule and then click the trash can to delete it.  
 
-<a href="https://tetration.guru/labguide/module14/images/module14_020.png"><img src="https://tetration.guru/labguide/module14/images/module14_020.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_020.png"><img src="images/module14_020.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -221,7 +221,7 @@ Click to edit the rule and then click the trash can to delete it.
 
 Delete all services from the rule with nopCommerce-DB as Consumer and the Root scope as Provider.  
 
-<a href="https://tetration.guru/labguide/module14/images/module14_021.png"><img src="https://tetration.guru/labguide/module14/images/module14_021.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_021.png"><img src="images/module14_021.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -229,7 +229,7 @@ Delete all services from the rule with nopCommerce-DB as Consumer and the Root s
 
 Click to edit the rule, and then click the trash can to delete the rule.
 
-<a href="https://tetration.guru/labguide/module14/images/module14_022.png"><img src="https://tetration.guru/labguide/module14/images/module14_022.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_022.png"><img src="images/module14_022.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -239,7 +239,7 @@ On the policy rule with nopCommerce-App as Consumer and Common-GC-DC-DNS,  the A
 
 Click to delete the TCP ports within the 49158-65535 range.  The ports discovered in your ADM run may be different from the image, as Windows may have opened up different ports for the workloads in your student environment.  
 
-<a href="https://tetration.guru/labguide/module14/images/module14_023.png"><img src="https://tetration.guru/labguide/module14/images/module14_023.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_023.png"><img src="images/module14_023.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -247,7 +247,7 @@ Click to delete the TCP ports within the 49158-65535 range.  The ports discovere
 
 Add the Windows ephemeral port range 49158-65535 to the Service Ports.  
 
-<a href="https://tetration.guru/labguide/module14/images/module14_024.png"><img src="https://tetration.guru/labguide/module14/images/module14_024.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_024.png"><img src="images/module14_024.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -257,7 +257,7 @@ We must repeat the same tasks for the rule with nopCommerce-DB as Consumer and C
 
 > Notice the orange circle next to the all of the Service Ports.  This means that there are outstanding Policy Requests that have been issued to another workspace.  If you click on the orange circle, it will tell you to which workspace the outgoing Policy Requests are pending. Whenever communication is required between workloads that are members of clusters in different workspaces,  there must be matching rules in both workspaces in order for the rules to take affect.  In this case we have configured rules in the nopCommerce workspace from nopCommerce-App and nopCommerce-DB to the Common-GC-DC-DNS cluster in the Common Policy workspace,  but there are not yet matching rules in the Common Policy workspace.  A Policy Request is sent by the nopCommerce workspace to the Common Policy workspace to create the rules in the Common Policy workspace. An administrator must review and approve the Policy Requests, as we will see in just a moment.
 
-<a href="https://tetration.guru/labguide/module14/images/module14_025.png"><img src="https://tetration.guru/labguide/module14/images/module14_025.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_025.png"><img src="images/module14_025.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -265,7 +265,7 @@ We must repeat the same tasks for the rule with nopCommerce-DB as Consumer and C
 
 Edit the rule where the Root scope is a Consumer to nopCommerce-App as Provider for TCP ports 80 and 443.  This is to allow inbound access to the web application both internally and externally,  thus we will set the Consumer to Any.  Change the Consumer from the root scope to Any.  
 
-<a href="https://tetration.guru/labguide/module14/images/module14_026.png"><img src="https://tetration.guru/labguide/module14/images/module14_026.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_026.png"><img src="images/module14_026.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -273,7 +273,7 @@ Edit the rule where the Root scope is a Consumer to nopCommerce-App as Provider 
 
 The Consumer should now be set to Any as shown below.   
 
-<a href="https://tetration.guru/labguide/module14/images/module14_027.png"><img src="https://tetration.guru/labguide/module14/images/module14_027.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_027.png"><img src="images/module14_027.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -285,7 +285,7 @@ Click on Switch Application.
 
 
 
-<a href="https://tetration.guru/labguide/module14/images/module14_028.png"><img src="https://tetration.guru/labguide/module14/images/module14_028.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_028.png"><img src="images/module14_028.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -293,7 +293,7 @@ Click on Switch Application.
 
 Select the Common Policy App Workspace.
 
-<a href="https://tetration.guru/labguide/module14/images/module14_029.png"><img src="https://tetration.guru/labguide/module14/images/module14_029.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_029.png"><img src="images/module14_029.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -301,7 +301,7 @@ Select the Common Policy App Workspace.
 
 Click on Provided Services.  
 
-<a href="https://tetration.guru/labguide/module14/images/module14_030.png"><img src="https://tetration.guru/labguide/module14/images/module14_030.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_030.png"><img src="images/module14_030.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -309,7 +309,7 @@ Click on Provided Services.
 
 Notice that we have 18 incoming Policy Requests that are in Pending state.  The administrator of this workspace must accept the requests to allow the policies to be created in the Common Policy workspace to complete the configuration.  It is also possible to set up Auto-Pilot rules so that incoming Policy Requests for specific TCP/UDP ports are automatically accepted.
 
-<a href="https://tetration.guru/labguide/module14/images/module14_031.png"><img src="https://tetration.guru/labguide/module14/images/module14_031.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_031.png"><img src="images/module14_031.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -317,7 +317,7 @@ Notice that we have 18 incoming Policy Requests that are in Pending state.  The 
 
 Click Accept on each of the 18 Policy Requests.  
 
-<a href="https://tetration.guru/labguide/module14/images/module14_032.png"><img src="https://tetration.guru/labguide/module14/images/module14_032.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_032.png"><img src="images/module14_032.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -325,7 +325,7 @@ Click Accept on each of the 18 Policy Requests.
 
 Click on Policies to view the policies in the Common Policy workspace.
 
-<a href="https://tetration.guru/labguide/module14/images/module14_033.png"><img src="https://tetration.guru/labguide/module14/images/module14_033.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_033.png"><img src="images/module14_033.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -333,7 +333,7 @@ Click on Policies to view the policies in the Common Policy workspace.
 
 There are now two new rules that have been created,  one from nopCommerce-App to Common-GC-DC-DNS each with 9 services as shown in the below image.
 
-<a href="https://tetration.guru/labguide/module14/images/module14_034.png"><img src="https://tetration.guru/labguide/module14/images/module14_034.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_034.png"><img src="images/module14_034.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -341,17 +341,17 @@ There are now two new rules that have been created,  one from nopCommerce-App to
 
  Below shows the services in the second rule from nopCommerce-DB to Common-GC-DC-DNS.  Notice that the services all show a thumbs up and are colored green,  this indicates that they have been approved by an administrator.  
 
-<a href="https://tetration.guru/labguide/module14/images/module14_035.png"><img src="https://tetration.guru/labguide/module14/images/module14_035.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_035.png"><img src="images/module14_035.png" style="width:100%;height:100%;"></a>  
 
 
 <div class="step" id="step-036"><a href="#step-036" style="font-weight:bold">Step 036</a></div>  
 
 Switch Application and go back to the nopCommerce Application Workspace.  Select the rule from nopCommerce-App to Common-GC-DC-DNS and select Services.  Notice that the orange circles next to each service have now disappeared.
 
-<a href="https://tetration.guru/labguide/module14/images/module14_036.png"><img src="https://tetration.guru/labguide/module14/images/module14_036.png" style="width:100%;height:100%;"></a>  
+<a href="images/module14_036.png"><img src="images/module14_036.png" style="width:100%;height:100%;"></a>  
 
 > The above exercise was intended to demonstrate Provided Services and Policy Requests. In a real world scenario where there could be hundreds or possibly even thousands of workspaces in an organization, the strategy shown of creating specific rules from each workspace to the Common Policy workspace would not be desirable. Instead, we would recommend creating more broad rules in the Common Policy workspace to cover all workspaces accessing common services.  For example, in our Common Policy we could have collapsed the rules allowing nopCommerce-App and nopCommerce-DB to Common-GC-DC-DNS to a single more broad rule such as Windows to Common-GC-DC-DNS.  This would keep the size of the Common Policy ruleset more manageable.  
 
 YOU HAVE COMPLETED THIS MODULE
 
-| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page](https://tetration.guru/labguide/module14/) | [Continue to the Next Module](https://tetration.guru/labguide/module15/) |
+| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page]() | [Continue to the Next Module]() |

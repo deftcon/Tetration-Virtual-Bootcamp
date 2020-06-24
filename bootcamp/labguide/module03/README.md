@@ -12,7 +12,7 @@ This diagram depicts how you will deploy Tetration Agents out to each of your wo
    2. Click on and connecting to the Ansible machine
    3. Verify and, if necessary, edit the inventory for deployment by first changing directories with `cd /opt/ansible-tetration-sensor/` running `sudo nano inventory/hosts` and when prompted with `[sudo] password for ciscolab:`, entering the standard lab password of `tet123$$!`. 
 
-<a href="https://tetration.guru/labguide/diagrams/images/diagrams_007.png"><img src="https://tetration.guru/labguide/diagrams/images/diagrams_007.png" style="width:100%;height:100%;"></a>  
+<a href="images/diagrams_007.png"><img src="images/diagrams_007.png" style="width:100%;height:100%;"></a>  
 
 The Ansible machine is already configured to deploy agents out to the following workloads by OS:
 
@@ -30,13 +30,13 @@ The Ansible machine is already configured to deploy agents out to the following 
 ---
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/03a_agent_installation_manual.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of demonstrating how to install Tetration sensors manually (this is for demo only - these tasks will not be performed in this module).</a>  
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/03a_agent_installation_manual.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="images/video_icon_mini.png"> Click here to view a video of demonstrating how to install Tetration sensors manually (this is for demo only - these tasks will not be performed in this module).</a>  
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/03b_firewalld_ipsets_iptables.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of demonstrating how to disable firewalld and install ipsets and iptables in linux prior to sensor install (this is for demo only - these tasks will not be performed in this module).</a>  
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/03b_firewalld_ipsets_iptables.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="images/video_icon_mini.png"> Click here to view a video of demonstrating how to disable firewalld and install ipsets and iptables in linux prior to sensor install (this is for demo only - these tasks will not be performed in this module).</a>  
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/03c_agent_installation_w_ansible.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks being performed to install Tetration sensors using Ansible (tasks covered in this module).</a>  
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/03c_agent_installation_w_ansible.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="images/video_icon_mini.png"> Click here to view a video of the tasks being performed to install Tetration sensors using Ansible (tasks covered in this module).</a>  
 
 
 ---
@@ -66,7 +66,7 @@ The Ansible machine is already configured to deploy agents out to the following 
 
 Navigate to Agent Config.
 
-<a href="https://tetration.guru/labguide/module03/images/module03_001.png"><img src="https://tetration.guru/labguide/module03/images/module03_001.png" style="width:100%;height:100%;"></a>  
+<a href="images/module03_001.png"><img src="images/module03_001.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -74,7 +74,7 @@ Navigate to Agent Config.
 
 Select the Software Agent Download tab.
 
-<a href="https://tetration.guru/labguide/module03/images/module03_002.png"><img src="https://tetration.guru/labguide/module03/images/module03_002.png" style="width:100%;height:100%;"></a>  
+<a href="images/module03_002.png"><img src="images/module03_002.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -82,7 +82,7 @@ Select the Software Agent Download tab.
 
 Select the Linux platform,  Enforcement Agent,  and then click Download Installer.
 
-<a href="https://tetration.guru/labguide/module03/images/module03_003.png"><img src="https://tetration.guru/labguide/module03/images/module03_003.png" style="width:100%;height:100%;"></a>  
+<a href="images/module03_003.png"><img src="images/module03_003.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -90,7 +90,7 @@ Select the Linux platform,  Enforcement Agent,  and then click Download Installe
 
 Save the file to the desktop and rename it to `tet-linux.sh`.  
 
-<a href="https://tetration.guru/labguide/module03/images/module03_004.png"><img src="https://tetration.guru/labguide/module03/images/module03_004.png" style="width:100%;height:100%;"></a>  
+<a href="images/module03_004.png"><img src="images/module03_004.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -98,7 +98,7 @@ Save the file to the desktop and rename it to `tet-linux.sh`.
 
 Select the Windows platform, Enforcement Agent,  and then Download Installer.
 
-<a href="https://tetration.guru/labguide/module03/images/module03_005.png"><img src="https://tetration.guru/labguide/module03/images/module03_005.png" style="width:100%;height:100%;"></a>  
+<a href="images/module03_005.png"><img src="images/module03_005.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -106,7 +106,7 @@ Select the Windows platform, Enforcement Agent,  and then Download Installer.
 
 Name the file `tet-win.ps1` and save the file to the desktop.
 
-<a href="https://tetration.guru/labguide/module03/images/module03_006.png"><img src="https://tetration.guru/labguide/module03/images/module03_006.png" style="width:100%;height:100%;"></a>  
+<a href="images/module03_006.png"><img src="images/module03_006.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -114,7 +114,7 @@ Name the file `tet-win.ps1` and save the file to the desktop.
 
 Log into the Apache Guacamole server and open a session to the Ansible machine.
 
-<a href="https://tetration.guru/labguide/module03/images/module03_007.png"><img src="https://tetration.guru/labguide/module03/images/module03_007.png" style="width:100%;height:100%;"></a>  
+<a href="images/module03_007.png"><img src="images/module03_007.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -122,7 +122,7 @@ Log into the Apache Guacamole server and open a session to the Ansible machine.
 
 Copy the scripts from the desktop to the Ansible machine by clicking and dragging them from the desktop to the Ansible console window.  A file copy dialogue should be displayed in the lower right-hand corner.   Once complete,  do an `ls` to list the directory on the Ansible machine and make sure the files are present.
 
-<a href="https://tetration.guru/labguide/module03/images/module03_008.png"><img src="https://tetration.guru/labguide/module03/images/module03_008.png" style="width:100%;height:100%;"></a>  
+<a href="images/module03_008.png"><img src="images/module03_008.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -130,7 +130,7 @@ Copy the scripts from the desktop to the Ansible machine by clicking and draggin
 
 Switch to the directory containing the Ansible playbooks with the command `cd /opt/ansible-tetration-sensor/` and then `cd inventory` to switch to the Inventory directory.  Type the command `cat hosts` and examine the contents in the inventory file. The Linux and Windows machine IP addresses as listed in your student spreadsheet should already be populated in the [centos] section for Linux and the [win] section for Windows.
 
-<a href="https://tetration.guru/labguide/module03/images/module03_009.png"><img src="https://tetration.guru/labguide/module03/images/module03_009.png" style="width:100%;height:100%;"></a>  
+<a href="images/module03_009.png"><img src="images/module03_009.png" style="width:100%;height:100%;"></a>  
 
 
 <div class="step" id="step-010"><a href="#step-010" style="font-weight:bold">Step 010</a></div>  
@@ -140,7 +140,7 @@ Type `cd ..` to exit the Inventory directory and run the following command to ex
 `ansible-playbook playbooks/clean-install-with-script.yml`
 
 
-<a href="https://tetration.guru/labguide/module03/images/module03_010.png"><img src="https://tetration.guru/labguide/module03/images/module03_010.png" style="width:100%;height:100%;"></a>  
+<a href="images/module03_010.png"><img src="images/module03_010.png" style="width:100%;height:100%;"></a>  
 
 <div class="step" id="step-011"><a href="#step-011" style="font-weight:bold">Step 011</a></div>  
 
@@ -148,17 +148,17 @@ The Ansible playbook will take a few minutes to complete.  When finished, you sh
 
 > Ignore the failure of host 10.1.0.162 in the image below, the machine was undergoing maintenance when the installation was performed.
 
-<a href="https://tetration.guru/labguide/module03/images/module03_011.png"><img src="https://tetration.guru/labguide/module03/images/module03_011.png" style="width:100%;height:100%;"></a>  
+<a href="images/module03_011.png"><img src="images/module03_011.png" style="width:100%;height:100%;"></a>  
 
 > The playbook may display an error such as the one below for the Windows machines. Ignore the error,  the installation actually completed successfully but the connection from the Ansible machine was disrupted briefly by the sensor installation.  We are currently investigating workarounds to avoid the error in the future.    
 
-<a href="https://tetration.guru/labguide/module03/images/module03_010.png"><img src="https://tetration.guru/labguide/module03/images/module03_011b.jpg" style="width:100%;height:100%;"></a>
+<a href="images/module03_010.png"><img src="images/module03_011b.jpg" style="width:100%;height:100%;"></a>
 
 <div class="step" id="step-012"><a href="#step-012" style="font-weight:bold">Step 012</a></div>  
 
 Open a session to the IIS Web Server.
 
-<a href="https://tetration.guru/labguide/module03/images/module03_012.png"><img src="https://tetration.guru/labguide/module03/images/module03_012.png" style="width:100%;height:100%;"></a>  
+<a href="images/module03_012.png"><img src="images/module03_012.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -166,7 +166,7 @@ Open a session to the IIS Web Server.
 
 Click on the Search button and enter "services",  and then open up Services Control Panel.
 
-<a href="https://tetration.guru/labguide/module03/images/module03_013.png"><img src="https://tetration.guru/labguide/module03/images/module03_013.png" style="width:100%;height:100%;"></a>  
+<a href="images/module03_013.png"><img src="images/module03_013.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -174,7 +174,7 @@ Click on the Search button and enter "services",  and then open up Services Cont
 
 Scroll down and locate the WindowsAgentEngine and WindowsTetEngine services and ensure they are in Running state.
 
-<a href="https://tetration.guru/labguide/module03/images/module03_014.png"><img src="https://tetration.guru/labguide/module03/images/module03_014.png" style="width:100%;height:100%;"></a>  
+<a href="images/module03_014.png"><img src="images/module03_014.png" style="width:100%;height:100%;"></a>  
 
 
 ### REPEAT STEPS 012-14 FOR THE MS-SQL DB SERVER AND MICROSOFT ACTIVE DIRECTORY SERVER
@@ -183,7 +183,7 @@ Scroll down and locate the WindowsAgentEngine and WindowsTetEngine services and 
 
 Open a session to the Apache Web Server.
 
-<a href="https://tetration.guru/labguide/module03/images/module03_015.png"><img src="https://tetration.guru/labguide/module03/images/module03_015.png" style="width:100%;height:100%;"></a>  
+<a href="images/module03_015.png"><img src="images/module03_015.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -191,7 +191,7 @@ Open a session to the Apache Web Server.
 
 Run the command `ps -ef | grep tet` and ensure that the tet-engine, and ensure that the tet-engine, tet-enforcer, and tet-sensor services are displayed.
 
-<a href="https://tetration.guru/labguide/module03/images/module03_016.png"><img src="https://tetration.guru/labguide/module03/images/module03_016.png" style="width:100%;height:100%;"></a>  
+<a href="images/module03_016.png"><img src="images/module03_016.png" style="width:100%;height:100%;"></a>  
 
 ### REPEAT STEPS 15-16 FOR THE MYSQL DB SERVER
 
@@ -199,7 +199,7 @@ Run the command `ps -ef | grep tet` and ensure that the tet-engine, and ensure t
 
 Navigate to Agent Config. 
 
-<a href="https://tetration.guru/labguide/module03/images/module03_017.png"><img src="https://tetration.guru/labguide/module03/images/module03_017.png" style="width:100%;height:100%;"></a>  
+<a href="images/module03_017.png"><img src="images/module03_017.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -207,10 +207,10 @@ Navigate to Agent Config.
 
 Click on the Software Agents tab,  and ensure that all of the sensors that were installed are displayed.  
 
-<a href="https://tetration.guru/labguide/module03/images/module03_018.png"><img src="https://tetration.guru/labguide/module03/images/module03_018.png" style="width:100%;height:100%;"></a>  
+<a href="images/module03_018.png"><img src="images/module03_018.png" style="width:100%;height:100%;"></a>  
 
 YOU HAVE FINISHED THIS MODULE
 
 
 
-| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page](https://tetration.guru/labguide/module03/) | [Continue to the Next Module](https://tetration.guru/labguide/module04/) |
+| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page]() | [Continue to the Next Module]() |

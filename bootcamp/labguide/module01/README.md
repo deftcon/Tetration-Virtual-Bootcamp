@@ -37,7 +37,7 @@ We highly recommend having a quick read on the intro, then possibly a quick watc
 
 To use this method, simply click on the video you wish to watch, pause the video, click the virtical elipses at the bottom right of the player, click "Picture in Picture", switch to the browser tab or window logged into TaaS, resize as desired, unpause, and begin your task while watching along as we perform the same task. Pause as desired. Scrubbing the playhead to Rewind is only supported by going back full screen, although once you get the hang of it you should be able to do this rather quickly, when needed. 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/01c_pip_w_taas.mp4" style="font-weight:bold"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png">Click here to watch a short video on how to perform tasks with picture-in-picture video.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/01c_pip_w_taas.mp4" style="font-weight:bold"><img src="images/video_icon_mini.png">Click here to watch a short video on how to perform tasks with picture-in-picture video.</a>
 
 ---
 
@@ -63,7 +63,7 @@ Credentials, specifically the *usernames* and *passwords* used in this lab are q
 
 Every student will be provided with an Excel or CSV file from which to derive all pod-specific values from such as those noted in the NOTE section just above. 
 
-<a href="https://tetration.guru/labguide/module01/images/module01_001.png"><img src="https://tetration.guru/labguide/module01/images/module01_001.png" style="width:100%;height:100%;"></a>  
+<a href="images/module01_001.png"><img src="images/module01_001.png" style="width:100%;height:100%;"></a>  
 
 A list of what you will find in this CSV file is as follows:
 
@@ -88,7 +88,7 @@ A list of what you will find in this CSV file is as follows:
 You are highly encouraged open a browser window to this [online CSV/Excel viewer](https://sheet.zoho.com/sheet/excelviewer){:target="_blank"}, drag & drop your CSV/XLS file there, and continue to reference that file throughout your interaction with this lab environment, as seen here in the short video below.
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/01a_online_csv_viewer.mp4" style="font-weight:bold"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of interaction with the student CSV and online viewer.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/01a_online_csv_viewer.mp4" style="font-weight:bold"><img src="images/video_icon_mini.png"> Click here to view a video of interaction with the student CSV and online viewer.</a>
 
 ---
 
@@ -100,22 +100,22 @@ This will be either to the desktop via RDP in the case of a Windows machine or t
 
 This diagram depicts how you will gain access to the workloads running in your lab environment. 
 
-<a href="https://tetration.guru/labguide/diagrams/images/diagrams_005.png"><img src="https://tetration.guru/labguide/diagrams/images/diagrams_005.png" style="width:100%;height:100%;"></a>  
+<a href="images/diagrams_005.png"><img src="images/diagrams_005.png" style="width:100%;height:100%;"></a>  
   
 The "Home" screen of Guac should look something like this:
 
-<a href="https://tetration.guru/labguide/module01/images/module01_002.png"><img src="https://tetration.guru/labguide/module01/images/module01_002.png" style="width:100%;height:100%;"></a>  
+<a href="images/module01_002.png"><img src="images/module01_002.png" style="width:100%;height:100%;"></a>  
 
 From here you will be able to simply click on any one of the hosts in the "Connections" menu to connect to that virtual machine. If you would like to open each new connection in a new window, either right-click and choose "Open in New Tab/Window", or you may press `Ctrl-click` on Windows, or `Cmd-click` (`⌘ click`) on a Mac. 
 
 If you do happen to find yourself seemingly *stuck* inside a single host connection to an RDP desktop or SSH shell session, you may always get back to the "Home" screen by pressing `Ctrl-Alt-Shift` on Windows, or `Ctrl-Option-Shift` (`⌃ ⌥ ⇧`) on a Mac, which should bring up a sidebar menu where you can then click on your student name (`cisco-student-xx`) at the top-right of that menu. This will then present you with an option to click "Home" and should look something like this:
 
-<a href="https://tetration.guru/labguide/module01/images/module01_003.png"><img src="https://tetration.guru/labguide/module01/images/module01_003.png" style="width:100%;height:100%;"></a>  
+<a href="images/module01_003.png"><img src="images/module01_003.png" style="width:100%;height:100%;"></a>  
 
 
 Throughout this lab, there will come times when you must get files from your local workstation over to one of the hosts in your lab environment. The ability to copy files directly to and from the remote desktop or even to any linux shell session can be accomplished quite easily by simply dragging them from your local workstation desktop over to the web browser where Guac is already signed into a remote host and just dropping them there. For Windows or even Ubuntu Desktop this will use the native RDP copy/paste functionality, and for a linux shell session this will seamlessly instantiate a direct SFTP session. No further work is necessary on your part. Note that for Windows files may appear on the desktop or wherever you dragged and released them to. For Linux files will __*always*__ appear in `/home/ciscolab/`, no matter what directory you may be `cd` into. 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/01b_guac_user_access.mp4" style="font-weight:bold"><img src="https://tetration.guru/labguide/diagrams/images/video_icon_mini.png">Click here to view a video of interaction with the student Guacamole webUI console.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/01b_guac_user_access.mp4" style="font-weight:bold"><img src="images/video_icon_mini.png">Click here to view a video of interaction with the student Guacamole webUI console.</a>
 
 ---
 
@@ -140,10 +140,10 @@ The lab environment accompanying this lab guide lives entirely in the cloud. Thi
 
 Every learner working with this Lab Guide has a __*complete*__ lab evironment for themselves. 
 
-This consists of every item seen in the following diagram, which is enumerated in more detail below the diagram. The diagram below actually links to a live, interactive diagram that you may like to use throughout your lab experience, [which you can read more about here on the diagrams page](https://tetration.guru/labguide/diagrams/). There will also be more diagrams used throughout this lab guide, and they will all correspond with the Diagram ### found on that diagrams page. 
+This consists of every item seen in the following diagram, which is enumerated in more detail below the diagram. The diagram below actually links to a live, interactive diagram that you may like to use throughout your lab experience, [which you can read more about here on the diagrams page](). There will also be more diagrams used throughout this lab guide, and they will all correspond with the Diagram ### found on that diagrams page. 
 
 
-<a href="https://www.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501" target="_blank">Click on the image to open an interactive diagram<img src="https://tetration.guru/labguide/diagrams/images/diagrams_004.png" style="width:100%;height:100%;"></a>  
+<a href="https://www.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501" target="_blank">Click on the image to open an interactive diagram<img src="images/diagrams_004.png" style="width:100%;height:100%;"></a>  
 
 
 <div class="link" id="Assets"><a href="#Assets" style="font-weight:bold">Lab Assets</a></div>
@@ -213,4 +213,4 @@ Your complete lab environment consists of the following assets:
 
 
 
-| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page](https://tetration.guru/labguide/module01/) | [Continue to the Next Module](https://tetration.guru/labguide/module02/) |
+| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page]() | [Continue to the Next Module]() |
