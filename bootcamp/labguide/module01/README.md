@@ -30,7 +30,7 @@ It's almost time to get started on the lab, and that warrants a very brief discu
 
 This image shows the three sections for a given module:
 
-<a href="https://tetration.guru/labguide/module01/images/module01_004.png"><img src="https://tetration.guru/labguide/module01/images/module01_004.png" style="width:100%;height:100%;"></a>  
+<a href="images/module01_004.png"><img src="images/module01_004.png" style="width:100%;height:100%;"></a>  
 
 
 We highly recommend having a quick read on the intro, then possibly a quick watch of the video, followed by beginning to perform the tasks yourself in your own instance of TaaS. However, you may find it more advantageous to go ahead and begin following the instructions and performing the tasks yourself with the aid of the screenshots once you've reviewed the intro. Should you choose this method, you may at times find it nice to watch along as someone performs those tasks with you. To accomplish this you can choose to use the 'picture-in-picture' method which allows you to watch the video while you simultaneously perform the necessary tasks in TaaS. For this we highly recommend using [Google Chrome](https://www.google.com/chrome/){:target="_blank"} for the best browsing experience.
