@@ -15,7 +15,7 @@ Another common place you may find RPC in use is with NFS. You will likely encoun
 ---
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/19_policy_analysis_nopcommerce.mp4" style="font-weight:bold" title="Policy Analysis - nopCommerce Policies"><img src="images/video_icon_mini.png"> Click here to view a video of the tasks necessary to perform policy analysis for the nopCommerce app.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/19_policy_analysis_nopcommerce.mp4" style="font-weight:bold" title="Policy Analysis - nopCommerce Policies"><img src="https://tetration.guru/bootcamp/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to perform policy analysis for the nopCommerce app.</a>
 
 ---
 

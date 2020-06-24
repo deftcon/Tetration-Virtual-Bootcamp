@@ -5,7 +5,7 @@ In this module we will enable enforcement on the nopCommerce application workspa
 
 ---
 <a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/23_policy_enforcement_nopcommerce.mp4
-" style="font-weight:bold" title="Enforcement - nopCommerce"><img src="images/video_icon_mini.png"> Click here to view a video showing the necessary tasks to be performed to take the Windows-based nopCommerce into full enforcement mode with micro-segmentation.</a>
+" style="font-weight:bold" title="Enforcement - nopCommerce"><img src="https://tetration.guru/bootcamp/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video showing the necessary tasks to be performed to take the Windows-based nopCommerce into full enforcement mode with micro-segmentation.</a>
 
 ---
 
