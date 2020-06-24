@@ -1,6 +1,6 @@
 # Cisco Tetration - Hands-On Lab
 
-## Module 04.00 -- Lecture -- Scopes
+## Module 04.00  Scopes
 Scopes are used in Tetration to break down an IP scheme of an organization into manageable blocks that represent a function,  such as an application.  Scopes are organized in a tree structure,  with a Root Scope at the top of the tree which represents all IP addresses;  both internal and external.  The root scope is tied to the VRF,  which in turn represents the IP space of a Tenant.  In Tetration Cloud,  there can be only a single Tenant and hence only a single VRF and Root Scope.  With an on-prem Tetration cluster,  you could possibly have multiple Tenants and VRFs.  Each leaf of the scope tree is tied to a query, with the queries typically being more broad at the higher levels of the tree and becoming more specific as you traverse down the tree structure.  For example,  consider the following scope structure that will be used in this lab:
 ```
   Root  
@@ -17,9 +17,9 @@ In this tree structure, the Pod matches our annotation PodSubnet=internal which 
 In this module,  we'll define the Scope tree that will be used throughout the rest of the lab exercises.  
 
 ---
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/07a_scope_creation.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video highlighting the creation of Scopes.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/07a_scope_creation.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video highlighting the creation of Scopes.</a>
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/07b_scope_member_verify.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video showing the verification of Scope members.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/07b_scope_member_verify.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video showing the verification of Scope members.</a>
 
 ---
 
@@ -251,4 +251,4 @@ The workloads listed here are the Linux machines running Apache and MySQL that m
 You have reached the end of this module.  
 
 
-| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page]() | [Continue to the Next Module]() |
+| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page]() | [Continue to the Next Module]() |

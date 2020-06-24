@@ -1,10 +1,10 @@
 # Cisco Tetration - Hands-On Lab
 
-## Module 07.07 -- Demo -- Segmentation - Policy Analysis - Common Services
+## Module 07.07  Segmentation - Policy Analysis - Common Services
 In this module we will perform Policy Analysis for the Common Policy workspace which contains the Active Directory and Ansible server workloads. We will identify any errors in our ruleset that might have caused disruption had we put the workspace into enforcement,  and make corrections as necessary.  
 
 ---
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/18_policy_analysis_common_policy.mp4" style="font-weight:bold" title="Pre-Enforcement Checks"><img src="https://tetration.guru/bootcamp/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to perform policy analysis for the Common apps.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/18_policy_analysis_common_policy.mp4" style="font-weight:bold" title="Pre-Enforcement Checks"><img src="https://tetration.guru/bootcamp/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to perform policy analysis for the Common apps.</a>
 
 ---
 
@@ -151,4 +151,4 @@ YOU HAVE COMPLETED THIS MODULE
 
 
 
-| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page]() | [Continue to the Next Module]() |
+| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page]() | [Continue to the Next Module]() |

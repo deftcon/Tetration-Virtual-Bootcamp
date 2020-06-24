@@ -1,7 +1,7 @@
 # Cisco Tetration - Hands-On Lab
   
-## Module 12.00 -- Lecture -- Data Backup and Restore
+## Module 12.00  Data Backup and Restore
 
 
 
-| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page]() | [Continue to the Next Module]() |
+| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page]() | [Continue to the Next Module]() |

@@ -1,13 +1,13 @@
 # Cisco Tetration - Hands-On Lab
 
-## Module 07.00 -- Lecture -- Segmentation - Inventory Filters
+## Module 07.00  Segmentation - Inventory Filters
 
 Inventory Filters provide a way to describe a group of endpoints as an object for easy  identification when used within policy and other areas of the system. For example, earlier in the lab when creating Agent Config Intents we created Inventory Filters that matched all Windows and Linux machines by matching on the Operating System.  This was done by creating a query that matched on the Operating System reported by the agent.  Inventory Filter queries can match on annotations, tags being received from the various External Orchestrators, inventory characteristics such as Operating System,  or security characteristics such as CVE score. This allows the administrator great flexibility when building policy.  
 
 In this module we will create Inventory Filters that will be used in later modules to build our policies.   
 
 ---
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/11_policy_creation_inventory_filters.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video to create a few key Inventory Filters.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/11_policy_creation_inventory_filters.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video to create a few key Inventory Filters.</a>
 
 ---
 ### Steps for this Module  
@@ -113,4 +113,4 @@ The query matches only the internal IP of the Guacamole server.  Click Create.
 You have completed this module.
 
 
-| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page]() | [Continue to the Next Module]() |
+| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page]() | [Continue to the Next Module]() |

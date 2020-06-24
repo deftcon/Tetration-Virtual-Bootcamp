@@ -1,12 +1,12 @@
 # Cisco Tetration - Hands-On Lab
 
-## Module 07.11 -- Demo -- Segmentation - Enforcement - Global and Common
+## Module 07.11  Segmentation - Enforcement - Global and Common
 
 In this module we will enable Enforcement on the Global Services and Common Policies application workspaces. This will cause rules to be generated on the hosts in Windows Firewall in the case of Windows and iptables on the Linux hosts. 
 
 ---
 <a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/22_policy_enforcement_global_and_common.mp4
-" style="font-weight:bold" title="Enforcement - nopCommerce"><img src="https://tetration.guru/bootcamp/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video showing the necessary tasks to be performed to take the hierarchical Global Policy as well as Common App Policy into full enforcement mode.</a>
+" style="font-weight:bold" title="Enforcement - nopCommerce"><img src="https://tetration.guru/bootcamp/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video showing the necessary tasks to be performed to take the hierarchical Global Policy as well as Common App Policy into full enforcement mode.</a>
 
 ---
 
@@ -178,4 +178,4 @@ Go back to the session to the AD server, and examine the Inbound Rules in Window
 YOU HAVE COMPLETED THIS MODULE
 
 
-| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page]() | [Continue to the Next Module]() |
+| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page]() | [Continue to the Next Module]() |

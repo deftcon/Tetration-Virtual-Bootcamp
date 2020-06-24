@@ -1,6 +1,6 @@
 # Cisco Tetration - Hands-On Lab
 
-## Module 07.02 -- Demo -- Segmentation - ADM - Common Services
+## Module 07.02  Segmentation - ADM - Common Services
 
 In this module we'll be configuring an Application Workspace called Common Policy which will be tied to the Common Apps scope. This will be used to create policies controlling traffic to/from the Active Directory and Ansible servers toward the other application workloads in the lab environment.  We will first create the Application Workspace and run Application Discovery and Mapping (ADM) to automatically discover the workloads, group them into clusters, and provide initial policy recommendations based on the discovered flows in the environment. During ADM, Tetration will group servers together into a cluster based on their similarities from a traffic flow and process perspective.  We will review the suggested clusters,  and adjust the cluster queries to make the cluster membership more dynamic.  For example, we will configure our cluster query for Active Directory servers to match on the AWS tag GC-DC-DNS which will allow any new servers that are added with this tag to automatically be included in the cluster and have the policies applied. Once we have modified the cluster queries, we will then review the suggested policies created by ADM and manually refine them as necessary. 
 
@@ -13,7 +13,7 @@ This diagram depicts how AWS Lambda (aka 'serverless') plays nice with Tetration
 
 ---
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/13_policy_creation_adm_clusters_common_services.mp4" style="font-weight:bold" title="Policy Analysis - Commom Policies"><img src="https://tetration.guru/bootcamp/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to create policy for the services provided by Commom apps.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/13_policy_creation_adm_clusters_common_services.mp4" style="font-weight:bold" title="Policy Analysis - Commom Policies"><img src="https://tetration.guru/bootcamp/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to create policy for the services provided by Commom apps.</a>
 
 ---
 
@@ -466,4 +466,4 @@ Create a new rule allowing Guacamole to talk to Any-Internal on TCP ports 3389 a
 YOU HAVE FINISHED THIS MODULE
 
 
-| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page]() | [Continue to the Next Module]() |
+| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page]() | [Continue to the Next Module]() |

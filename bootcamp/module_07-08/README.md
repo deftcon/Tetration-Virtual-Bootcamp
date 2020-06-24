@@ -1,6 +1,6 @@
 # Cisco Tetration - Hands-On Lab
 
-## Module 07.08 -- Demo -- Segmentation - Policy Analysis - Windows App
+## Module 07.08  Segmentation - Policy Analysis - Windows App
 
 In this module we will perform Policy Analysis for the NopCommerce Windows application. We will analyze the ruleset that we tuned previously, learn how to filter out unnecessary flows from cluttering the Policy Analysis view, and also purposely create Escaped flows to gain insight into their cause and learn how to remediate them.
 
@@ -16,7 +16,7 @@ Another common place you may find RPC in use is with NFS. You will likely encoun
 ---
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/19_policy_analysis_nopcommerce.mp4" style="font-weight:bold" title="Policy Analysis - nopCommerce Policies"><img src="https://tetration.guru/bootcamp/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to perform policy analysis for the nopCommerce app.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/19_policy_analysis_nopcommerce.mp4" style="font-weight:bold" title="Policy Analysis - nopCommerce Policies"><img src="https://tetration.guru/bootcamp/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to perform policy analysis for the nopCommerce app.</a>
 
 ---
 
@@ -228,4 +228,4 @@ YOU HAVE FINISHED THIS MODULE
 
 
 
-| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page]() | [Continue to the Next Module]() |
+| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page]() | [Continue to the Next Module]() |

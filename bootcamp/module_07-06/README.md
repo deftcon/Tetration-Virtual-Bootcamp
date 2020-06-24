@@ -1,13 +1,13 @@
 # Cisco Tetration - Hands-On Lab
 
-## Module 07.06 -- Demo -- Segmentation - Policy Analysis - Global Services
+## Module 07.06  Segmentation - Policy Analysis - Global Services
 
 In this module we will begin performing Policy Analysis. Policy Analysis is a powerful feature of Tetration that allows you to determine what the impact of implementing a ruleset would be based on current and historical traffic flows. Policy Analysis is helpful prior to initially enabling enforcement, as well as to gauge the impact of ongoing policy changes.  It greatly reduces the chances of creating business-impacting outages caused by missing or incorrect policy rules, and decreases the need to roll back ruleset changes.  Implemented policies are also versioned, and rollback to a previous policy can be done easily if needed.
 
 In this module we will first enable Policy Analysis for each workspace,  and then in each of the sub-sequent modules we will use Policy Analysis to determine the impact of our ruleset and make required changes based on the findings.  
 
 ---
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/17_policy_analysis_global_services.mp4" style="font-weight:bold" title="Policy Analysis - OpenCart Policies"><img src="https://tetration.guru/bootcamp/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to perform policy analysis for the Global policy.</a>  
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/17_policy_analysis_global_services.mp4" style="font-weight:bold" title="Policy Analysis - OpenCart Policies"><img src="https://tetration.guru/bootcamp/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to perform policy analysis for the Global policy.</a>  
 
 ---
 
@@ -203,4 +203,4 @@ Once the time horizon on the chart has caught up to when you enabled Policy Anal
 YOU HAVE COMPLETED THIS MODULE
 
 
-| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page]() | [Continue to the Next Module]() |
+| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page]() | [Continue to the Next Module]() |

@@ -1,11 +1,11 @@
 # Cisco Tetration - Hands-On Lab
 
-## Module 07.13 -- Demo -- Segmentation - Enforcement - Linux App
+## Module 07.13  Segmentation - Enforcement - Linux App
 
 In this module we will enable enforcement for the OpenCart application.  We will review the deployed policies both before and after enabling enforcement to compare the results,  and then once in enforcement test access to the application.  We will also test the user-based policy as defined in <a href="">Module 16</a> 
 
 ---
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/24_policy_enforcement_opencart.mp4" style="font-weight:bold" title="Enforcement - OpenCart"><img src="https://tetration.guru/bootcamp/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video showing the necessary tasks to be performed to take the Linux-based OpenCart into full enforcement mode with micro-segmentation.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/24_policy_enforcement_opencart.mp4" style="font-weight:bold" title="Enforcement - OpenCart"><img src="https://tetration.guru/bootcamp/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video showing the necessary tasks to be performed to take the Linux-based OpenCart into full enforcement mode with micro-segmentation.</a>
 
 ---
 
@@ -258,4 +258,4 @@ Attempt a connection from the Apache web server to the IIS web server using the 
 YOU HAVE FINISHED THIS MODULE
 
 
-| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page]() | [Continue to the Next Module]() |
+| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page]() | [Continue to the Next Module]() |

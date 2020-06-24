@@ -1,6 +1,6 @@
 # Cisco Tetration - Hands-On Lab
 
-## Module 03.02 -- Lecture -- Data Sources - Agents
+## Module 03.02  Data Sources - Agents
 Tetration agent (also called sensor) installation can be performed manually using a shell script for Linux and a Powershell script (.ps1) for Windows. These scripts can also be leveraged by 3rd party software configuration management systems such as Ansible, Puppet, Microsoft SCCM, etc. to automate deployment across multiple machines. The installation does not require any modification to run unattended, the scripts run without any interaction required from the administrator. It is important that the scripts be downloaded from the Tetration cluster, as they have specific information embedded to connect to the cluster.  When the script is executed, it will pull down the required software from the Tetration cluster based on the Operating System in use. This means that outbound connectivity from each server to the Tetration cluster is a requirement.
 
 In this module, we'll download the installation scripts for Windows and Linux from the Tetration cluster and use Ansible to perform automated rollout of the sensors.
@@ -30,13 +30,13 @@ The Ansible machine is already configured to deploy agents out to the following 
 ---
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/03a_agent_installation_manual.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of demonstrating how to install Tetration sensors manually (this is for demo only - these tasks will not be performed in this module).</a>  
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/03a_agent_installation_manual.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video of demonstrating how to install Tetration sensors manually (this is for demo only - these tasks will not be performed in this module).</a>  
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/03b_firewalld_ipsets_iptables.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of demonstrating how to disable firewalld and install ipsets and iptables in linux prior to sensor install (this is for demo only - these tasks will not be performed in this module).</a>  
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/03b_firewalld_ipsets_iptables.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video of demonstrating how to disable firewalld and install ipsets and iptables in linux prior to sensor install (this is for demo only - these tasks will not be performed in this module).</a>  
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/03c_agent_installation_w_ansible.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks being performed to install Tetration sensors using Ansible (tasks covered in this module).</a>  
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/03c_agent_installation_w_ansible.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks being performed to install Tetration sensors using Ansible (tasks covered in this module).</a>  
 
 
 ---
@@ -213,4 +213,4 @@ YOU HAVE FINISHED THIS MODULE
 
 
 
-| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page]() | [Continue to the Next Module]() |
+| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page]() | [Continue to the Next Module]() |

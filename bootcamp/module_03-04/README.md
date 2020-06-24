@@ -1,6 +1,6 @@
 # Cisco Tetration - Hands-On Lab
 
-## Module 03.04 -- Lecture -- Data Sources - External Orchestrators
+## Module 03.04  Data Sources - External Orchestrators
 
 In this section we will configure External Orchestrators.  Tetration provides the ability to pull in metadata such as tags and labels from various external sources such as VMware vCenter, AWS, Kubernetes, F5 Big-IP, Citrix Netscaler, Infoblox, DNS, and AVI Vantage.  The metadata from the External Orchestrators are then utilized to annotate the associated workloads in Tetration. These are in addition to static annotations which we configured in the previous module.  We'll be configuring AWS as an External Orchestrator since all of our lab instances are deployed there. Each workload is deployed with a series of tags that will be propagated into Tetration as annotations which will be used throughout the remainder of the exercises. In addition, we'll be configuring Kubernetes as an External Orchestrator to pull in the labels that are assigned to the microservices application as annotations. 
 
@@ -8,7 +8,7 @@ Follow the below steps to deploy AWS and Kubernetes as External Orchestrators in
 
 ---
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/06_external_orchestrators.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video highlighting the creation of two External Orchestrators providing the ability to drive dynamic policy - namely AWS tags and Kubernetes labels.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/06_external_orchestrators.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video highlighting the creation of two External Orchestrators providing the ability to drive dynamic policy - namely AWS tags and Kubernetes labels.</a>
 
 ---
 
@@ -248,4 +248,4 @@ Enter the search criteria `* orchestrator_AppCluster = front-end` and select Sea
 YOU HAVE COMPLETED THIS MODULE
 
 
-| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page]() | [Continue to the Next Module]() |
+| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page]() | [Continue to the Next Module]() |

@@ -1,13 +1,13 @@
 # Cisco Tetration - Hands-On Lab
 
-## Module 07.03 -- Demo -- Segmentation - ADM - Windows App
+## Module 07.03  Segmentation - ADM - Windows App
 
 In this module we will create an Application Workspace for the NopCommerce application which consists of an IIS web server and a MS-SQL database server. We will first run ADM, and then adjust the discovered cluster queries to use AWS tags. Then we will refine the discovered policies.  We will also take a look at Policy Requests. When policies are created that allow a cluster in one application workspace to talk to a cluster in a different application workspace, policies must be created in both workspaces to allow the communication.  Policy requests are a way to notify the administrator of the other workspace that matching policies need to be created.  The administrator must then go into the other workspace and accept the policy requests.  By accepting the requests,  the rules are automatically created in the other workspace.  Auto-pilot rules can also be set up to automatically accept any incoming policy requests to an application workspace.
 
 In this module, we'll be configuring rules from the Windows IIS and MSSQL servers to the Common Policy workspace to allow communications such as Microsoft RPC, Kerberos, LDAP, DNS, and etc. The rules will be initially discovered by ADM,  and will be created in the Common Policy workspace using the Policy Request functionality described above.  
 
 ---
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/14_policy_creation_adm_clusters_nopcommerce.mp4" style="font-weight:bold" title="nopCommerce ADM & Clusters"><img src="https://tetration.guru/bootcamp/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to setup an Workspace, run ADM, configure Clusters, and customize the security Policy for the Windows-based app called nopCommerce.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/14_policy_creation_adm_clusters_nopcommerce.mp4" style="font-weight:bold" title="nopCommerce ADM & Clusters"><img src="https://tetration.guru/bootcamp/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to setup an Workspace, run ADM, configure Clusters, and customize the security Policy for the Windows-based app called nopCommerce.</a>
 
 ---
 
@@ -355,4 +355,4 @@ Switch Application and go back to the nopCommerce Application Workspace.  Select
 
 YOU HAVE COMPLETED THIS MODULE
 
-| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page]() | [Continue to the Next Module]() |
+| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page]() | [Continue to the Next Module]() |

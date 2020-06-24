@@ -1,6 +1,6 @@
 # Cisco Tetration - Hands-On Lab
 
-## Module 07.05 -- Demo -- Segmentation - User-Based Policy
+## Module 07.05  Segmentation - User-Based Policy
 
 In this module we will configure policies that are based on the ISE Security Group tags that are propagated into Tetration from ISE when a user logs in.  There are two desktop machines, one which will be assigned to Employees and one which will be assigned to SysAdmins.  The users will log in from the desktop machines using the Cisco AnyConnect VPN client and will be authenticated by ISE. A Security Group Tag will then be propagated into Tetration as an annotation on IP address of the desktop machine.  We will set up our policies such that Employees can gain access to the web front-end of our applications,  but will not have any other access.  SysAdmins, on the other hand will additionally have access to manage the servers using Remote Desktop for the Windows servers and SSH for the Linux servers.  
 
@@ -19,7 +19,7 @@ In this lab diagram, SysAdmins not only get standard access to the app front-end
 
 ---
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/16_policy_creation_user_based_policy.mp4" style="font-weight:bold" title="Policy Analysis - nopCommerce Policies"><img src="https://tetration.guru/bootcamp/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to configure dynamic user-based policy.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/16_policy_creation_user_based_policy.mp4" style="font-weight:bold" title="Policy Analysis - nopCommerce Policies"><img src="https://tetration.guru/bootcamp/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to configure dynamic user-based policy.</a>
 
 ---
 
@@ -149,4 +149,4 @@ Add TCP 8080 as a service on the new rule.  Recall that previously the attacker 
 YOU HAVE COMPLETED THIS MODULE
 
 
-| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page]() | [Continue to the Next Module]() |
+| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page]() | [Continue to the Next Module]() |

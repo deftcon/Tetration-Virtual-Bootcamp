@@ -1,12 +1,12 @@
 # Cisco Tetration - Hands-On Lab
 
-## Module 07.09 -- Demo -- Segmentation - Policy Analysis - Linux App
+## Module 07.09  Segmentation - Policy Analysis - Linux App
 
 In this module we will perform Policy Analysis for the OpenCart application and adjust policy as necessary based on the results. We will also run an Experiment which analyzes the current policy against historical flows that occurred during a specified time range. This can be useful to see what the policy results would have been over a period of weeks or even months based on the traffic observed during that time frame, even before Policy Analysis was enabled for the application.  
 
 ---
 <a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/20_policy_analysis_opencart.mp4
-" style="font-weight:bold" title="Enforcement - OpenCart"><img src="https://tetration.guru/bootcamp/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video showing the necessary tasks to perform Policy Analysis for the Linux-based OpenCart.</a>
+" style="font-weight:bold" title="Enforcement - OpenCart"><img src="https://tetration.guru/bootcamp/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video showing the necessary tasks to perform Policy Analysis for the Linux-based OpenCart.</a>
 
 ---
 
@@ -169,4 +169,4 @@ The Policy Decision is deny.   This is the desired outcome for this traffic beca
 YOU HAVE FINISHED THIS MODULE
 
 
-| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page]() | [Continue to the Next Module]() |
+| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page]() | [Continue to the Next Module]() |

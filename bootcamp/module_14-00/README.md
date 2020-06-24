@@ -1,7 +1,7 @@
 # Cisco Tetration - Hands-On Lab
   
-## Module 14.00 -- Lecture -- Neighborhood
+## Module 14.00  Neighborhood
 
 
 
-| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page]() | [Continue to the Next Module]() |
+| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page]() | [Continue to the Next Module]() |

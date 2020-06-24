@@ -1,12 +1,12 @@
 # Cisco Tetration - Hands-On Lab
 
-## Module 08.00 -- Lecture -- CVE Detection Visibility and Monitoring
+## Module 08.00  CVE Detection Visibility and Monitoring
 
 In this module we will review key security visibility and monitoring features of Tetration such as the Security dashboard, Vulnerability dashboard, and others. We'll also investigate configuration of Alert triggers and the multiple alert destinations that can be configured.   
 
 
 ---
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/26_security_visibility_monitoring.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video reviewing the Security and Vulnerability Dashboards.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/26_security_visibility_monitoring.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video reviewing the Security and Vulnerability Dashboards.</a>
 
 ---
 ### Steps for this Module  
@@ -311,4 +311,4 @@ Here you can configure alert destinations for each type of alert.  The internal 
 YOU HAVE FINISHED THIS MODULE
 
 
-| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page]() | [Continue to the Next Module](https://tetration.guru/labguide/z-appendix-legacy-policy/) |
+| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page]() | [Continue to the Next Module](https://tetration.guru/bootcamp/z-appendix-legacy-policy/) |

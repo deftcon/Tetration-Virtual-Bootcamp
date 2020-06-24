@@ -1,6 +1,6 @@
 # Cisco Tetration - Hands-On Lab
 
-Module 06.00 -- Lecture -- ATT&CK! and Forensics
+Module 06.00  ATT&CK! and Forensics
 
 ---
 
@@ -28,7 +28,7 @@ You will use this diagram when performing the lab that will have you attack a kn
 
 ---
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/10_forensics.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video that demonstrates a live attack and the ability to detect the attack and perform Forensic analysis.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/10_forensics.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video that demonstrates a live attack and the ability to detect the attack and perform Forensic analysis.</a>
 
 ---
 
@@ -232,4 +232,4 @@ Examine the other alarms that were generated. These show the initial access wher
 YOU HAVE FINISHED THIS MODULE
 
 
-| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page]() | [Continue to the Next Module]() |
+| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page]() | [Continue to the Next Module]() |

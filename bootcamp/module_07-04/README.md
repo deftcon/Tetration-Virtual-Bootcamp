@@ -1,11 +1,11 @@
 # Cisco Tetration - Hands-On Lab
 
-## Module 07.04 -- Demo -- Segmentation - ADM - Linux App
+## Module 07.04  Segmentation - ADM - Linux App
 
 In this module we will create an Application Workspace for the OpenCart application which consists of a Linux server running Apache web server as the front end talking to a Linux server running MySQL for the back-end database.  We will run ADM,  change the cluster queries,  and tune the discovered policies as needed.  We will also accept any Policy Requests made from the OpenCart application workspace to the Common Policy workspace.  
 
 ---
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/15_policy_creation_adm_clusters_opencart.mp4" style="font-weight:bold" title="OpenCart ADM & Clusters"><img src="https://tetration.guru/bootcamp/labguide/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to setup an Workspace, run ADM, configure Clusters, and customize the security Policy for the Linux-based app called OpenCart.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/15_policy_creation_adm_clusters_opencart.mp4" style="font-weight:bold" title="OpenCart ADM & Clusters"><img src="https://tetration.guru/bootcamp/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to setup an Workspace, run ADM, configure Clusters, and customize the security Policy for the Linux-based app called OpenCart.</a>
 
 ---
 ### Steps for this Module  
@@ -234,4 +234,4 @@ Click on the Policies tab and notice the new rule that has been created from Ope
 
 YOU HAVE COMPLETED THIS MODULE
 
-| [Return to Table of Contents](https://tetration.guru/labguide/) | [Go to Top of the Page]() | [Continue to the Next Module]() |
+| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page]() | [Continue to the Next Module]() |
