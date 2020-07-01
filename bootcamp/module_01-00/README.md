@@ -8,7 +8,7 @@ Cisco Tetration is a powerful tool that allows organizations to easily define an
 
 
 ### Introduction - Table of Contents
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/lectures/Module_01.00__Lecture__Introduction_Course_and_Lab_Walkthrough" style="font-weight:bold">Introduction, Course, and Lab Walkthrough -- Video (WATCH ME!) <img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"></a>   
+<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/lectures/Module_01.00__Lecture__Introduction_Course_and_Lab_Walkthrough.mp4" style="font-weight:bold">Introduction, Course, and Lab Walkthrough -- Video (WATCH ME!) <img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"></a>  
 <a href="#Guide" style="font-weight:bold">How to Use This Lab Guide</a>  
 <a href="#Credentials" style="font-weight:bold">Lab Environment Credentials</a>  
 <a href="#CSV" style="font-weight:bold">Student/Pod-Specific Information - CSV File</a>  
