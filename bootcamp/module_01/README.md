@@ -1,12 +1,20 @@
-# Cisco Tetration Virtual Bootcamp
-  
-## Module 01.00 :: Lecture :: Introduction, Course, and Lab Walkthrough
+# Cisco Tetration Virtual Bootcamp  
 
+### Table of Contents - SubModules  
+<a href="#subModule_01.00" style="font-weight:bold">subModule 01.00</a>  
+<a href="#subModule_01.01" style="font-weight:bold">subModule 01.01</a>  
+<a href="#subModule_01.02" style="font-weight:bold">subModule 01.02</a>  
+  
+  
+<div class="link" id="#subModule_01.00">subModule 01.00</div>  
+  
+## Module 01.00 :: Lecture :: Introduction, Course, and Lab Walkthrough  
+  
 This lab guide has been developed in close coordination with the Cisco Tetration product team in order to provide you, the learner, with a complete experience of deploying, configuring, and truly getting the most out of Cisco Tetration. 
 
-Cisco Tetration is a powerful tool that allows organizations to easily define and maintain centralized, intent-driven policy, made possible by collecting advanced telemetry with complete visibility of every packet, action, and process happening across every single workload, regardless of floor tile. Whether your workloads live in your own data centers, someone elses such as a CoLo or even public cloud provider, or any combination thereof, Cisco Tetration has you covered.     
-
-
+Cisco Tetration is a powerful tool that allows organizations to easily define and maintain centralized, intent-driven policy, made possible by collecting advanced telemetry with complete visibility of every packet, action, and process happening across every single workload, regardless of floor tile. Whether your workloads live in your own data centers, someone elses such as a CoLo or even public cloud provider, or any combination thereof, Cisco Tetration has you covered.  
+  
+  
 ### Introduction - Table of Contents
 <a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/lectures/Module_01.00__Lecture__Introduction_Course_and_Lab_Walkthrough.mp4" style="font-weight:bold">Introduction, Course, and Lab Walkthrough -- Video (WATCH ME!) <img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"></a> Runtime: 00:05:41  
 <a href="#Guide" style="font-weight:bold">How to Use This Lab Guide</a>  
@@ -213,5 +221,20 @@ Your complete lab environment consists of the following assets:
    * Apache Guacamole server (CentOS 7)
 
 
+<div class="link" id="#subModule_01.01">subModule 01.01</div>  
+  
+## Module 01.01 :: Lecture :: Defining the Problem
 
-| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page]() | [Continue to the Next Module]() |
+<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/lectures/Module_01.01__Lecture__Defining_the_Problem.mp4" style="font-weight:bold">Defining the Problem -- Video (WATCH ME!) <img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"></a> Runtime: 00:02:56  
+  
+  
+  
+<div class="link" id="#subModule_01.02"><a href="#subModule_01.02" style="font-weight:bold">subModule 01.02</a></div>  
+  
+## Module 01.02 :: Lecture :: Positioning Workload Protection
+
+<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/lectures/Module_01.02__Lecture__Positioning_Workload_Protection.mp4" style="font-weight:bold">Defining the Problem -- Video (WATCH ME!) <img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"></a> Runtime: 00:10:24  
+  
+  
+  
+| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](README.md) | [Continue to the Next Module](../module_02/) |
