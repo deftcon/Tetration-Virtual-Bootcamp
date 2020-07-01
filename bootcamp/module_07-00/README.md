@@ -1,4 +1,4 @@
-# Cisco Tetration - Hands-On Lab
+# Cisco Tetration Virtual Bootcamp
 
 ## Module 07.00  Segmentation - Inventory Filters
 

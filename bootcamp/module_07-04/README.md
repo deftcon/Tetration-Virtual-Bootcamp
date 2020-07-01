@@ -1,4 +1,4 @@
-# Cisco Tetration - Hands-On Lab
+# Cisco Tetration Virtual Bootcamp
 
 ## Module 07.04  Segmentation - ADM - Linux App
 

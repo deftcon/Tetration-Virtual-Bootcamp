@@ -1,4 +1,4 @@
-# Cisco Tetration - Hands-On Lab
+# Cisco Tetration Virtual Bootcamp
 
 ## Module 07.05  Segmentation - User-Based Policy
 

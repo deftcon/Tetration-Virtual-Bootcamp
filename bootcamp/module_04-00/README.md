@@ -1,4 +1,4 @@
-# Cisco Tetration - Hands-On Lab
+# Cisco Tetration Virtual Bootcamp
 
 ## Module 04.00  Scopes
 Scopes are used in Tetration to break down an IP scheme of an organization into manageable blocks that represent a function,  such as an application.  Scopes are organized in a tree structure,  with a Root Scope at the top of the tree which represents all IP addresses;  both internal and external.  The root scope is tied to the VRF,  which in turn represents the IP space of a Tenant.  In Tetration Cloud,  there can be only a single Tenant and hence only a single VRF and Root Scope.  With an on-prem Tetration cluster,  you could possibly have multiple Tenants and VRFs.  Each leaf of the scope tree is tied to a query, with the queries typically being more broad at the higher levels of the tree and becoming more specific as you traverse down the tree structure.  For example,  consider the following scope structure that will be used in this lab:

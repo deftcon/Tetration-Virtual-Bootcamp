@@ -1,4 +1,4 @@
-# Cisco Tetration - Hands-On Lab
+# Cisco Tetration Virtual Bootcamp
   
 ## Module 01.01 :: Lecture :: Defining the Problem
 

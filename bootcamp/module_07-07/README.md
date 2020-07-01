@@ -1,4 +1,4 @@
-# Cisco Tetration - Hands-On Lab
+# Cisco Tetration Virtual Bootcamp
 
 ## Module 07.07  Segmentation - Policy Analysis - Common Services
 In this module we will perform Policy Analysis for the Common Policy workspace which contains the Active Directory and Ansible server workloads. We will identify any errors in our ruleset that might have caused disruption had we put the workspace into enforcement,  and make corrections as necessary.  

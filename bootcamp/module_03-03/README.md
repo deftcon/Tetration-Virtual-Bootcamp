@@ -1,4 +1,4 @@
-# Cisco Tetration - Hands-On Lab
+# Cisco Tetration Virtual Bootcamp
 
 ## Module 03.03  Data Sources - Annotations
 Annotations are metadata that can be associated with endpoint IP addresses that are stored in Tetration inventory. Traditionally, IP addresses and/or hostnames of devices have been the primary means of identifying devices in an environment. Annotations provide a mechanism by which we can provide more context about the IP addresses, and build search criteria and policy within the platform using language that is much more consumable and meaningful to humans. Each IP address can be annotated with up to 32 fields of metadata.  With annotations we can build policy that is dynamic; by changing an annotation we can potentially affect the policy that is being applied to a particular machine.  Take for an example a machine that has been identified by the security team as running a highly vulnerable version of software.  By creating a policy that matches an annotation of "Quarantine",  we can annotate the workload with the "Quarantine" annotation to cause it to be removed from the network so that the vulnerability can be patched.

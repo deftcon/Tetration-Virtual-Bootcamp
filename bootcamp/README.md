@@ -1,4 +1,4 @@
-# Cisco Tetration - Hands-On Lab
+# Cisco Tetration Virtual Bootcamp
   
 ## Table of Contents
 [Module00: Diagrams](diagrams/)  

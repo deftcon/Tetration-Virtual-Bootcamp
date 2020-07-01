@@ -1,4 +1,4 @@
-# Cisco Tetration - Hands-On Lab
+# Cisco Tetration Virtual Bootcamp
   
 ## Module 01.00 :: Lecture :: Introduction and Course Walkthru
 

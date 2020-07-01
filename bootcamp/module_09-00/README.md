@@ -1,4 +1,4 @@
-# Cisco Tetration - Hands-On Lab
+# Cisco Tetration Virtual Bootcamp
   
 ## Module 09.00  RBAC - LDAP - SSO - and MOTD
 

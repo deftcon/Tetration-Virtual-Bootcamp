@@ -1,4 +1,4 @@
-# Cisco Tetration - Hands-On Lab
+# Cisco Tetration Virtual Bootcamp
 
 ## Module 03.01  Data Sources - Collection Rules
 In this module we will configure Collection Rules.  Collection Rules govern what endpoints will be considered for inclusion in inventory.  Typically this should be any internal IP address space of an organization.  It may also make sense to configure public IP address space that is used by an organization,  such as DMZ or public cloud address space.  
