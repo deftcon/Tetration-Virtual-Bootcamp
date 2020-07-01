@@ -1,6 +1,6 @@
 # Cisco Tetration Virtual Bootcamp
   
-## Module 01.00 :: Lecture :: Introduction and Course Walkthru
+## Module 01.00 :: Lecture :: Introduction, Course, and Lab Walkthrough
 
 This lab guide has been developed in close coordination with the Cisco Tetration product team in order to provide you, the learner, with a complete experience of deploying, configuring, and truly getting the most out of Cisco Tetration. 
 
