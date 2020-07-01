@@ -2,7 +2,7 @@
   
 ## Table of Contents
 [Diagrams](diagrams/)  
-[Module00: Lab Environment Deployment & Diagrams](../lab-env-build/)  
+[Module00: Lab Environment Deployment](../lab-env-build/)  
 [Module01: Introduction, Course, and Lab Walkthrough](module_01/)  
 [Module02: Customer Use Cases](module_02/)  
 [Module03: Data Sources (Inventory, Collection Rules, Agents, Annotations, & External Orchestrators)](module_03/)  
