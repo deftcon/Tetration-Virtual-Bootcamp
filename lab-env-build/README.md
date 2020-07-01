@@ -1,12 +1,148 @@
-# Cisco Tetration - Hands On Lab
+# Cisco Tetration Virtual Bootcamp
 
-## Student/Learner Lab Guide
+ 
+## Lab Environment Deployment
 
-Firstly, if you are here for the Lab Guide, it is co-hosted here under the `/bootcamp/` folder in the repo using [GitHub Pages](https://pages.github.com/), currently with a [Jekyll theme](https://jekyllrb.com/) called 'Hacker', and can be found here: [Lab Guide Documentation](https://tetration.guru/bootcamp/).
+This lab environment build deploys entirely to AWS with the current unique exception of Cisco ISE, which requires deployment to an on-prem vCenter environment with a VPN connection and route table addition. Note importantly that this lab-build DOES NOT deploy any type of instance(s) for the Tetration cluster itself (TaaS/Tetration-V, etc), and ONLY deploys that which you see below in the "Complete Lab Diagram" inside of the "AWS Cloud" box with the already noted exception of ISE, as well as the exception of the necessary AMIs, which must be copied from Deft's AWS account and is detailed below in the next sub-section.  
+  
+It is REQUIRED that you have your own instance of Tetration, whether On-Prem, Tet-V, or TaaS makes no difference, only that you have one provisioned. This instance of Tetration does not require provisioning prior to the deployment of this lab environment, however this lab environment won't do you much good without Tetration. 
 
-## Lab Environment Deployment and Git Repo Usage
+<a href="https://app.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501" style="font-weight:bold">"Complete Lab Diagram"  
+<img src="../bootcamp/diagrams/images/diagrams_003.png"></a>  
 
-This lab environment deploys entirely to AWS with the current unique exception of Cisco ISE, which requires deployment to an on-prem vCenter environment with a VPN connection and route table addition. 
+
+#### AMIs Required Prior to AWS Lab Environment Deployment
+
+There are a number of AMIs that you will be required to copy from Deft's AWS account in the Ohio region prior to being able to deploy this lab environment to AWS successfully. They are outlined two sub-sections below, along with their AMI IDs, in the "Parameters File Example" section, however we have also added that info here in this sub-section, as well. It will be necessary in some cases to authorize or subscribe to a few of the 14 total EC2 instances that you will launch in order to bring up this environment. Below are listed the 14 AMIs, complete with their colloquial name, AMI ID, a brief description, and screenshots where appropriate to aid in getting setup. 
+
+
+###### These first 7 AMIs only require a simple copy from Deft's AWS Account and are currently available only in the Ohio region:  
+  
+ldap_ami: ami-0b416df717b448667   # << This is for MS Active Directory and is a private image that requires a simple copy  
+  
+mssql_ami: ami-09782396834215732   # << This is for MS Win19 SQL and is a private image that requires a simple copy  
+  
+iis_ami: ami-091df3f67b36e2250   # << This is for MS Win19 IIS and is a private image that requires a simple copy  
+  
+tet_data_ami: ami-0cf7fd4e75d7d91ab   # << This is the Tetration Data Ingest appliance and is a private image that requires a simple copy  
+  
+tet_edge_ami: ami-05d08946ffda72d18   # << This is the Tetration Edge appliance and is a private image that requires a simple copy  
+  
+employee_ubuntu_ami: ami-0af925e340025c9f9   # << This is the Ubuntu 18.04 desktop image for both Employee and SysAdmin and is a private image that requires a simple copy  
+  
+sysadmin_ubuntu_ami: ami-0af925e340025c9f9   # << Simple AMI copy (same AMI ID as Employee just above)  
+  
+  
+###### These next 4 AMIs require copying, launching (which will fail as seen in screenshot below), accepting the subscription from the AWS Marketplace, then booting again. You may need to create an AMI image from each of your 4 booted instances and use that new AMI ID, replacing it in this file for all subsequent uses. This only requires performing on the very first launch. On subsequent launches this will not be required.  
+
+mysql_ami: ami-051ba5822fc02da4b   # <<  This is for CentOS7 MySQL and is a private image that requires launch from shared AMI, you to Accept Subscription, then create the AMI
+
+apache_ami: ami-0c85d8851d66cd9f9   # <<  This is for CentOS7 Apache and is a private image that requires launch from shared AMI, you to Accept Subscription, then create the AMI
+
+ansible_ami: ami-0083b10a007c92d2d   # << This is for CentOS7 Ansible and is a private image that requires launch from shared AMI, you to Accept Subscription, then create the AM
+
+guacamole_ami: ami-007f96a1ed0595540   # << This is for CentOS7 Guacamole and is a private image that requires launch from shared AMI, you to Accept Subscription, then create the AMI
+
+<a href="#step-001" style="font-weight:bold">Failed Launch - Navigate to URI and accept subscription:</a>  
+<a href="images/admin_001.png"><img src="images/admin_001.png" style="width:100%;height:100%;"></a>  
+  
+
+
+attack_server_ami: ami-04f958d48e22e185c   # << This is for Ubuntu Kali Linux with Metasploit and is a private image that requires launch, you to Accept Subscription, then create the AMI
+
+
+asav_ami: ami-0f3cca6491d987102   # << This is the ASAv, is a region-specific image ID, and requires a subscription from AWS Marketplace (search for ASAv BYOL)
+
+eks_worker_ami: ami-0c4c60006aa81c29b   # << Global AWS Marketplace - will change with region - https://cloud-images.ubuntu.com/docs/aws/eks/
+
+
+
+
+
+
+<div class="step" id="step-002"><a href="#step-002" style="font-weight:bold">Step 002</a></div>  
+
+<a href="images/admin_002.png"><img src="images/admin_002.png" style="width:100%;height:100%;"></a>  
+  
+
+
+<div class="step" id="step-003"><a href="#step-003" style="font-weight:bold">Step 003</a></div>  
+
+<a href="images/admin_003.png"><img src="images/admin_003.png" style="width:100%;height:100%;"></a>  
+  
+
+
+<div class="step" id="step-004"><a href="#step-004" style="font-weight:bold">Step 004</a></div>  
+
+<a href="images/admin_004.png"><img src="images/admin_004.png" style="width:100%;height:100%;"></a>  
+  
+
+
+<div class="step" id="step-005"><a href="#step-005" style="font-weight:bold">Step 005</a></div>  
+
+<a href="images/admin_005.png"><img src="images/admin_005.png" style="width:100%;height:100%;"></a>  
+  
+
+
+<div class="step" id="step-006"><a href="#step-006" style="font-weight:bold">Step 006</a></div>  
+
+<a href="images/admin_006.png"><img src="images/admin_006.png" style="width:100%;height:100%;"></a>  
+  
+
+
+<div class="step" id="step-007"><a href="#step-007" style="font-weight:bold">Step 007</a></div>  
+
+<a href="images/admin_007.png"><img src="images/admin_007.png" style="width:100%;height:100%;"></a>  
+  
+
+
+<div class="step" id="step-008"><a href="#step-008" style="font-weight:bold">Step 008</a></div>  
+
+<a href="images/admin_008.png"><img src="images/admin_008.png" style="width:100%;height:100%;"></a>  
+  
+
+
+<div class="step" id="step-009"><a href="#step-009" style="font-weight:bold">Step 009</a></div>  
+
+<a href="images/admin_009.png"><img src="images/admin_009.png" style="width:100%;height:100%;"></a>  
+  
+
+
+<div class="step" id="step-010"><a href="#step-010" style="font-weight:bold">Step 010</a></div>  
+
+<a href="images/admin_010.png"><img src="images/admin_010.png" style="width:100%;height:100%;"></a>  
+  
+
+
+<div class="step" id="step-011"><a href="#step-011" style="font-weight:bold">Step 011</a></div>  
+
+<a href="images/admin_011.png"><img src="images/admin_011.png" style="width:100%;height:100%;"></a>  
+  
+
+
+<div class="step" id="step-012"><a href="#step-012" style="font-weight:bold">Step 012</a></div>  
+
+<a href="images/admin_012.png"><img src="images/admin_012.png" style="width:100%;height:100%;"></a>  
+  
+
+
+<div class="step" id="step-013"><a href="#step-013" style="font-weight:bold">Step 013</a></div>  
+
+<a href="images/admin_013.png"><img src="images/admin_013.png" style="width:100%;height:100%;"></a>  
+  
+
+
+<div class="step" id="step-014"><a href="#step-014" style="font-weight:bold">Step 014</a></div>  
+
+<a href="images/admin_014.png"><img src="images/admin_014.png" style="width:100%;height:100%;"></a>  
+  
+
+
+<div class="step" id="step-015"><a href="#step-015" style="font-weight:bold">Step 015</a></div>  
+
+<a href="images/admin_015.png"><img src="images/admin_015.png" style="width:100%;height:100%;"></a>  
+  
+
 
 
 #### Files Required to Deploy to AWS
@@ -105,8 +241,8 @@ Say you chose `10.0.0.0/16` as your primary range, and `198.18.0.0/16` as your s
 > Note that the default subnet value for the secondary range is `198.18.0.0/16` and was chosen specifically becuase it both represented a "real internet, non-RFC1918 IP range", and also that it falls in the *'Reserved'* range, specifically that "This block has been allocated for use in benchmark tests of network interconnect devices" per [RFC5735](https://tools.ietf.org/html/rfc5735). It could initially be argued that a range such as `198.51.100.0/24` or `203.0.113.0/24` would seem more appropos as they were created so that "This block is assigned as "TEST-NET-2/3" for use in documentation and example code", but they weren't large enough (/24), so the decision was made soundly to provide a real-world-like environment whilst simultaneously avoiding any blackholing any legitimate internet traffic from within the lab environment. 
 
 Here is a diagram that will help to explain the subnets described above in a bit better visual detail: 
-![Subnet Diagram](../bootcamp/bootcamp/diagrams/images/diagrams_003.png)
-More can be found [here on the Diagrams page](../bootcamp/bootcamp/diagrams/).
+![Subnet Diagram](../bootcamp/diagrams/images/diagrams_003.png)
+More can be found [in the Diagrams section](../bootcamp/diagrams/).
 
 
 #### IAM Role API Credentials - Scope and Permissions

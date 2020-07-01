@@ -113,4 +113,4 @@ The query matches only the internal IP of the Guacamole server.  Click Create.
 You have completed this module.
 
 
-| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page]() | [Continue to the Next Module]() |
+| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](README.md) | [Continue to the Next Module](../module_08/) |

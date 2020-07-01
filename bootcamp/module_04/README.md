@@ -251,4 +251,4 @@ The workloads listed here are the Linux machines running Apache and MySQL that m
 You have reached the end of this module.  
 
 
-| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page]() | [Continue to the Next Module]() |
+| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](README.md) | [Continue to the Next Module](../module_05/) |

@@ -1,12 +1,12 @@
 # Cisco Tetration Virtual Bootcamp  
 
 ### Table of Contents - SubModules  
-<a href="#subModule_01.00" style="font-weight:bold">subModule 01.00</a>  
-<a href="#subModule_01.01" style="font-weight:bold">subModule 01.01</a>  
-<a href="#subModule_01.02" style="font-weight:bold">subModule 01.02</a>  
+<a href="#subModule_00" style="font-weight:bold">subModule 01.00</a>  
+<a href="#subModule_01" style="font-weight:bold">subModule 01.01</a>  
+<a href="#subModule_02" style="font-weight:bold">subModule 01.02</a>  
   
   
-<div class="link" id="#subModule_01.00">subModule 01.00</div>  
+<div class="link" id="#subModule_00">subModule 01.00</div>  
   
 ## Module 01.00 :: Lecture :: Introduction, Course, and Lab Walkthrough  
   
@@ -221,7 +221,7 @@ Your complete lab environment consists of the following assets:
    * Apache Guacamole server (CentOS 7)
 
 
-<div class="link" id="#subModule_01.01">subModule 01.01</div>  
+<div class="link" id="#subModule_01">subModule 01.01</div>  
   
 ## Module 01.01 :: Lecture :: Defining the Problem
 
@@ -229,7 +229,7 @@ Your complete lab environment consists of the following assets:
   
   
   
-<div class="link" id="#subModule_01.02"><a href="#subModule_01.02" style="font-weight:bold">subModule 01.02</a></div>  
+<div class="link" id="#subModule_02"><a href="#subModule_01.02" style="font-weight:bold">subModule 01.02</a></div>  
   
 ## Module 01.02 :: Lecture :: Positioning Workload Protection
 

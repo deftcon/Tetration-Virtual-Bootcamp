@@ -311,4 +311,4 @@ Here you can configure alert destinations for each type of alert.  The internal 
 YOU HAVE FINISHED THIS MODULE
 
 
-| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page]() | [Continue to the Next Module](https://tetration.guru/bootcamp/z-appendix-legacy-policy/) |
+| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](README.md) | [Continue to the Next Module](../module_09/) |
