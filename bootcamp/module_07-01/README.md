@@ -7,7 +7,7 @@ In this module we will begin creating policies that will apply across all of the
 In this module we'll be creating Absolute policies in the Global Services application workspace to permit common traffic that will apply across all applications.   
 
 ---
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/12_policy_creation_global_services.mp4" style="font-weight:bold" title="Policy Analysis - Global Services"><img src="https://tetration.guru/bootcamp/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to create hierarchical policy that will later be enforced at a Global level.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/12_policy_creation_global_services.mp4" style="font-weight:bold" title="Policy Analysis - Global Services"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to create hierarchical policy that will later be enforced at a Global level.</a>
 
 ---
 

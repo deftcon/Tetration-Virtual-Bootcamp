@@ -17,9 +17,9 @@ In this tree structure, the Pod matches our annotation PodSubnet=internal which 
 In this module,  we'll define the Scope tree that will be used throughout the rest of the lab exercises.  
 
 ---
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/07a_scope_creation.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video highlighting the creation of Scopes.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/07a_scope_creation.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video highlighting the creation of Scopes.</a>
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/07b_scope_member_verify.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video showing the verification of Scope members.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/07b_scope_member_verify.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video showing the verification of Scope members.</a>
 
 ---
 

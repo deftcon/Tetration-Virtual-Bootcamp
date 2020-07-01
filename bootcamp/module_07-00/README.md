@@ -7,7 +7,7 @@ Inventory Filters provide a way to describe a group of endpoints as an object fo
 In this module we will create Inventory Filters that will be used in later modules to build our policies.   
 
 ---
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/11_policy_creation_inventory_filters.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video to create a few key Inventory Filters.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/11_policy_creation_inventory_filters.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video to create a few key Inventory Filters.</a>
 
 ---
 ### Steps for this Module  

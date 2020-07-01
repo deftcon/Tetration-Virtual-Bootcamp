@@ -6,7 +6,7 @@ In this module we will enable Enforcement on the Global Services and Common Poli
 
 ---
 <a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/22_policy_enforcement_global_and_common.mp4
-" style="font-weight:bold" title="Enforcement - nopCommerce"><img src="https://tetration.guru/bootcamp/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video showing the necessary tasks to be performed to take the hierarchical Global Policy as well as Common App Policy into full enforcement mode.</a>
+" style="font-weight:bold" title="Enforcement - nopCommerce"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video showing the necessary tasks to be performed to take the hierarchical Global Policy as well as Common App Policy into full enforcement mode.</a>
 
 ---
 
