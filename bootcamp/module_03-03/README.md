@@ -128,4 +128,4 @@ Here you should see the annotations and their values that were entered into the 
 <a href="images/module05_013.png"><img src="images/module05_013.png" style="width:100%;height:100%;"></a>  
 
 
-| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page]() | [Continue to the Next Module]() |
+| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](readme.md) | [Continue to the Next Module]() |

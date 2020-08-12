@@ -151,7 +151,7 @@ This consists of every item seen in the following diagram, which is enumerated i
 
 Your complete lab environment consists of the following assets:
 
-###### "Internal/Corporate" Subnet (inside firewall)
+***"Internal/Corporate" Subnet (inside firewall)***
 
 ##### Apps
    * Windows app - "nopCommerce" 
@@ -194,7 +194,7 @@ Your complete lab environment consists of the following assets:
    * Tetration Edge (ISE TrustSec SGT to Active Directory user mapping)
 
 
-###### "External/Internet" Subnet (outside firewall)
+***"External/Internet" Subnet (outside firewall)***
 
 ##### Corporate Employees Using VPN
    * Employee (Win10 or Ubuntu18 Desktop)
@@ -204,7 +204,7 @@ Your complete lab environment consists of the following assets:
    * Metasploit Attack Machine (Kali Linux)
 
 
-###### Straddling Internal Corporate & External Internet Subnets
+***Straddling Internal Corporate & External Internet Subnets***
 
 ##### Firewall / VPN
    * ASAv
