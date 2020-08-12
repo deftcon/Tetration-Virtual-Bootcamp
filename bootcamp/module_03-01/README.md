@@ -6,17 +6,16 @@ In this module we will configure Collection Rules.  Collection Rules govern what
 When configuring Collection rules, we must first delete the IPv6 and IPv4 rules that are configured by default in a new Tetration deployment. Then we can create our own specific rules to match the internal IP space. In the lab,  we'll assume the customer uses all RFC1918 private address space inside their organization.
 
 ---
-
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/lectures/Module_03.01__Lecture__Data_Sources__Collection_Rules.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view the Lecture video for this module.</a>
-
----
-  
+<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/lectures/Module_03.01__Lecture__Data_Sources__Collection_Rules.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png">Data Sources - Collection Rules :: Lecture Video :: Runtime: 13 mins</a>
 ---
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/02_collection_rules.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks being performed to configure Collection Rules.</a>
 
 ---
+<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_03.01__Demo__Data_Sources__Collection_Rules.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png">Data Sources - Collection Rules :: Demo Video :: Runtime: 2 mins</a>
+---
 
+
+## Lab 
 ### Steps for this Module  
 
 Perform the following tasks to configure Collection Rules.  
@@ -38,7 +37,7 @@ Perform the following tasks to configure Collection Rules.
 
 Click on the gear icon in the upper right hand corner and select Collection Rules.
 
-<a href="images/module02_001.png"><img src="images/module02_001.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_03-01_001.png"><img src="images/module_03-01_001.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -46,7 +45,7 @@ Click on the gear icon in the upper right hand corner and select Collection Rule
 
 Click on Edit.  
 
-<a href="images/module02_002.png"><img src="images/module02_002.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_03-01_002.png"><img src="images/module_03-01_002.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -55,7 +54,7 @@ Click on Edit.
 Click Delete to remove the default ::/0: IPv6 rule.  
 
 
-<a href="images/module02_003.png"><img src="images/module02_003.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_03-01_003.png"><img src="images/module_03-01_003.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -63,7 +62,7 @@ Click Delete to remove the default ::/0: IPv6 rule.
 
 Click Delete to remove the default 0.0.0.0/0 IPv4 rule.
 
-<a href="images/module02_004.png"><img src="images/module02_004.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_03-01_004.png"><img src="images/module_03-01_004.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -71,7 +70,7 @@ Click Delete to remove the default 0.0.0.0/0 IPv4 rule.
 
 Enter ::/0: in the Subnet field,  select "Exclude traffic" and then Add Rule.  
 
-<a href="images/module02_005.png"><img src="images/module02_005.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_03-01_005.png"><img src="images/module_03-01_005.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -80,7 +79,7 @@ Enter ::/0: in the Subnet field,  select "Exclude traffic" and then Add Rule.
  Enter 0.0.0.0/0 in the Subnet field, Select "Exclude traffic" and then Add Rule.  
 
 
-<a href="images/module02_006.png"><img src="images/module02_006.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_03-01_006.png"><img src="images/module_03-01_006.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -89,7 +88,7 @@ Enter ::/0: in the Subnet field,  select "Exclude traffic" and then Add Rule.
  Enter 10.0.0.0/8 in the Subnet field,  Select "include traffic" and then Add Rule.  
 
 
-<a href="images/module02_007.png"><img src="images/module02_007.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_03-01_007.png"><img src="images/module_03-01_007.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -98,19 +97,19 @@ Enter ::/0: in the Subnet field,  select "Exclude traffic" and then Add Rule.
 Enter 172.16.0.0/12 in the Subnet field,  Select "include traffic" and then Add Rule.  
 
 
-<a href="images/module02_008.png"><img src="images/module02_008.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_03-01_008.png"><img src="images/module_03-01_008.png" style="width:100%;height:100%;"></a>  
 
 <div class="step" id="step-009"><a href="#step-009" style="font-weight:bold">Step 009</a></div>
 
 Enter 192.168.0.0/16 in the Subnet field,  Select "include traffic" and then Add Rule.  
 
-<a href="images/module02_009.png"><img src="images/module02_009.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_03-01_009.png"><img src="images/module_03-01_009.png" style="width:100%;height:100%;"></a>  
 
 <div class="step" id="step-010"><a href="#step-010" style="font-weight:bold">Step 010</a></div>
 
 Below is what the ruleset should look like when finished.
 
-<a href="images/module02_010.png"><img src="images/module02_010.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_03-01_010.png"><img src="images/module_03-01_010.png" style="width:100%;height:100%;"></a>  
 
 
 
