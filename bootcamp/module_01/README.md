@@ -1,12 +1,4 @@
 # Cisco Tetration Virtual Bootcamp  
-
-### Table of Contents - SubModules  
-<a href="#subModule_00" style="font-weight:bold">subModule 01.00</a>  
-<a href="#subModule_01" style="font-weight:bold">subModule 01.01</a>  
-<a href="#subModule_02" style="font-weight:bold">subModule 01.02</a>  
-  
-  
-<div class="link" id="#subModule_00">subModule 01.00</div>  
   
 ## Module 01.00 :: Lecture :: Introduction, Course, and Lab Walkthrough  
   
@@ -221,20 +213,4 @@ Your complete lab environment consists of the following assets:
    * Apache Guacamole server (CentOS 7)
 
 
-<div class="link" id="#subModule_01">subModule 01.01</div>  
-  
-## Module 01.01 :: Lecture :: Defining the Problem
-
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/lectures/Module_01.01__Lecture__Defining_the_Problem.mp4" style="font-weight:bold">Defining the Problem -- Video (WATCH ME!) <img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"></a> Runtime: 00:02:56  
-  
-  
-  
-<div class="link" id="#subModule_02"><a href="#subModule_01.02" style="font-weight:bold">subModule 01.02</a></div>  
-  
-## Module 01.02 :: Lecture :: Positioning Workload Protection
-
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/lectures/Module_01.02__Lecture__Positioning_Workload_Protection.mp4" style="font-weight:bold">Defining the Problem -- Video (WATCH ME!) <img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"></a> Runtime: 00:10:24  
-  
-  
-  
-| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](README.md) | [Continue to the Next Module](../module_02/) |
+| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](README.md) | [Continue to the Next Module](../module_01-01/) |
