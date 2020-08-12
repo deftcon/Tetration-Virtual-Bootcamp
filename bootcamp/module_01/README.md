@@ -8,7 +8,7 @@ Cisco Tetration is a powerful tool that allows organizations to easily define an
   
   
 ### Introduction - Table of Contents
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/lectures/Module_01.00__Lecture__Introduction_Course_and_Lab_Walkthrough.mp4" style="font-weight:bold">Introduction, Course, and Lab Walkthrough -- Video (WATCH ME!) <img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"></a> Runtime: 00:05:41  
+<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/lectures/Module_01.00__Lecture__Introduction_Course_and_Lab_Walkthrough.mp4" style="font-weight:bold">Introduction, Course, and Lab Walkthrough :: Video  <img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"></a> Runtime: 00:05:41  
 <a href="#Guide" style="font-weight:bold">How to Use This Lab Guide</a>  
 <a href="#Credentials" style="font-weight:bold">Lab Environment Credentials</a>  
 <a href="#CSV" style="font-weight:bold">Student/Pod-Specific Information - CSV File</a>  
@@ -38,7 +38,7 @@ We highly recommend having a quick read on the intro, then possibly a quick watc
 
 To use this method, simply click on the video you wish to watch, pause the video, click the virtical elipses at the bottom right of the player, click "Picture in Picture", switch to the browser tab or window logged into TaaS, resize as desired, unpause, and begin your task while watching along as we perform the same task. Pause as desired. Scrubbing the playhead to Rewind is only supported by going back full screen, although once you get the hang of it you should be able to do this rather quickly, when needed. 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/01c_pip_w_taas.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png">Click here to watch a short video on how to perform tasks with picture-in-picture video.</a>
+<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_01.00__Demo__01c_pip_w_taas.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png">Click here to watch a short video on how to perform tasks with picture-in-picture video.</a>
 
 ---
 
@@ -89,7 +89,7 @@ A list of what you will find in this CSV file is as follows:
 You are highly encouraged open a browser window to this [online CSV/Excel viewer](https://sheet.zoho.com/sheet/excelviewer){:target="_blank"}, drag & drop your CSV/XLS file there, and continue to reference that file throughout your interaction with this lab environment, as seen here in the short video below.
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/01a_online_csv_viewer.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video of interaction with the student CSV and online viewer.</a>
+<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_01.00__Demo__01a_online_csv_viewer.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video of interaction with the student CSV and online viewer.</a>
 
 ---
 
@@ -116,7 +116,7 @@ If you do happen to find yourself seemingly *stuck* inside a single host connect
 
 Throughout this lab, there will come times when you must get files from your local workstation over to one of the hosts in your lab environment. The ability to copy files directly to and from the remote desktop or even to any linux shell session can be accomplished quite easily by simply dragging them from your local workstation desktop over to the web browser where Guac is already signed into a remote host and just dropping them there. For Windows or even Ubuntu Desktop this will use the native RDP copy/paste functionality, and for a linux shell session this will seamlessly instantiate a direct SFTP session. No further work is necessary on your part. Note that for Windows files may appear on the desktop or wherever you dragged and released them to. For Linux files will __*always*__ appear in `/home/ciscolab/`, no matter what directory you may be `cd` into. 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/01b_guac_user_access.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png">Click here to view a video of interaction with the student Guacamole webUI console.</a>
+<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_01.00__Demo__01b_guac_user_access.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png">Click here to view a video of interaction with the student Guacamole webUI console.</a>
 
 ---
 
