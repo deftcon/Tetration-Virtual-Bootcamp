@@ -215,5 +215,5 @@ Your complete lab environment consists of the following assets:
 ##### Lab Environment Access
    * Apache Guacamole server (CentOS 7)
 
-
+---
 | [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](README.md) | [Continue to the Next Module](../module_01-01/) |

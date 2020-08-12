@@ -209,8 +209,11 @@ Click on the Software Agents tab,  and ensure that all of the sensors that were 
 
 <a href="images/module_03-02_018.png"><img src="images/module_03-02_018.png" style="width:100%;height:100%;"></a>  
 
-YOU HAVE FINISHED THIS MODULE
 
+---  
 
+END OF MODULE
+
+---  
 
 | [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](readme.md) | [Continue to the Next Module]() |
