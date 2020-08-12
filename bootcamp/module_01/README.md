@@ -101,7 +101,7 @@ This will be either to the desktop via RDP in the case of a Windows machine or t
 
 This diagram depicts how you will gain access to the workloads running in your lab environment. 
 
-<a href="images/diagrams_005.png"><img src="images/diagrams_005.png" style="width:100%;height:100%;"></a>  
+<a href="../diagrams/images/diagrams_005.png"><img src="../diagrams/images/diagrams_005.png" style="width:100%;height:100%;"></a>  
   
 The "Home" screen of Guac should look something like this:
 
@@ -144,16 +144,16 @@ Every learner working with this Lab Guide has a __*complete*__ lab evironment fo
 This consists of every item seen in the following diagram, which is enumerated in more detail below the diagram. The diagram below actually links to a live, interactive diagram that you may like to use throughout your lab experience, [which you can read more about here on the diagrams page](). There will also be more diagrams used throughout this lab guide, and they will all correspond with the Diagram ### found on that diagrams page. 
 
 
-<a href="https://www.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501" target="_blank">Click on the image to open an interactive diagram<img src="images/diagrams_004.png" style="width:100%;height:100%;"></a>  
+<a href="https://www.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501" target="_blank">Click on the image to open an interactive diagram<img src="../diagrams/images/diagrams_004.png" style="width:100%;height:100%;"></a>  
 
 
 <div class="link" id="Assets"><a href="#Assets" style="font-weight:bold">Lab Assets</a></div>
 
 Your complete lab environment consists of the following assets:
 
-##### "Internal/Corporate" Subnet (inside firewall)
+###### "Internal/Corporate" Subnet (inside firewall)
 
-###### Apps
+##### Apps
    * Windows app - "nopCommerce" 
       * IIS App server (Win19)
       * MS SQL DB server (Win19)
@@ -183,33 +183,33 @@ Your complete lab environment consists of the following assets:
             * Carts App
             * Carts DB
 
-###### LDAP
+##### LDAP
    * Active Directory (Win19)
 
-###### Automation
+##### Automation
    * Ansible (CentOS 7)
 
-###### Tetration Appliances
+##### Tetration Appliances
    * Tetration Data Ingest (AWS VPC Flow Logs & ASAv NAT Stiching)
    * Tetration Edge (ISE TrustSec SGT to Active Directory user mapping)
 
 
-##### "External/Internet" Subnet (outside firewall)
+###### "External/Internet" Subnet (outside firewall)
 
-###### Corporate Employees Using VPN
+##### Corporate Employees Using VPN
    * Employee (Win10 or Ubuntu18 Desktop)
    * SysAdmin (Win10 or Ubuntu18 Desktop)
 
-###### Attacker!
+##### Attacker!
    * Metasploit Attack Machine (Kali Linux)
 
 
-##### Straddling Internal Corporate & External Internet Subnets
+###### Straddling Internal Corporate & External Internet Subnets
 
-###### Firewall / VPN
+##### Firewall / VPN
    * ASAv
 
-###### Lab Environment Access
+##### Lab Environment Access
    * Apache Guacamole server (CentOS 7)
 
 
