@@ -12,5 +12,6 @@
 [Module 03.03: Data Sources - Collection Rules](module_03-03/)
 [Module 03.04: Data Sources - Collection Rules](module_03-04/)
 
+---
 
 | [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](README.md) | [Continue to the Next Module](../module_03-01/) |
