@@ -120,7 +120,26 @@ The query matches only the internal IP of the Guacamole server.  Click Create.
 <a href="images/module_07_010.png"><img src="images/module_07_010.png" style="width:100%;height:100%;"></a>  
 
 
----   .
+---  
+
+## SubModules for Module 07
+[Module 07.01: Segmentation - ADM, Policy Analysis, and Enforcement](../module_07-01/)  
+[Module 07.02: Segmentation - ADM - Common Services](../module_07-02/)  
+[Module 07.03: Segmentation - ADM - Windows App](../module_07-03/)  
+[Module 07.04: Segmentation - ADM - Linux App](../module_07-04/)  
+[Module 07.05: Segmentation - User-Based Policy](../module_07-05/)  
+[Module 07.06: Segmentation - Policy Analysis - Global Services](../module_07-06/)  
+[Module 07.07: Segmentation - Policy Analysis - Common Services](../module_07-07/)  
+[Module 07.08: Segmentation - Policy Analysis - Windows App](../module_07-08/)  
+[Module 07.09: Segmentation - Policy Analysis - Linux App](../module_07-09/)  
+[Module 07.10: Segmentation - Enforcement - Pre Enforcement Checks](../module_07-10/)  
+[Module 07.11: Segmentation - Enforcement - Global and Common](../module_07-11/)  
+[Module 07.12: Segmentation - Enforcement - Windows App](../module_07-12/)  
+[Module 07.13: Segmentation - Enforcement - Linux App](../module_07-13/)  
+[Module 07.14: Segmentation - Enforcement - Containers](../module_07-14/)  
+  
+---  
+  
 
 
 | [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](README.md) | [Continue to the Next Module](../module_07-01/) |
