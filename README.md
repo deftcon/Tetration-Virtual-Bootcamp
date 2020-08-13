@@ -2,7 +2,7 @@
   
 ## Table of Contents
 [Diagrams](bootcamp/diagrams/)  
-[Module00: Lab Environment Deployment](../lab-env-build/)  
+[Instructor: Lab Environment Deployment](../lab-env-build/)  
 [Module01: Introduction, Course, and Lab Walkthrough](bootcamp/module_01/)  
 [Module02: Customer Use Cases](bootcamp/module_02/)  
 [Module03: Data Sources (Inventory, Collection Rules, Agents, Annotations, & External Orchestrators)](bootcamp/module_03/)  
