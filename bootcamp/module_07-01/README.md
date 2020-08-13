@@ -1,16 +1,25 @@
 # Cisco Tetration Virtual Bootcamp
 
-## Module 07.01  Segmentation - ADM Policy Analysis and Enforcement
+## Module 07.01  Segmentation - ADM, Policy Analysis, and Enforcement
 
 In this module we will begin creating policies that will apply across all of the applications. We will accomplish this by creating an Application Workspace called Global Services and associating it with the Cloud Scope. The remaining Application Workspaces will be assigned to child scopes of the Cloud scope, and therefore will inherit the policies that we define in the Global Services workspace.  There are two types of policies that can be created; Default or Absolute.  Default policies can be overridden by rules in application workspaces that are defined at a lower level of the scope tree.  For example,  if we defined Default policies in Global Services, an administrator of an application workspace that is associated with a child of the Cloud scope could create Default policies that override the policy we created in Global Services.  Absolute policies cannot be overridden by policies defined in workspaces that are associated with child scopes.  This allows a security administrator to set a broad policy at a higher level of the scope tree, such as "Dev app can't talk to Prod database",  and that policy cannot be accidentally or purposely overridden in a child workspace.
 
 In this module we'll be creating Absolute policies in the Global Services application workspace to permit common traffic that will apply across all applications.   
 
----
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/12_policy_creation_global_services.mp4" style="font-weight:bold" title="Policy Analysis - Global Services"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video of the tasks necessary to create hierarchical policy that will later be enforced at a Global level.</a>
+## --- Lecture Video ---  
+---  
+<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/lectures/Module_07.01__Lecture__Segmentation__ADM_Policy_Analysis_and_Enforcement.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Segmentation - ADM, Policy Analysis, and Enforcement :: Lecture Video :: Runtime: 2 hrs 14 mins</a>  
+  
+---  
+  
 
----
+## --- Demo Video ---  
+---  
+<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_07.01__Demo__Segmentation__Hierarchical_Policy_Global.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Segmentation - Hierarchical Policy - Global :: Demo Video :: Runtime: 10 mins</a>  
+  
+---  
 
+## --- Lab ---
 ### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Navigate to Inventory Filters</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Create an Inventory Filter</a>  
@@ -34,13 +43,13 @@ First we will create an Inventory Filter to describe IP address space external f
 
 Click on Visibility and select Inventory Filters.
 
-<a href="images/module12_001.png"><img src="images/module12_001.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-01_001.png"><img src="images/module_07-01_001.png" style="width:100%;height:100%;"></a>  
 
 <div class="step" id="step-002"><a href="#step-002" style="font-weight:bold">Step 002</a></div>  
 
 Select Create Filter.
 
-<a href="images/module12_002.png"><img src="images/module12_002.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-01_002.png"><img src="images/module_07-01_002.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -48,14 +57,14 @@ Select Create Filter.
 
 Name the filter Internet, and enter the query `PodSubnet not equal internal`.  Keep the scope set to the root scope,  and select the checkboxes to restrict the query to ownership scope,  and provide a service external of the scope.  
 
-<a href="images/module12_003.png"><img src="images/module12_003.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-01_003.png"><img src="images/module_07-01_003.png" style="width:100%;height:100%;"></a>  
 
 
 <div class="step" id="step-004"><a href="#step-004" style="font-weight:bold">Step 004</a></div>  
 
 Click Create.
 
-<a href="images/module12_004.png"><img src="images/module12_004.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-01_004.png"><img src="images/module_07-01_004.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -63,7 +72,7 @@ Click Create.
 
 Navigate to Applications.  
 
-<a href="images/module12_005.png"><img src="images/module12_005.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-01_005.png"><img src="images/module_07-01_005.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -71,7 +80,7 @@ Navigate to Applications.
 
 Create a new Application Workspace.
 
-<a href="images/module12_006.png"><img src="images/module12_006.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-01_006.png"><img src="images/module_07-01_006.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -79,7 +88,7 @@ Create a new Application Workspace.
 
 Enter the name "Global Services",  and select the Cloud scope.  Then click Create.
 
-<a href="images/module12_007.png"><img src="images/module12_007.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-01_007.png"><img src="images/module_07-01_007.png" style="width:100%;height:100%;"></a>  
 
 
 <div class="step" id="step-008"><a href="#step-008" style="font-weight:bold">Step 008</a></div>  
@@ -88,7 +97,7 @@ For the Global Services workspace we will create Absolute policies. Absolute pol
 
 Click on the Absolute policies tab.  
 
-<a href="images/module12_008.png"><img src="images/module12_008.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-01_008.png"><img src="images/module_07-01_008.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -96,7 +105,7 @@ Click on the Absolute policies tab.
 
 Define a policy to allow Any-Internal to the Internet filter we previously created.
 
-<a href="images/module12_009.png"><img src="images/module12_009.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-01_009.png"><img src="images/module_07-01_009.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -104,7 +113,7 @@ Define a policy to allow Any-Internal to the Internet filter we previously creat
 
 Click on Services and click the Add button to add TCP/UDP ports.    
 
-<a href="images/module12_010.png"><img src="images/module12_010.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-01_010.png"><img src="images/module_07-01_010.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -112,7 +121,7 @@ Click on Services and click the Add button to add TCP/UDP ports.
 
 Add the services shown in the image below.
 
-<a href="images/module12_011.png"><img src="images/module12_011.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-01_011.png"><img src="images/module_07-01_011.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -120,7 +129,7 @@ Add the services shown in the image below.
 
 Add another rule allowing ICMP within the organization.  Select Any-Internal for both Provider and Consumer and configure ICMP as the Service.
 
-<a href="images/module12_012.png"><img src="images/module12_012.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-01_012.png"><img src="images/module_07-01_012.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -128,7 +137,7 @@ Add another rule allowing ICMP within the organization.  Select Any-Internal for
 
 The Catch-All defines what happens to any traffic that doesn't match any of the specific rules.  For the Global Services policy, we want to set this to Allow.  The reason we set to Allow for Global Services is that this is the rule that all traffic that does not belong to any child scopes will hit.  Setting it to Allow will prevent blocking unexpected flows when moving into enforcement as Tetration is deployed.  Eventually, as Tetration is fully deployed within an organization there should be minimal flows hitting the Catch-All and at that point it can be set to Deny.   
 
-<a href="images/module12_013.png"><img src="images/module12_013.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-01_013.png"><img src="images/module_07-01_013.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -136,10 +145,10 @@ The Catch-All defines what happens to any traffic that doesn't match any of the 
 
 No action is required here, the image illustrates what the policy should look like when completed.
 
-<a href="images/module12_014.png"><img src="images/module12_014.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-01_014.png"><img src="images/module_07-01_014.png" style="width:100%;height:100%;"></a>  
 
 
-YOU HAVE FINISHED THIS MODULE
+---   
 
 
 | [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](readme.md) | [Continue to the Next Module]() |

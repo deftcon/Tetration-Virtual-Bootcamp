@@ -4,12 +4,15 @@
 
 In this module we will enable enforcement on the nopCommerce application workspace. First we will review the current policies in place on the IIS web server, and will come back to review the policies after enabling enforcement. Once in enforcement, we'll resolve a common error that can occur when using the Preserve Rules feature.  Then we will test the application, as well as test the user-based policy that was created based on ISE Security Group tags in <a href="">Module 16</a>  
 
----
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/23_policy_enforcement_nopcommerce.mp4
-" style="font-weight:bold" title="Enforcement - nopCommerce"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video showing the necessary tasks to be performed to take the Windows-based nopCommerce into full enforcement mode with micro-segmentation.</a>
+---   
 
----
+## --- Demo Video ---  
+---  
+<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_07.12__Demo__Segmentation__Enforcement_Windows_App.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Segmentation - Enforcement - Windows App :: Demo Video :: Runtime: 10 mins</a>  
+  
+---  
 
+## --- Lab ---
 ### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Navigate to Inventory Search</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Search for the IIS web server</a>  
@@ -62,7 +65,7 @@ In this module we will enable enforcement on the nopCommerce application workspa
 
 Navigate to Inventory Search.
 
-<a href="images/module23_001.png"><img src="images/module23_001.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_001.png"><img src="images/module_07-12_001.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -70,7 +73,7 @@ Navigate to Inventory Search.
 
 Filter for the IIS web server using filter `Hostname contains WEBSERVER`. Then click on the IP address of the web server.
 
-<a href="images/module23_002.png"><img src="images/module23_002.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_002.png"><img src="images/module_07-12_002.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -78,7 +81,7 @@ Filter for the IIS web server using filter `Hostname contains WEBSERVER`. Then c
 
 Click on Policies.
 
-<a href="images/module23_003.png"><img src="images/module23_003.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_003.png"><img src="images/module_07-12_003.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -86,7 +89,7 @@ Click on Policies.
 
 Note the number of policies currently displayed. These are the policies that were implemented as part of the Common Policy and Global Services application workspaces that were moved to enforcement earlier.  We will see the number of policies increase further after we enable enforcement for the application.  
 
-<a href="images/module23_004.png"><img src="images/module23_004.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_004.png"><img src="images/module_07-12_004.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -94,7 +97,7 @@ Note the number of policies currently displayed. These are the policies that wer
 
 Navigate to the nopCommerce application workspace.
 
-<a href="images/module23_005.png"><img src="images/module23_005.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_005.png"><img src="images/module_07-12_005.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -102,7 +105,7 @@ Navigate to the nopCommerce application workspace.
 
 Click on the Enforcement tab and then select Enforce Policies.  
 
-<a href="images/module23_006.png"><img src="images/module23_006.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_006.png"><img src="images/module_07-12_006.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -110,7 +113,7 @@ Click on the Enforcement tab and then select Enforce Policies.
 
 Select the latest version of policy to enforce and then Accept and Enforce.
 
-<a href="images/module23_007.png"><img src="images/module23_007.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_007.png"><img src="images/module_07-12_007.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -118,7 +121,7 @@ Select the latest version of policy to enforce and then Accept and Enforce.
 
 Navigate to Agent Config.  
 
-<a href="images/module23_008.png"><img src="images/module23_008.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_008.png"><img src="images/module_07-12_008.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -126,7 +129,7 @@ Navigate to Agent Config.
 
 Select the Software Agents tab,  and then locate and click on the IIS web server.  This is an alternative way to get to the Workload Profile screen.
 
-<a href="images/module23_009.png"><img src="images/module23_009.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_009.png"><img src="images/module_07-12_009.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -134,7 +137,7 @@ Select the Software Agents tab,  and then locate and click on the IIS web server
 
 Click on the Policies tab.
 
-<a href="images/module23_010.png"><img src="images/module23_010.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_010.png"><img src="images/module_07-12_010.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -144,7 +147,7 @@ Notice the increased number of policies that are now displayed.  Tetration has p
 
 > It may take a few minutes for the additional rules to be displayed.  
 
-<a href="images/module23_011.png"><img src="images/module23_011.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_011.png"><img src="images/module_07-12_011.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -152,7 +155,7 @@ Notice the increased number of policies that are now displayed.  Tetration has p
 
 Open a browser and point to the public IP address of the IIS web server.  We should see that the web application is still accessible after moving into enforcement.
 
-<a href="images/module23_012.png"><img src="images/module23_012.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_012.png"><img src="images/module_07-12_012.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -160,7 +163,7 @@ Open a browser and point to the public IP address of the IIS web server.  We sho
 
 Open a session to the Employee desktop.  
 
-<a href="images/module23_013.png"><img src="images/module23_013.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_013.png"><img src="images/module_07-12_013.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -168,7 +171,7 @@ Open a session to the Employee desktop.
 
 Click on the Cisco Anyconnect VPN Client icon on the desktop.  
 
-<a href="images/module23_014.png"><img src="images/module23_014.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_014.png"><img src="images/module_07-12_014.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -176,7 +179,7 @@ Click on the Cisco Anyconnect VPN Client icon on the desktop.
 
 Connect to VPN, if not already connected.  
 
-<a href="images/module23_015.png"><img src="images/module23_015.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_015.png"><img src="images/module_07-12_015.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -184,7 +187,7 @@ Connect to VPN, if not already connected.
 
 Select Connect Anyway when presented with the security warning.  
 
-<a href="images/module23_016.png"><img src="images/module23_016.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_016.png"><img src="images/module_07-12_016.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -192,7 +195,7 @@ Select Connect Anyway when presented with the security warning.
 
 Enter the employee credentials.  The password is `tet123$$!`.
 
-<a href="images/module23_017.png"><img src="images/module23_017.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_017.png"><img src="images/module_07-12_017.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -200,7 +203,7 @@ Enter the employee credentials.  The password is `tet123$$!`.
 
 Navigate to Inventory Search.
 
-<a href="images/module23_018.png"><img src="images/module23_018.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_018.png"><img src="images/module_07-12_018.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -210,13 +213,13 @@ Enter the following filter: `* ISE_ctsSecurityGroup contains Employee`.  You sho
 
 > It takes a few minutes after connecting to VPN for the IP address of the VPN client to become annotated with the ISE Security Group Tag.  
 
-<a href="images/module23_019.png"><img src="images/module23_019.png" style="width:100%;height:100%;"></a>    
+<a href="images/module_07-12_019.png"><img src="images/module_07-12_019.png" style="width:100%;height:100%;"></a>    
 
 <div class="step" id="step-020"><a href="#step-020" style="font-weight:bold">Step 020</a></div>  
 
 Click on the IP address of the employee desktop to access the Workload Profile screen.  Then click on the link next to User Annotations.
 
-<a href="images/module23_020.png"><img src="images/module23_020.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_020.png"><img src="images/module_07-12_020.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -224,7 +227,7 @@ Click on the IP address of the employee desktop to access the Workload Profile s
 
 This shows all of the annotations that are placed on the IP address,  including the ctsSecurityGroup which is the Security Group assigned to the IP address.  
 
-<a href="images/module23_021.png"><img src="images/module23_021.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_021.png"><img src="images/module_07-12_021.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -232,7 +235,7 @@ This shows all of the annotations that are placed on the IP address,  including 
 
 Open a terminal session from the employee desktop and test HTTP connectivity to the IIS web server using the curl command as shown in the image below.  The response should be an HTTP redirect to the HTTPS URL of the web server.  This shows that we are still able to access the web application using HTTP after moving to enforcement.
 
-<a href="images/module23_022.png"><img src="images/module23_022.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_022.png"><img src="images/module_07-12_022.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -240,7 +243,7 @@ Open a terminal session from the employee desktop and test HTTP connectivity to 
 
 Test HTTPS connectivity to the web server using the curl command as shown in the image below.  The response should be a text representation of the web site.  
 
-<a href="images/module23_023.png"><img src="images/module23_023.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_023.png"><img src="images/module_07-12_023.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -248,7 +251,7 @@ Test HTTPS connectivity to the web server using the curl command as shown in the
 
 The below output shows the output of the previous curl command using HTTPS.  
 
-<a href="images/module23_024.png"><img src="images/module23_024.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_024.png"><img src="images/module_07-12_024.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -256,7 +259,7 @@ The below output shows the output of the previous curl command using HTTPS.
 
 Click on the magnifying glass at the bottom of the screen to search for an application,  and search for Remmina.  Remmina is a Remote Desktop application that can be used to connect to Microsoft servers running Terminal Services on TCP port 3389.  Click on Remmina and select Launch.
 
-<a href="images/module23_025.png"><img src="images/module23_025.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_025.png"><img src="images/module_07-12_025.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -264,7 +267,7 @@ Click on the magnifying glass at the bottom of the screen to search for an appli
 
 Enter the IP address of the IIS web server and click connect.  You should be presented with a login dialogue.  This is not what we expected to see,  we actually expected the connection to time out.  Recall that our policy is configured to allow SysAdmins,  but not Employees to connect to the IIS server on TCP 3389.  Let's investigate further to see why we are being permitted to access RDP as an Employee.  
 
-<a href="images/module23_026.png"><img src="images/module23_026.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_026.png"><img src="images/module_07-12_026.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -272,7 +275,7 @@ Enter the IP address of the IIS web server and click connect.  You should be pre
 
 Navigate to the nopCommerce application.  
 
-<a href="images/module23_027.png"><img src="images/module23_027.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_027.png"><img src="images/module_07-12_027.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -280,7 +283,7 @@ Navigate to the nopCommerce application.
 
 Click on the Policy Analysis tab,  and filter for the IP address of the employee desktop VPN.
 
-<a href="images/module23_028.png"><img src="images/module23_028.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_028.png"><img src="images/module_07-12_028.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -288,7 +291,7 @@ Click on the Policy Analysis tab,  and filter for the IP address of the employee
 
 Turn off Permitted flows, and you should see some Escaped flows to the IIS web server.  Click on one of those flows.  
 
-<a href="images/module23_029.png"><img src="images/module23_029.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_029.png"><img src="images/module_07-12_029.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -296,7 +299,7 @@ Turn off Permitted flows, and you should see some Escaped flows to the IIS web s
 
 Click on Quick Policy Analysis.  
 
-<a href="images/module23_030.png"><img src="images/module23_030.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_030.png"><img src="images/module_07-12_030.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -304,7 +307,7 @@ Click on Quick Policy Analysis.
 
 Click on Find matching policies,  and you should see that the Policy Decision is DENY.  This means our policy is configured correctly, the traffic should be getting denied but for some reason is being allowed.  To troubleshoot further,  we have to examine the Windows Firewall rules.  
 
-<a href="images/module23_031.png"><img src="images/module23_031.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_031.png"><img src="images/module_07-12_031.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -312,7 +315,7 @@ Click on Find matching policies,  and you should see that the Policy Decision is
 
 Open a session to the IIS Web Server.  
 
-<a href="images/module23_032.png"><img src="images/module23_032.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_032.png"><img src="images/module_07-12_032.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -320,7 +323,7 @@ Open a session to the IIS Web Server.
 
 Click on the Search button in the toolbar and search for firewall.  Then open the Windows Firewall control panel.  
 
-<a href="images/module23_033.png"><img src="images/module23_033.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_033.png"><img src="images/module_07-12_033.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -328,7 +331,7 @@ Click on the Search button in the toolbar and search for firewall.  Then open th
 
 Click on Inbound Rules.  
 
-<a href="images/module23_034.png"><img src="images/module23_034.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_034.png"><img src="images/module_07-12_034.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -336,7 +339,7 @@ Click on Inbound Rules.
 
 Locate the rule titled `Remote Desktop - User Mode (TCP-In)`.  Right click on the rule and select Disable Rule.  
 
-<a href="images/module23_035.png"><img src="images/module23_035.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_035.png"><img src="images/module_07-12_035.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -346,7 +349,7 @@ Scroll to the right and you will see that this rule is permitting traffic from a
 
 > It might seem logical to go ahead and turn off Preserve Rules now in the Windows Config Intent.  It is not recommended to disable Preserve Rules after going into enforcement.  This may cause undesirable behavior, such as the agents becoming unable to check in with the Tetration cluster.        
 
-<a href="images/module23_036.png"><img src="images/module23_036.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_036.png"><img src="images/module_07-12_036.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -354,7 +357,7 @@ Scroll to the right and you will see that this rule is permitting traffic from a
 
 From the employee desktop,  attempt another Remote Desktop session to the IIS web server using the Remmina application.  This time,  the connection should not be successful.  
 
-<a href="images/module23_037.png"><img src="images/module23_037.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_037.png"><img src="images/module_07-12_037.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -362,7 +365,7 @@ From the employee desktop,  attempt another Remote Desktop session to the IIS we
 
 Open a session to the SysAdmin desktop,  and launch the Remmina application.  
 
-<a href="images/module23_038.png"><img src="images/module23_038.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_038.png"><img src="images/module_07-12_038.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -370,7 +373,7 @@ Open a session to the SysAdmin desktop,  and launch the Remmina application.
 
 Open a connection to the IIS web server.  A login dialogue should be displayed.  This is successful because we have a specific rule allowing SysAdmins to connect to the nopCommerce scope on TCP 3389.
 
-<a href="images/module23_039.png"><img src="images/module23_039.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_039.png"><img src="images/module_07-12_039.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -378,7 +381,7 @@ Open a connection to the IIS web server.  A login dialogue should be displayed. 
 
 Navigate to Inventory Search.
 
-<a href="images/module23_040.png"><img src="images/module23_040.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_040.png"><img src="images/module_07-12_040.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -386,7 +389,7 @@ Navigate to Inventory Search.
 
 Search for the VPN client IP of the SysAdmin desktop using the query `* ISE_ctsSecurityGroup contains SysAdmin`.  Click on the IP address to enter the Workload Profile.  
 
-<a href="images/module23_041.png"><img src="images/module23_041.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_041.png"><img src="images/module_07-12_041.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -394,7 +397,7 @@ Search for the VPN client IP of the SysAdmin desktop using the query `* ISE_ctsS
 
 Click on the link next to User Annotations.
 
-<a href="images/module23_042.png"><img src="images/module23_042.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_042.png"><img src="images/module_07-12_042.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -402,14 +405,14 @@ Click on the link next to User Annotations.
 
 Here we see the IP address is annotated with the Security Group named SysAdmins.  
 
-<a href="images/module23_043.png"><img src="images/module23_043.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_043.png"><img src="images/module_07-12_043.png" style="width:100%;height:100%;"></a>  
 
 <div class="step" id="step-044"><a href="#step-044" style="font-weight:bold">Step 044</a></div>  
 
 In our nopCommerce policy, we have created a rule that allows this security group to access all systems in the scope on TCP 3389.   
 
-<a href="images/module23_044.png"><img src="images/module23_044.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-12_044.png"><img src="images/module_07-12_044.png" style="width:100%;height:100%;"></a>  
 
-YOU HAVE COMPLETED THIS MODULE
+---   
 
 | [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](readme.md) | [Continue to the Next Module]() |

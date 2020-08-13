@@ -4,9 +4,15 @@
 
 In this module we will test access to the applications and workloads prior to enabling enforcement to ensure that everything worked as expected prior to enforcement.  Later when we enable enforcement we will re-run these same tests to ensure that the desired intent was achieved. 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/21_policy_enforcement_pre-enforcement.mp4" style="font-weight:bold" title="Enforcement Policy Tuning"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video of tasks performed to go through a series of pre-enforcement checks prior to taking all workloads into enforcement mode.</a>
+---   
 
+## --- Demo Video ---  
+---  
+<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_07.10__Demo__Segmentation__Enforcement_Pre_Enforcement_Checks.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Segmentation - Enforcement - Pre Enforcement Checks :: Demo Video :: Runtime: 7 mins</a>  
+  
+---  
 
+## --- Lab ---
 ### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Test public access to the IIS web server</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Test public access to the Apache web server</a>  
@@ -40,7 +46,7 @@ In this module we will test access to the applications and workloads prior to en
 
 Test public access to the IIS web server.
 
-<a href="images/module21_001.png"><img src="images/module21_001.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-10_001.png"><img src="images/module_07-10_001.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -48,7 +54,7 @@ Test public access to the IIS web server.
 
 Test public access to the Apache web server.
 
-<a href="images/module21_002.png"><img src="images/module21_002.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-10_002.png"><img src="images/module_07-10_002.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -56,7 +62,7 @@ Test public access to the Apache web server.
 
 Open a session to the IIS web server.
 
-<a href="images/module21_003.png"><img src="images/module21_003.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-10_003.png"><img src="images/module_07-10_003.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -64,7 +70,7 @@ Open a session to the IIS web server.
 
 Test outbound access to the Internet from the IIS web server.
 
-<a href="images/module21_004.png"><img src="images/module21_004.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-10_004.png"><img src="images/module_07-10_004.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -72,7 +78,7 @@ Test outbound access to the Internet from the IIS web server.
 
 Next we will test access from the IIS web server to the Apache web server.  This is traffic that should be blocked once we implement our policy. Browse to the IP address of the Apache web server.  Click Advanced on the security warning.
 
-<a href="images/module21_005.png"><img src="images/module21_005.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-10_005.png"><img src="images/module_07-10_005.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -80,7 +86,7 @@ Next we will test access from the IIS web server to the Apache web server.  This
 
 Click on Proceed to continue.  
 
-<a href="images/module21_006.png"><img src="images/module21_006.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-10_006.png"><img src="images/module_07-10_006.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -88,7 +94,7 @@ Click on Proceed to continue.
 
 The ACME Digital Store web site should be displayed.  
 
-<a href="images/module21_007.png"><img src="images/module21_007.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-10_007.png"><img src="images/module_07-10_007.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -97,7 +103,7 @@ The ACME Digital Store web site should be displayed.
 
 Open a session to the Apache web server.  
 
-<a href="images/module21_008.png"><img src="images/module21_008.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-10_008.png"><img src="images/module_07-10_008.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -105,7 +111,7 @@ Open a session to the Apache web server.
 
 Test outbound Internet access by issuing ping commands to well-known web sites.  
 
-<a href="images/module21_009.png"><img src="images/module21_009.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-10_009.png"><img src="images/module_07-10_009.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -113,7 +119,7 @@ Test outbound Internet access by issuing ping commands to well-known web sites.
 
 Use the curl command to initiate an outbound HTTP connection to well-known web sites.
 
-<a href="images/module21_010.png"><img src="images/module21_010.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-10_010.png"><img src="images/module_07-10_010.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -121,7 +127,7 @@ Use the curl command to initiate an outbound HTTP connection to well-known web s
 
 Use the curl command to create an HTTP session from the Apache web server to the IIS web server.
 
-<a href="images/module21_011.png"><img src="images/module21_011.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-10_011.png"><img src="images/module_07-10_011.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -129,7 +135,7 @@ Use the curl command to create an HTTP session from the Apache web server to the
 
 Open a session to the Employee desktop.  
 
-<a href="images/module21_012.png"><img src="images/module21_012.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-10_012.png"><img src="images/module_07-10_012.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -137,7 +143,7 @@ Open a session to the Employee desktop.
 
 Click on the Cisco AnyConnect VPN Client icon on the desktop.  
 
-<a href="images/module21_013.png"><img src="images/module21_013.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-10_013.png"><img src="images/module_07-10_013.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -145,7 +151,7 @@ Click on the Cisco AnyConnect VPN Client icon on the desktop.
 
 Click Connect.  
 
-<a href="images/module21_014.png"><img src="images/module21_014.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-10_014.png"><img src="images/module_07-10_014.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -153,7 +159,7 @@ Click Connect.
 
 Select Connect Anyway on the security warning.  
 
-<a href="images/module21_015.png"><img src="images/module21_015.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-10_015.png"><img src="images/module_07-10_015.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -161,7 +167,7 @@ Select Connect Anyway on the security warning.
 
 Log in using your employee credentials.
 
-<a href="images/module21_016.png"><img src="images/module21_016.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-10_016.png"><img src="images/module_07-10_016.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -169,7 +175,7 @@ Log in using your employee credentials.
 
 Open the terminal application and use the curl command to open an HTTP connection to the IIS web server.  The terminal application can be launched by clicking the black icon in the bottom middle of the screen.  
 
-<a href="images/module21_017.png"><img src="images/module21_017.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-10_017.png"><img src="images/module_07-10_017.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -177,7 +183,7 @@ Open the terminal application and use the curl command to open an HTTP connectio
 
 Use curl to open an HTTPS session to the IIS web server. This can be accomplished by using the -k flag and https for the URL as shown in the below image.   
 
-<a href="images/module21_018.png"><img src="images/module21_018.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-10_018.png"><img src="images/module_07-10_018.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -185,7 +191,7 @@ Use curl to open an HTTPS session to the IIS web server. This can be accomplishe
 
 The below image shows the output of the curl command which is a text-based representation of the web site.
 
-<a href="images/module21_019.png"><img src="images/module21_019.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-10_019.png"><img src="images/module_07-10_019.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -193,7 +199,7 @@ The below image shows the output of the curl command which is a text-based repre
 
 Test an HTTP connection to the Apache web server using the curl command.    
 
-<a href="images/module21_020.png"><img src="images/module21_020.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-10_020.png"><img src="images/module_07-10_020.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -201,7 +207,7 @@ Test an HTTP connection to the Apache web server using the curl command.
 
 Test an HTTPS connection to the Apache web server using the curl command.
 
-<a href="images/module21_021.png"><img src="images/module21_021.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-10_021.png"><img src="images/module_07-10_021.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -209,7 +215,7 @@ Test an HTTPS connection to the Apache web server using the curl command.
 
 The below image shows the text-based representation of the web site that is returned from the previous curl command.
 
-<a href="images/module21_022.png"><img src="images/module21_022.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-10_022.png"><img src="images/module_07-10_022.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -217,7 +223,7 @@ The below image shows the text-based representation of the web site that is retu
 
 Connect to the Apache web server using SSH.  The connection should be successful.  
 
-<a href="images/module21_023.png"><img src="images/module21_023.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-10_023.png"><img src="images/module_07-10_023.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -225,7 +231,7 @@ Connect to the Apache web server using SSH.  The connection should be successful
 Click on the Search icon at the bottom of the screen and search for the Remmina application.  This is an Remote Desktop application for Ubuntu.  Click on Remmina,  and select Launch.  
 
 
-<a href="images/module21_024.png"><img src="images/module21_024.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-10_024.png"><img src="images/module_07-10_024.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -233,10 +239,10 @@ Click on the Search icon at the bottom of the screen and search for the Remmina 
 
 Enter the IP address of the IIS web server and click Connect.  A userid/password dialogue should be display.  This indicates that the connection was successful to the IIS server.  There is no need to log into the RDP session.  Close the login dialogue.
 
-<a href="images/module21_025.png"><img src="images/module21_025.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-10_025.png"><img src="images/module_07-10_025.png" style="width:100%;height:100%;"></a>  
 
 REPEAT STEPS 12-25 ON THE SYSADMIN MACHINE.  
 
-YOU HAVE FINISHED THIS MODULE
+---   
 
 | [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](readme.md) | [Continue to the Next Module]() |

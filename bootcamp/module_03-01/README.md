@@ -8,7 +8,7 @@ When configuring Collection rules, we must first delete the IPv6 and IPv4 rules 
 
 ## --- Lecture Video ---  
 ---  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/lectures/Module_03.01__Lecture__Data_Sources__Collection_Rules.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Data Sources - Collection Rules :: Lecture Video :: Runtime: 13 mins</a>  
+<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/lectures/Module_03.01__Lecture__Data_Sources__Collection_Rules.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Data Sources - Collection Rules :: Lecture Video :: Runtime: 16 mins</a>  
   
 ---  
   

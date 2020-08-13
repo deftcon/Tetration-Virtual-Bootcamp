@@ -13,14 +13,15 @@ Another common place you may find RPC in use is with NFS. You will likely encoun
 <a href="https://www.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501" target="_blank"><img src="../diagrams/images/diagrams_009.png" style="width:100%;height:100%;"></a>  
 
 
----
+---   
 
+## --- Demo Video ---  
+---  
+<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_07.08__Demo__Segmentation__Policy_Analysis_Windows_App.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Segmentation - Policy Analysis - Windows App :: Demo Video :: Runtime: 5 mins</a>  
+  
+---  
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/19_policy_analysis_nopcommerce.mp4" style="font-weight:bold" title="Policy Analysis - nopCommerce Policies"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video of the tasks necessary to perform policy analysis for the nopCommerce app.</a>
-
----
-
-
+## --- Lab ---
 ### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Navigate to the nopCommerce App Workspace</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Click on Policy Analysis</a>  
@@ -51,7 +52,7 @@ Another common place you may find RPC in use is with NFS. You will likely encoun
 Navigate to the nopCommerce application workspace.
 
 
-<a href="images/module19_001.png"><img src="images/module19_001.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-08_001.png"><img src="images/module_07-08_001.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -59,7 +60,7 @@ Navigate to the nopCommerce application workspace.
 
 Click on Policy Analysis and click to filter out Permitted flows.  Hover your mouse over points in the graph.  A popup will be displaced showing how many Misdropped, Escaped, and Rejected flows were detected at that point on the graph.  
 
-<a href="images/module19_002.png"><img src="images/module19_002.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-08_002.png"><img src="images/module_07-08_002.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -67,7 +68,7 @@ Click on Policy Analysis and click to filter out Permitted flows.  Hover your mo
 
 You should see some flows that have a disposition of MISDROPPED:PERMITTED.  Click on one of those flows.  This is seen typically on Windows machines and occurs during the end of a connection.  Notice the TCP flags of FIN and RST in the flow details.
 
-<a href="images/module19_003.png"><img src="images/module19_003.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-08_003.png"><img src="images/module_07-08_003.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -76,7 +77,7 @@ You should see some flows that have a disposition of MISDROPPED:PERMITTED.  Clic
 The flows with TCP RST and/or FIN flags set can be ignored,  so let's filter them out.  In the Filters field,  enter the following: `not Fwd TCP Flags contain RST` `not Rev TCP Flags contains RST`.  Then click Filter Flows.
 
 
-<a href="images/module19_004.png"><img src="images/module19_004.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-08_004.png"><img src="images/module_07-08_004.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -84,7 +85,7 @@ The flows with TCP RST and/or FIN flags set can be ignored,  so let's filter the
 
 Click on the graph on a point past the point that we last analyzed policy,  and observe any rejected or misdropped flows.  There should be minimal, if any misdropped and some rejected for Netbios traffic.  
 
-<a href="images/module19_005.png"><img src="images/module19_005.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-08_005.png"><img src="images/module_07-08_005.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -95,7 +96,7 @@ Click on Policies.  To show how Escaped flows can be seen based on changes in th
 > Note that this would break the application under normal circumstances if this was a live version of the polciies. We aren't in enforcement yet so we aren't affecting the application.  In addition, even if we were in enforcement we can safely experiment with policies by modifying them and then analyzing via Policy Analysis.  The changes would not be implemented until we enforced the new version of the policy.  
 
 
-<a href="images/module19_006.png"><img src="images/module19_006.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-08_006.png"><img src="images/module_07-08_006.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -104,7 +105,7 @@ Click on Policies.  To show how Escaped flows can be seen based on changes in th
 Return to Policy Analysis and enter the filter enter `Provider Port = 1433`, then click Filter Flows.  Click the Permitted button to enable viewing of permitted flows.  
 
 
-<a href="images/module19_007.png"><img src="images/module19_007.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-08_007.png"><img src="images/module_07-08_007.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -113,7 +114,7 @@ Return to Policy Analysis and enter the filter enter `Provider Port = 1433`, the
 Click on a point in the graph and then click on one of the flows under Flow Observations.  
 
 
-<a href="images/module19_008.png"><img src="images/module19_008.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-08_008.png"><img src="images/module_07-08_008.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -121,7 +122,7 @@ Click on a point in the graph and then click on one of the flows under Flow Obse
 
 Click on Quick Policy Analysis.  
 
-<a href="images/module19_009.png"><img src="images/module19_009.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-08_009.png"><img src="images/module_07-08_009.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -129,7 +130,7 @@ Click on Quick Policy Analysis.
 
 Click on Find Matching Policies.  Notice that although the graph is currently showing permitted,  the current policies will Deny the traffic as expected.  This allows us to examine previous traffic against current policy.     
 
-<a href="images/module19_010.png"><img src="images/module19_010.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-08_010.png"><img src="images/module_07-08_010.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -137,7 +138,7 @@ Click on Find Matching Policies.  Notice that although the graph is currently sh
 
 Click on Policy Analysis and select Analyze Latest Policies.  
 
-<a href="images/module19_011.png"><img src="images/module19_011.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-08_011.png"><img src="images/module_07-08_011.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -145,7 +146,7 @@ Click on Policy Analysis and select Analyze Latest Policies.
 
 Enter a reason.
 
-<a href="images/module19_012.png"><img src="images/module19_012.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-08_012.png"><img src="images/module_07-08_012.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -154,7 +155,7 @@ Enter a reason.
 In a few minutes, we should begin to see Escaped flows over on the right side of the graph.  Click on the clock icon and note the time you enabled Policy Analysis.
 
 
-<a href="images/module19_013.png"><img src="images/module19_013.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-08_013.png"><img src="images/module_07-08_013.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -165,7 +166,7 @@ Click back on the graph and filter for Escaped flows by turning off the Permitte
 > You may have to wait a few minutes to see the escaped flows indicated on the graph.  It usually takes the graph about 5 minutes to catch up from the time you publish new policies (by clicking Analyze Latest Policies).  
 
 
-<a href="images/module19_014.png"><img src="images/module19_014.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-08_014.png"><img src="images/module_07-08_014.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -173,7 +174,7 @@ Click back on the graph and filter for Escaped flows by turning off the Permitte
 
 Click on the escaped flow for TCP port 1433.  Notice that this time the Consumer Outbound Policy indicates DENY.  Click Quick Policy Analysis.
 
-<a href="images/module19_015.png"><img src="images/module19_015.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-08_015.png"><img src="images/module_07-08_015.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -181,7 +182,7 @@ Click on the escaped flow for TCP port 1433.  Notice that this time the Consumer
 
 Click Find Matching Policies,  and the Policy Decision should be DENY.  The rule denying the traffic is the Catch-All, since we removed TCP 1433 from the ruleset.
 
-<a href="images/module19_016.png"><img src="images/module19_016.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-08_016.png"><img src="images/module_07-08_016.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -189,7 +190,7 @@ Click Find Matching Policies,  and the Policy Decision should be DENY.  The rule
 
 Return to Default Policies and re-add TCP port 1433 to the nopCommerce-App to nopCommerce-DB rule.  
 
-<a href="images/module19_017.png"><img src="images/module19_017.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-08_017.png"><img src="images/module_07-08_017.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -197,7 +198,7 @@ Return to Default Policies and re-add TCP port 1433 to the nopCommerce-App to no
 
 Click on Policy Analysis, and Analyze Latest Policies.  
 
-<a href="images/module19_018.png"><img src="images/module19_018.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-08_018.png"><img src="images/module_07-08_018.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -205,7 +206,7 @@ Click on Policy Analysis, and Analyze Latest Policies.
 
 Add a reason.  
 
-<a href="images/module19_019.png"><img src="images/module19_019.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-08_019.png"><img src="images/module_07-08_019.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -213,7 +214,7 @@ Add a reason.
 
 Click on the Escaped flow in the diagram.  
 
-<a href="images/module19_020.png"><img src="images/module19_020.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-08_020.png"><img src="images/module_07-08_020.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -222,9 +223,9 @@ Click on the Escaped flow in the diagram.
 Click on the flow and do a Quick Policy Analysis.  The Policy Decision should now be ALLOW.  
 
 
-<a href="images/module19_021.png"><img src="images/module19_021.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-08_021.png"><img src="images/module_07-08_021.png" style="width:100%;height:100%;"></a>  
 
-YOU HAVE FINISHED THIS MODULE
+---   
 
 
 

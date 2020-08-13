@@ -4,10 +4,15 @@
 
 In this module we will create an Application Workspace for the OpenCart application which consists of a Linux server running Apache web server as the front end talking to a Linux server running MySQL for the back-end database.  We will run ADM,  change the cluster queries,  and tune the discovered policies as needed.  We will also accept any Policy Requests made from the OpenCart application workspace to the Common Policy workspace.  
 
----
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/15_policy_creation_adm_clusters_opencart.mp4" style="font-weight:bold" title="OpenCart ADM & Clusters"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video of the tasks necessary to setup an Workspace, run ADM, configure Clusters, and customize the security Policy for the Linux-based app called OpenCart.</a>
+---   
 
----
+## --- Demo Video ---  
+---  
+<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_07.04__Demo__Segmentation__ADM_Linux_App.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Segmentation - ADM - Linux App :: Demo Video :: Runtime: 6 mins</a>  
+  
+---  
+
+## --- Lab ---
 ### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Create a new App Workspace</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Configure the OpenCart Workspace</a>  
@@ -40,7 +45,7 @@ In this module we will create an Application Workspace for the OpenCart applicat
 
 Navigate to Applications and create a new workspace.
 
-<a href="images/module15_001.png"><img src="images/module15_001.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-04_001.png"><img src="images/module_07-04_001.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -48,7 +53,7 @@ Navigate to Applications and create a new workspace.
 
 Name the new Application Workspace OpenCart and select the OpenCart scope.
 
-<a href="images/module15_002.png"><img src="images/module15_002.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-04_002.png"><img src="images/module_07-04_002.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -56,7 +61,7 @@ Name the new Application Workspace OpenCart and select the OpenCart scope.
 
 Click Automatically Discover Policies to begin the ADM run process.
 
-<a href="images/module15_003.png"><img src="images/module15_003.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-04_003.png"><img src="images/module_07-04_003.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -64,7 +69,7 @@ Click Automatically Discover Policies to begin the ADM run process.
 
 Configure the time range to consider the last 6 hours of traffic.
 
-<a href="images/module15_004.png"><img src="images/module15_004.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-04_004.png"><img src="images/module_07-04_004.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -72,7 +77,7 @@ Configure the time range to consider the last 6 hours of traffic.
 
 Click Show to reveal the member workloads.  The IP addresses of the Apache web server and MySQL database servers should be shown.
 
-<a href="images/module15_005.png"><img src="images/module15_005.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-04_005.png"><img src="images/module_07-04_005.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -80,7 +85,7 @@ Click Show to reveal the member workloads.  The IP addresses of the Apache web s
 
 Expand External Dependencies and set Common Apps and the Root scope to Fine.  
 
-<a href="images/module15_006.png"><img src="images/module15_006.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-04_006.png"><img src="images/module_07-04_006.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -88,7 +93,7 @@ Expand External Dependencies and set Common Apps and the Root scope to Fine.
 
 Set Cluster Granularity to Very Fine and then submit the ADM run.
 
-<a href="images/module15_007.png"><img src="images/module15_007.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-04_007.png"><img src="images/module_07-04_007.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -96,7 +101,7 @@ Set Cluster Granularity to Very Fine and then submit the ADM run.
 
 When the ADM run completes,  select the link for ADM results available.
 
-<a href="images/module15_008.png"><img src="images/module15_008.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-04_008.png"><img src="images/module_07-04_008.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -104,7 +109,7 @@ When the ADM run completes,  select the link for ADM results available.
 
 Expand the discovered clusters to see the cluster members.  There should be two clusters, one containing the Apache web server and the other containing the MySQL database server.
 
-<a href="images/module15_009.png"><img src="images/module15_009.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-04_009.png"><img src="images/module_07-04_009.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -112,7 +117,7 @@ Expand the discovered clusters to see the cluster members.  There should be two 
 
 Click on Clusters,  select the cluster that displays the IP address of the MySQL database server and edit the cluster.  
 
-<a href="images/module15_010.png"><img src="images/module15_010.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-04_010.png"><img src="images/module_07-04_010.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -120,7 +125,7 @@ Click on Clusters,  select the cluster that displays the IP address of the MySQL
 
 Change the cluster name and query as shown in the below image.
 
-<a href="images/module15_011.png"><img src="images/module15_011.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-04_011.png"><img src="images/module_07-04_011.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -128,7 +133,7 @@ Change the cluster name and query as shown in the below image.
 
 Select the cluster containing the IP address of the Apache web server and edit the cluster.
 
-<a href="images/module15_012.png"><img src="images/module15_012.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-04_012.png"><img src="images/module_07-04_012.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -136,7 +141,7 @@ Select the cluster containing the IP address of the Apache web server and edit t
 
 Edit the cluster name and query as shown in the image below.
 
-<a href="images/module15_013.png"><img src="images/module15_013.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-04_013.png"><img src="images/module_07-04_013.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -144,7 +149,7 @@ Edit the cluster name and query as shown in the image below.
 
 Highlight the OpenCart-App cluster and select the rocket shop icon to promote the cluster to an Inventory Filter.
 
-<a href="images/module15_014.png"><img src="images/module15_014.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-04_014.png"><img src="images/module_07-04_014.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -153,7 +158,7 @@ Highlight the OpenCart-App cluster and select the rocket shop icon to promote th
 Leave the default settings here and click Promote Cluster.
 
 
-<a href="images/module15_015.png"><img src="images/module15_015.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-04_015.png"><img src="images/module_07-04_015.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -161,7 +166,7 @@ Leave the default settings here and click Promote Cluster.
 
 Select the OpenCart-DB cluster and promote it to an Inventory Filter.  
 
-<a href="images/module15_016.png"><img src="images/module15_016.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-04_016.png"><img src="images/module_07-04_016.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -169,7 +174,7 @@ Select the OpenCart-DB cluster and promote it to an Inventory Filter.
 
 Keep the default settings here and select Promote Cluster.
 
-<a href="images/module15_017.png"><img src="images/module15_017.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-04_017.png"><img src="images/module_07-04_017.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -177,7 +182,7 @@ Keep the default settings here and select Promote Cluster.
 
 Delete the two lines which provide outbound access from the OpenCart-DB and OpenCart-App clusters to the Root scope on TCP ports 80, 443 and UDP 123.  These outbound policies are covered in our Global Services Absolute policies, so this traffic should be allowed.   
 
-<a href="images/module15_018.png"><img src="images/module15_018.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-04_018.png"><img src="images/module_07-04_018.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -185,7 +190,7 @@ Delete the two lines which provide outbound access from the OpenCart-DB and Open
 
 Modify the rule allowing the Root scope as Consumer access to the OpenCart-App as Provider on TCP 80, 443 and 8080.  Click to edit the rule and change the Root scope to Any.  
 
-<a href="images/module15_019.png"><img src="images/module15_019.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-04_019.png"><img src="images/module_07-04_019.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -193,7 +198,7 @@ Modify the rule allowing the Root scope as Consumer access to the OpenCart-App a
 
 The rule should now say Consumer Any to OpenCart-App on TCP 80, 443, and 8080.  
 
-<a href="images/module15_020.png"><img src="images/module15_020.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-04_020.png"><img src="images/module_07-04_020.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -204,7 +209,7 @@ Recall that in Module10 on Forensics,  the attacker came from the outside agains
 > Since the Catch All is set to Deny,  anything not explicitly permitted will be denied.  Catch-all of Deny is the default on all application workspaces. This can be thought of just like an implicit deny at the end of an access-list or firewall rule.  Anything not explicitly permitted will be denied.  By removing port 8080,  we cause that traffic to be dropped by the Catch-All.  We could also configure an explicit Deny rule if desired.
 
 
-<a href="images/module15_021.png"><img src="images/module15_021.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-04_021.png"><img src="images/module_07-04_021.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -212,7 +217,7 @@ Recall that in Module10 on Forensics,  the attacker came from the outside agains
 
 Switch to the Common Policy Application Workspace.
 
-<a href="images/module15_022.png"><img src="images/module15_022.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-04_022.png"><img src="images/module_07-04_022.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -220,7 +225,7 @@ Switch to the Common Policy Application Workspace.
 
 Click on the Provided Services tab,  click on policy requests and accept the pending policy request from OpenCart-DB on UDP port 53.
 
-<a href="images/module15_023.png"><img src="images/module15_023.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-04_023.png"><img src="images/module_07-04_023.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -228,10 +233,10 @@ Click on the Provided Services tab,  click on policy requests and accept the pen
 
 Click on the Policies tab and notice the new rule that has been created from OpenCart-DB to Common-GC-DC-DNS with UDP 53 as the service.
 
-<a href="images/module15_024.png"><img src="images/module15_024.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-04_024.png"><img src="images/module_07-04_024.png" style="width:100%;height:100%;"></a>  
 
 
 
-YOU HAVE COMPLETED THIS MODULE
+---   
 
 | [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](readme.md) | [Continue to the Next Module]() |

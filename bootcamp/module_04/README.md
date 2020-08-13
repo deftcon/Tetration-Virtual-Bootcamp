@@ -16,13 +16,21 @@ In this tree structure, the Pod matches our annotation PodSubnet=internal which 
 
 In this module,  we'll define the Scope tree that will be used throughout the rest of the lab exercises.  
 
----
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/07a_scope_creation.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video highlighting the creation of Scopes.</a>
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/07b_scope_member_verify.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video showing the verification of Scope members.</a>
+## --- Lecture Video ---  
+---  
+<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/lectures/Module_04.00__Lecture__Scopes.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Scopes :: Lecture Video :: Runtime: 1 hr 8 mins</a>  
+  
+---  
+  
 
----
+## --- Demo Video ---  
+---  
+<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_04.00__Demo__Scopes.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Scopes :: Demo Video :: Runtime: 5 mins</a>  
+  
+---  
 
+## --- Lab ---
 ### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Navigate to Scopes</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Create a new scope under the root</a>  
@@ -55,7 +63,7 @@ In this module,  we'll define the Scope tree that will be used throughout the re
 
 Click the Gear icon in the right-hand corner and select Scopes
 
-<a href="images/module07_001.png"><img src="images/module07_001.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_04_001.png"><img src="images/module_04_001.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -65,7 +73,7 @@ Here we will create our first scope under the root scope. Click Create New Scope
 
 > Your root scope will be named based on your StudentID in the lab.  In a real customer deployment in Tetration Cloud, it would be the company name.  
 
-<a href="images/module07_002.png"><img src="images/module07_002.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_04_002.png"><img src="images/module_04_002.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -73,7 +81,7 @@ Here we will create our first scope under the root scope. Click Create New Scope
 
 The name of the first scope will be Pod, to represent your student Pod.  Set the query to * PodSubnet = internal.  This was a static annotation that we set in the previous module on annotations.  It matches all RFC1918 private address space.  
 
-<a href="images/module07_003.png"><img src="images/module07_003.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_04_003.png"><img src="images/module_04_003.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -81,7 +89,7 @@ The name of the first scope will be Pod, to represent your student Pod.  Set the
 
 Click on Pod to navigate to the next level in the scope tree.  Notice how the path at the top now changes to ROOT : Pod.  
 
-<a href="images/module07_004.png"><img src="images/module07_004.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_04_004.png"><img src="images/module_04_004.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -89,7 +97,7 @@ Click on Pod to navigate to the next level in the scope tree.  Notice how the pa
 
 Create a new child scope under the Pod scope.  
 
-<a href="images/module07_005.png"><img src="images/module07_005.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_04_005.png"><img src="images/module_04_005.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -97,7 +105,7 @@ Create a new child scope under the Pod scope.
 
 Name this scope Cloud,  and enter the query *orchestrator_Cloud = AWS.  From here on out, we'll be matching on tags that are set on your instances running in AWS. Recall that these tags are being pulled in from the External Orchestrator configuration for AWS. All instances will be tagged with the Cloud = AWS tag.  
 
-<a href="images/module07_006.png"><img src="images/module07_006.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_04_006.png"><img src="images/module_04_006.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -105,7 +113,7 @@ Name this scope Cloud,  and enter the query *orchestrator_Cloud = AWS.  From her
 
 Click on the Cloud scope to move down to the next level in the scope tree.
 
-<a href="images/module07_007.png"><img src="images/module07_007.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_04_007.png"><img src="images/module_04_007.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -113,7 +121,7 @@ Click on the Cloud scope to move down to the next level in the scope tree.
 
 Create a new Scope under the Cloud scope.
 
-<a href="images/module07_008.png"><img src="images/module07_008.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_04_008.png"><img src="images/module_04_008.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -121,7 +129,7 @@ Create a new Scope under the Cloud scope.
 
 Name the new scope Region,  and enter the query *orchestrator_Region = us-east-1.
 
-<a href="images/module07_009.png"><img src="images/module07_009.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_04_009.png"><img src="images/module_04_009.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -129,7 +137,7 @@ Name the new scope Region,  and enter the query *orchestrator_Region = us-east-1
 
 Click on the Region scope to navigate to the next level in the scope tree.
 
-<a href="images/module07_010.png"><img src="images/module07_010.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_04_010.png"><img src="images/module_04_010.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -137,7 +145,7 @@ Click on the Region scope to navigate to the next level in the scope tree.
 
 Create a new scope under the Region scope.  We will create three scopes under the Region.  
 
-<a href="images/module07_011.png"><img src="images/module07_011.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_04_011.png"><img src="images/module_04_011.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -145,7 +153,7 @@ Create a new scope under the Region scope.  We will create three scopes under th
 
 Name the first scope under the Region nopCommerce,  and set the query to *orchestrator_AppName = nopCommerce.  This query will match the Windows app servers.  
 
-<a href="images/module07_012.png"><img src="images/module07_012.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_04_012.png"><img src="images/module_04_012.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -153,7 +161,7 @@ Name the first scope under the Region nopCommerce,  and set the query to *orches
 
 Create another scope under the Region scope.
 
-<a href="images/module07_013.png"><img src="images/module07_013.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_04_013.png"><img src="images/module_04_013.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -161,7 +169,7 @@ Create another scope under the Region scope.
 
 Name the scope OpenCart,  and enter the query *orchestrator_AppName = OpenCart.
 
-<a href="images/module07_014.png"><img src="images/module07_014.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_04_014.png"><img src="images/module_04_014.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -169,7 +177,7 @@ Name the scope OpenCart,  and enter the query *orchestrator_AppName = OpenCart.
 
 Create another scope under the Region scope.
 
-<a href="images/module07_015.png"><img src="images/module07_015.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_04_015.png"><img src="images/module_04_015.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -177,7 +185,7 @@ Create another scope under the Region scope.
 
 Enter Common Apps for the name and enter the query *orchestrator_AppGroup = Common.  This will match the Windows Active Directory and Ansible servers.  
 
-<a href="images/module07_016.png"><img src="images/module07_016.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_04_016.png"><img src="images/module_04_016.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -185,7 +193,7 @@ Enter Common Apps for the name and enter the query *orchestrator_AppGroup = Comm
 
 Click Commit Scope Updates to approve the new scopes and have the new scope structure take affect.  
 
-<a href="images/module07_017.png"><img src="images/module07_017.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_04_017.png"><img src="images/module_04_017.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -195,7 +203,7 @@ After a few minutes, the warning icon that indicates scopes have not been commit
 
 > You may have to refresh your screen a few times.
 
-<a href="images/module07_018.png"><img src="images/module07_018.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_04_018.png"><img src="images/module_04_018.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -203,7 +211,7 @@ After a few minutes, the warning icon that indicates scopes have not been commit
 
 Now we will verify that the queries match the workloads in the lab environment.  Click on the query orchestrator_AppGroup = Common.
 
-<a href="images/module07_019.png"><img src="images/module07_019.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_04_019.png"><img src="images/module_04_019.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -211,7 +219,7 @@ Now we will verify that the queries match the workloads in the lab environment. 
 
 Here you should see listed the Active Directory server as well as CentOS machine which is the Ansible server.  Cross check the IP addressing against your pod information.  Click the back button on the browser to return to the previous screen.
 
-<a href="images/module07_020.png"><img src="images/module07_020.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_04_020.png"><img src="images/module_04_020.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -219,7 +227,7 @@ Here you should see listed the Active Directory server as well as CentOS machine
 
 Click on the query *orchestrator_AppName = nopCommerce.
 
-<a href="images/module07_021.png"><img src="images/module07_021.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_04_021.png"><img src="images/module_04_021.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -227,7 +235,7 @@ Click on the query *orchestrator_AppName = nopCommerce.
 
 Here we should see the IIS and MSSqlServer Windows servers that make up the nopCommerce application.  Click back in the browser to return to the previous screen.
 
-<a href="images/module07_022.png"><img src="images/module07_022.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_04_022.png"><img src="images/module_04_022.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -237,7 +245,7 @@ Click on the *orchestrator_AppName = OpenCart query.
 
 
 
-<a href="images/module07_023.png"><img src="images/module07_023.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_04_023.png"><img src="images/module_04_023.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -245,7 +253,7 @@ Click on the *orchestrator_AppName = OpenCart query.
 
 The workloads listed here are the Linux machines running Apache and MySQL that make up the OpenCart web application.
 
-<a href="images/module07_024.png"><img src="images/module07_024.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_04_024.png"><img src="images/module_04_024.png" style="width:100%;height:100%;"></a>  
 
 
 You have reached the end of this module.  

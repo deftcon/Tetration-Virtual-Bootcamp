@@ -4,12 +4,15 @@
 
 In this module we will perform Policy Analysis for the OpenCart application and adjust policy as necessary based on the results. We will also run an Experiment which analyzes the current policy against historical flows that occurred during a specified time range. This can be useful to see what the policy results would have been over a period of weeks or even months based on the traffic observed during that time frame, even before Policy Analysis was enabled for the application.  
 
----
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/20_policy_analysis_opencart.mp4
-" style="font-weight:bold" title="Enforcement - OpenCart"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video showing the necessary tasks to perform Policy Analysis for the Linux-based OpenCart.</a>
+---   
 
----
+## --- Demo Video ---  
+---  
+<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_07.09__Demo__Segmentation__Policy_Analysis_Linux_App.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Segmentation - Policy Analysis - Linux App :: Demo Video :: Runtime: 2 mins</a>  
+  
+---  
 
+## --- Lab ---
 ### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Navigate to the OpenCart application workspace</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Click on Policy Analysis</a>  
@@ -33,7 +36,7 @@ In this module we will perform Policy Analysis for the OpenCart application and 
 
 Navigate to the OpenCart application workspace.
 
-<a href="images/module20_001.png"><img src="images/module20_001.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-09_001.png"><img src="images/module_07-09_001.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -41,7 +44,7 @@ Navigate to the OpenCart application workspace.
 
 Click on Policy Analysis.
 
-<a href="images/module20_002.png"><img src="images/module20_002.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-09_002.png"><img src="images/module_07-09_002.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -49,7 +52,7 @@ Click on Policy Analysis.
 
 Filter out Permitted flows, and click on the point in the graph where there are Escaped flows (denoted in orange).
 
-<a href="images/module20_003.png"><img src="images/module20_003.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-09_003.png"><img src="images/module_07-09_003.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -57,7 +60,7 @@ Filter out Permitted flows, and click on the point in the graph where there are 
 
 Click on one of the escaped flows,  and select Quick Policy Analysis.  
 
-<a href="images/module20_004.png"><img src="images/module20_004.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-09_004.png"><img src="images/module_07-09_004.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -68,7 +71,7 @@ Click on Find matching policies.  Note that the Policy Decision is ALLOW.  Why i
 > Hint: We haven't changed the time range!  We are looking at a point in the graph prior to our policy change we made earlier in the OpenCart application workspace to allow the OpenCart scope to talk to Common-GC-DC-DNS on UDP port 53.  
 
 
-<a href="images/module20_005.png"><img src="images/module20_005.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-09_005.png"><img src="images/module_07-09_005.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -76,7 +79,7 @@ Click on Find matching policies.  Note that the Policy Decision is ALLOW.  Why i
 
 Click on the clock icon and note the last time policy was changed and the reason.  
 
-<a href="images/module20_006.png"><img src="images/module20_006.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-09_006.png"><img src="images/module_07-09_006.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -85,7 +88,7 @@ Click on the clock icon and note the last time policy was changed and the reason
 Click on Policy Analysis and change the time range to 1 hour.  
 
 
-<a href="images/module20_007.png"><img src="images/module20_007.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-09_007.png"><img src="images/module_07-09_007.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -93,7 +96,7 @@ Click on Policy Analysis and change the time range to 1 hour.
 
 Click on a point in the graph past the time when the policy was last published.  Here you should see the flows that were indicated as Escaped showing as Permitted.  
 
-<a href="images/module20_008.png"><img src="images/module20_008.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-09_008.png"><img src="images/module_07-09_008.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -104,7 +107,7 @@ Click on Run Experiment.
 > An experiment allows you to compare the current policy against historical traffic.  It helps you answer the question, what would have happened to the historical flows if the current policy was applied.
 
 
-<a href="images/module20_009.png"><img src="images/module20_009.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-09_009.png"><img src="images/module_07-09_009.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -115,7 +118,7 @@ Select the last 24 hours for Start Date and End Date, and then select Run.
 > The experiment will take a few minutes to complete.
 
 
-<a href="images/module20_010.png"><img src="images/module20_010.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-09_010.png"><img src="images/module_07-09_010.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -123,7 +126,7 @@ Select the last 24 hours for Start Date and End Date, and then select Run.
 
 Click on Live Policy Analysis to view the status of the experiment.  
 
-<a href="images/module20_011.png"><img src="images/module20_011.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-09_011.png"><img src="images/module_07-09_011.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -131,7 +134,7 @@ Click on Live Policy Analysis to view the status of the experiment.
 
 Once the experiment is complete, click on it to view the results.
 
-<a href="images/module20_012.png"><img src="images/module20_012.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-09_012.png"><img src="images/module_07-09_012.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -139,7 +142,7 @@ Once the experiment is complete, click on it to view the results.
 
 Filter oput Permitted flows.  
 
-<a href="images/module20_013.png"><img src="images/module20_013.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-09_013.png"><img src="images/module_07-09_013.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -147,7 +150,7 @@ Filter oput Permitted flows.
 
 Notice that there are some rejected flows to TCP port 8080.    
 
-<a href="images/module20_014.png"><img src="images/module20_014.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-09_014.png"><img src="images/module_07-09_014.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -155,7 +158,7 @@ Notice that there are some rejected flows to TCP port 8080.
 
 Click on the flow to TCP port 8080 and select Quick Policy Analysis.  
 
-<a href="images/module20_015.png"><img src="images/module20_015.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-09_015.png"><img src="images/module_07-09_015.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -163,10 +166,10 @@ Click on the flow to TCP port 8080 and select Quick Policy Analysis.
 
 The Policy Decision is deny.   This is the desired outcome for this traffic because it will block the attacker from coming in on that port to the Apache Struts application.
 
-<a href="images/module20_016.png"><img src="images/module20_016.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_07-09_016.png"><img src="images/module_07-09_016.png" style="width:100%;height:100%;"></a>  
 
 
-YOU HAVE FINISHED THIS MODULE
+---   
 
 
 | [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](readme.md) | [Continue to the Next Module]() |
