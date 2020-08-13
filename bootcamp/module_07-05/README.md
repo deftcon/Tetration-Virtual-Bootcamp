@@ -8,12 +8,12 @@ This diagram depicts the flow of traffic that will be used during the lab that h
 
 In this lab diagram, Employees get standard access to the app front-ends and no more - essentially what everyone else gets.
 
-<a href="images/diagrams_011.png"><img src="images/diagrams_011.png" style="width:100%;height:100%;"></a>  
+<a href="../diagrams/images/diagrams_011.png"><img src="../diagrams/images/diagrams_011.png" style="width:100%;height:100%;"></a>  
 
 
 In this lab diagram, SysAdmins not only get standard access to the app front-ends, but they also gain RDP and/or SSH access to each app's frontend workload as well as the backend databases, so that they can properly perform necessary administration.
 
-<a href="images/diagrams_012.png"><img src="images/diagrams_012.png" style="width:100%;height:100%;"></a>  
+<a href="../diagrams/images/diagrams_012.png"><img src="../diagrams/images/diagrams_012.png" style="width:100%;height:100%;"></a>  
 
 
 

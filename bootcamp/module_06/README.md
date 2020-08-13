@@ -23,7 +23,7 @@ This consists of:
 
 You will use this diagram when performing the lab that will have you attack a known vulnerability running on the server hosting the OpenCart webapp tier and then continuing on to accomplish lateral movement to other higher-value targets, such as the DB containing customer info with PII. 
 
-<a href="images/diagrams_010.png"><img src="images/diagrams_010.png" style="width:100%;height:100%;"></a>  
+<a href="../diagrams/images/diagrams_010.png"><img src="../diagrams/images/diagrams_010.png" style="width:100%;height:100%;"></a>  
 
 
 ---
