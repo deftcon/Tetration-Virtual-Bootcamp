@@ -10,7 +10,7 @@ In our case, we have the MS-SQL server set to use Domain Authentication rather t
 
 Another common place you may find RPC in use is with NFS. You will likely encounter the usage of RPC in many other environments and should be on the lookout for it and other ephemeral port-range protocols like it. A quick parting thought is that you should look out for other ephemeral port "hopping" protocols besides RPC, when building policy in a production deployment of Tetration. A quick example that comes to mind is "RTP" or "Real Time Protocol". RTP and its sister - RTCP (Real Time Control Protocol) together use a range of UCP ports from 16384-32767, and will likely be found anywhere that VoIP is used - such as with IP Phones and Telepresence units talking to one another as well as a slew of other devices such as voice gateways and call recorders.
 
-<a href="https://www.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501"><img src="../diagrams/images/diagrams_009.png" style="width:100%;height:100%;"></a>  
+<a href="https://www.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501" target="_blank"><img src="../diagrams/images/diagrams_009.png" style="width:100%;height:100%;"></a>  
 
 
 ---

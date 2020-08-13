@@ -62,7 +62,7 @@ This first image is the base diagram which references the environment that _each
 
 This is the flow that for a learner (that's you) accessing the lab environment. You will have been provided a unique URL and login for your TaaS instance, and will access it directly given that information (step 1 in this diagram). Step 2 in this diagram shows you accesing the lab guide documentation, which we will assume you have managed somehow since you are reading this on that documentation site, which is hosted with GitHub Pages. Step 3 on the diagram shows you accessing the three applications that you have unique to your lab environment. You will be able to access each of the apps directly from your local laptop/workstation. Later on you will also find that you will be able to access each app from the two Win10 "User Access" machines pictured at the bottom right in the simulated "External / Internet" Subnet - 198.18.x.0/24". 
 
-<a href="../diagrams/images/diagrams_004.png"><img src="../diagrams/images/diagrams_004.png" style="width:100%;height:100%;"></a>  
+<a href="https://www.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501" target="_blank"><img src="../diagrams/images/diagrams_004.png" style="width:100%;height:100%;"></a>  
   
 As you can see from the diagram above, your lab contains one of each of the following apps:
 
@@ -215,7 +215,7 @@ This diagram depicts the AWS Security Groups that help to keep this intentionall
 <a href="../diagrams/images/diagrams_014.png"><img src="../diagrams/images/diagrams_014.png" style="width:100%;height:100%;"></a>  
   
 
-
-
-
+  
+---  
+  
 | [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](readme.md) | [Continue to the Introduction](https://tetration.guru/bootcamp/module_01/) |

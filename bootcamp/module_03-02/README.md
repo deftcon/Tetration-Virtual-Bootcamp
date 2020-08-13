@@ -12,7 +12,7 @@ This diagram depicts how you will deploy Tetration Agents out to each of your wo
    2. Click on and connecting to the Ansible machine
    3. Verify and, if necessary, edit the inventory for deployment by first changing directories with `cd /opt/ansible-tetration-sensor/` running `sudo nano inventory/hosts` and when prompted with `[sudo] password for ciscolab:`, entering the standard lab password of `tet123$$!`. 
 
-<a href="https://www.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501"><img src="../diagrams/images/diagrams_007.png" style="width:100%;height:100%;"></a>  
+<a href="https://www.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501" target="_blank"><img src="../diagrams/images/diagrams_007.png" style="width:100%;height:100%;"></a>  
 
 The Ansible machine is already configured to deploy agents out to the following workloads by OS:
 

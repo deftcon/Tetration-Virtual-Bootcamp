@@ -109,7 +109,7 @@ This will be either to the desktop via RDP in the case of a Windows machine or t
 
 This diagram depicts how you will gain access to the workloads running in your lab environment. 
 
-<a href="https://www.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501"><img src="../diagrams/images/diagrams_005.png" style="width:100%;height:100%;"></a>  
+<a href="https://www.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501" target="_blank"><img src="../diagrams/images/diagrams_005.png" style="width:100%;height:100%;"></a>  
   
 The "Home" screen of Guac should look something like this:
 
