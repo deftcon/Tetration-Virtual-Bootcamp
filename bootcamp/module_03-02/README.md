@@ -213,6 +213,5 @@ Click on the Software Agents tab,  and ensure that all of the sensors that were 
 ---  
   
 
-Navigation | Jump Up | Get Down 
----------- | ------- | --------
-[Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](readme.md) | [Continue to the Next Module](../module_03-01/)
+
+| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](readme.md) | [Continue to the Next Module](../module_03-01/) |
