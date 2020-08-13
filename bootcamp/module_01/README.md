@@ -149,7 +149,7 @@ The lab environment accompanying this lab guide lives entirely in the cloud. Thi
 
 Every learner working with this Lab Guide has a __*complete*__ lab evironment for themselves. 
 
-This consists of every item seen in the following diagram, which is enumerated in more detail below the diagram. The diagram below actually links to a live, interactive diagram that you may like to use throughout your lab experience, [which you can read more about here on the diagrams page](). There will also be more diagrams used throughout this lab guide, and they will all correspond with the Diagram ### found on that diagrams page. 
+This consists of every item seen in the following diagram, which is enumerated in more detail below the diagram. The diagram below actually links to a live, interactive diagram that you may like to use throughout your lab experience, [which you can read more about here on the diagrams page](../diagrams/). There will also be more diagrams used throughout this lab guide, and they will all correspond with the Diagram ### found on that diagrams page. 
 
 
 <a href="https://www.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501" target="_blank">Click on the image to open an interactive diagram<img src="../diagrams/images/diagrams_004.png" style="width:100%;height:100%;"></a>  
