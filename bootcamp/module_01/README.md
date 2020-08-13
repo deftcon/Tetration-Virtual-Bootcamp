@@ -15,8 +15,8 @@ Cisco Tetration is a powerful tool that allows organizations to easily define an
 
   
 
-## --- Introduction to Lab ---
-### Table of Contents
+## --- Introduction to Lab ---  
+### Table of Contents  
 <a href="#Guide" style="font-weight:bold">How to Use This Lab Guide</a>  
 <a href="#Credentials" style="font-weight:bold">Lab Environment Credentials</a>  
 <a href="#CSV" style="font-weight:bold">Student/Pod-Specific Information - CSV File</a>  
@@ -24,8 +24,8 @@ Cisco Tetration is a powerful tool that allows organizations to easily define an
 <a href="#Integrations" style="font-weight:bold">Integrations with Tetration</a>  
 <a href="#Environment" style="font-weight:bold">Lab Environment</a>  
 <a href="#Assets" style="font-weight:bold">Lab Assets</a>  
-
----
+  
+---  
 
 <div class="link" id="Guide"><a href="#Guide" style="font-weight:bold">How to Use This Lab Guide</a></div>
 
@@ -109,7 +109,7 @@ This will be either to the desktop via RDP in the case of a Windows machine or t
 
 This diagram depicts how you will gain access to the workloads running in your lab environment. 
 
-<a href="../diagrams/images/diagrams_005.png"><img src="../diagrams/images/diagrams_005.png" style="width:100%;height:100%;"></a>  
+<a href="https://www.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501"><img src="../diagrams/images/diagrams_005.png" style="width:100%;height:100%;"></a>  
   
 The "Home" screen of Guac should look something like this:
 
