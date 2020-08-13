@@ -11,7 +11,7 @@ In this module we will configure the policies and enable enforcement on a micros
 
 ---
 
-### Steps for this Module  
+### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Navigate to Agent Config</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Click to select the Linux Inventory Filter</a>  
 <a href="#step-003" style="font-weight:bold">Step 003 - Edit the Inventory Filter</a>  

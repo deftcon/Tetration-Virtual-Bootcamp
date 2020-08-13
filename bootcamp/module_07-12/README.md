@@ -10,7 +10,7 @@ In this module we will enable enforcement on the nopCommerce application workspa
 
 ---
 
-### Steps for this Module  
+### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Navigate to Inventory Search</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Search for the IIS web server</a>  
 <a href="#step-003" style="font-weight:bold">Step 003 - Click on Policies</a>  

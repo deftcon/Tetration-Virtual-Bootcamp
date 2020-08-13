@@ -8,7 +8,7 @@ In this module we will create an Application Workspace for the OpenCart applicat
 <a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/15_policy_creation_adm_clusters_opencart.mp4" style="font-weight:bold" title="OpenCart ADM & Clusters"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video of the tasks necessary to setup an Workspace, run ADM, configure Clusters, and customize the security Policy for the Linux-based app called OpenCart.</a>
 
 ---
-### Steps for this Module  
+### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Create a new App Workspace</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Configure the OpenCart Workspace</a>  
 <a href="#step-003" style="font-weight:bold">Step 003 - Begin ADM run</a>  

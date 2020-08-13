@@ -9,7 +9,7 @@ In this module we will review key security visibility and monitoring features of
 <a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/26_security_visibility_monitoring.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video reviewing the Security and Vulnerability Dashboards.</a>
 
 ---
-### Steps for this Module  
+### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Examine Vulerability Score</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Review Vulnerability Score Help</a>  
 <a href="#step-003" style="font-weight:bold">Step 003 - Examine Process Hash Score</a>  

@@ -24,7 +24,7 @@ In this lab diagram, SysAdmins not only get standard access to the app front-end
 ---
 
 
-### Steps for this Module  
+### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Navigate to Inventory Filters</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Create a new Inventory filter for SysAdmins"</a>  
 <a href="#step-003" style="font-weight:bold">Step 003 - Review workloads and create</a>  

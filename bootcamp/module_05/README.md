@@ -23,7 +23,7 @@ This diagram depicts the flow of traffic used by various devices to utimately in
 
 ---  
 
-### Steps for this Module  
+### Steps for this Lab  
 #### AWS VPC Flow Logs
 <a href="#step-001" style="font-weight:bold">Step 001 - Naviaget to Connectors</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Select AWS under Flow Ingest</a>  

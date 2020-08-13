@@ -10,7 +10,7 @@ In this module we will enable Enforcement on the Global Services and Common Poli
 
 ---
 
-### Steps for this Module  
+### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Open a session to the MS Active Directory server</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Search for and open Windows Firewall</a>  
 <a href="#step-003" style="font-weight:bold">Step 003 - View Inbound Rules</a>  

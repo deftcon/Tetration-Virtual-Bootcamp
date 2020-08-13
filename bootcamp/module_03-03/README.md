@@ -11,7 +11,7 @@ In this module,  we'll configure Static Annotations for the endpoints in the lab
 <a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/05b_verify_static_annotations.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view the second of two videos highlighting the verification of those Annotations.</a>  
 
 ---
-### Steps for this Module  
+### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Open annotations file</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Modify annotations file with lab IP addresses</a>  
 <a href="#step-003" style="font-weight:bold">Step 003 - Save the annotations file to the desktop</a>  

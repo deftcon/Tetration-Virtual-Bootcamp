@@ -9,7 +9,7 @@ In this module we will enable enforcement for the OpenCart application.  We will
 
 ---
 
-### Steps for this Module  
+### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Navigate to Inventory Search</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Search for the Apache Linux machine</a>  
 <a href="#step-003" style="font-weight:bold">Step 003 - View the policies on the Apache Linux machine</a>  

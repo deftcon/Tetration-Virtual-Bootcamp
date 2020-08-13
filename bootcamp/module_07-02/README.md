@@ -17,7 +17,7 @@ This diagram depicts how AWS Lambda (aka 'serverless') plays nice with Tetration
 
 ---
 
-### Steps for this Module  
+### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Navigate to Applications</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Create App Workspace</a>  
 <a href="#step-003" style="font-weight:bold">Step 003 - Create Workspace for Common Policy</a>  

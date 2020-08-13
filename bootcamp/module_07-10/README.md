@@ -7,7 +7,7 @@ In this module we will test access to the applications and workloads prior to en
 <a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/21_policy_enforcement_pre-enforcement.mp4" style="font-weight:bold" title="Enforcement Policy Tuning"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video of tasks performed to go through a series of pre-enforcement checks prior to taking all workloads into enforcement mode.</a>
 
 
-### Steps for this Module  
+### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Test public access to the IIS web server</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Test public access to the Apache web server</a>  
 <a href="#step-003" style="font-weight:bold">Step 003 - Open a session to the IIS web server</a>  

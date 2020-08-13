@@ -12,7 +12,7 @@ In this module we will first enable Policy Analysis for each workspace,  and the
 ---
 
 
-### Steps for this Module  
+### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Navigate to the Global Services App Workspace</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Click on Policy Analysis</a>  
 <a href="#step-003" style="font-weight:bold">Step 003 - Begin Policy Analysis</a>  

@@ -8,7 +8,7 @@ In this module we will perform Policy Analysis for the Common Policy workspace w
 
 ---
 
-### Steps for this Module  
+### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Navigate to the Common Policy app workspace</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Click on Policy Analysis</a>  
 <a href="#step-003" style="font-weight:bold">Step 003 - Filter out Permitted flows</a>  

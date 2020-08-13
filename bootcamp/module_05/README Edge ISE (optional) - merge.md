@@ -16,7 +16,7 @@ This diagram depicts the flow of traffic used by various devices to utimately in
 
 ---
 
-### Steps for this Module  
+### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Navigate to Connectors</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Click on ISE</a>  
 <a href="#step-003" style="font-weight:bold">Step 003 - Enable the ISE connector</a>  

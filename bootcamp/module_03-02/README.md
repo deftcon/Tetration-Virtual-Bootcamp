@@ -5,8 +5,8 @@ Tetration agent (also called sensor) installation can be performed manually usin
 
 In this module, we'll download the installation scripts for Windows and Linux from the Tetration cluster and use Ansible to perform automated rollout of the sensors.
 
----
-
+## --- Diagram Overview ---  
+---  
 This diagram depicts how you will deploy Tetration Agents out to each of your workloads in your lab environment. Deployment will occur by performing the following tasks:
    1. Connect to the Guac server via HTTPS
    2. Click on and connecting to the Ansible machine
@@ -27,6 +27,7 @@ The Ansible machine is already configured to deploy agents out to the following 
    * Ubuntu 16.04
       * EKS Worker Node
   
+
 ## --- Lecture Video ---  
 ---  
 <a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/lectures/Module_03.02__Lecture__Data_Sources__Agents.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Data Sources - Collection Rules :: Lecture Video :: Runtime: 13 mins</a>  
@@ -40,7 +41,8 @@ The Ansible machine is already configured to deploy agents out to the following 
   
 ---  
 
-### Steps for this Module  
+## --- Lab :: Agent Deployment via Ansible ---  
+### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Navigate to Agent Config</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Click on Software Agent Download</a>  
 <a href="#step-003" style="font-weight:bold">Step 003 - Select the Linux Enforcement Agent</a>  
@@ -60,6 +62,7 @@ The Ansible machine is already configured to deploy agents out to the following 
 <a href="#step-017" style="font-weight:bold">Step 017 - Navigate to Software Agents</a>  
 <a href="#step-018" style="font-weight:bold">Step 018 - Verify the agents are registered</a>  
 
+---  
 
 <div class="step" id="step-001"><a href="#step-001" style="font-weight:bold">Step 001</a></div>  
 
@@ -211,6 +214,154 @@ Click on the Software Agents tab,  and ensure that all of the sensors that were 
 
 ---  
   
+## --- Lab :: Agent Config Intent ---  
+Agent Config Intent defines what features will be enabled for a group of sensors.  The Config Intent can be tied to an Inventory Filter, which provides the capability to apply different configurations to different types of hosts.  For example, you could define a profile enabling a specific set of features to all Windows machines,  and a separate profile enabling a different set of features to all Linux machines.  We will see an example of doing just that in the exercise below.  
 
+### Steps for this Lab  
+<a href="#step-001" style="font-weight:bold">Step 019 - Navigate to Agent Config</a>  
+<a href="#step-002" style="font-weight:bold">Step 020 - Create a Profile for Windows machines</a>  
+<a href="#step-003" style="font-weight:bold">Step 021 - Configure Windows Profile Settings</a>  
+<a href="#step-004" style="font-weight:bold">Step 022 - Configure Windows Profile Settings</a>  
+<a href="#step-005" style="font-weight:bold">Step 023 - Create a Profile for Linux machines</a>  
+<a href="#step-006" style="font-weight:bold">Step 024 - Configure Linux Profile Settings</a>  
+<a href="#step-007" style="font-weight:bold">Step 025 - Configure Linux Profile Settings</a>  
+<a href="#step-008" style="font-weight:bold">Step 026 - Create a Config Intent for Windows</a>  
+<a href="#step-009" style="font-weight:bold">Step 027 - Create a new Inventory Filter</a>  
+<a href="#step-010" style="font-weight:bold">Step 028 - Configure Inventory Filter for Windows OS</a>  
+<a href="#step-011" style="font-weight:bold">Step 029 - Apply the Inventory Filter to the Config Intent</a>  
+<a href="#step-012" style="font-weight:bold">Step 030 - Create a Config Intent for Linux</a>  
+<a href="#step-013" style="font-weight:bold">Step 031 - Create a new Inventory Filter</a>  
+<a href="#step-014" style="font-weight:bold">Step 032 - Configure Inventory Filter for Linux OS</a>  
+<a href="#step-015" style="font-weight:bold">Step 033 - Apply the Inventory Filter to the Config Intent</a>  
+
+---  
+
+
+
+<div class="step" id="step-019"><a href="#step-019" style="font-weight:bold">Step 019</a></div>
+
+Select the Gear icon and select Agent Config.  
+
+<a href="images/module04_019.png"><img src="images/module04_019.png" style="width:100%;height:100%;"></a>  
+
+
+<div class="step" id="step-020"><a href="#step-020" style="font-weight:bold">Step 020</a></div>  
+
+Click Create Profile to being creating an Agent Config Profile that we will apply to Windows machines.
+
+<a href="images/module04_020.png"><img src="images/module04_020.png" style="width:100%;height:100%;"></a>  
+
+
+
+<div class="step" id="step-021"><a href="#step-021" style="font-weight:bold">Step 021</a></div>  
+
+Enter the name Windows for the profile name,  and select to enable Enforcement and Preserve rules.  
+
+> Enforcement - This agent config intent setting provides the capability to enable/disable the enforcement feature.  This can be useful to prevent a situation where you have a set of machines that you would like to ensure cannot be put into enforcement inadvertently.
+
+> Preserve Rules - When enabled,  this setting will preserve any manually configured firewall rules that might be present on the servers when going into enforcement.  It is common to set this to enabled, such as to preserve any rules that might have been previously configured.
+
+<a href="images/module04_021.png"><img src="images/module04_021.png" style="width:100%;height:100%;"></a>  
+
+
+
+<div class="step" id="step-022"><a href="#step-022" style="font-weight:bold">Step 022</a></div>  
+
+Click to enable the following settings and then Save the configuration:
+- PID Lookup
+- Forensics
+- Meltdown Exploit Detection
+- Anamalous Cache Activity Detection
+
+> NOTE: The Auto-Upgrade setting will cause the agents to be upgraded automatically when Tetration code is updated.  It is common to disable this feature in a production environment so that agents can be upgraded in a more controlled manner.
+
+<a href="images/module04_022.png"><img src="images/module04_022.png" style="width:100%;height:100%;"></a>  
+
+
+<div class="step" id="step-023"><a href="#step-023" style="font-weight:bold">Step 023</a></div>  
+
+Select Create Profile to create a new Agent Config Profile for Linux machines.
+
+<a href="images/module04_023.png"><img src="images/module04_023.png" style="width:100%;height:100%;"></a>  
+
+
+<div class="step" id="step-024"><a href="#step-024" style="font-weight:bold">Step 024</a></div>  
+
+Enter the profile name Linux,  and enable Enforcement and Preserve Rules features.
+
+<a href="images/module04_024.png"><img src="images/module04_024.png" style="width:100%;height:100%;"></a>  
+
+
+
+<div class="step" id="step-025"><a href="#step-025" style="font-weight:bold">Step 025</a></div>  
+
+Scroll down and Save the configuration.  
+
+<a href="images/module04_025.png"><img src="images/module04_025.png" style="width:100%;height:100%;"></a>  
+
+
+
+<div class="step" id="step-026"><a href="#step-026" style="font-weight:bold">Step 026</a></div>  
+
+Click Create Intent to begin creating the Windows Agent Config Intent.  
+
+<a href="images/module04_026.png"><img src="images/module04_026.png" style="width:100%;height:100%;"></a>  
+
+
+
+<div class="step" id="step-027"><a href="#step-027" style="font-weight:bold">Step 027</a></div>  
+
+Select to apply the profile that we just created called Windows,  and select to create a new filter.  This will create a new Inventory Filter that we will configure to match on the Windows Operating System.
+
+<a href="images/module04_027.png"><img src="images/module04_027.png" style="width:100%;height:100%;"></a>  
+
+
+<div class="step" id="step-028"><a href="#step-028" style="font-weight:bold">Step 028</a></div>  
+
+Enter Windows for the name,  and enter the query "OS contains MS".  Then save the new filter.  This will match any machines with sensors installed that have "MS" in their Operating System name.  Also notice that the filter already matches inventory items (your number of matched items may differ from the image).  
+
+<a href="images/module04_028.png"><img src="images/module04_028.png" style="width:100%;height:100%;"></a>  
+
+
+
+<div class="step" id="step-029"><a href="#step-029" style="font-weight:bold">Step 029</a></div>  
+
+Make sure the "to filter" field is set to the Windows inventory filter we just created,  and select Save.  We have now applied the new Config Intent.  Any Windows machines matching the inventory filter we created will now have the configuration applied.  
+
+<a href="images/module04_029.png"><img src="images/module04_029.png" style="width:100%;height:100%;"></a>  
+
+
+
+<div class="step" id="step-030"><a href="#step-030" style="font-weight:bold">Step 030</a></div>  
+
+Create a new Config Intent for Linux machines.
+
+<a href="images/module04_030.png"><img src="images/module04_030.png" style="width:100%;height:100%;"></a>  
+
+
+<div class="step" id="step-031"><a href="#step-031" style="font-weight:bold">Step 031</a></div>  
+
+Select to apply the Linux profile that we previously created,  and select Create new filter.
+
+<a href="images/module04_031.png"><img src="images/module04_031.png" style="width:100%;height:100%;"></a>  
+
+
+
+<div class="step" id="step-032"><a href="#step-032" style="font-weight:bold">Step 032</a></div>  
+
+Enter the name Linux and the query "OS contains CentOS".  This will match any machines with sensors installed that are running the CentOS Operating System.  Later we will see how we can add additional OS flavors to this Config Intent.
+
+<a href="images/module04_032.png"><img src="images/module04_032.png" style="width:100%;height:100%;"></a>  
+
+
+
+<div class="step" id="step-033"><a href="#step-033" style="font-weight:bold">Step 033</a></div>  
+
+Ensure that the Inventory Filter we just created called Linux is selected as the "to filter" and Save to apply the Config Intent.  
+
+<a href="images/module04_033.png"><img src="images/module04_033.png" style="width:100%;height:100%;"></a>  
+
+
+---  
 
 | [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](readme.md) | [Continue to the Next Module](../module_03-01/) |

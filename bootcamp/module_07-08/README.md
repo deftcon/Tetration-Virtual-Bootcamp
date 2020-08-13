@@ -21,7 +21,7 @@ Another common place you may find RPC in use is with NFS. You will likely encoun
 ---
 
 
-### Steps for this Module  
+### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Navigate to the nopCommerce App Workspace</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Click on Policy Analysis</a>  
 <a href="#step-003" style="font-weight:bold">Step 003 - Filter on a MISDROPPED: PERMITTED flow</a>  

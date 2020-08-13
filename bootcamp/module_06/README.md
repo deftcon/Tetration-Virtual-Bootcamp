@@ -32,7 +32,7 @@ You will use this diagram when performing the lab that will have you attack a kn
 
 ---
 
-### Steps for this Module  
+### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Navigate to Agent Config</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Edit the Linux Agent Config Intent</a>  
 <a href="#step-003" style="font-weight:bold">Step 003 - Set Forensics to Enabled</a>  

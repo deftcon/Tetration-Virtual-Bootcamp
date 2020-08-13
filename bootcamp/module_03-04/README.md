@@ -12,7 +12,7 @@ Follow the below steps to deploy AWS and Kubernetes as External Orchestrators in
 
 ---
 
-### Steps for this Module  
+### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Navigate to External Orchestrators</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Create New Configuration</a>  
 <a href="#step-003" style="font-weight:bold">Step 003 - Specify AWS Parameters</a>  

@@ -23,7 +23,7 @@ In this module,  we'll define the Scope tree that will be used throughout the re
 
 ---
 
-### Steps for this Module  
+### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Navigate to Scopes</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Create a new scope under the root</a>  
 <a href="#step-003" style="font-weight:bold">Step 003 - Create the Pod scope</a>  

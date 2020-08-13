@@ -22,7 +22,7 @@ When configuring Collection rules, we must first delete the IPv6 and IPv4 rules 
 
 
 ## --- Lab ---
-### Steps for this Module  
+### Steps for this Lab  
 
 Perform the following tasks to configure Collection Rules.  
 

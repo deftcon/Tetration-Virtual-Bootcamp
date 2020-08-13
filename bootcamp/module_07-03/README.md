@@ -11,7 +11,7 @@ In this module, we'll be configuring rules from the Windows IIS and MSSQL server
 
 ---
 
-### Steps for this Module  
+### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Navigate to Applications</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Create a new Workspace</a>  
 <a href="#step-003" style="font-weight:bold">Step 003 - Assign Workspace to nopCommerce Scope</a>  
