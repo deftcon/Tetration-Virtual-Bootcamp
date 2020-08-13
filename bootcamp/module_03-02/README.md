@@ -26,20 +26,19 @@ The Ansible machine is already configured to deploy agents out to the following 
       * Ansible Automation server (itself)
    * Ubuntu 16.04
       * EKS Worker Node
+  
+## --- Lecture Video ---  
+---  
+<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/lectures/Module_03.02__Lecture__Data_Sources__Agents.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Data Sources - Collection Rules :: Lecture Video :: Runtime: 13 mins</a>  
+  
+---  
+  
 
----
-
-
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/03a_agent_installation_manual.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video of demonstrating how to install Tetration sensors manually (this is for demo only - these tasks will not be performed in this module).</a>  
-
-
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/03b_firewalld_ipsets_iptables.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video of demonstrating how to disable firewalld and install ipsets and iptables in linux prior to sensor install (this is for demo only - these tasks will not be performed in this module).</a>  
-
-
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/03c_agent_installation_w_ansible.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video of the tasks being performed to install Tetration sensors using Ansible (tasks covered in this module).</a>  
-
-
----
+## --- Demo Video ---  
+---  
+<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_03.02__Demo__Data_Sources__Agents.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Data Sources - Collection Rules :: Demo Video :: Runtime: 2 mins</a>  
+  
+---  
 
 ### Steps for this Module  
 <a href="#step-001" style="font-weight:bold">Step 001 - Navigate to Agent Config</a>  
