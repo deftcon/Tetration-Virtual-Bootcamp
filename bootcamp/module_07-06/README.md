@@ -206,4 +206,4 @@ Once the time horizon on the chart has caught up to when you enabled Policy Anal
 ---   
 
 
-| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](readme.md) | [Continue to the Next Module]() |
+| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](README.md) | [Continue to the Next Module]() |

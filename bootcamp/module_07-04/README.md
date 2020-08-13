@@ -239,4 +239,4 @@ Click on the Policies tab and notice the new rule that has been created from Ope
 
 ---   
 
-| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](readme.md) | [Continue to the Next Module]() |
+| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](README.md) | [Continue to the Next Module]() |

@@ -415,4 +415,4 @@ In our nopCommerce policy, we have created a rule that allows this security grou
 
 ---   
 
-| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](readme.md) | [Continue to the Next Module]() |
+| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](README.md) | [Continue to the Next Module]() |

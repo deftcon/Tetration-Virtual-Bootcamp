@@ -364,4 +364,4 @@ Ensure that the Inventory Filter we just created called Linux is selected as the
 
 ---  
 
-| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](readme.md) | [Continue to the Next Module](../module_03-01/) |
+| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](README.md) | [Continue to the Next Module](../module_03-01/) |
