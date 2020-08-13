@@ -22,7 +22,6 @@ In this module we will create Inventory Filters that will be used in later modul
 <a href="#step-009" style="font-weight:bold">Step 009 - Create Inventory Filter for Guacamole server</a>  
 <a href="#step-010" style="font-weight:bold">Step 010 - View query results</a>  
 
-
 ---
 
 <div class="step" id="step-001"><a href="#step-001" style="font-weight:bold">Step 001</a></div>  
