@@ -22,7 +22,7 @@ Cisco Tetration is a powerful tool that allows organizations to easily define an
 <a href="#CSV" style="font-weight:bold">Student/Pod-Specific Information - CSV File</a>  
 <a href="#Access" style="font-weight:bold">Access to the Lab Environment - Guacamole</a>  
 <a href="#Integrations" style="font-weight:bold">Integrations with Tetration</a>  
-<a href="#Environment" style="font-weight:bold">Lab Environment</a>  
+<a href="#Environment" style="font-weight:bold">Lab Environment and Diagrams</a>  
 <a href="#Assets" style="font-weight:bold">Lab Assets</a>  
   
 ---  
@@ -142,7 +142,7 @@ Included in this lab are multiple integrations with Tetration, including:
 
 ---
 
-<div class="link" id="Environment"><a href="#Environment" style="font-weight:bold">Lab Environment</a></div>
+<div class="link" id="Environment"><a href="#Environment" style="font-weight:bold">Lab Environment and Diagrams</a></div>
 
 
 The lab environment accompanying this lab guide lives entirely in the cloud. This starts with the Cisco Tetration product itself which is a SaaS product - referred to throughout this lab guide as "TaaS" or "Tetration as a Service". As for the Windows, Linux, and Container-based applications and workloads that make them up, the end-user simulated machines, the ASA firewall that separates the simulated Internet from the simulated corporate environment, the Tetration appliances, and even the web-based proxy that gives you access to the whole thing - that all lives in the public cloud, as well. This was chosen as the most scalable and predictable way to allow this lab to be redistributed freely and ensure that the exact same experience was had by every learner, regardless of where in the world you happened to be. 
