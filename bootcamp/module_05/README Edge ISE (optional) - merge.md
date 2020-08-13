@@ -10,9 +10,9 @@ This diagram depicts the flow of traffic used by various devices to utimately in
 
 ---
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/09a_comissioning_tetration_edge_appliance.mp4" style="font-weight:bold" title="Data Ingest Appliance and ASAv NAT Flow Stiching"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png">Click here to view a video showing the necessary tasks to comission the Tetration Edge appliance to prepare for integration with Cisco ISE (note this is similar to data ingest with nuanced differences).</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/09a_comissioning_tetration_edge_appliance.mp4" style="font-weight:bold" title="Data Ingest Appliance and ASAv NAT Flow Stiching"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Click here to view a video showing the necessary tasks to comission the Tetration Edge appliance to prepare for integration with Cisco ISE (note this is similar to data ingest with nuanced differences).</a>
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/09b_ise_integration.mp4" style="font-weight:bold" title="Data Ingest Appliance and ASAv NAT Flow Stiching"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video showing the necessary tasks to integrate Cisco ISE with Tetration to prepare to support user-based policy in Module 16.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/09b_ise_integration.mp4" style="font-weight:bold" title="Data Ingest Appliance and ASAv NAT Flow Stiching"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video showing the necessary tasks to integrate Cisco ISE with Tetration to prepare to support user-based policy in Module 16.</a>
 
 ---
 

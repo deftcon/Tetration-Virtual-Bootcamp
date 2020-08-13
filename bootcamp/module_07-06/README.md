@@ -7,7 +7,7 @@ In this module we will begin performing Policy Analysis. Policy Analysis is a po
 In this module we will first enable Policy Analysis for each workspace,  and then in each of the sub-sequent modules we will use Policy Analysis to determine the impact of our ruleset and make required changes based on the findings.  
 
 ---
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/17_policy_analysis_global_services.mp4" style="font-weight:bold" title="Policy Analysis - OpenCart Policies"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to perform policy analysis for the Global policy.</a>  
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/17_policy_analysis_global_services.mp4" style="font-weight:bold" title="Policy Analysis - OpenCart Policies"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video of the tasks necessary to perform policy analysis for the Global policy.</a>  
 
 ---
 

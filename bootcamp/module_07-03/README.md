@@ -7,7 +7,7 @@ In this module we will create an Application Workspace for the NopCommerce appli
 In this module, we'll be configuring rules from the Windows IIS and MSSQL servers to the Common Policy workspace to allow communications such as Microsoft RPC, Kerberos, LDAP, DNS, and etc. The rules will be initially discovered by ADM,  and will be created in the Common Policy workspace using the Policy Request functionality described above.  
 
 ---
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/14_policy_creation_adm_clusters_nopcommerce.mp4" style="font-weight:bold" title="nopCommerce ADM & Clusters"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to setup an Workspace, run ADM, configure Clusters, and customize the security Policy for the Windows-based app called nopCommerce.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/14_policy_creation_adm_clusters_nopcommerce.mp4" style="font-weight:bold" title="nopCommerce ADM & Clusters"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video of the tasks necessary to setup an Workspace, run ADM, configure Clusters, and customize the security Policy for the Windows-based app called nopCommerce.</a>
 
 ---
 

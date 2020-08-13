@@ -13,13 +13,13 @@ This diagram depicts the flow of traffic used by various devices to utimately in
 
 ---
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/08a_comissioning_tetration_edge_appliance.mp4" style="font-weight:bold" title="Data Ingest Appliance"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video showing the necessary tasks to comission the Tetration Data Ingest appliance to prepare for integration with ASA and AWS.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/08a_comissioning_tetration_edge_appliance.mp4" style="font-weight:bold" title="Data Ingest Appliance"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video showing the necessary tasks to comission the Tetration Data Ingest appliance to prepare for integration with ASA and AWS.</a>
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/08b_tetration_edge_aws_flow_logs.mp4" style="font-weight:bold" title="AWS VPC Flow Logs"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video showing the necessary tasks to configure AWS VPC Flow Logs to be sent to the Tetration Data Ingest appliance and allow Tetration to see traffic in an AWS VPC other than that which has or speaks to a workload with a Tetration Agent.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/08b_tetration_edge_aws_flow_logs.mp4" style="font-weight:bold" title="AWS VPC Flow Logs"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video showing the necessary tasks to configure AWS VPC Flow Logs to be sent to the Tetration Data Ingest appliance and allow Tetration to see traffic in an AWS VPC other than that which has or speaks to a workload with a Tetration Agent.</a>
 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/08c_data_ingest_asav.mp4" style="font-weight:bold" title="ASAv NAT Flow Stiching"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video showing the necessary tasks to configure the ASAv to send NetFlow to the Tetration Data Ingest appliance and allow Tetration stich NAT'd flows together (note the appliance IPs in the video may differ based on env taken from).</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/08c_data_ingest_asav.mp4" style="font-weight:bold" title="ASAv NAT Flow Stiching"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video showing the necessary tasks to configure the ASAv to send NetFlow to the Tetration Data Ingest appliance and allow Tetration stich NAT'd flows together (note the appliance IPs in the video may differ based on env taken from).</a>
 
 ---  
 

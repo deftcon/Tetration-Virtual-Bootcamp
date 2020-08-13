@@ -4,7 +4,7 @@
 In this module we will perform Policy Analysis for the Common Policy workspace which contains the Active Directory and Ansible server workloads. We will identify any errors in our ruleset that might have caused disruption had we put the workspace into enforcement,  and make corrections as necessary.  
 
 ---
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/18_policy_analysis_common_policy.mp4" style="font-weight:bold" title="Pre-Enforcement Checks"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to perform policy analysis for the Common apps.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/18_policy_analysis_common_policy.mp4" style="font-weight:bold" title="Pre-Enforcement Checks"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video of the tasks necessary to perform policy analysis for the Common apps.</a>
 
 ---
 

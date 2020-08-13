@@ -4,7 +4,7 @@
 Agent Config Intent defines what features will be enabled for a group of sensors.  The Config Intent can be tied to an Inventory Filter, which provides the capability to apply different configurations to different types of hosts.  For example, you could define a profile enabling a specific set of features to all Windows machines,  and a separate profile enabling a different set of features to all Linux machines.  We will see an example of doing just that in the exercise below.  
 
 ---
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/04_agent_config.mp4" style="font-weight:bold" title="Agent Config Intent"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video of the tasks necessary to configure Tetration Agents for Windows and Linux machines.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/04_agent_config.mp4" style="font-weight:bold" title="Agent Config Intent"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video of the tasks necessary to configure Tetration Agents for Windows and Linux machines.</a>
 
 ---
 

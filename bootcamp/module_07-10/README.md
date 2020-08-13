@@ -4,7 +4,7 @@
 
 In this module we will test access to the applications and workloads prior to enabling enforcement to ensure that everything worked as expected prior to enforcement.  Later when we enable enforcement we will re-run these same tests to ensure that the desired intent was achieved. 
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/21_policy_enforcement_pre-enforcement.mp4" style="font-weight:bold" title="Enforcement Policy Tuning"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video of tasks performed to go through a series of pre-enforcement checks prior to taking all workloads into enforcement mode.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/21_policy_enforcement_pre-enforcement.mp4" style="font-weight:bold" title="Enforcement Policy Tuning"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video of tasks performed to go through a series of pre-enforcement checks prior to taking all workloads into enforcement mode.</a>
 
 
 ### Steps for this Module  

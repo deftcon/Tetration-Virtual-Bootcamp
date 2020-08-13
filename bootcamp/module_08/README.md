@@ -6,7 +6,7 @@ In this module we will review key security visibility and monitoring features of
 
 
 ---
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/26_security_visibility_monitoring.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video reviewing the Security and Vulnerability Dashboards.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/26_security_visibility_monitoring.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video reviewing the Security and Vulnerability Dashboards.</a>
 
 ---
 ### Steps for this Module  

@@ -6,16 +6,16 @@ In this module we will configure Collection Rules.  Collection Rules govern what
 When configuring Collection rules, we must first delete the IPv6 and IPv4 rules that are configured by default in a new Tetration deployment. Then we can create our own specific rules to match the internal IP space. In the lab,  we'll assume the customer uses all RFC1918 private address space inside their organization.
 
 
-## --- Lecture Video ---
----
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/lectures/Module_03.01__Lecture__Data_Sources__Collection_Rules.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png">Data Sources - Collection Rules :: Lecture Video :: Runtime: 13 mins</a>  
+## --- Lecture Video ---  
+---  
+<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/lectures/Module_03.01__Lecture__Data_Sources__Collection_Rules.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Data Sources - Collection Rules :: Lecture Video :: Runtime: 13 mins</a>  
   
 ---  
   
 
-## --- Demo Video ---
----
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_03.01__Demo__Data_Sources__Collection_Rules.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png">Data Sources - Collection Rules :: Demo Video :: Runtime: 2 mins</a>  
+## --- Demo Video ---  
+---  
+<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_03.01__Demo__Data_Sources__Collection_Rules.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Data Sources - Collection Rules :: Demo Video :: Runtime: 2 mins</a>  
   
 ---  
   

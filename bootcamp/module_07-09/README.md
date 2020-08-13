@@ -6,7 +6,7 @@ In this module we will perform Policy Analysis for the OpenCart application and 
 
 ---
 <a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/20_policy_analysis_opencart.mp4
-" style="font-weight:bold" title="Enforcement - OpenCart"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video showing the necessary tasks to perform Policy Analysis for the Linux-based OpenCart.</a>
+" style="font-weight:bold" title="Enforcement - OpenCart"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video showing the necessary tasks to perform Policy Analysis for the Linux-based OpenCart.</a>
 
 ---
 

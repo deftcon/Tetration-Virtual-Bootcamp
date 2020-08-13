@@ -8,7 +8,7 @@ Follow the below steps to deploy AWS and Kubernetes as External Orchestrators in
 
 ---
 
-<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/06_external_orchestrators.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_mini.png"> Click here to view a video highlighting the creation of two External Orchestrators providing the ability to drive dynamic policy - namely AWS tags and Kubernetes labels.</a>
+<a href="https://cisco-tetration-hol-content.s3.amazonaws.com/videos/06_external_orchestrators.mp4" style="font-weight:bold" title="Collection Rules Title"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video highlighting the creation of two External Orchestrators providing the ability to drive dynamic policy - namely AWS tags and Kubernetes labels.</a>
 
 ---
 
