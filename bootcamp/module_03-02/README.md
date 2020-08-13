@@ -242,14 +242,14 @@ Agent Config Intent defines what features will be enabled for a group of sensors
 
 Select the Gear icon and select Agent Config.  
 
-<a href="images/module04_019.png"><img src="images/module04_019.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_03-02_019.png"><img src="images/module_03-02_019.png" style="width:100%;height:100%;"></a>  
 
 
 <div class="step" id="step-020"><a href="#step-020" style="font-weight:bold">Step 020</a></div>  
 
 Click Create Profile to being creating an Agent Config Profile that we will apply to Windows machines.
 
-<a href="images/module04_020.png"><img src="images/module04_020.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_03-02_020.png"><img src="images/module_03-02_020.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -261,7 +261,7 @@ Enter the name Windows for the profile name,  and select to enable Enforcement a
 
 > Preserve Rules - When enabled,  this setting will preserve any manually configured firewall rules that might be present on the servers when going into enforcement.  It is common to set this to enabled, such as to preserve any rules that might have been previously configured.
 
-<a href="images/module04_021.png"><img src="images/module04_021.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_03-02_021.png"><img src="images/module_03-02_021.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -275,21 +275,21 @@ Click to enable the following settings and then Save the configuration:
 
 > NOTE: The Auto-Upgrade setting will cause the agents to be upgraded automatically when Tetration code is updated.  It is common to disable this feature in a production environment so that agents can be upgraded in a more controlled manner.
 
-<a href="images/module04_022.png"><img src="images/module04_022.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_03-02_022.png"><img src="images/module_03-02_022.png" style="width:100%;height:100%;"></a>  
 
 
 <div class="step" id="step-023"><a href="#step-023" style="font-weight:bold">Step 023</a></div>  
 
 Select Create Profile to create a new Agent Config Profile for Linux machines.
 
-<a href="images/module04_023.png"><img src="images/module04_023.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_03-02_023.png"><img src="images/module_03-02_023.png" style="width:100%;height:100%;"></a>  
 
 
 <div class="step" id="step-024"><a href="#step-024" style="font-weight:bold">Step 024</a></div>  
 
 Enter the profile name Linux,  and enable Enforcement and Preserve Rules features.
 
-<a href="images/module04_024.png"><img src="images/module04_024.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_03-02_024.png"><img src="images/module_03-02_024.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -297,7 +297,7 @@ Enter the profile name Linux,  and enable Enforcement and Preserve Rules feature
 
 Scroll down and Save the configuration.  
 
-<a href="images/module04_025.png"><img src="images/module04_025.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_03-02_025.png"><img src="images/module_03-02_025.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -305,7 +305,7 @@ Scroll down and Save the configuration.
 
 Click Create Intent to begin creating the Windows Agent Config Intent.  
 
-<a href="images/module04_026.png"><img src="images/module04_026.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_03-02_026.png"><img src="images/module_03-02_026.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -313,14 +313,14 @@ Click Create Intent to begin creating the Windows Agent Config Intent.
 
 Select to apply the profile that we just created called Windows,  and select to create a new filter.  This will create a new Inventory Filter that we will configure to match on the Windows Operating System.
 
-<a href="images/module04_027.png"><img src="images/module04_027.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_03-02_027.png"><img src="images/module_03-02_027.png" style="width:100%;height:100%;"></a>  
 
 
 <div class="step" id="step-028"><a href="#step-028" style="font-weight:bold">Step 028</a></div>  
 
 Enter Windows for the name,  and enter the query "OS contains MS".  Then save the new filter.  This will match any machines with sensors installed that have "MS" in their Operating System name.  Also notice that the filter already matches inventory items (your number of matched items may differ from the image).  
 
-<a href="images/module04_028.png"><img src="images/module04_028.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_03-02_028.png"><img src="images/module_03-02_028.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -328,7 +328,7 @@ Enter Windows for the name,  and enter the query "OS contains MS".  Then save th
 
 Make sure the "to filter" field is set to the Windows inventory filter we just created,  and select Save.  We have now applied the new Config Intent.  Any Windows machines matching the inventory filter we created will now have the configuration applied.  
 
-<a href="images/module04_029.png"><img src="images/module04_029.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_03-02_029.png"><img src="images/module_03-02_029.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -336,14 +336,14 @@ Make sure the "to filter" field is set to the Windows inventory filter we just c
 
 Create a new Config Intent for Linux machines.
 
-<a href="images/module04_030.png"><img src="images/module04_030.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_03-02_030.png"><img src="images/module_03-02_030.png" style="width:100%;height:100%;"></a>  
 
 
 <div class="step" id="step-031"><a href="#step-031" style="font-weight:bold">Step 031</a></div>  
 
 Select to apply the Linux profile that we previously created,  and select Create new filter.
 
-<a href="images/module04_031.png"><img src="images/module04_031.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_03-02_031.png"><img src="images/module_03-02_031.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -351,7 +351,7 @@ Select to apply the Linux profile that we previously created,  and select Create
 
 Enter the name Linux and the query "OS contains CentOS".  This will match any machines with sensors installed that are running the CentOS Operating System.  Later we will see how we can add additional OS flavors to this Config Intent.
 
-<a href="images/module04_032.png"><img src="images/module04_032.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_03-02_032.png"><img src="images/module_03-02_032.png" style="width:100%;height:100%;"></a>  
 
 
 
@@ -359,7 +359,7 @@ Enter the name Linux and the query "OS contains CentOS".  This will match any ma
 
 Ensure that the Inventory Filter we just created called Linux is selected as the "to filter" and Save to apply the Config Intent.  
 
-<a href="images/module04_033.png"><img src="images/module04_033.png" style="width:100%;height:100%;"></a>  
+<a href="images/module_03-02_033.png"><img src="images/module_03-02_033.png" style="width:100%;height:100%;"></a>  
 
 
 ---  
