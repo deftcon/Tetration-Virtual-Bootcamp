@@ -6,11 +6,6 @@ This lab guide has been developed in close coordination with the Cisco Tetration
 
 Cisco Tetration is a powerful tool that allows organizations to easily define and maintain centralized, intent-driven policy, made possible by collecting advanced telemetry with complete visibility of every packet, action, and process happening across every single workload, regardless of floor tile. Whether your workloads live in your own data centers, someone elses such as a CoLo or even public cloud provider, or any combination thereof, Cisco Tetration has you covered.  
 
-
-## --- Lecture Video ---  
----  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/lectures/Module_01.00__Lecture__Introduction_Course_and_Lab_Walkthrough.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Introduction, Course, and Lab Walkthrough :: Lecture Video :: Runtime: 6 mins</a>  
-  
 ---  
 
   
@@ -219,13 +214,7 @@ Your complete lab environment consists of the following assets:
 
 ##### Lab Environment Access
    * Apache Guacamole server (CentOS 7)  
-  
----  
 
-
-## SubModules for Module 01
-[Module 01.01: Defining the Problem](../module_01-01/)    
-[Module 01.02: Positioning Workload Protection](../module_01-02/)  
 
 ---
 
