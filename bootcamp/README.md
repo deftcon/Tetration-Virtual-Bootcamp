@@ -19,4 +19,4 @@
 [Module14: Neighborhood](module_14/)  
 [Module15: Farewell](module_15/)  
 
-This lab is provided using the [GPL-3.0](https://github.com/deftcon/cisco-tetration-hol/blob/master/LICENSE). You may fork this repo and use it mostly as you like, however you must retain the same GPL license, and you must give credit. This lab was created by [Raheel Anwar](https://github.com/raheel-anwar), [Matt Mullen](https://github.com/mamullen13316), and [Mark Snow](https://github.com/highspeedsnow). All video content was created, directed and filmed by Mark Snow.
+This lab is provided using the [GPL-3.0](https://github.com/deftcon/cisco-tetration-hol/blob/master/LICENSE). You may fork this repo and use it mostly as you like, however you must retain the same GPL license, and you must give credit. This lab was created by [Raheel Anwar](https://github.com/raheel-anwar), [Matt Mullen](https://github.com/mamullen13316), and [Mark Snow](https://github.com/highspeedsnow). All video content was created, directed, shot, and edited by Mark Snow.
