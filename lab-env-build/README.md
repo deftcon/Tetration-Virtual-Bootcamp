@@ -1,6 +1,6 @@
 # Cisco Tetration Virtual Bootcamp
 
-## (FIRST right-click above "View on Github" and Open in a new tab/window)
+## (DO FIRST>> right-click above "View on GitHub" and Open in a new tab/window)
  
 ## Lab Environment Deployment
 
@@ -8,13 +8,15 @@ This lab environment build deploys entirely to AWS with the current unique excep
   
 It is REQUIRED that you have your own instance of Tetration, whether On-Prem, Tet-V, or TaaS makes no difference, only that you have one provisioned. This instance of Tetration does not require provisioning prior to the deployment of this lab environment, however this lab environment won't do you much good without Tetration. 
 
-<a href="https://app.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501" style="font-weight:bold">"Complete Lab Diagram"  
+<a href="https://app.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501" style="font-weight:bold" target="_blank">"Complete Lab Diagram"  
 <img src="../bootcamp/diagrams/images/diagrams_003.png"></a>  
 
 
 #### AMIs Required Prior to AWS Lab Environment Deployment
 
 There are a number of AMIs that you will be required to copy from Deft's AWS account in the Ohio region prior to being able to deploy this lab environment to AWS successfully. They are outlined two sub-sections below, along with their AMI IDs, in the "Parameters File Example" section, however we have also added that info here in this sub-section, as well. It will be necessary in some cases to authorize or subscribe to a few of the 14 total EC2 instances that you will launch in order to bring up this environment. Below are listed the 14 AMIs, complete with their colloquial name, AMI ID, a brief description, and screenshots where appropriate to aid in getting setup. 
+
+If the AMIs listed below happen to not be publicly available for copy at the time you attempt to do so, please 
 
 
 ###### These first 7 AMIs only require a simple copy from Deft's AWS Account and are currently available only in the Ohio region:  
@@ -42,23 +44,17 @@ apache_ami: ami-0c85d8851d66cd9f9   # <<  This is for CentOS7 Apache and is a pr
 
 ansible_ami: ami-0083b10a007c92d2d   # << This is for CentOS7 Ansible and is a private image that requires launch from shared AMI, you to Accept Subscription, then create the AM
 
-guacamole_ami: ami-007f96a1ed0595540   # << This is for CentOS7 Guacamole and is a private image that requires launch from shared AMI, you to Accept Subscription, then create the AMI
+eks_worker_ami: ami-0c4c60006aa81c29b   # << Global AWS Marketplace - will change with region - https://cloud-images.ubuntu.com/docs/aws/eks/
+  
+  
+  
+guacamole_ami: ami-007f96a1ed0595540   # << This is for CentOS7 Guacamole and is a private image that requires launch from shared AMI, you to Accept Subscription, then create the AMI.  
 
 <a href="#step-001" style="font-weight:bold">Failed Launch - Navigate to URI and accept subscription:</a>  
 <a href="images/admin_001.png"><img src="images/admin_001.png" style="width:100%;height:100%;"></a>  
   
 
-
 attack_server_ami: ami-04f958d48e22e185c   # << This is for Ubuntu Kali Linux with Metasploit and is a private image that requires launch, you to Accept Subscription, then create the AMI
-
-
-asav_ami: ami-0f3cca6491d987102   # << This is the ASAv, is a region-specific image ID, and requires a subscription from AWS Marketplace (search for ASAv BYOL)
-
-eks_worker_ami: ami-0c4c60006aa81c29b   # << Global AWS Marketplace - will change with region - https://cloud-images.ubuntu.com/docs/aws/eks/
-
-
-
-
 
 
 <div class="step" id="step-002"><a href="#step-002" style="font-weight:bold">Step 002</a></div>  
@@ -69,8 +65,9 @@ eks_worker_ami: ami-0c4c60006aa81c29b   # << Global AWS Marketplace - will chang
 
 <div class="step" id="step-003"><a href="#step-003" style="font-weight:bold">Step 003</a></div>  
 
-<a href="images/admin_003.png"><img src="images/admin_003.png" style="width:100%;height:100%;"></a>  
-  
+<a href="images/admin_003.png"><img src="images/admin_003.png" style="width:100%;height:100%;"></a> 
+
+asav_ami: ami-0f3cca6491d987102   # << This is the ASAv, is a region-specific image ID, and requires a subscription from AWS Marketplace (search for ASAv BYOL)  
 
 
 <div class="step" id="step-004"><a href="#step-004" style="font-weight:bold">Step 004</a></div>  
@@ -386,3 +383,9 @@ Currently there is a limitation that prevents any abilitiy to increment student 
 ##### LICENSE
 
 This lab is provided using the [GPL-3.0](https://github.com/deftcon/Tetration-Bootcamp-Labs/blob/master/LICENSE). You may fork this repo and use it mostly as you like, however you must retain the same GPL license, and you must give credit. This lab was created by [Raheel Anwar](https://github.com/raheel-anwar), [Matt Mullen](https://github.com/mamullen13316), and [Mark Snow](https://github.com/highspeedsnow).
+
+
+---
+
+[Go to Top of Page](README.md)
+
