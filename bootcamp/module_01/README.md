@@ -79,7 +79,7 @@ A list of what you will find in this CSV file is as follows:
 You are highly encouraged open a browser window to this [online CSV/Excel viewer](https://sheet.zoho.com/sheet/excelviewer){:target="_blank"}, drag & drop your CSV/XLS file there, and continue to reference that file throughout your interaction with this lab environment, as seen here in the short video below.
 
 
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_01.00__Demo__01a_online_csv_viewer.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video of interaction with the student CSV and online viewer.</a>
+<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_01.00__Demo__01a_online_csv_viewer.mp4" style="font-weight:bold" target="_blank"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png"> Click here to view a video of interaction with the student CSV and online viewer.</a>
 
 ---
 
@@ -106,7 +106,7 @@ If you do happen to find yourself seemingly *stuck* inside a single host connect
 
 Throughout this lab, there will come times when you must get files from your local workstation over to one of the hosts in your lab environment. The ability to copy files directly to and from the remote desktop or even to any linux shell session can be accomplished quite easily by simply dragging them from your local workstation desktop over to the web browser where Guac is already signed into a remote host and just dropping them there. For Windows or even Ubuntu Desktop this will use the native RDP copy/paste functionality, and for a linux shell session this will seamlessly instantiate a direct SFTP session. No further work is necessary on your part. Note that for Windows files may appear on the desktop or wherever you dragged and released them to. For Linux files will __*always*__ appear in `/home/ciscolab/`, no matter what directory you may be `cd` into. 
 
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_01.00__Demo__01b_guac_user_access.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Click here to view a video of interaction with the student Guacamole webUI console.</a>
+<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_01.00__Demo__01b_guac_user_access.mp4" style="font-weight:bold" target="_blank"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Click here to view a video of interaction with the student Guacamole webUI console.</a>
 
 ---
 
