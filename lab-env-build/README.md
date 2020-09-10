@@ -357,7 +357,7 @@ Currently there is a limitation that prevents any abilitiy to increment student 
 
 ##### LICENSE
 
-This lab is provided using the [GPL-3.0](https://github.com/deftcon/Tetration-Bootcamp-Labs/blob/master/LICENSE). You may fork this repo and use it mostly as you like, however you must retain the same GPL license, and you must give credit. This lab was created by [Raheel Anwar](https://github.com/raheel-anwar), [Matt Mullen](https://github.com/mamullen13316), and [Mark Snow](https://github.com/highspeedsnow). All video content was created, directed, shot, and edited by [Mark](https://www.instagram.com/highspeedsnow){:target="_blank"}.
+This lab is provided using the <a href="https://github.com/deftcon/cisco-tetration-hol/blob/master/LICENSE" target="_blank">GPL-3.0</a>. You may fork this repo and use it mostly as you like, however you must retain the same GPL license, and you must give credit. This lab was created by <a href="https://github.com/raheel-anwar" target="_blank">Raheel Anwar</a>, <a href="https://github.com/mamullen13316" target="_blank">Matt Mullen<a>, and <a href="https://github.com/highspeedsnow" target="_blank">Mark Snow</a>. All video content was created, directed, shot, and edited by <a href="https://www.instagram.com/highspeedsnow" target="_blank">Mark</a>.
 
 
 ---
