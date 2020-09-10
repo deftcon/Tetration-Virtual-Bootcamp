@@ -16,7 +16,7 @@ It is REQUIRED that you have your own instance of Tetration, whether On-Prem, Te
 
 There are a number of AMIs that you will be required to copy from Deft's AWS account in the Ohio region prior to being able to deploy this lab environment to AWS successfully. They are outlined two sub-sections below, along with their AMI IDs, in the "Parameters File Example" section, however we have also added that info here in this sub-section, as well. It will be necessary in some cases to authorize or subscribe to a few of the 14 total EC2 instances that you will launch in order to bring up this environment. Below are listed the 14 AMIs, complete with their colloquial name, AMI ID, a brief description, and screenshots where appropriate to aid in getting setup. 
 
-If the AMIs listed below happen to not be publicly available for copy at the time you attempt to do so, please 
+If the AMIs listed below happen to not be publicly available for copy at the time you attempt to do so, <a href="https://github.com/deftcon/Tetration-Virtual-Bootcamp/issues/1" target="_blank">please open an issue on GitHub similar to this one</a>. 
 
 
 ###### These first 7 AMIs only require a simple copy from Deft's AWS Account and are currently available only in the Ohio region:  
@@ -44,7 +44,7 @@ apache_ami: ami-0c85d8851d66cd9f9   # <<  This is for CentOS7 Apache and is a pr
 
 ansible_ami: ami-0083b10a007c92d2d   # << This is for CentOS7 Ansible and is a private image that requires launch from shared AMI, you to Accept Subscription, then create the AM
 
-eks_worker_ami: ami-0c4c60006aa81c29b   # << Global AWS Marketplace - will change with region - https://cloud-images.ubuntu.com/docs/aws/eks/
+eks_worker_ami: ami-0c4c60006aa81c29b   # << Global AWS Marketplace - will change with region and this link has all possible region-specific AMIs - https://cloud-images.ubuntu.com/docs/aws/eks/
   
   
   
