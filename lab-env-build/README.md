@@ -127,18 +127,7 @@ asav_ami: ami-0f3cca6491d987102   # << This is the ASAv, is a region-specific im
 <div class="step" id="step-013"><a href="#step-013" style="font-weight:bold">Step 013</a></div>  
 
 <a href="images/admin_013.png"><img src="images/admin_013.png" style="width:100%;height:100%;"></a>  
-  
 
-
-<div class="step" id="step-014"><a href="#step-014" style="font-weight:bold">Step 014</a></div>  
-
-<a href="images/admin_014.png"><img src="images/admin_014.png" style="width:100%;height:100%;"></a>  
-  
-
-
-<div class="step" id="step-015"><a href="#step-015" style="font-weight:bold">Step 015</a></div>  
-
-<a href="images/admin_015.png"><img src="images/admin_015.png" style="width:100%;height:100%;"></a>  
   
 
 
@@ -236,11 +225,11 @@ Say you chose `10.0.0.0/16` as your primary range, and `198.18.0.0/16` as your s
 * 10.0.129.0/24  < not used, simply required by AWS
 
 
-> Note that the default subnet value for the secondary range is `198.18.0.0/16` and was chosen specifically becuase it both represented a "real internet, non-RFC1918 IP range", and also that it falls in the *'Reserved'* range, specifically that "This block has been allocated for use in benchmark tests of network interconnect devices" per [RFC5735](https://tools.ietf.org/html/rfc5735). It could initially be argued that a range such as `198.51.100.0/24` or `203.0.113.0/24` would seem more appropos as they were created so that "This block is assigned as "TEST-NET-2/3" for use in documentation and example code", but they weren't large enough (/24), so the decision was made soundly to provide a real-world-like environment whilst simultaneously avoiding any blackholing any legitimate internet traffic from within the lab environment. 
+> Note that the default subnet value for the secondary range is `198.18.0.0/16` and was chosen specifically becuase it both represented a "real internet, non-RFC1918 IP range", and also that it falls in the *'Reserved'* range, specifically that "This block has been allocated for use in benchmark tests of network interconnect devices" per [RFC5735](https://tools.ietf.org/html/rfc5735){:target="_blank"}. It could initially be argued that a range such as `198.51.100.0/24` or `203.0.113.0/24` would seem more appropos as they were created so that "This block is assigned as "TEST-NET-2/3" for use in documentation and example code", but they weren't large enough (/24), so the decision was made soundly to provide a real-world-like environment whilst simultaneously avoiding any blackholing any legitimate internet traffic from within the lab environment. 
 
 Here is a diagram that will help to explain the subnets described above in a bit better visual detail: 
 ![Subnet Diagram](../bootcamp/diagrams/images/diagrams_003.png)
-More can be found [in the Diagrams section](../bootcamp/diagrams/).
+More can be found [in the Diagrams section](../bootcamp/diagrams/){:target="_blank"}.
 
 
 #### IAM Role API Credentials - Scope and Permissions
