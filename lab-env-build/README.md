@@ -116,22 +116,8 @@ asav_ami: ami-0f3cca6491d987102   # << This is the ASAv, is a region-specific im
 
 <a href="images/admin_011.png"><img src="images/admin_011.png" style="width:100%;height:100%;"></a>  
   
-
-
-<div class="step" id="step-012"><a href="#step-012" style="font-weight:bold">Step 012</a></div>  
-
-<a href="images/admin_012.png"><img src="images/admin_012.png" style="width:100%;height:100%;"></a>  
   
-
-
-<div class="step" id="step-013"><a href="#step-013" style="font-weight:bold">Step 013</a></div>  
-
-<a href="images/admin_013.png"><img src="images/admin_013.png" style="width:100%;height:100%;"></a>  
-
   
-
-
-
 #### Files Required to Deploy to AWS
 
 Deployment of the environment for lab pod(s) requires the use of three files - namely: `parameters.yml`, `cisco-hol-pod-cft-template.yml`, and `launch.py`. 
