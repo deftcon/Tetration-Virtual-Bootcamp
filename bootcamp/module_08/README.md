@@ -320,5 +320,4 @@ Here you can configure alert destinations for each type of alert.  The internal 
 
 ---   
 
-
-| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](README.md) | [Continue to the Next Module](../module_09/) |
+[Go to Top of Page](README.md)

@@ -28,17 +28,6 @@ The Ansible machine is already configured to deploy agents out to the following 
       * EKS Worker Node
   
 
-## --- Lecture Video ---  
----  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/lectures/Module_03.02__Lecture__Data_Sources__Agents.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Data Sources - Agents :: Lecture Video :: Runtime: 58 mins</a>  
-  
----  
-  
-
-## --- Demo Video ---  
----  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_03.02__Demo__Data_Sources__Agents.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Data Sources - Agents :: Demo Video :: Runtime: 11 mins</a>  
-  
 ---  
 
 ## --- Lab :: Agent Deployment via Ansible ---  
@@ -364,4 +353,4 @@ Ensure that the Inventory Filter we just created called Linux is selected as the
 
 ---  
 
-| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](README.md) | [Continue to the Next Module](../module_03-03/) |
+[Go to Top of Page](README.md)

@@ -295,5 +295,4 @@ Open a web browser once again to the Sock Shop public URL and refresh the page. 
 
 ---   
 
-
-| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](README.md) | [Continue to the Next Module](../module_08/) |
+[Go to Top of Page](README.md)

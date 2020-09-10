@@ -262,4 +262,4 @@ Attempt a connection from the Apache web server to the IIS web server using the 
 ---   
 
 
-| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](README.md) | [Continue to the Next Module](../module_07-14/) |
+[Go to Top of Page](README.md)

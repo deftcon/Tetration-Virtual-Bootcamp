@@ -241,5 +241,4 @@ Examine the other alarms that were generated. These show the initial access wher
 
 ---   
 
-
-| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](README.md) | [Continue to the Next Module](../module_07/) |
+[Go to Top of Page](README.md)

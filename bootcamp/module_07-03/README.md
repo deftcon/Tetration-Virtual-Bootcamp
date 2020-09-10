@@ -359,4 +359,4 @@ Switch Application and go back to the nopCommerce Application Workspace.  Select
 
 ---   
 
-| [Return to Table of Contents](https://tetration.guru/bootcamp/) | [Go to Top of the Page](README.md) | [Continue to the Next Module](../module_07-04/) |
+[Go to Top of Page](README.md)
