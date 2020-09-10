@@ -1,5 +1,6 @@
 # Cisco Tetration Virtual Bootcamp
 
+## (FIRST right-click above "View on Github" and Open in a new tab/window)
  
 ## Lab Environment Deployment
 
