@@ -14,13 +14,6 @@ In this lab diagram, Employees get standard access to the app front-ends and no 
 In this lab diagram, SysAdmins not only get standard access to the app front-ends, but they also gain RDP and/or SSH access to each app's frontend workload as well as the backend databases, so that they can properly perform necessary administration.
 
 <a href="https://www.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501" target="_blank"><img src="../diagrams/images/diagrams_012.png" style="width:100%;height:100%;"></a>  
-
-
----   
-
-## --- Demo Video ---  
----  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_07.05__Demo__Segmentation__User-Based_Policy.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Segmentation - User-Based Policy :: Demo Video :: Runtime: 5 mins</a>  
   
 ---  
 

@@ -5,17 +5,6 @@
 In this module we will begin creating policies that will apply across all of the applications. We will accomplish this by creating an Application Workspace called Global Services and associating it with the Cloud Scope. The remaining Application Workspaces will be assigned to child scopes of the Cloud scope, and therefore will inherit the policies that we define in the Global Services workspace.  There are two types of policies that can be created; Default or Absolute.  Default policies can be overridden by rules in application workspaces that are defined at a lower level of the scope tree.  For example,  if we defined Default policies in Global Services, an administrator of an application workspace that is associated with a child of the Cloud scope could create Default policies that override the policy we created in Global Services.  Absolute policies cannot be overridden by policies defined in workspaces that are associated with child scopes.  This allows a security administrator to set a broad policy at a higher level of the scope tree, such as "Dev app can't talk to Prod database",  and that policy cannot be accidentally or purposely overridden in a child workspace.
 
 In this module we'll be creating Absolute policies in the Global Services application workspace to permit common traffic that will apply across all applications.   
-
-## --- Lecture Video ---  
----  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/lectures/Module_07.01__Lecture__Segmentation__ADM_Policy_Analysis_and_Enforcement.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Segmentation - ADM, Policy Analysis, and Enforcement :: Lecture Video :: Runtime: 2 hrs 14 mins</a>  
-  
----  
-  
-
-## --- Demo Video ---  
----  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_07.01__Demo__Segmentation__Hierarchical_Policy_Global.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Segmentation - Hierarchical Policy - Global :: Demo Video :: Runtime: 10 mins</a>  
   
 ---  
 

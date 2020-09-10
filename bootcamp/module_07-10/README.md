@@ -3,12 +3,6 @@
 ## Module 07.10  Segmentation - Enforcement - Pre Enforcement Checks
 
 In this module we will test access to the applications and workloads prior to enabling enforcement to ensure that everything worked as expected prior to enforcement.  Later when we enable enforcement we will re-run these same tests to ensure that the desired intent was achieved. 
-
----   
-
-## --- Demo Video ---  
----  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_07.10__Demo__Segmentation__Enforcement_Pre_Enforcement_Checks.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Segmentation - Enforcement - Pre Enforcement Checks :: Demo Video :: Runtime: 7 mins</a>  
   
 ---  
 

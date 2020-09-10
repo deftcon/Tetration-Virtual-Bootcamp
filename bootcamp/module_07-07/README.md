@@ -3,12 +3,6 @@
 ## Module 07.07  Segmentation - Policy Analysis - Common Services
 In this module we will perform Policy Analysis for the Common Policy workspace which contains the Active Directory and Ansible server workloads. We will identify any errors in our ruleset that might have caused disruption had we put the workspace into enforcement,  and make corrections as necessary.  
 
-
----   
-
-## --- Demo Video ---  
----  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_07.07__Demo__Segmentation__Policy_Analysis_Common_Services.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Segmentation - Policy Analysis - Common  Services :: Demo Video :: Runtime: 9 mins</a>  
   
 ---  
 

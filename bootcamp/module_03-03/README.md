@@ -6,17 +6,6 @@ Annotations are metadata that can be associated with endpoint IP addresses that 
 In this module,  we'll configure Static Annotations for the endpoints in the lab environment.  Static Annotations are manually configured by the Tetration administrator by uploading a .CSV file,  or alternatively by configuring one at a time using the Assign Annotations wizard from the Inventory Upload screen.  Annotations can also be populated from external sources,  such as tags in VMware and AWS.  External annotations will be covered in the next section covering External Orchestrators.
 
 
-## --- Lecture Video ---  
----  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/lectures/Module_03.03__Lecture__Data_Sources__Annotations.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Data Sources - Annotations :: Lecture Video :: Runtime: 58 mins</a>  
-  
----  
-  
-
-## --- Demo Video ---  
----  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_03.03__Demo__Data_Sources__Annotations.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Data Sources - Annotations :: Demo Video :: Runtime: 3 mins</a>  
-  
 ---  
 
 ## --- Lab ---

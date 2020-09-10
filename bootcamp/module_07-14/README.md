@@ -3,12 +3,6 @@
 ## Module 07.14  Segmentation - Enforcement - Containers
 
 In this module we will configure the policies and enable enforcement on a microservices web application running in Amazon EKS.  Amazon Elastic Kubernetes Service (EKS) provides a Kubernetes master controller and worker node(s) to deploy containerized applications.  During the lab build process, an EKS cluster was brought up and the application was deployed into Kubernetes.  In this module, we will create an application workspace for the microservices application and define the clusters based on queries using the Kubernetes labels that were configured as part of the application deployment, and that are being brought into Tetration via the External Orchestrator configuration that we performed in <a href="">Module 6</a>. We will then create the policies needed to secure traffic between the multiple tiers of the application,  and enable enforcement.  Finally,  we will test to make sure the application is still functioning once moving into enforcement.  
-
----   
-
-## --- Demo Video ---  
----  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_07.14__Demo__Segmentation__Enforcement_Containers.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Segmentation - Enforcement - Containers :: Demo Video :: Runtime: 19 mins</a>  
   
 ---  
 

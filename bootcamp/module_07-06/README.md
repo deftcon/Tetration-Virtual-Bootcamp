@@ -5,12 +5,6 @@
 In this module we will begin performing Policy Analysis. Policy Analysis is a powerful feature of Tetration that allows you to determine what the impact of implementing a ruleset would be based on current and historical traffic flows. Policy Analysis is helpful prior to initially enabling enforcement, as well as to gauge the impact of ongoing policy changes.  It greatly reduces the chances of creating business-impacting outages caused by missing or incorrect policy rules, and decreases the need to roll back ruleset changes.  Implemented policies are also versioned, and rollback to a previous policy can be done easily if needed.
 
 In this module we will first enable Policy Analysis for each workspace,  and then in each of the sub-sequent modules we will use Policy Analysis to determine the impact of our ruleset and make required changes based on the findings.  
-
----   
-
-## --- Demo Video ---  
----  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_07.06__Demo__Segmentation__Policy_Analysis_Global_Services.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Segmentation - Policy Analysis - Global Services :: Demo Video :: Runtime: 8 mins</a>  
   
 ---  
 

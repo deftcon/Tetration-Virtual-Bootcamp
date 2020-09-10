@@ -16,17 +16,6 @@ In this tree structure, the Pod matches our annotation PodSubnet=internal which 
 
 In this module,  we'll define the Scope tree that will be used throughout the rest of the lab exercises.  
 
-
-## --- Lecture Video ---  
----  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/lectures/Module_04.00__Lecture__Scopes.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Scopes :: Lecture Video :: Runtime: 1 hr 8 mins</a>  
-  
----  
-  
-
-## --- Demo Video ---  
----  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_04.00__Demo__Scopes.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Scopes :: Demo Video :: Runtime: 5 mins</a>  
   
 ---  
 

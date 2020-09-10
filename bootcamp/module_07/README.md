@@ -5,21 +5,9 @@
 Inventory Filters provide a way to describe a group of endpoints as an object for easy  identification when used within policy and other areas of the system. For example, earlier in the lab when creating Agent Config Intents we created Inventory Filters that matched all Windows and Linux machines by matching on the Operating System.  This was done by creating a query that matched on the Operating System reported by the agent.  Inventory Filter queries can match on annotations, tags being received from the various External Orchestrators, inventory characteristics such as Operating System,  or security characteristics such as CVE score. This allows the administrator great flexibility when building policy.  
 
 In this module we will create Inventory Filters that will be used in later modules to build our policies.   
-
-
-## --- Lecture Video ---  
----  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/lectures/Module_07.00__Lecture__Segmentation__Inventory_Filters.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Segmentation - Inventory Filters :: Lecture Video :: Runtime: 9 mins</a>  
   
 ---  
   
-
-## --- Demo Video ---  
----  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_07.00__Demo__Segmentation__Inventory_Filters.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Segmentation - Inventory Filters :: Demo Video :: Runtime: 2 mins</a>  
-  
----  
-
 ## --- Lab ---
 ### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Navigate to Inventory Filters</a>  

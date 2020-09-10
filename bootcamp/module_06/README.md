@@ -26,19 +26,6 @@ You will use this diagram when performing the lab that will have you attack a kn
 <a href="https://www.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501" target="_blank"><img src="../diagrams/images/diagrams_010.png" style="width:100%;height:100%;"></a>  
 
 
----
-
-## --- Lecture Video ---  
----  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/lectures/Module_06.00__Lecture__ATTACK_and_Forensic_Analysis.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Connectors :: Lecture Video :: Runtime: 42 mins</a>  
-  
----  
-  
-
-## --- Demo Video ---  
----  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_06.00__Demo__ATTACK_and_Forensic_Analysis.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Data Sources - Agents :: Demo Video :: Runtime: 8 mins</a>  
-  
 ---  
 
 ## --- Lab ---  

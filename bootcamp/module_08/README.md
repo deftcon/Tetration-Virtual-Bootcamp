@@ -4,17 +4,6 @@
 
 In this module we will review key security visibility and monitoring features of Tetration such as the Security dashboard, Vulnerability dashboard, and others. We'll also investigate configuration of Alert triggers and the multiple alert destinations that can be configured.   
 
-
-## --- Lecture Video ---  
----  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/lectures/Module_08.00__Lecture__CVE_Detection_Visibility_and_Monitoring.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">CVE Detection, Visibility, and Monitoring :: Lecture Video :: Runtime: 26 mins</a>  
-  
----  
-  
-
-## --- Demo Video ---  
----  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_08.00__Demo__CVE_Detection_Visibility_and_Monitoring.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">CVE Detection, Visibility, and Monitoring :: Demo Video :: Runtime: 10 mins</a>  
   
 ---  
 

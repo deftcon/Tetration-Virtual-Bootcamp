@@ -3,12 +3,6 @@
 ## Module 07.04  Segmentation - ADM - Linux App
 
 In this module we will create an Application Workspace for the OpenCart application which consists of a Linux server running Apache web server as the front end talking to a Linux server running MySQL for the back-end database.  We will run ADM,  change the cluster queries,  and tune the discovered policies as needed.  We will also accept any Policy Requests made from the OpenCart application workspace to the Common Policy workspace.  
-
----   
-
-## --- Demo Video ---  
----  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_07.04__Demo__Segmentation__ADM_Linux_App.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Segmentation - ADM - Linux App :: Demo Video :: Runtime: 6 mins</a>  
   
 ---  
 

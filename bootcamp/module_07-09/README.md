@@ -3,12 +3,6 @@
 ## Module 07.09  Segmentation - Policy Analysis - Linux App
 
 In this module we will perform Policy Analysis for the OpenCart application and adjust policy as necessary based on the results. We will also run an Experiment which analyzes the current policy against historical flows that occurred during a specified time range. This can be useful to see what the policy results would have been over a period of weeks or even months based on the traffic observed during that time frame, even before Policy Analysis was enabled for the application.  
-
----   
-
-## --- Demo Video ---  
----  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_07.09__Demo__Segmentation__Policy_Analysis_Linux_App.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Segmentation - Policy Analysis - Linux App :: Demo Video :: Runtime: 2 mins</a>  
   
 ---  
 

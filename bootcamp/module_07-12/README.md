@@ -3,12 +3,6 @@
 ## Module 07.12  Segmentation - Enforcement - Windows App
 
 In this module we will enable enforcement on the nopCommerce application workspace. First we will review the current policies in place on the IIS web server, and will come back to review the policies after enabling enforcement. Once in enforcement, we'll resolve a common error that can occur when using the Preserve Rules feature.  Then we will test the application, as well as test the user-based policy that was created based on ISE Security Group tags in <a href="">Module 16</a>  
-
----   
-
-## --- Demo Video ---  
----  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_07.12__Demo__Segmentation__Enforcement_Windows_App.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Segmentation - Enforcement - Windows App :: Demo Video :: Runtime: 10 mins</a>  
   
 ---  
 

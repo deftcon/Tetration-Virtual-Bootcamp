@@ -12,12 +12,6 @@ Another common place you may find RPC in use is with NFS. You will likely encoun
 
 <a href="https://www.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501" target="_blank"><img src="../diagrams/images/diagrams_009.png" style="width:100%;height:100%;"></a>  
 
-
----   
-
-## --- Demo Video ---  
----  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_07.08__Demo__Segmentation__Policy_Analysis_Windows_App.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Segmentation - Policy Analysis - Windows App :: Demo Video :: Runtime: 5 mins</a>  
   
 ---  
 

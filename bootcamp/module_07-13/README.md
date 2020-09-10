@@ -3,12 +3,6 @@
 ## Module 07.13  Segmentation - Enforcement - Linux App
 
 In this module we will enable enforcement for the OpenCart application.  We will review the deployed policies both before and after enabling enforcement to compare the results,  and then once in enforcement test access to the application.  We will also test the user-based policy as defined in <a href="">Module 16</a> 
-
----   
-
-## --- Demo Video ---  
----  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_07.13__Demo__Segmentation__Enforcement_Linux_App.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Segmentation - Enforcement - Linux App :: Demo Video :: Runtime: 7 mins</a>  
   
 ---  
 

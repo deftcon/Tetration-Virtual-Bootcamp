@@ -5,12 +5,6 @@
 In this module we will create an Application Workspace for the NopCommerce application which consists of an IIS web server and a MS-SQL database server. We will first run ADM, and then adjust the discovered cluster queries to use AWS tags. Then we will refine the discovered policies.  We will also take a look at Policy Requests. When policies are created that allow a cluster in one application workspace to talk to a cluster in a different application workspace, policies must be created in both workspaces to allow the communication.  Policy requests are a way to notify the administrator of the other workspace that matching policies need to be created.  The administrator must then go into the other workspace and accept the policy requests.  By accepting the requests,  the rules are automatically created in the other workspace.  Auto-pilot rules can also be set up to automatically accept any incoming policy requests to an application workspace.
 
 In this module, we'll be configuring rules from the Windows IIS and MSSQL servers to the Common Policy workspace to allow communications such as Microsoft RPC, Kerberos, LDAP, DNS, and etc. The rules will be initially discovered by ADM,  and will be created in the Common Policy workspace using the Policy Request functionality described above.  
-
----   
-
-## --- Demo Video ---  
----  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_07.03__Demo__Segmentation__ADM_Windows_App.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Segmentation - ADM - Windows App :: Demo Video :: Runtime: 18 mins</a>  
   
 ---  
 

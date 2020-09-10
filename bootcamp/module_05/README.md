@@ -4,18 +4,6 @@
 
 ---
 
-## --- Lecture Video ---  
----  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/lectures/Module_05.00__Lecture__Connectors.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Connectors :: Lecture Video :: Runtime: 29 mins</a>  
-  
----  
-  
-
-## --- Demo Video ---  
----  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_05.00__Demo__Connectors.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Connectors :: Demo Video :: Runtime: 28 mins</a>  
-  
----  
 
 ## --- Lab :: AWS VPC Flow Logs ---
 ### Steps for this Lab  

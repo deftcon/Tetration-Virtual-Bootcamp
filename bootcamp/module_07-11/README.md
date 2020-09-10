@@ -3,13 +3,7 @@
 ## Module 07.11  Segmentation - Enforcement - Global and Common
 
 In this module we will enable Enforcement on the Global Services and Common Policies application workspaces. This will cause rules to be generated on the hosts in Windows Firewall in the case of Windows and iptables on the Linux hosts. 
-
----   
-
-## --- Demo Video ---  
----  
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_07.11__Demo__Segmentation__Enforcement_Global_and_Common.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Segmentation - Enforcement - Global and Common :: Demo Video :: Runtime: 5 mins</a>  
-  
+    
 ---  
 
 ## --- Lab ---
