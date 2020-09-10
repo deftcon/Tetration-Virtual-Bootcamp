@@ -26,22 +26,9 @@ Cisco Tetration is a powerful tool that allows organizations to easily define an
 
 This lab is structured in a way that allows the learner to follow along a consistent path on the journey of designing and configuring Cisco Tetration to an effective working state. Throughout this guide, each module will begin with a video that walks through every task that the learner will accomplish. Following the video, screenshots along with instructions will highlight the important steps that the learner is intended to perform. It is important to note that while the screens should appear quite consistent with what the learner will experience in their own environment, the *values* input into those screens, such as IP addresses and even perhaps AWS regions may (and will likely, though not always) be quite different than those seen in the videos and accompanying screenshots. While hostnames are not usually very important in this lab, for the most part they should remain the same, with the possible exception of ISE. 
 
-It's almost time to get started on the lab, and that warrants a very brief discussion on how to get the most out of using this lab guide. In every module you will find three essential sections, namely:
+Before continuing on it is worth noting that from here on out it is assumed that a proctor or bootcamp instructor has provisioned <a href="https://www.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501" target="_blank">your lab environment (consisting of three applications and supporting servers)</a> along with either an instance of TaaS, or a tenant in a full Tetration or Tet-V cluster, which is not currently provisioned at the time of provisioning your lab environment, but which the proctor should have ready for you. 
 
-1. Introduction and Background
-2. Video of Tasks Being Performed
-3. Tasks, Instructions, and Screenshots to Perform Tasks
-
-This image shows the three sections for a given module:
-
-<a href="images/module01_004.png"><img src="images/module01_004.png" style="width:100%;height:100%;"></a>  
-
-
-We highly recommend having a quick read on the intro, then possibly a quick watch of the video, followed by beginning to perform the tasks yourself in your own instance of TaaS. However, you may find it more advantageous to go ahead and begin following the instructions and performing the tasks yourself with the aid of the screenshots once you've reviewed the intro. Should you choose this method, you may at times find it nice to watch along as someone performs those tasks with you. To accomplish this you can choose to use the 'picture-in-picture' method which allows you to watch the video while you simultaneously perform the necessary tasks in TaaS. For this we highly recommend using [Google Chrome](https://www.google.com/chrome/){:target="_blank"} for the best browsing experience.
-
-To use this method, simply click on the video you wish to watch, pause the video, click the virtical elipses at the bottom right of the player, click "Picture in Picture", switch to the browser tab or window logged into TaaS, resize as desired, unpause, and begin your task while watching along as we perform the same task. Pause as desired. Scrubbing the playhead to Rewind is only supported by going back full screen, although once you get the hang of it you should be able to do this rather quickly, when needed. 
-
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/demos/Module_01.00__Demo__01c_pip_w_taas.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp/diagrams/images/video_icon_small.png">Click here to watch a short video on how to perform tasks with picture-in-picture video.</a>
+If you are _not_ part of a formal bootcamp yet are wishing indeed to complete this lab, you will need to <a href="https://learningnetwork.cisco.com/s/learning-plan-detail-standard?ltui__urlRecordId=a1c3i000000koWxAAI&ltui__urlRedirect=learning-plan-detail-standard" target="_blank">take a quick detour over here</a> to learn how to clone this git repo -this website is served up along side the lab code- and spin up an environment for yourself. It's quite simple and after cloning some AMIs to your own VPC, you'll change a small parameters file and run a python script that will launch everything into your private AWS VPC, allowing connections back to your instance of Tetration, wherever that may be.
 
 ---
 
