@@ -1,0 +1,34 @@
+
+ldap_ami:
+  id: ami-0f7a08583b3138159
+  name: cisco-hol-cisco-student-00-ec2-active-directory-win-2019-us-east-2a
+mssql_ami: 
+  id: ami-09782396834215732
+  name: cisco-hol-ami-mssql-win-server-2019-final
+iis_ami: 
+  id: ami-091df3f67b36e2250
+  name: cisco-hol-ami-iis-win-server-2019-final
+tet_data_ami: 
+  id: ami-0cf7fd4e75d7d91ab
+  name: cisco-hol-ami-tet-data-ingest-centos7-final
+tet_edge_ami:
+  id: ami-05d08946ffda72d18
+  name: cisco-hol-ami-tet-edge-centos7-final
+employee_sysadmin_ubuntu_ami: 
+  id: ami-043ee92c2ee3ca98f
+  name: cisco-hol-ami-employee-sysadmin-ubuntu-1804-final
+attack_server_ami: 
+  id: ami-04f958d48e22e185c
+  name:  cisco-hol-ami-attacker-kali-debian-final
+guacamole_ami:
+  id: ami-007f96a1ed0595540
+  name: cisco-hol-ami-guacamole-centos7-final
+mysql_ami: 
+  id: ami-051ba5822fc02da4b
+  name: cisco-hol-ami-mysql-centos7-final
+apache_ami: 
+  id: ami-0c85d8851d66cd9f9 
+  name: cisco-hol-ami-apache-http-centos7-final
+ansible_ami: 
+  id: ami-0083b10a007c92d2d 
+  name: cisco-hol-ami-ansible-centos7-final

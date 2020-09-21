@@ -14,41 +14,38 @@ It is REQUIRED that you have your own instance of Tetration, whether On-Prem, Te
 
 #### AMIs Required Prior to AWS Lab Environment Deployment
 
-There are a number of AMIs that you will be required to copy from Deft's AWS account in the Ohio region prior to being able to deploy this lab environment to AWS successfully. They are outlined two sub-sections below, along with their AMI IDs, in the "Parameters File Example" section, however we have also added that info here in this sub-section, as well. It will be necessary in some cases to authorize or subscribe to a few of the 14 total EC2 instances that you will launch in order to bring up this environment. Below are listed the 14 AMIs, complete with their colloquial name, AMI ID, a brief description, and screenshots where appropriate to aid in getting setup. 
+There are a number of AMIs that will be copied from Deft's AWS account in the Ohio region prior to being able to deploy this lab environment to AWS successfully.  
 
-If the AMIs listed below happen to not be publicly available for copy at the time you attempt to do so, <a href="https://github.com/deftcon/Tetration-Virtual-Bootcamp/issues/1" target="_blank">please open an issue on GitHub similar to this one</a>. 
+From the AWS Console,  navigate to the EC2 service and select Images.  If the AMIs listed below happen to not be listed when you select "Private Images", <a href="https://github.com/deftcon/Tetration-Virtual-Bootcamp/issues/1" target="_blank">please open an issue on GitHub similar to this one</a>. 
+  
+ldap_ami: ami-0f7a08583b3138159     
+mssql_ami: ami-09782396834215732
+iis_ami: ami-091df3f67b36e2250  
+tet_data_ami: ami-0cf7fd4e75d7d91ab
+tet_edge_ami: ami-05d08946ffda72d18  
+employee_ubuntu_ami: ami-0af925e340025c9f9
+sysadmin_ubuntu_ami: ami-0af925e340025c9f9  
+mysql_ami: ami-051ba5822fc02da4b   
+apache_ami: ami-0c85d8851d66cd9f9  
+ansible_ami: ami-0083b10a007c92d2d  
+guacamole_ami: ami-007f96a1ed0595540 
+attack_server_ami: ami-04f958d48e22e185c
+mysql_ami: ami-051ba5822fc02da4b
+
+Before several of the images above can be launched in your account, you must Subscribe to use them in AWS Marketplace.  Please follow the links below and proceed to "Continue to Subscribe".  If this is not done first,  the sub-sequent script to copy the AMIs to your account will fail. 
+
+https://aws.amazon.com/marketplace/pp?sku=89bab4k3h9x4rkojcm2tj8j4l
+https://aws.amazon.com/marketplace/pp?sku=aw0evgkw8e5c1q413zgy5pjce
+
+INSERT TEXT FOR RUNNING THE AMI COPY SCRIPT HERE
 
 
-###### These first 7 AMIs only require a simple copy from Deft's AWS Account and are currently available only in the Ohio region:  
-  
-ldap_ami: ami-0b416df717b448667   # << This is for MS Active Directory and is a private image that requires a simple copy  
-  
-mssql_ami: ami-09782396834215732   # << This is for MS Win19 SQL and is a private image that requires a simple copy  
-  
-iis_ami: ami-091df3f67b36e2250   # << This is for MS Win19 IIS and is a private image that requires a simple copy  
-  
-tet_data_ami: ami-0cf7fd4e75d7d91ab   # << This is the Tetration Data Ingest appliance and is a private image that requires a simple copy  
-  
-tet_edge_ami: ami-05d08946ffda72d18   # << This is the Tetration Edge appliance and is a private image that requires a simple copy  
-  
-employee_ubuntu_ami: ami-0af925e340025c9f9   # << This is the Ubuntu 18.04 desktop image for both Employee and SysAdmin and is a private image that requires a simple copy  
-  
-sysadmin_ubuntu_ami: ami-0af925e340025c9f9   # << Simple AMI copy (same AMI ID as Employee just above)  
-  
-  
-###### These next 4 AMIs require copying, launching (which will fail as seen in screenshot below), accepting the subscription from the AWS Marketplace, then booting again. You may need to create an AMI image from each of your 4 booted instances and use that new AMI ID, replacing it in this file for all subsequent uses. This only requires performing on the very first launch. On subsequent launches this will not be required.  
 
-mysql_ami: ami-051ba5822fc02da4b   # <<  This is for CentOS7 MySQL and is a private image that requires launch from shared AMI, you to Accept Subscription, then create the AMI
-
-apache_ami: ami-0c85d8851d66cd9f9   # <<  This is for CentOS7 Apache and is a private image that requires launch from shared AMI, you to Accept Subscription, then create the AMI
-
-ansible_ami: ami-0083b10a007c92d2d   # << This is for CentOS7 Ansible and is a private image that requires launch from shared AMI, you to Accept Subscription, then create the AM
 
 eks_worker_ami: ami-0c4c60006aa81c29b   # << Global AWS Marketplace - will change with region and this link has all possible region-specific AMIs - https://cloud-images.ubuntu.com/docs/aws/eks/
+
+
   
-  
-  
-guacamole_ami: ami-007f96a1ed0595540   # << This is for CentOS7 Guacamole and is a private image that requires launch from shared AMI, you to Accept Subscription, then create the AMI.  
 
 <a href="#step-001" style="font-weight:bold">Failed Launch - Navigate to URI and accept subscription:</a>  
 <a href="images/admin_001.png"><img src="images/admin_001.png" style="width:100%;height:100%;"></a>  
