@@ -44,7 +44,7 @@ apache_ami: ami-0c85d8851d66cd9f9   # <<  This is for CentOS7 Apache and is a pr
 
 ansible_ami: ami-0083b10a007c92d2d   # << This is for CentOS7 Ansible and is a private image that requires launch from shared AMI, you to Accept Subscription, then create the AM
 
-eks_worker_ami: ami-0c4c60006aa81c29b   # << Global AWS Marketplace - will change with region and this link has all possible region-specific AMIs - https://cloud-images.ubuntu.com/docs/aws/eks/
+eks_worker_ami: ami-0c4c60006aa81c29b   # << Global AWS Marketplace - will change with region and <a href="https://cloud-images.ubuntu.com/docs/aws/eks/" target="_blank">this link has all possible region-specific AMIs</a>.
   
   
   
