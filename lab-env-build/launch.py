@@ -13,9 +13,13 @@ import urllib
 from datetime import datetime
 
 PARAMETERS_FILE = './parameters.yml'
-CFT_POD_FILE = './cisco-hol-pod-cft-template.yml'
 
 params = yaml.load(open(PARAMETERS_FILE), Loader=yaml.Loader)
+
+if 'vpc_id' in params:
+    CFT_POD_FILE = './cisco-hol-pod-cft-template-existvpc.yml'
+else:
+    CFT_POD_FILE = './cisco-hol-pod-cft-template-newvpc.yml'
 
 
 ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY_ID')
@@ -30,8 +34,10 @@ if SECRET_KEY == None or SECRET_KEY == '':
 
 
 REGION = params['aws_region']
-VPC_ID = params['vpc_id']
-INTERNET_GATEWAY_ID = params['internet_gateway_id']
+if 'vpc_id' in params:
+    VPC_ID = params['vpc_id']
+    INTERNET_GATEWAY_ID = params['internet_gateway_id']
+VPC_CIDR = params['vpc_cidr']
 SUBNET_RANGE_PRIMARY = params['subnet_range_primary']
 SUBNET_RANGE_SECONDARY = params['subnet_range_secondary']
 STUDENT_COUNT = params['student_count']
@@ -54,7 +60,7 @@ ELASTIC_IPS = []
 def password_generator(size=14, chars=string.ascii_letters + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
-
+# Gets the public IP address of system running this script
 def get_public_ip():
     result = json.load(urllib.request.urlopen('https://api.ipify.org/?format=json'))
     return result['ip']
@@ -73,34 +79,35 @@ except:
 
 
 #######################################################################
-# Verify VPC Id Provided ##############################################
+# Verify VPC Id Provided, if using existing ###########################
 #######################################################################
-try:
-    print(f'INFO: Checking VPC ID: {VPC_ID}...')
+if 'vpc_id' in params:
+    try:
+        print(f'INFO: Checking VPC ID: {VPC_ID}...')
+        ec2 = session.resource('ec2')
+        vpc = ec2.Vpc(VPC_ID)
+        print(f'INFO: VPC ID Verified: {vpc.vpc_id}...')
+    except:
+        print(f'ERROR: VPC Check Failed! Please provide a valid VPC Id...')
+        exit(1)
+#######################################################################
+
+
+#######################################################################
+# Check Existing Subnets if deploying into existing ###################
+#######################################################################
+    print(f'INFO: Checking Existing Subnets...')
+    filters = [{'Name':'vpcId', 'Values':[VPC_ID]}]
+
     ec2 = session.resource('ec2')
-    vpc = ec2.Vpc(VPC_ID)
-    print(f'INFO: VPC ID Verified: {vpc.vpc_id}...')
-except:
-    print(f'ERROR: VPC Check Failed! Please provide a valid VPC Id...')
-    exit(1)
-#######################################################################
+    subnets_count = len(list(ec2.subnets.filter(Filters=filters)))
+
+    if subnets_count > 0:
+        print(f'ERROR: {subnets_count} Subnets Found In Current VPC...')
+        exit(1)
 
 
-#######################################################################
-# Check Existing Subnets ##############################################
-#######################################################################
-print(f'INFO: Checking Existing Subnets...')
-filters = [{'Name':'vpcId', 'Values':[VPC_ID]}]
-
-ec2 = session.resource('ec2')
-subnets_count = len(list(ec2.subnets.filter(Filters=filters)))
-
-if subnets_count > 0:
-    print(f'ERROR: {subnets_count} Subnets Found In Current VPC...')
-    exit(1)
-
-
-print(f'INFO: Subnet Check Completed...')
+    print(f'INFO: Subnet Check Completed...')
 #######################################################################
 
 
@@ -208,7 +215,10 @@ print(f'INFO: Student Accounts Collection Created...')
 #######################################################################
 # Confirm Deploy Before Proceeding ####################################
 #######################################################################
-print(f'You are about to deploy {STUDENT_COUNT} student pod(s) to {VPC_ID} in the {REGION} Region')
+if 'vpc_id' in params:
+    print(f'You are about to deploy {STUDENT_COUNT} student pod(s) to {VPC_ID} in the {REGION} Region')
+else:
+    print(f'You are about to deploy {STUDENT_COUNT} student pod(s) to a new VPC in the {REGION} Region')
 rusure_response = input('Are you sure you wish to proceed with this deployment (y/Y to continue)? ')
 if rusure_response.lower() != 'y':
     print('No pods were created, exiting now.')
@@ -221,7 +231,10 @@ if rusure_response.lower() != 'y':
 #######################################################################
 print('INFO: Uploading Template To S3...')
 s3 = boto3.resource('s3')
-s3.meta.client.upload_file('cisco-hol-pod-cft-template.yml', S3_BUCKET, 'cisco-hol-pod-cft-template.yml')
+if 'vpc_id' in params:
+    s3.meta.client.upload_file('cisco-hol-pod-cft-template-existvpc.yml', S3_BUCKET, 'cisco-hol-pod-cft-template-existvpc.yml')
+else:
+    s3.meta.client.upload_file('cisco-hol-pod-cft-template-newvpc.yml', S3_BUCKET, 'cisco-hol-pod-cft-template-newvpc.yml')
 print('INFO: CFT Template Uploaded To S3...')
 #######################################################################
 
@@ -246,9 +259,6 @@ for student in STUDENTS_LIST:
             {'ParameterKey': 'StudentName', 'ParameterValue': student['account_name']},
             {'ParameterKey': 'StudentPassword', 'ParameterValue': student['account_password']},
             {'ParameterKey': 'ManagementCidrBlock', 'ParameterValue': MANAGEMENT_CIDR},
-
-            {'ParameterKey': 'VpcID', 'ParameterValue': VPC_ID},
-            {'ParameterKey': 'InternetGatewayId', 'ParameterValue': INTERNET_GATEWAY_ID},
             {'ParameterKey': 'Subnet01CidrBlock', 'ParameterValue': f"{student['public_subnet_01']}/24"},
             {'ParameterKey': 'Subnet02CidrBlock', 'ParameterValue': f"{student['public_subnet_02']}/24"},
             {'ParameterKey': 'Subnet03CidrBlock', 'ParameterValue': f"{student['private_subnet']}/24"},
@@ -293,13 +303,18 @@ for student in STUDENTS_LIST:
             {'ParameterKey': 'GuacamoleImageID', 'ParameterValue': params['guacamole_ami']},
             {'ParameterKey': 'EKSWorkerImageID', 'ParameterValue': params['eks_worker_ami']}
         ]
+        if 'vpc_id' in params:
+            aws_parameters.append(
+                {'ParameterKey': 'VpcID', 'ParameterValue': VPC_ID},
+                {'ParameterKey': 'InternetGatewayId', 'ParameterValue': INTERNET_GATEWAY_ID},
+                {'ParameterKey': 'VpcCIDR', 'ParameterValue': VPC_CIDR})
 
         print('INFO:', aws_parameters)
 
         result = cloudformation.create_stack(
             StackName=student['account_name'],
             # TemplateBody=cloudformation_template,
-            TemplateURL=f"https://{S3_BUCKET}.s3.{REGION}.amazonaws.com/cisco-hol-pod-cft-template.yml",
+            TemplateURL=f"https://{S3_BUCKET}.s3.{REGION}.amazonaws.com/{CFT_POD_FILE }",
             Parameters=aws_parameters,
             Capabilities=[
                 'CAPABILITY_IAM', 'CAPABILITY_NAMED_IAM',

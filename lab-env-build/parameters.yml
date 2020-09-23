@@ -10,8 +10,9 @@ aws_region: us-east-2
 student_count: 1
 student_prefix: cisco-student
 
-vpc_id: vpc-017dd7e8fc4a4b9de
-internet_gateway_id: igw-0dbfdfc228666cee0
+vpc_cidr: 10.1.0.0/16 # << the CIDR block to assign to the VPC if creating a new VPC
+#vpc_id: vpc-017dd7e8fc4a4b9de # << Enter the VPC ID if using existing VPC. Comment if creating new VPC.
+#internet_gateway_id: igw-0dbfdfc228666cee0 # << Enter the IG_ID if using existing VPC. Comment if creating new VPC.
 subnet_range_primary: 10.1.0.0/16
 subnet_range_secondary: 198.18.0.0/16
 

@@ -14,6 +14,7 @@ Metadata:
           default: "Network Configuration"
         Parameters:
           - VpcID
+          - VpcCIDR
           - InternetGatewayId
           - PrivateRouteTableId
           - Subnet01CidrBlock
@@ -46,6 +47,8 @@ Metadata:
         default: "Your Name"
       StudentPassword:
         default: "Password"
+      VpcCIDR:
+        default: "VPC CIDR"
       VpcID:
         default: "VPC ID"
       InternetGatewayId:
@@ -94,6 +97,9 @@ Parameters:
   VpcID:
     Type: String
     Description: Please enter the VPC Id
+  VpcCIDR:
+    Type: String
+    Description: Please enter the VPC CIDR
   InternetGatewayId:
     Type: String
     Description: Please enter the Internet Gateway Id
@@ -208,11 +214,51 @@ Parameters:
 
 Resources:
 
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref VpcCIDR
+#       Fn::Sub: '${VpcCIDR}'
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: Tetration_HoL
+
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: Tetration_HoL
+
+  AttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref VPC
+      InternetGatewayId: !Ref InternetGateway
+
+  # RouteTable:
+  #   Type: AWS::EC2::RouteTable
+  #   Properties:
+  #     VpcId: !Ref VPC
+  #     Tags:
+  #       - Key: Name
+  #         Value: Tetration_HoL
+
+  # Route:
+  #   Type: AWS::EC2::Route
+  #   Properties:
+  #     RouteTableId: !Ref RouteTable
+  #     DestinationCidrBlock: 0.0.0.0/0
+  #     GatewayId: !Ref InternetGateway
+  #   DependsOn: AttachGateway
+
   # Create Public Route Table  
   PublicRouteTable:
     Type: AWS::EC2::RouteTable
     Properties:
-      VpcId: !Ref VpcID
+      VpcId: !Ref VPC
       Tags:
       - Key: Name
         Value: !Sub "cisco-hol-${StudentName}-public-rt-${Region}"
@@ -221,7 +267,7 @@ Resources:
   PrivateRouteTable:
     Type: AWS::EC2::RouteTable
     Properties:
-      VpcId: !Ref VpcID
+      VpcId: !Ref VPC
       Tags:
       - Key: Name
         Value: !Sub "cisco-hol-${StudentName}-private-rt-${Region}"
@@ -231,14 +277,14 @@ Resources:
    Type: AWS::EC2::Route
    Properties:
       DestinationCidrBlock: 0.0.0.0/0
-      GatewayId: !Ref InternetGatewayId
+      GatewayId: !Ref InternetGateway
       RouteTableId: !Ref PublicRouteTable
     
   # Subnets
   CiscoHOLSubnet01:
     Type: AWS::EC2::Subnet
     Properties:
-      VpcId: !Ref VpcID
+      VpcId: !Ref VPC
       CidrBlock: !Ref Subnet01CidrBlock
       AvailabilityZone: !Sub "${Region}${Subnet01AvailabilityZone}"
       Tags:
@@ -258,7 +304,7 @@ Resources:
   CiscoHOLSubnet02:
     Type: AWS::EC2::Subnet
     Properties:
-      VpcId: !Ref VpcID
+      VpcId: !Ref VPC
       CidrBlock: !Ref Subnet02CidrBlock
       AvailabilityZone: !Sub "${Region}${Subnet02AvailabilityZone}"
       Tags:
@@ -278,7 +324,7 @@ Resources:
   CiscoHOLSubnet03:
     Type: AWS::EC2::Subnet
     Properties:
-      VpcId: !Ref VpcID
+      VpcId: !Ref VPC
       CidrBlock: !Ref Subnet03CidrBlock
       AvailabilityZone: !Sub "${Region}${Subnet03AvailabilityZone}"
       Tags:
@@ -318,7 +364,7 @@ Resources:
   CiscoHOLPublicSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      VpcId: !Ref VpcID
+      VpcId: !Ref VPC
       GroupDescription: !Sub "Cisco HOL Public Security Group For ${StudentName}"
       SecurityGroupIngress:
         - IpProtocol: -1
@@ -369,7 +415,7 @@ Resources:
   CiscoHOLPrivateSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      VpcId: !Ref VpcID
+      VpcId: !Ref VPC
       GroupDescription: !Sub "Cisco HOL Private Security Group For ${StudentName}"
       SecurityGroupIngress:
         - IpProtocol: -1
@@ -402,7 +448,7 @@ Resources:
   CiscoHOLWebSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      VpcId: !Ref VpcID
+      VpcId: !Ref VPC
       GroupDescription: !Sub "Cisco HOL Web Security Group For ${StudentName}"
       SecurityGroupIngress:
         - IpProtocol: tcp
@@ -1646,7 +1692,7 @@ Resources:
     Properties:
       LogDestinationType: s3
       LogDestination: !GetAtt CiscoHOLVPCFlowLogS3Bucket.Arn
-      ResourceId: !Ref VpcID
+      ResourceId: !Ref VPC
       ResourceType: VPC
       TrafficType: ALL
   
