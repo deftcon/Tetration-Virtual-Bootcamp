@@ -8,7 +8,7 @@ In this module we'll be creating Absolute policies in the Global Services applic
   
 ---  
 
-## --- Lab ---
+## --- Lab - Global Policy ---
 ### Steps for this Lab  
 <a href="#step-001" style="font-weight:bold">Step 001 - Navigate to Inventory Filters</a>  
 <a href="#step-002" style="font-weight:bold">Step 002 - Create an Inventory Filter</a>  

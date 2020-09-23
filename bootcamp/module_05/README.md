@@ -343,9 +343,11 @@ Click on the Log tab and select Start Log Configuration.
 
 Change the Logging Level to debug and click Verify & Save Configs.  
 
-<a href="images/module_05_036.png"><img src="images/module_05_036.png" style="width:100%;height:100%;"></a>  
-
-
+<a href="images/module_05_036.png"><img src="images/module_05_036.png" style="width:100%;height:100%;"></a>   
+  
+---  
+  
+  
 ## --- Lab :: ASA Connector and NAT Stitching ---
 <a href="#step-037" style="font-weight:bold">Step 037 - Open a session to the Windows 10 employee desktop </a>  
 <a href="#step-038" style="font-weight:bold">Step 038 - Open a web browser and point to the NAT IP of the IIS web server</a>  
