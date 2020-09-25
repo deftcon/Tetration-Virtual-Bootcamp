@@ -953,6 +953,7 @@ Resources:
           - !Ref CiscoHOLSubnet01
           - !Ref CiscoHOLSubnet02
       RoleArn: !GetAtt EKSClusterInstanceRole.Arn
+      Version: '1.15'
   
   # Node Launch Configuration
   EKSWorkerNodeLaunchConfig:
