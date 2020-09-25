@@ -2,7 +2,15 @@ import boto3
 import yaml
 from time import sleep
 import logging
-import random
+import argparse
+
+parser = argparse.ArgumentParser(description="Create AMIs and copy to destination region")
+
+parser.add_argument('--region', '-r', required=True, help="AWS Region")
+args = parser.parse_args()
+
+aws_region = args.region
+
 
 logformat = '%(asctime)s - %(levelname)s - %(message)s'
 logging.basicConfig(level='INFO', format=logformat)
@@ -64,9 +72,29 @@ for inst_obj, image_obj in obj_list:
     logger.info(f"Terminating instance {inst_name}")
     inst_obj.terminate()
 
+# If using other region besides us-east-2, copy to dest region then delete from us-east-2
+if aws_region != 'us-east-2':
+    # copy newly created AMIs to destination region
+    for key in ami_dict.keys():
+        logger.info(f"Copying AMI {ami_dict[key]['id']} to region {aws_region}")
+        dest_region = boto3.client('ec2', region_name=aws_region)
+        copy_response = dest_region.copy_image(
+            Name=ami_dict[key]['name'],
+            Description='Tetration Virtual Bootcamp Lab',
+            SourceImageId=ami_dict[key]['new_id'],
+            SourceRegion='us-east-2'
+        )
+        ec2 = boto3.resource('ec2')
+        image = ec2.Image(ami_dict[key]['new_id'])
+        image.deregister()
+        logger.info(f"Deregistering AMI {ami_dict[key]['id']} from region us-east-2")
+        ami_dict[key]['new_id'] = copy_response['ImageId']
+
+
 ami_dict['employee_ubuntu_ami'] = dict(new_id=ami_dict['employee_sysadmin_ubuntu_ami']['new_id'])
 ami_dict['sysadmin_ubuntu_ami'] = dict(new_id=ami_dict['employee_sysadmin_ubuntu_ami']['new_id'])
 ami_dict.pop('employee_sysadmin_ubuntu_ami')
+
 
 logger.info("AMIs to be updated in parameters.yml")
 for ami in ami_dict.keys():
@@ -83,11 +111,12 @@ for ami_key in ami_dict.keys():
         if ami_key in line:
             params_file[x] = f"{ami_key}: {ami_dict[ami_key]['new_id']}\n"
             replaced = True
+        if 'aws_region' in line:
+            params_file[x] = f"aws_region: {aws_region}\n"
         if x == len(params_file) - 1 and not replaced:
             params_file.append(f"{ami_key}: {ami_dict[ami_key]['new_id']}\n")
 
 with open('parameters.yml', 'w') as f:
     f.writelines(params_file)
 
-logger.info("Finished!")        
-
+logger.info("Finished!")
