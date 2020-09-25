@@ -1,0 +1,23 @@
+# Last validated 9-24-2020
+# https://cloud-images.ubuntu.com/docs/aws/eks/
+ap-east-1: ami-990644e8
+ap-northeast-1: ami-080c00a096f7c441e
+ap-northeast-2: ami-00f047105454d1fb7
+ap-northeast-3: ami-0cf0bff1b253145c2
+ap-south-1:  ami-0e829c1cb313329b7
+ap-southeast-1: ami-09d2e579ac993218b
+ap-southeast-2: ami-082839d11a2e0c705
+af-south-1: ami-07ed6185bae872107
+ca-central-1:  ami-068ccfb5cc6a150f0
+eu-central-1: ami-04191511acdcf00d4
+eu-north-1: ami-0fbbc5d69f65b989b
+eu-west-1: ami-07bb2d237ec1edd5e
+eu-west-2: ami-074be00c674e0158c
+eu-west-3: ami-01f8031907584e435
+eu-south-1: ami-0effad3308619952d
+me-south-1: ami-01c738499867260b8
+sa-east-1: ami-05dfe3a83942ccf84
+us-east-1: ami-000c56e8536aaaf50
+us-east-2: ami-0c12dc9171d7252ad
+us-west-1: ami-0b24cd8e1758abfcc
+us-west-2: ami-0f85d876fff2b916e
