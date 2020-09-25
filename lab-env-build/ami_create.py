@@ -24,8 +24,8 @@ obj_list = []
 for ami in ami_dict.keys():
     logger.info(f"Creating EC2 image {ami_dict[ami]['name']}")
     # Creating temporary EC2 instance
-    ec2 = boto3.resource('ec2')
-    instances = ec2.create_instances(
+    ec2_ohio = boto3.resource('ec2', region_name='us-east-2')
+    instances = ec2_ohio.create_instances(
         ImageId=ami_dict[ami]['id'], 
         MinCount=1,
         MaxCount=1,
@@ -74,9 +74,11 @@ for inst_obj, image_obj in obj_list:
 
 # If using other region besides us-east-2, copy to dest region then delete from us-east-2
 if aws_region != 'us-east-2':
+    ohio_amis = []
+    dest_region_amis = []
     # copy newly created AMIs to destination region
     for key in ami_dict.keys():
-        logger.info(f"Copying AMI {ami_dict[key]['id']} to region {aws_region}")
+        logger.info(f"Copying AMI {ami_dict[key]['name']} to region {aws_region}")
         dest_region = boto3.client('ec2', region_name=aws_region)
         copy_response = dest_region.copy_image(
             Name=ami_dict[key]['name'],
@@ -84,21 +86,44 @@ if aws_region != 'us-east-2':
             SourceImageId=ami_dict[key]['new_id'],
             SourceRegion='us-east-2'
         )
-        ec2 = boto3.resource('ec2')
-        image = ec2.Image(ami_dict[key]['new_id'])
-        image.deregister()
-        logger.info(f"Deregistering AMI {ami_dict[key]['id']} from region us-east-2")
+        image = ec2_ohio.Image(ami_dict[key]['new_id'])
+        ohio_amis.append(image)
         ami_dict[key]['new_id'] = copy_response['ImageId']
+        dest_region_amis.append(copy_response['ImageId'])
 
-
+    # wait for images to be successfully copied in dest region
+    for image_id in dest_region_amis:
+        ec2_dest_region = boto3.resource('ec2', region_name=aws_region)
+        image = ec2_dest_region.Image(image_id)
+        logger.info(f"Checking state of AMI {image.name} in region {aws_region}")
+        while image.state == 'pending':
+            image.load()
+            logger.info(f"{image.name}: {image.state}")
+            sleep(5)
+    
+    # deregistering and deleting snapshots in Ohio
+    for image_obj in ohio_amis:
+        logger.info(f"Deregistering AMI {image_obj.name} from region us-east-2")
+        image_obj.load()
+        snapshot_id = image_obj.block_device_mappings[0]['Ebs']['SnapshotId']
+        image_obj.deregister()
+        logger.info(f"Deleting snapshot {snapshot_id} from region us-east-2" )
+        snapshot = ec2_ohio.Snapshot(snapshot_id)
+        snapshot.delete()     
+    
 ami_dict['employee_ubuntu_ami'] = dict(new_id=ami_dict['employee_sysadmin_ubuntu_ami']['new_id'])
 ami_dict['sysadmin_ubuntu_ami'] = dict(new_id=ami_dict['employee_sysadmin_ubuntu_ami']['new_id'])
 ami_dict.pop('employee_sysadmin_ubuntu_ami')
 
+# Parse YAML file of valid EKS worker nodes and update parameters.yml
+def ami_lookup(yaml_file):
+    with open(yaml_file, 'r') as f:
+        amis = yaml.safe_load(f)
+    return amis.get(aws_region)
 
-logger.info("AMIs to be updated in parameters.yml")
-for ami in ami_dict.keys():
-    print(f"{ami}: {ami_dict[ami]['new_id']}")
+ami_dict['eks_worker_ami'] = dict(new_id=ami_lookup('eks_worker_amis.yml'))
+ami_dict['asav_ami'] = dict(new_id=ami_lookup('asav_amis.yml'))
+
       
 logger.info("Updating parameters.yml")
 
@@ -116,17 +141,11 @@ for ami_key in ami_dict.keys():
         if x == len(params_file) - 1 and not replaced:
             params_file.append(f"{ami_key}: {ami_dict[ami_key]['new_id']}\n")
 
-# Parse YAML file of valid EKS worker nodes and update parameters.yml
-def ami_lookup(yaml_file, image_type):
-    with open(yaml_file, 'r') as f:
-        amis = yaml.safe_load(f)
-    params_file.append(f"{aws_region}: {amis.get(aws_region)}")
-    logger.info(f"{image_type} image for region {aws_region} is {amis.get(aws_region)}")
-
-ami_lookup('eks_worker_amis', 'EKS')
-ami_lookup('asav_amis', 'ASAv')
-
 with open('parameters.yml', 'w') as f:
     f.writelines(params_file)
+
+logger.info("New AMIs written to parameters.yml")
+for ami in ami_dict.keys():
+    print(f"{ami}: {ami_dict[ami]['new_id']}")
 
 logger.info("Finished!")

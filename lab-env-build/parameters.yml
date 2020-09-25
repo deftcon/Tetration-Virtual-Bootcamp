@@ -20,18 +20,17 @@ s3_bucket: 'deft-tetration-hol-cft-template' # << S3 Bucket is global DNS unique
 
 ise_server_ip: '172.16.171.49' # << This is your own private on-prem ISE instance - needs VPN with AWS VGW
 
-asav_ami: ami-0f3cca6491d987102 # << Needs subscription from AWS Marketplace (search for ASAv BYOL)
-eks_worker_ami: ami-0c4c60006aa81c29b # << Global AWS Marketplace - will change with region - https://cloud-images.ubuntu.com/docs/aws/eks/
-ldap_ami: ami-0ecd51456420b3c84
-mssql_ami: ami-02670c11fed21b8cd
-iis_ami: ami-05c1c07d8fda57e4b
-mysql_ami: ami-0c50bc1a8dd1da09c
-apache_ami: ami-0e03893e7b834a83c
-ansible_ami: ami-01166afb7cd2bcf70
-tet_data_ami: ami-0b46efe9a678038dd
-tet_edge_ami: ami-0e5cb57ddae2d943c
-employee_ubuntu_ami: ami-03b66de8983ae3183
-sysadmin_ubuntu_ami: ami-03b66de8983ae3183
-attack_server_ami: ami-0c931ab56d785a5b8
-guacamole_ami: ami-0743c994eaf05ccb7
-
+asav_ami: ami-0baf97ff07e48f3ac
+eks_worker_ami: ami-000c56e8536aaaf50
+ldap_ami: ami-0ed3d9c4c3fbce7bf
+mssql_ami: ami-0fa648985720afdfa
+iis_ami: ami-0df881b2876a1a354
+mysql_ami: ami-0083d75b484308cfb
+apache_ami: ami-09fb4b0d60038c22d
+ansible_ami: ami-0fe587a7cd68b22e9
+tet_data_ami: ami-08b6328b0aedbd35a
+tet_edge_ami: ami-09a760d2450e46a52
+employee_ubuntu_ami: ami-019e21d638db36dee
+sysadmin_ubuntu_ami: ami-019e21d638db36dee
+attack_server_ami: ami-0a929cec699e79311
+guacamole_ami: ami-015fa085270a1b2c9
