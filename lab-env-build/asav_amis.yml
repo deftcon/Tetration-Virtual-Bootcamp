@@ -1,0 +1,22 @@
+# Last validated 9-24-2020
+# AWS Marketplace > Manage Subscriptions > Cisco Adaptive Security Virtual Appliance (ASAv) - BYOL)
+ap-east-1: ami-02c8160119941c05c
+ap-northeast-1: ami-0e00412dfd85bbf00
+ap-northeast-2: ami-089824a374eee73dd
+ap-south-1:  ami-078f7ba36f22d6d75
+ap-southeast-1: ami-0a6d724b1ab24eb7a
+ap-southeast-2: ami-07ab92e8e65453b61
+af-south-1: ami-0583119b73c9da256
+ca-central-1:  ami-0ba6c7c7ace737a7e
+eu-central-1: ami-03ce85f33ec8799bc
+eu-north-1: ami-04454d32dad2773e6
+eu-west-1:  ami-01ede3ddc53b9a8f9
+eu-west-2: ami-0728869fceeac100c
+eu-west-3: ami-04c286adff5c7d11d
+eu-south-1: ami-070ac7c71eef4caf5
+me-south-1: ami-01eea958cfeb6d726
+sa-east-1: ami-0c4ec7f6c9802b81b
+us-east-1: ami-0baf97ff07e48f3ac
+us-east-2: ami-0cc6d931eeb481121
+us-west-1: ami-08c86352b233c5f6e
+us-west-2: ami-03ad81377648fcb21

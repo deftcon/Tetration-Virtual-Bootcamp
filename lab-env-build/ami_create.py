@@ -116,15 +116,15 @@ for ami_key in ami_dict.keys():
         if x == len(params_file) - 1 and not replaced:
             params_file.append(f"{ami_key}: {ami_dict[ami_key]['new_id']}\n")
 
-# Parse list of valid EKS worker nodes and update parameters.yml
-with open ('eks_worker_amis.yml', 'r') as f:
-    eks_amis = yaml.safe_load(f)
+# Parse YAML file of valid EKS worker nodes and update parameters.yml
+def ami_lookup(yaml_file, image_type):
+    with open(yaml_file, 'r') as f:
+        amis = yaml.safe_load(f)
+    params_file.append(f"{aws_region}: {amis.get(aws_region)}")
+    logger.info(f"{image_type} image for region {aws_region} is {amis.get(aws_region)}")
 
-params_file.append(f"{aws_region}: {eks_amis.get(aws_region)}")
-logger.info(f"EKS image for region {aws_region} is {eks_amis.get(aws_region)}")
-
-
-
+ami_lookup('eks_worker_amis', 'EKS')
+ami_lookup('asav_amis', 'ASAv')
 
 with open('parameters.yml', 'w') as f:
     f.writelines(params_file)
