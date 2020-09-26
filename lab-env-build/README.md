@@ -16,33 +16,45 @@ It is REQUIRED that you have your own instance of Tetration, whether On-Prem, Te
 
 There are a number of AMIs that will be copied from Deft's AWS account in the Ohio region prior to being able to deploy this lab environment to AWS successfully.  
 
-From the AWS Console,  navigate to the EC2 service and select Images.  If the AMIs listed below happen to not be listed when you select "Private Images", <a href="https://github.com/deftcon/Tetration-Virtual-Bootcamp/issues/1" target="_blank">please open an issue on GitHub similar to this one</a>. 
+From the AWS Console,  navigate to the EC2 service and change to the `us-east-2` region (Ohio).  Then select AMIs and change the view to "Private Images". If the AMIs listed below are not listed, <a href="https://github.com/deftcon/Tetration-Virtual-Bootcamp/issues/1" target="_blank">please open an issue on GitHub similar to this one</a>. 
   
 ldap_ami: ami-0f7a08583b3138159     
-mssql_ami: ami-09782396834215732
+mssql_ami: ami-09782396834215732  
 iis_ami: ami-091df3f67b36e2250  
-tet_data_ami: ami-0cf7fd4e75d7d91ab
+tet_data_ami: ami-0cf7fd4e75d7d91ab  
 tet_edge_ami: ami-05d08946ffda72d18  
-employee_ubuntu_ami: ami-0af925e340025c9f9
+employee_ubuntu_ami: ami-0af925e340025c9f9  
 sysadmin_ubuntu_ami: ami-0af925e340025c9f9  
 mysql_ami: ami-051ba5822fc02da4b   
 apache_ami: ami-0c85d8851d66cd9f9  
 ansible_ami: ami-0083b10a007c92d2d  
 guacamole_ami: ami-007f96a1ed0595540 
-attack_server_ami: ami-04f958d48e22e185c
-mysql_ami: ami-051ba5822fc02da4b
+attack_server_ami: ami-04f958d48e22e185c  
+mysql_ami: ami-051ba5822fc02da4b  
+eks_worker_ami: ami-0c4c60006aa81c29b  
 
-Before several of the images above can be launched in your account, you must Subscribe to use them in AWS Marketplace.  Please follow the links below and proceed to "Continue to Subscribe".  If this is not done first,  the sub-sequent script to copy the AMIs to your account will fail. 
+For a few of the images, you must Subscribe to use them in AWS Marketplace before they can be launched.  Please follow the links below and proceed to "Continue to Subscribe".   
 
-https://aws.amazon.com/marketplace/pp?sku=89bab4k3h9x4rkojcm2tj8j4l
-https://aws.amazon.com/marketplace/pp?sku=aw0evgkw8e5c1q413zgy5pjce
+https://aws.amazon.com/marketplace/pp?sku=89bab4k3h9x4rkojcm2tj8j4l  
+https://aws.amazon.com/marketplace/pp?sku=aw0evgkw8e5c1q413zgy5pjce  
+https://aws.amazon.com/marketplace/pp/B00WRGASUC  
 
-INSERT TEXT FOR RUNNING THE AMI COPY SCRIPT HERE
+Once you are subscribed to the above products,  a script called `ami_create.py` can be run to create new image files in your account and optionally copy them to another region. The script automates the process of creating the AMIs and populates the AMI IDs into the `parameters.yml` file which will later be used to launch all of the instances.  
 
+`ami_create.py` requires Python 3.7 as well as the boto3 and pyyaml packages which can be installed by executing the following commands:
 
+```
+pip install boto3
+pip install pyyaml
+```
 
+The script can then be run with the below command.  The region command-line argument is optional, and if omitted the AMIs will be created in the us-east-2 region.  If you plan to run the lab from an AWS region other than us-west-2, specify `--region` followed by the region name to have the AMIs copied to the destination region. 
 
-eks_worker_ami: ami-0c4c60006aa81c29b   # << Global AWS Marketplace - will change with region and this link has all possible region-specific AMIs - https://cloud-images.ubuntu.com/docs/aws/eks/
+```
+python ami_create.yml --region us-east-1
+```
+
+   
 
 
   
@@ -168,12 +180,7 @@ eks_worker_ami: ami-0c4c60006aa81c29b   # << Global AWS Marketplace - will chang
 
 ```
 
-#### Requirements / Dependancies
-
-`launch.py` requires Python 3.7 as well as the boto3 and pyyaml packages which can be installed by executing the following commands:
-
-`pip install boto3`  
-`pip install pyyaml`
+#### Requirements / Dependencies
 
 It is important to note that prior to running `launch.py`, you must have a few things already created in your AWS environment - namely a VPC, an IGW, and a S3 bucket.
 1. VPC: This probably goes without saying, but we recommend a non-default VPC. Place your VPC ID in `parameters.yml` in the `vpc_id:` line (no quotes surounding the value). This VPC must have at least two CIDR blocks, one for `subnet_range_primary` and one for `subnet_range_secondary`. It is important that **no** subnets be created in this VPC whatsoever, else the script will error out. `launch.py` will create the subnets and we have a brief discussion about them below. 
@@ -292,6 +299,8 @@ Exiting! All The Tasks Are Completed Successfully...
 ```
 
 Then you should find in your relative-path `reports` directory, a CSV file with every students' information. An enhancement to export a single XLS file with nicely formatted info *per student* is something we aim to do, in addition to the currently exported single CSV which is still very useful for the Lab Admin. 
+
+> If the script reports that the EKS Worker image could not be found,  it may be that the AMI ID has changed since this lab was developed.  The AMI ID changes from time to time as operating system patches are released and Amazon updates the images.  If this is the case,  this link has all possible region-specific AMIs for the EKS worker: - https://cloud-images.ubuntu.com/docs/aws/eks/
 
 #### Tearing Down Lab Environment
 
