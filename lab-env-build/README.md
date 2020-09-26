@@ -14,7 +14,7 @@ It is REQUIRED that you have your own instance of Tetration, whether On-Prem, Te
 
 #### AMIs Required Prior to AWS Lab Environment Deployment
 
-There are a number of AMIs that will be copied from Deft's AWS account in the Ohio region prior to being able to deploy this lab environment to AWS successfully.  
+There are a number of AMIs that will be copied from Deft's AWS account in the Ohio region (us-east-2) prior to being able to deploy this lab environment to AWS successfully.  
 
 From the AWS Console,  navigate to the EC2 service and change to the `us-east-2` region (Ohio).  Then select AMIs and change the view to "Private Images". If the AMIs listed below are not listed, <a href="https://github.com/deftcon/Tetration-Virtual-Bootcamp/issues/1" target="_blank">please open an issue on GitHub similar to this one</a>. 
   
@@ -31,7 +31,7 @@ ansible_ami: ami-0083b10a007c92d2d
 guacamole_ami: ami-007f96a1ed0595540 
 attack_server_ami: ami-04f958d48e22e185c  
 mysql_ami: ami-051ba5822fc02da4b  
-eks_worker_ami: ami-0c4c60006aa81c29b  
+attack_server_ami: ami-04f958d48e22e185c
 
 For a few of the images, you must Subscribe to use them in AWS Marketplace before they can be launched.  Please follow the links below and proceed to "Continue to Subscribe".   
 
@@ -48,13 +48,13 @@ pip install boto3
 pip install pyyaml
 ```
 
-The script can then be run with the below command.  The region command-line argument is optional, and if omitted the AMIs will be created in the us-east-2 region.  If you plan to run the lab from an AWS region other than us-west-2, specify `--region` followed by the region name to have the AMIs copied to the destination region. 
+The script can then be run with the below command.  The region command-line argument is optional, and if omitted the AMIs will be created in the us-east-2 region.  If you plan to run the lab from an AWS region other than us-east-2, specify `--region` followed by the region name to have the AMIs copied to the destination region. 
 
 ```
 python ami_create.yml --region us-east-1
 ```
 
-   
+   --- WORK IN PROGRESS BELOW ---
 
 
   
@@ -62,8 +62,6 @@ python ami_create.yml --region us-east-1
 <a href="#step-001" style="font-weight:bold">Failed Launch - Navigate to URI and accept subscription:</a>  
 <a href="images/admin_001.png"><img src="images/admin_001.png" style="width:100%;height:100%;"></a>  
   
-
-attack_server_ami: ami-04f958d48e22e185c   # << This is for Ubuntu Kali Linux with Metasploit and is a private image that requires launch, you to Accept Subscription, then create the AMI
 
 
 <div class="step" id="step-002"><a href="#step-002" style="font-weight:bold">Step 002</a></div>  
