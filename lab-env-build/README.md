@@ -39,9 +39,11 @@ For a few of the images, you must Subscribe to use them in AWS Marketplace befor
 <a href="https://aws.amazon.com/marketplace/pp?sku=aw0evgkw8e5c1q413zgy5pjce" target="_blank">CentOS 7</a>      
 <a href="https://aws.amazon.com/marketplace/pp/B00WRGASUC" target="_blank">ASAv</a>  
 
+Accept the terms for each product and after a few moments a date should appear under "Effective Date".  It is not necessary to proceed to "Continue to Configuration" as this would be used to manually deploy an instance,  and this will be accomplished by automation using the lab setup script. 
+
 Once you are subscribed to the above products,  a script called `ami_create.py` can be run to create new image files in your account and optionally copy them to another region. The script automates the process of creating the AMIs and populates the AMI IDs into the `parameters.yml` file which will later be used to launch all of the instances.  
 
-`ami_create.py` requires Python 3.7 as well as the boto3 and pyyaml packages which can be installed by executing the following commands:
+`ami_create.py` requires Python 3.7 or later as well as the boto3 and pyyaml packages which can be installed by executing the following commands:
 
 ```
 pip install boto3
@@ -51,7 +53,7 @@ pip install pyyaml
 The script can then be run with the below command.  The region command-line argument is optional, and if omitted the AMIs will be created in the us-east-2 region.  If you plan to run the lab from an AWS region other than us-east-2, specify `--region` followed by the region name to have the AMIs copied to the destination region. 
 
 ```
-python ami_create.yml --region us-east-1
+python ami_create.py --region us-east-1
 ```
 
    --- WORK IN PROGRESS BELOW ---
