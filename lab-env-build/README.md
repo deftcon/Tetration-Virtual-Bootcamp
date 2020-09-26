@@ -35,9 +35,9 @@ attack_server_ami: ami-04f958d48e22e185c
 
 For a few of the images, you must Subscribe to use them in AWS Marketplace before they can be launched.  Please follow the links below and proceed to "Continue to Subscribe".   
 
-https://aws.amazon.com/marketplace/pp?sku=89bab4k3h9x4rkojcm2tj8j4l  
-https://aws.amazon.com/marketplace/pp?sku=aw0evgkw8e5c1q413zgy5pjce  
-https://aws.amazon.com/marketplace/pp/B00WRGASUC  
+<a href="https://aws.amazon.com/marketplace/pp?sku=89bab4k3h9x4rkojcm2tj8j4l" target="_blank">Kali Linux</a>  
+<a href="https://aws.amazon.com/marketplace/pp?sku=aw0evgkw8e5c1q413zgy5pjce" target="_blank">CentOS 7</a>      
+<a href="https://aws.amazon.com/marketplace/pp/B00WRGASUC" target="_blank">ASAv</a>  
 
 Once you are subscribed to the above products,  a script called `ami_create.py` can be run to create new image files in your account and optionally copy them to another region. The script automates the process of creating the AMIs and populates the AMI IDs into the `parameters.yml` file which will later be used to launch all of the instances.  
 
