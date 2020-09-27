@@ -10,27 +10,26 @@ aws_region: us-east-1
 student_count: 1
 student_prefix: cisco-student
 
-vpc_cidr: 10.1.0.0/16 # << the CIDR block to assign to the VPC if creating a new VPC
 #vpc_id: vpc-017dd7e8fc4a4b9de # << Enter the VPC ID if using existing VPC. Comment if creating new VPC.
 #internet_gateway_id: igw-0dbfdfc228666cee0 # << Enter the IG_ID if using existing VPC. Comment if creating new VPC.
 subnet_range_primary: 10.1.0.0/16
 subnet_range_secondary: 198.18.0.0/16
 
-s3_bucket: 'deft-tetration-hol-cft-template' # << S3 Bucket is global DNS unique name - create S3 bucket first with any arbitrary desired non-overlapping name
+s3_bucket: 'deft2-tetration-hol-cft-template' # << S3 Bucket is global DNS unique name, use any arbitrary desired non-overlapping name. Will be created if doesn't exist.
 
 ise_server_ip: '172.16.171.49' # << This is your own private on-prem ISE instance - needs VPN with AWS VGW
 
 asav_ami: ami-0baf97ff07e48f3ac
 eks_worker_ami: ami-000c56e8536aaaf50
-ldap_ami: ami-0ed3d9c4c3fbce7bf
-mssql_ami: ami-0fa648985720afdfa
-iis_ami: ami-0df881b2876a1a354
-mysql_ami: ami-0083d75b484308cfb
-apache_ami: ami-09fb4b0d60038c22d
-ansible_ami: ami-0fe587a7cd68b22e9
-tet_data_ami: ami-08b6328b0aedbd35a
-tet_edge_ami: ami-09a760d2450e46a52
-employee_ubuntu_ami: ami-019e21d638db36dee
-sysadmin_ubuntu_ami: ami-019e21d638db36dee
-attack_server_ami: ami-0a929cec699e79311
-guacamole_ami: ami-015fa085270a1b2c9
+ldap_ami: ami-0dd0d42e5d794c9cc
+mssql_ami: ami-06b3bfa9f06cacd07
+iis_ami: ami-08f1528dbb7360d0b
+mysql_ami: ami-0412c8db82a86a968
+apache_ami: ami-0b5a63a4e3e148295
+ansible_ami: ami-0eaee22bf80d4e870
+tet_data_ami: ami-0dea2326de876c583
+tet_edge_ami: ami-042381de13b771e34
+employee_ubuntu_ami: ami-02e67b54ebbc601cf
+sysadmin_ubuntu_ami: ami-02e67b54ebbc601cf
+attack_server_ami: ami-0b9119d0178e700cc
+guacamole_ami: ami-098baf83b507c18ba

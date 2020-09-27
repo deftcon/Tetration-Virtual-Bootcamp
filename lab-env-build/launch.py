@@ -17,9 +17,9 @@ PARAMETERS_FILE = './parameters.yml'
 params = yaml.load(open(PARAMETERS_FILE), Loader=yaml.Loader)
 
 if 'vpc_id' in params:
-    CFT_POD_FILE = './cisco-hol-pod-cft-template-existvpc.yml'
+    CFT_POD_FILE = 'cisco-hol-pod-cft-template-existvpc.yml'
 else:
-    CFT_POD_FILE = './cisco-hol-pod-cft-template-newvpc.yml'
+    CFT_POD_FILE = 'cisco-hol-pod-cft-template-newvpc.yml'
 
 
 ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY_ID')
@@ -34,10 +34,11 @@ if SECRET_KEY == None or SECRET_KEY == '':
 
 
 REGION = params['aws_region']
+
 if 'vpc_id' in params:
     VPC_ID = params['vpc_id']
     INTERNET_GATEWAY_ID = params['internet_gateway_id']
-VPC_CIDR = params['vpc_cidr']
+
 SUBNET_RANGE_PRIMARY = params['subnet_range_primary']
 SUBNET_RANGE_SECONDARY = params['subnet_range_secondary']
 STUDENT_COUNT = params['student_count']
@@ -225,6 +226,25 @@ if rusure_response.lower() != 'y':
     exit(1)
 #######################################################################
 
+#######################################################################
+# CREATE THE S3 BUCKET FOR THE CFT TEMPLATE
+#######################################################################
+s3 = session.client('s3')
+print(f"session: {boto3.session.Session().region_name}")
+try:
+    print(f"Creating S3 Bucket {S3_BUCKET}")
+    response = s3.create_bucket(
+            Bucket=S3_BUCKET, CreateBucketConfiguration={
+            'LocationConstraint': boto3.session.Session().region_name
+            },
+            ACL='private')
+
+except Exception as e:
+    if 'BucketAlreadyOwnedByYou' in e.response['Error']['Code']:
+        print(f"Bucket {S3_BUCKET} already exists, skipping")
+    else:
+        print(f"Error while creating bucket: {e}")
+        exit(1)
 
 #######################################################################
 # Upload CFT TO S3 Bucket #############################################
@@ -259,6 +279,9 @@ for student in STUDENTS_LIST:
             {'ParameterKey': 'StudentName', 'ParameterValue': student['account_name']},
             {'ParameterKey': 'StudentPassword', 'ParameterValue': student['account_password']},
             {'ParameterKey': 'ManagementCidrBlock', 'ParameterValue': MANAGEMENT_CIDR},
+            {'ParameterKey': 'SubnetRangePrimary', 'ParameterValue': SUBNET_RANGE_PRIMARY},
+            {'ParameterKey': 'SubnetRangeSecondary', 'ParameterValue': SUBNET_RANGE_SECONDARY},
+
             {'ParameterKey': 'Subnet01CidrBlock', 'ParameterValue': f"{student['public_subnet_01']}/24"},
             {'ParameterKey': 'Subnet02CidrBlock', 'ParameterValue': f"{student['public_subnet_02']}/24"},
             {'ParameterKey': 'Subnet03CidrBlock', 'ParameterValue': f"{student['private_subnet']}/24"},
@@ -310,11 +333,12 @@ for student in STUDENTS_LIST:
                 {'ParameterKey': 'VpcCIDR', 'ParameterValue': VPC_CIDR})
 
         print('INFO:', aws_parameters)
-
+        templateURL = f"https://{S3_BUCKET}.s3.{boto3.session.Session().region_name}.amazonaws.com/{CFT_POD_FILE }"
+        print(templateURL)
         result = cloudformation.create_stack(
             StackName=student['account_name'],
             # TemplateBody=cloudformation_template,
-            TemplateURL=f"https://{S3_BUCKET}.s3.{REGION}.amazonaws.com/{CFT_POD_FILE }",
+            TemplateURL=templateURL,
             Parameters=aws_parameters,
             Capabilities=[
                 'CAPABILITY_IAM', 'CAPABILITY_NAMED_IAM',
@@ -322,7 +346,7 @@ for student in STUDENTS_LIST:
         )
 
         STACKS_LIST.append(student['account_name'])
-
+        
     except Exception as e:
         print(e)
         exit(1)

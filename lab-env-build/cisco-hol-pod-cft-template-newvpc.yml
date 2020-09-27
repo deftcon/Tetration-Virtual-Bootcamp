@@ -13,9 +13,8 @@ Metadata:
         Label:
           default: "Network Configuration"
         Parameters:
-          - VpcID
-          - VpcCIDR
-          - InternetGatewayId
+          - SubnetRangePrimary
+          - SubnetRangeSecondary
           - PrivateRouteTableId
           - Subnet01CidrBlock
           - Subnet01AvailabilityZone
@@ -47,12 +46,10 @@ Metadata:
         default: "Your Name"
       StudentPassword:
         default: "Password"
-      VpcCIDR:
-        default: "VPC CIDR"
-      VpcID:
-        default: "VPC ID"
-      InternetGatewayId:
-        default: "Internet Gateway Id"
+      SubnetRangePrimary:
+        default: "Primary CIDR"
+      SubnetRangeSecondary:
+         default: "Secondary CIDR"
       PrivateRouteTableId:
         default: "Private Route Table Id"
       Subnet01CidrBlock:
@@ -94,15 +91,12 @@ Parameters:
   ManagementCidrBlock:
     Type: String
     Description: Please enter the Management Cidr Block
-  VpcID:
+  SubnetRangePrimary:
     Type: String
-    Description: Please enter the VPC Id
-  VpcCIDR:
+    Description: Please enter primary CIDR Block
+  SubnetRangeSecondary:
     Type: String
-    Description: Please enter the VPC CIDR
-  InternetGatewayId:
-    Type: String
-    Description: Please enter the Internet Gateway Id
+    Description: Please enter secondary CIDR Block
   Subnet01CidrBlock:
     Type: String
     Description: Please enter the Cidr Block for 1st Subnet
@@ -217,13 +211,18 @@ Resources:
   VPC:
     Type: AWS::EC2::VPC
     Properties:
-      CidrBlock: !Ref VpcCIDR
-#       Fn::Sub: '${VpcCIDR}'
+      CidrBlock: !Ref SubnetRangePrimary
       EnableDnsSupport: true
       EnableDnsHostnames: true
       Tags:
         - Key: Name
           Value: Tetration_HoL
+  
+  VpcSecondaryCidr:
+    Type: AWS::EC2::VPCCidrBlock
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: !Ref SubnetRangeSecondary
 
   InternetGateway:
     Type: AWS::EC2::InternetGateway
@@ -323,6 +322,8 @@ Resources:
 
   CiscoHOLSubnet03:
     Type: AWS::EC2::Subnet
+    DependsOn:
+      - VpcSecondaryCidr
     Properties:
       VpcId: !Ref VPC
       CidrBlock: !Ref Subnet03CidrBlock
@@ -1686,7 +1687,7 @@ Resources:
   CiscoHOLVPCFlowLogS3Bucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: !Sub "${VpcID}-cisco-hol-${StudentName}-vpc-flow-logs"
+      BucketName: !Sub "${VPC}-cisco-hol-${StudentName}-vpc-flow-logs"
 
   CiscoHOLVPCFlowLog:
     Type: AWS::EC2::FlowLog

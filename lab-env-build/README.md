@@ -49,12 +49,22 @@ Once you are subscribed to the above products,  a script called `ami_create.py` 
 pip install boto3
 pip install pyyaml
 ```
+  
+You will also need to retrieve your AWS API Keys and export them as environment variables in your terminal session as shown below:  
+```
+export AWS_ACCESS_KEY_ID=<YOUR AWS ACCESS KEY>
+export AWS_SECRET_ACCESS_KEY=<YOUR AWS SECRET KEY>
+```  
+> This can be accomplished by navigating to the Identity and Access Management (IAM) service in the AWS console.  Under Users, select your user account and click on the `Security credentials` tab. 
 
 The script can then be run with the below command.  The region command-line argument is optional, and if omitted the AMIs will be created in the us-east-2 region.  If you plan to run the lab from an AWS region other than us-east-2, specify `--region` followed by the region name to have the AMIs copied to the destination region. 
 
 ```
 python ami_create.py --region us-east-1
 ```
+
+> It may be a good time to take a break as this script will take around 15-20 minutes to complete. 
+
 
    --- WORK IN PROGRESS BELOW ---
 
