@@ -424,7 +424,29 @@ try:
 except Exception as e:
     print(e)
     exit(1)
+
 #######################################################################
+# If new VPC created, grab the VPC ID from stack output and populate
+# it into parameters.yml
+######################################################################
+if not 'vpc_id' in params:
+    cloudformation = session.client('cloudformation')
+    stack = cloudformation.describe_stacks(
+            StackName=STACKS_LIST[0]
+        )
+    output = {}
+
+    for o in stack['Stacks'][0]['Outputs']:
+        output[o['OutputKey']] = o['OutputValue']
+    new_vpc_id = output['NewVpc']
+    with open ('parameters.yml', 'r') as f:
+        params_file = f.readlines()
+    for x, line in enumerate(params_file):
+        if 'vpc_id' in line:
+            params_file[x] = f"vpc_id: {new_vpc_id}\n"
+    with open('parameters.yml', 'w') as f:
+        f.writelines(params_file)
+
 
 #######################################################################
 # Generate CSV Reports ################################################
@@ -528,15 +550,22 @@ try:
         'EKS Cluster CA Cert (should not need)'
     ]
 
-    filename = 'reports/' + datetime.today().strftime('%H-%M-%S %Y-%m-%d') + '-report.csv'
+    filename = 'reports/' + datetime.today().strftime('%H-%M-%S %Y-%m-%d') + student + '-report.csv'
 
     if not os.path.exists('reports'):
         os.makedirs('reports')
+    
+    outlines = []
+    for heading, record in header, records:
+        outlines.append(f"{heading}, {record}\n")
 
-    with open(filename, 'w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(header)
-        writer.writerows(records)
+    with open(filename, 'w') as file:
+        file.writelines(outlines)
+
+    # with open(filename, 'w', newline='') as file:
+    #     writer = csv.writer(file)
+    #     writer.writerow(header)
+    #     writer.writerows(records)
 
 except Exception as e:
     print(e)
