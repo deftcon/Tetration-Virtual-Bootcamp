@@ -1110,8 +1110,8 @@ Resources:
           tunnel-group LAB-PROFILE type remote-access
           tunnel-group LAB-PROFILE general-attributes
             address-pool LAB-POOL
-            authentication-server-group ISE-R-AAA
-            accounting-server-group ISE-R-AAA
+            ! authentication-server-group ISE-R-AAA
+            ! accounting-server-group ISE-R-AAA
             ! Above ISE Auth and Acctg can be commented out to enable LOCAL Auth if no ISE host present
           default-group-policy LAB-PROFILE
           tunnel-group LAB-PROFILE webvpn-attributes

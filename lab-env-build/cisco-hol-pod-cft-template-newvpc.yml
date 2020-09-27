@@ -237,22 +237,6 @@ Resources:
       VpcId: !Ref VPC
       InternetGatewayId: !Ref InternetGateway
 
-  # RouteTable:
-  #   Type: AWS::EC2::RouteTable
-  #   Properties:
-  #     VpcId: !Ref VPC
-  #     Tags:
-  #       - Key: Name
-  #         Value: Tetration_HoL
-
-  # Route:
-  #   Type: AWS::EC2::Route
-  #   Properties:
-  #     RouteTableId: !Ref RouteTable
-  #     DestinationCidrBlock: 0.0.0.0/0
-  #     GatewayId: !Ref InternetGateway
-  #   DependsOn: AttachGateway
-
   # Create Public Route Table  
   PublicRouteTable:
     Type: AWS::EC2::RouteTable
@@ -1156,8 +1140,8 @@ Resources:
           tunnel-group LAB-PROFILE type remote-access
           tunnel-group LAB-PROFILE general-attributes
             address-pool LAB-POOL
-            authentication-server-group ISE-R-AAA
-            accounting-server-group ISE-R-AAA
+            ! authentication-server-group ISE-R-AAA
+            ! accounting-server-group ISE-R-AAA
             ! Above ISE Auth and Acctg can be commented out to enable LOCAL Auth if no ISE host present
           default-group-policy LAB-PROFILE
           tunnel-group LAB-PROFILE webvpn-attributes
@@ -1743,6 +1727,11 @@ Outputs:
   CiscoHOLAWSRegion:
     Description: AWS Region
     Value: !Ref Region
+  
+  # VPC ID
+  NewVpc:
+    Description: ID of created VPC
+    Value: !Ref VPC
   
   # Student Outputs
   CiscoHOLStudentName:
