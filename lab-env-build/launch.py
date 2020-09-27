@@ -230,7 +230,6 @@ if rusure_response.lower() != 'y':
 # CREATE THE S3 BUCKET FOR THE CFT TEMPLATE
 #######################################################################
 s3 = session.client('s3')
-print(f"session: {boto3.session.Session().region_name}")
 try:
     print(f"Creating S3 Bucket {S3_BUCKET}")
     response = s3.create_bucket(
@@ -550,7 +549,7 @@ try:
         'EKS Cluster CA Cert (should not need)'
     ]
 
-    filename = 'reports/' + datetime.today().strftime('%H-%M-%S %Y-%m-%d') + student + '-report.csv'
+    filename = 'reports/' + datetime.today().strftime('%Y-%m-%d-%H-%M-%S-') + output['CiscoHOLStudentName'] + '-report.csv'
 
     if not os.path.exists('reports'):
         os.makedirs('reports')

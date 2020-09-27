@@ -10,7 +10,7 @@ aws_region: us-east-1
 student_count: 1
 student_prefix: cisco-student
 # Enter the VPC ID below if using existing VPC. Comment if creating new VPC, it will be populated here upon creation.
-vpc_id: vpc-0b943272ef81c003c 
+vpc_id: vpc-08e01514bc3519b15
 #internet_gateway_id: igw-0dbfdfc228666cee0 # << Enter the IG_ID if using existing VPC. Comment if creating new VPC.
 subnet_range_primary: 10.1.0.0/16
 subnet_range_secondary: 198.18.0.0/16
