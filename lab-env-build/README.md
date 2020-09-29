@@ -55,7 +55,7 @@ You will also need to retrieve your AWS API Keys and export them as environment 
 export AWS_ACCESS_KEY_ID=<YOUR AWS ACCESS KEY>
 export AWS_SECRET_ACCESS_KEY=<YOUR AWS SECRET KEY>
 ```  
-> This can be accomplished by navigating to the Identity and Access Management (IAM) service in the AWS console.  Under Users, select your user account and click on the `Security credentials` tab. 
+> Generating API keys can be accomplished by navigating to the Identity and Access Management (IAM) service in the AWS console.  Under Users, select your user account and click on the `Security credentials` tab. 
 
 The script can then be run with the below command.  The region command-line argument is optional, and if omitted the AMIs will be created in the us-east-2 region.  If you plan to run the lab from an AWS region other than us-east-2, specify `--region` followed by the region name to have the AMIs copied to the destination region. 
 
@@ -63,91 +63,18 @@ The script can then be run with the below command.  The region command-line argu
 python ami_create.py --region us-east-1
 ```
 
-> It may be a good time to take a break as this script will take around 15-20 minutes to complete. 
-
-
-   --- WORK IN PROGRESS BELOW ---
-
-
-  
-
-<a href="#step-001" style="font-weight:bold">Failed Launch - Navigate to URI and accept subscription:</a>  
-<a href="images/admin_001.png"><img src="images/admin_001.png" style="width:100%;height:100%;"></a>  
-  
-
-
-<div class="step" id="step-002"><a href="#step-002" style="font-weight:bold">Step 002</a></div>  
-
-<a href="images/admin_002.png"><img src="images/admin_002.png" style="width:100%;height:100%;"></a>  
-  
-
-
-<div class="step" id="step-003"><a href="#step-003" style="font-weight:bold">Step 003</a></div>  
-
-<a href="images/admin_003.png"><img src="images/admin_003.png" style="width:100%;height:100%;"></a> 
-
-asav_ami: ami-0f3cca6491d987102   # << This is the ASAv, is a region-specific image ID, and requires a subscription from AWS Marketplace (search for ASAv BYOL)  
-
-
-<div class="step" id="step-004"><a href="#step-004" style="font-weight:bold">Step 004</a></div>  
-
-<a href="images/admin_004.png"><img src="images/admin_004.png" style="width:100%;height:100%;"></a>  
-  
-
-
-<div class="step" id="step-005"><a href="#step-005" style="font-weight:bold">Step 005</a></div>  
-
-<a href="images/admin_005.png"><img src="images/admin_005.png" style="width:100%;height:100%;"></a>  
-  
-
-
-<div class="step" id="step-006"><a href="#step-006" style="font-weight:bold">Step 006</a></div>  
-
-<a href="images/admin_006.png"><img src="images/admin_006.png" style="width:100%;height:100%;"></a>  
-  
-
-
-<div class="step" id="step-007"><a href="#step-007" style="font-weight:bold">Step 007</a></div>  
-
-<a href="images/admin_007.png"><img src="images/admin_007.png" style="width:100%;height:100%;"></a>  
-  
-
-
-<div class="step" id="step-008"><a href="#step-008" style="font-weight:bold">Step 008</a></div>  
-
-<a href="images/admin_008.png"><img src="images/admin_008.png" style="width:100%;height:100%;"></a>  
-  
-
-
-<div class="step" id="step-009"><a href="#step-009" style="font-weight:bold">Step 009</a></div>  
-
-<a href="images/admin_009.png"><img src="images/admin_009.png" style="width:100%;height:100%;"></a>  
-  
-
-
-<div class="step" id="step-010"><a href="#step-010" style="font-weight:bold">Step 010</a></div>  
-
-<a href="images/admin_010.png"><img src="images/admin_010.png" style="width:100%;height:100%;"></a>  
-  
-
-
-<div class="step" id="step-011"><a href="#step-011" style="font-weight:bold">Step 011</a></div>  
-
-<a href="images/admin_011.png"><img src="images/admin_011.png" style="width:100%;height:100%;"></a>  
-  
-  
+> It may be a good time to take a break as this script will take around 10-15 minutes to complete. 
   
 #### Files Required to Deploy to AWS
 
 Deployment of the environment for lab pod(s) requires the use of three files - namely: `parameters.yml`, `cisco-hol-pod-cft-template.yml`, and `launch.py`. 
 
 
-`launch.py` reads in the parameters unique to each deployment set from `parameters.yml`, then executes one entire deployment of `cisco-hol-pod-cft-template.yml` per number of `student_count` found in `parameters.yml`. Student count begins with `00` and thus we recommend designating the first pod for the lab admin/instructor as a pristene deployment for use in demoing or troubleshooting any issues an actual student might for some reason encounter, and allowing the first student to be the second pod, which would begin with the numbering `01`. 
-
+`launch.py` reads in the parameters unique to each deployment set from `parameters.yml`, then executes one entire deployment of `cisco-hol-pod-cft-template.yml` per number of `student_count` found in `parameters.yml`. Student count begins with `00` and thus we recommend designating the first pod for the lab admin/instructor as a pristine deployment for use in demoing or troubleshooting any issues an actual student might for some reason encounter, and allowing the first student to be the second pod, which would begin with the numbering `01`. 
 
 #### Parameters File Example
 
-Below is an example of a `parameters.yml` file, however with additional inline commented markup, which can also be found in the directory `parameters-templates` under the name `parameters-example.yml`. The inline comments should be fairly self-explanatory, although much will be parsed out and explained following the example file. 
+Below is an example of a `parameters.yml` file. You will need to modify the file to meet your needs and save it in the `lab-env-build` directory.  Note that you can deploy into an existing VPC or a new VPC can be created.  To deploy a new VPC,  comment out the lines beginning with `vpc_id` and `internet_gateway_id` by placing a `#` symbol in front of them.  If using an existing VPC, you must retrieve the VPC ID and Internet Gateway ID from the AWS dashboard and populate those values in the `parameters.yml` file.  
 
 
 ```yaml

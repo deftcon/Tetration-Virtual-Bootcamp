@@ -73,6 +73,7 @@ try:
     print('INFO: Management Cidr:', MANAGEMENT_CIDR)
 except:
     print(f'ERROR: Unable To Grab Your Public IP for the Management CIDR')
+    exit(1)
 #######################################################################
 
 

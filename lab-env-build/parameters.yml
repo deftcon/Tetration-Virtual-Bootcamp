@@ -5,12 +5,12 @@
 # This template for Deft Ohio region 10.0 vpc
 aws_access_key: 
 aws_secret_key: 
-aws_region: us-east-1
+aws_region: us-east-2
 
 student_count: 1
 student_prefix: cisco-student
 # Enter the VPC ID below if using existing VPC. Comment if creating new VPC, it will be populated here upon creation.
-vpc_id: vpc-0aeb4df46f75c0f40
+vpc_id: vpc-0586ac1114ce7f438
 #internet_gateway_id: igw-0dbfdfc228666cee0 # << Enter the IG_ID if using existing VPC. Comment if creating new VPC.
 subnet_range_primary: 10.1.0.0/16
 subnet_range_secondary: 198.18.0.0/16
@@ -19,17 +19,17 @@ s3_bucket: 'deft2-tetration-hol-cft-template' # << S3 Bucket is global DNS uniqu
 
 ise_server_ip: '172.16.171.49' # << This is your own private on-prem ISE instance - needs VPN with AWS VGW
 
-asav_ami: ami-0baf97ff07e48f3ac
-eks_worker_ami: ami-000c56e8536aaaf50
-ldap_ami: ami-0dd0d42e5d794c9cc
-mssql_ami: ami-06b3bfa9f06cacd07
-iis_ami: ami-08f1528dbb7360d0b
-mysql_ami: ami-0412c8db82a86a968
-apache_ami: ami-0b5a63a4e3e148295
-ansible_ami: ami-0eaee22bf80d4e870
-tet_data_ami: ami-0dea2326de876c583
-tet_edge_ami: ami-042381de13b771e34
-employee_ubuntu_ami: ami-02e67b54ebbc601cf
-sysadmin_ubuntu_ami: ami-02e67b54ebbc601cf
-attack_server_ami: ami-0b9119d0178e700cc
-guacamole_ami: ami-098baf83b507c18ba
+asav_ami: ami-0cc6d931eeb481121
+eks_worker_ami: ami-0c12dc9171d7252ad
+ldap_ami: ami-0e6f4391953eec444
+mssql_ami: ami-02fa166b36b1a5954
+iis_ami: ami-089f7d9a20af761ef
+mysql_ami: ami-0d3839180cd0ca578
+apache_ami: ami-00eb7861f0e0bc956
+ansible_ami: ami-0dde645700d15c7ec
+tet_data_ami: ami-0cc9cb8124d3ccf67
+tet_edge_ami: ami-062ceb898f17b6649
+employee_ubuntu_ami: ami-0c90a8a55d734ed9d
+sysadmin_ubuntu_ami: ami-0c90a8a55d734ed9d
+attack_server_ami: ami-0b921c0dfed15f762
+guacamole_ami: ami-03cca41618626cc18
