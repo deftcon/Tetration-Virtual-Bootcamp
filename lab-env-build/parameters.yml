@@ -1,17 +1,11 @@
 ---
-# Prefer using Env Vars to set AWS Access & Secret Keys named as such:
-# AWS_ACCESS_KEY_ID
-# AWS_SECRET_ACCESS_KEY 
-# This template for Deft Ohio region 10.0 vpc
-aws_access_key: 
-aws_secret_key: 
 aws_region: us-east-2
 
 student_count: 1
 student_prefix: cisco-student
 # Enter the VPC ID below if using existing VPC. Comment if creating new VPC, it will be populated here upon creation.
 vpc_id: vpc-0586ac1114ce7f438
-#internet_gateway_id: igw-0dbfdfc228666cee0 # << Enter the IG_ID if using existing VPC. Comment if creating new VPC.
+internet_gateway_id: igw-036df93d2c7cc253b # << Enter the IG_ID if using existing VPC. Comment if creating new VPC.
 subnet_range_primary: 10.1.0.0/16
 subnet_range_secondary: 198.18.0.0/16
 

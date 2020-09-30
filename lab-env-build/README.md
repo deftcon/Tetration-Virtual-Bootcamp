@@ -4,6 +4,8 @@
  
 ## Lab Environment Deployment
 
+<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/setup/lab_setup.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp-w-vids/diagrams/images/video_icon_small.png">Lab Setup Walk-Through :: Runtime: 7 mins</a>
+
 This lab environment build deploys entirely to AWS with the current unique exception of Cisco ISE, which requires deployment to an on-prem vCenter environment with a VPN connection and route table addition. Note importantly that this lab-build DOES NOT deploy any type of instance(s) for the Tetration cluster itself (TaaS/Tetration-V, etc), and ONLY deploys that which you see below in the "Complete Lab Diagram" inside of the "AWS Cloud" box with the already noted exception of ISE, as well as the exception of the necessary AMIs, which must be copied from Deft's AWS account and is detailed below in the next sub-section.  
   
 It is REQUIRED that you have your own instance of Tetration, whether On-Prem, Tet-V, or TaaS makes no difference, only that you have one provisioned. This instance of Tetration does not require provisioning prior to the deployment of this lab environment, however this lab environment won't do you much good without Tetration. 
@@ -74,30 +76,25 @@ Deployment of the environment for lab pod(s) requires the use of three files - n
 
 #### Parameters File Example
 
-Below is an example of a `parameters.yml` file. You will need to modify the file to meet your needs and save it in the `lab-env-build` directory.  Note that you can deploy into an existing VPC or a new VPC can be created.  To deploy a new VPC,  comment out the lines beginning with `vpc_id` and `internet_gateway_id` by placing a `#` symbol in front of them.  If using an existing VPC, you must retrieve the VPC ID and Internet Gateway ID from the AWS dashboard and populate those values in the `parameters.yml` file.  
+Below is an example of a `parameters.yml` file. You will need to modify the file to meet your needs and save it in the `lab-env-build` directory.  Note that you can deploy into an existing VPC or a new VPC can be created.  To deploy a new VPC,  comment out the lines beginning with `vpc_id` and `internet_gateway_id` by placing a `#` symbol in front of them.  If using an existing VPC, you must retrieve the VPC ID and Internet Gateway ID from the AWS dashboard and populate those values as shown in the example below.  
 
 
 ```yaml
 ---
-# Prefer using Env Vars to set AWS Access & Secret Keys named as such:
-# AWS_ACCESS_KEY_ID
-# AWS_SECRET_ACCESS_KEY 
-aws_access_key: 
-aws_secret_key: 
 aws_region: us-east-2   # << This is the region where you will deploy the lab pods to. Currently only one deployment set per region is supported.
 
 student_count: 1   # << Number of pods to deploy. First pod starts with 00, so recommendation is to deploy 1 more pod than needed and use first for admin/instructor pod
-student_prefix: cisco-student 
+student_prefix: cisco-student   # << the username as well as objects in AWS will be prefixed with this
 
-vpc_id: vpc-017dd7e8fc4a4b9de   # << This is your existing VPC in the above-mentioned AWS region where you will deploy the lab pods to
-internet_gateway_id: igw-0dbfdfc228666cee0   # << This IGW needs to exist already in the above VPC
+vpc_id: vpc-017dd7e8fc4a4b9de   # << This is your existing VPC in the above-mentioned AWS region where you will deploy the lab pods to.  Comment it out if creation of new VPC is desired.  
+internet_gateway_id: igw-0dbfdfc228666cee0   # << This IGW needs to exist already in the above VPC.  It will be ignored if creating a new VPC.
 subnet_range_primary: 10.0.0.0/16   # << This will be the "Internal" subnet (inside the ASA FW) for most workloads, including apps
 subnet_range_secondary: 198.18.0.0/16   # << This will be the "Internet" subnet (outside the ASA FW) for users and attacker
 
 s3_bucket: tetration-hol-cft-template   # << S3 Bucket is global DNS unique name - change to any arbitrary desired non-overlapping name
 
 ise_server_ip: 172.16.171.49   # << This is your own private on-prem ISE instance - needs VPN with AWS VGW
-
+# The below AMI IDs are populated automatically when the ami_create.py script is run, so it should not be necessary to manually update these except for in specific circumstances which are described below
 asav_ami: ami-0f3cca6491d987102   # << This is the ASAv, is a region-specific image ID, and requires a subscription from AWS Marketplace (search for ASAv BYOL)
 ldap_ami: ami-0b416df717b448667   # << This is for MS Active Directory and is a private image that requires a simple copy
 mssql_ami: ami-09782396834215732   # << This is for MS Win19 SQL and is a private image that requires a simple copy
@@ -113,17 +110,19 @@ employee_ubuntu_ami: ami-0af925e340025c9f9   # << This is the Ubuntu 18.04 deskt
 sysadmin_ubuntu_ami: ami-0af925e340025c9f9   # << Simple AMI copy 
 attack_server_ami: ami-04f958d48e22e185c   # << This is for Ubuntu Kali Linux with Metasploit and is a private image that requires launch, you to Accept Subscription, then create the AMI
 guacamole_ami: ami-007f96a1ed0595540   # << This is for CentOS7 Guacamole and is a private image that requires launch from shared AMI, you to Accept Subscription, then create the AMI
-eks_worker_ami: ami-0c4c60006aa81c29b   # << Global AWS Marketplace - will change with region - https://cloud-images.ubuntu.com/docs/aws/eks/
+eks_worker_ami: ami-0c4c60006aa81c29b   # << Global AWS Marketplace - this is the image used for the EKS worker node.  It may change from time to time as Amazon installs OS and other security patches. If it fails to launch due to an invalid AMI,  check here to determine the correct AMI ID - https://cloud-images.ubuntu.com/docs/aws/eks/
 
 ```
 
 #### Requirements / Dependencies
 
-It is important to note that prior to running `launch.py`, you must have a few things already created in your AWS environment - namely a VPC, an IGW, and a S3 bucket.
-1. VPC: This probably goes without saying, but we recommend a non-default VPC. Place your VPC ID in `parameters.yml` in the `vpc_id:` line (no quotes surounding the value). This VPC must have at least two CIDR blocks, one for `subnet_range_primary` and one for `subnet_range_secondary`. It is important that **no** subnets be created in this VPC whatsoever, else the script will error out. `launch.py` will create the subnets and we have a brief discussion about them below. 
-2. IGW: You must have one IGW created in your `vpc_id` and designated in the `parameters.yml` in the `internet_gateway_id:` lin (no quotes surounding the value).
-3. S3 Bucket: Due to the size of the CFT, AWS requires that we first upload it to an S3 bucket prior to calling it and executing against it. It is required that you have already created the empty S3 bucket and placed the name of the bucket in the `parameters.yml` in the `s3_bucket:` line (no quotes surounding the value).
-4. Two (2) Elastic IPs per student pod. These must be already *allocated* to your region, but not yet *assigned* to any ENIs. This requirement exists due to AWS not allowing a Public IP to be assigned to any EC2 instance with more than a single ENI. There are currently three instances that have multiple ENIs, including Guacamole, Tet Data Ingest, and ASAv. Guac requires one so that students can access the environment from the public internet, and Tet Data Ingest requires the ability to communicate out to the internet to reach the TaaS cluster. ASAv only communicates internally, even if you have ISE running on-prem, assuming you have a VGW back to your CGW. If you need ASAv to speak externally, there is some code that can be uncommented in the `cisco-hol-pod-cft-template.yml` file. 
+Important items to note prior to running `launch.py`:
+1. You may use an existing VPC and Internet Gateway, and if so their IDs must be specified in the `parameters.yml` file. Alternatively, you can comment out the `vpc_id` line in the `parameters.yml` file which will cause the script to create a new VPC and Internet Gateway. This VPC must have at least two CIDR blocks, one for `subnet_range_primary` and one for `subnet_range_secondary`. It is important that **no** subnets be created in this VPC whatsoever, else the script will error out. `launch.py` will create the subnets and we have a brief discussion about them below.  
+
+2. S3 Bucket: Due to the size of the CFT, AWS requires that we first upload it to an S3 bucket prior to calling it and executing against it. The S3 bucket will be created by `launch.py` using the bucket name defined in the `parameters.yml` file `s3_bucket` value.  
+The name must be unique globally, and must conform to standard DNS naming nomenclature.  
+
+3. Two (2) Elastic IPs per student pod. These must be already *allocated* to your region, but not yet *assigned* to any ENIs. This requirement exists due to AWS not allowing a Public IP to be assigned to any EC2 instance with more than a single ENI. There are currently three instances that have multiple ENIs, including Guacamole, Tet Data Ingest, and ASAv. Guac requires one so that students can access the environment from the public internet, and Tet Data Ingest requires the ability to communicate out to the internet to reach the TaaS cluster. ASAv only communicates internally, even if you have ISE running on-prem, assuming you have a VGW back to your CGW. If you need ASAv to speak externally, there is some code that can be uncommented in the `cisco-hol-pod-cft-template.yml` file. 
 
 > NOTE: By default, [AWS limits you to five (5) Elastic IPs per region](https://docs.aws.amazon.com/general/latest/gr/vpc-service.html#w571aab9d325b7b3b5){:target="_blank"}. If you plan to deploy more than two (2) student pods, you will need to [submit a request for service quota increase](https://console.aws.amazon.com/support/home?#/case/create?issueType=service-limit-increase&limitType=vpc){:target="_blank"}. 
 
@@ -161,7 +160,12 @@ More can be found [in the Diagrams section](../bootcamp/diagrams/){:target="_bla
 
 #### IAM Role API Credentials - Scope and Permissions
 
-The AWS API Access key and Secret key used to deploy is preferred to be stored in the local OS environment variables, vs in the `parameters.yml` file, and the same is mentioned at the top of that file in the comments. The en environment variables should be labeled as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, respectively. If this is necessary to change, these variable names must be updated in the `launch.py` script to match your local env var names. 
+The AWS API Access key and Secret key used to deploy must be stored in the local OS environment variables. The environment variables should be labeled as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, respectively. Both the `ami_create.py` and `launch.py` scripts require the environment variables to function properly.  These can be set using the `export` command in your terminal:
+
+```
+export AWS_ACCESS_KEY_ID=<YOUR ACCCESS KEY ID>
+export AWS_SECRET_ACCESS_KEY=<YOUR SECRET ACCESS KEY>
+```
 
 The AWS credentials used need to have permissions that allow them to create, update, and delete the following:
 
@@ -186,15 +190,15 @@ The AWS credentials used need to have permissions that allow them to create, upd
 
 #### Deploying Lab Environment to AWS
 
-Assuming you've filled out your desired values in `parameters.yml`, it's time to deploy. Change directory to the `cisco-tetration-hol` directory and run python to launch (the below assumes `python` aliases to `python3` or `python3.7`).
+Assuming you've filled out your desired values in `parameters.yml`, it's time to deploy. Change directory to the `lab-env-build` directory and run python to launch (the below assumes `python` aliases to `python3` or `python3.7`).
 
 ```bash
-cd /<relative-path>/cisco-tetration-hol
+cd lab-env-build
 python launch.py
 ```
 > Note that you will be asked to verify most of the data in parameters before proceeding. Enter "Y" (case insensitive) to proceed. Anything other than y/Y will terminate the launch. 
 
-Assuming everything is correct creds allow you should have output similar to the following:
+Assuming everything is correct you should have output similar to the following:
 
 ```bash
 INFO: Fetching Public IP Of The Orchestrator...
@@ -235,7 +239,7 @@ INFO: StackName: cisco-student-00, Status: Generating CSV Report...
 Exiting! All The Tasks Are Completed Successfully...
 ```
 
-Then you should find in your relative-path `reports` directory, a CSV file with every students' information. An enhancement to export a single XLS file with nicely formatted info *per student* is something we aim to do, in addition to the currently exported single CSV which is still very useful for the Lab Admin. 
+Then you should find in your project root a `reports` directory, a CSV file with every students' information. An enhancement to export a single XLS file with nicely formatted info *per student* is something we aim to do, in addition to the currently exported single CSV which is still very useful for the Lab Admin. 
 
 > If the script reports that the EKS Worker image could not be found,  it may be that the AMI ID has changed since this lab was developed.  The AMI ID changes from time to time as operating system patches are released and Amazon updates the images.  If this is the case,  this link has all possible region-specific AMIs for the EKS worker: - https://cloud-images.ubuntu.com/docs/aws/eks/
 
@@ -249,7 +253,7 @@ python rollback.py
 
 > Note that you will be asked to verify most of the data in parameters before proceeding. Notice that on rollback we require a bit more stringent checking. This is for your protection. You will be asked to enter 'Y' initially and this is case sensitive, then a second verification is performed ensuring your intent, and this one requires you to type out 'YES' initially and this is case sensitive. Anything else will terminate the destruction of the environment. 
 
-Assuming everything is correct creds allow you should have output similar to the following:
+Assuming everything is correct you should have output similar to the following:
 
 
 ```bash
@@ -289,13 +293,14 @@ INFO: StackName: cisco-student-00, Status: DELETE_IN_PROGRESS
 WARN: cisco-student-00 Does Not Exist...
 INFO: CloudFormation Rollback Completed Successfully...
 ```
+> Note that the VPC will not be deleted because the rollback script has no way of knowing whether an existing VPC was used or a new one created.  Also note that when the `launch.py` script was run, if you had commented the `vpc_id` line it created a new VPC and populated the new vpc_id into the `parameters.yml` un-commented.  This was done because `rollback.py` needs to know the vpc_id in order to delete other resources.
 
 
 #### Limitations
 
-Currently deploying this lab environment only supports a single 'deployment set' per region, where 'deployment set' is defined as any numerical value defined in `parameters.yml` under the `student_count` field. It essentially is the number of student pods you are deploying at any one time. You must have 2x EIPs per student allocated to your region, as per the above section labeled "Requirements / Dependancies". Removing the single deployment option per region is an enhancement that we aim to add shortly. 
+Currently deploying this lab environment only supports a single 'deployment set' per region, where 'deployment set' is defined as any numerical value defined in `parameters.yml` under the `student_count` field. It essentially is the number of student pods you are deploying at any one time. You must have 2x EIPs per student allocated to your region, as per the above section labeled "Requirements / Dependencies". Removing the single deployment option per region is an enhancement that we aim to add shortly. 
 
-Currently there is a limitation that prevents any abilitiy to increment student pod count once deployed. Since it would take a bit of an effort to add, it is something we will be looking at however, don't aim to add anytime soon.
+Currently there is a limitation that prevents any ability to increment student pod count once deployed. Since it would take a bit of an effort to add, it is something we will be looking at however, don't aim to add anytime soon.
 
 
 ##### LICENSE
