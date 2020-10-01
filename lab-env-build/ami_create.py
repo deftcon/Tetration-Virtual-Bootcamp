@@ -68,6 +68,7 @@ for inst_obj, image_obj in obj_list:
         image_obj.load()
         logger.info(f"{image_obj.name}: {image_obj.state}")
         sleep(5)
+    logger.info(f"{image_obj.name}: {image_obj.state}")
     inst_name = inst_obj.tags[0]['Value']
     logger.info(f"Terminating instance {inst_name}")
     inst_obj.terminate()
