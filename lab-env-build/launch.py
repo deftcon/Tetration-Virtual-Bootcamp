@@ -543,83 +543,84 @@ try:
 
         ])
 
-    header = [
-        'Student Lab Access (Guac) Web Console URL',
-        'Student Lab Access (Guac) Username',   
-        'Student Lab Access (Guac) Password', 
-        'nopCommerce Windows App URL',
-        'OpenCart Linux App URL',
-        'EKS SockShop App URL',
-        'Student Internal/Inside Corporate Subnet',
-        'Student External/Outside "Internet" Subnet',
-        'MS Active Directory IP',
-        'ISE Server IP',
-        'MS IIS nopCommerce Inside IP',
-        'MS IIS nopCommerce Outside IP',
-        'MS SQL Private IP',
-        'Apache OpenCart Inside IP',
-        'Apache OpenCart Outside IP',
-        'MySQL Private IP',
-        'Ansible IP',
-        'Tetration Edge IP',
-        'Tetration Data Ingest IP 1',
-        'Tetration Data Ingest IP 2',
-        'Tetration Data Ingest IP 3',
-        'ASAv Inside IP',
-        'ASAv Outside IP',
-        'Metasploit Attacker IP',
-        'Ubuntu18.04 Employee IP',
-        'Ubuntu18.04 SysAdmin IP',
-        'Student AWS External Orchestrator Access Key',
-        'Student AWS External Orchestrator Secret Key',
-        'Student AWS Region',
-        'Student VPC Flow Log S3 Bucket',
-        'EKS Cluster API Endpoint (use for external orchestrator)',
-        'EKS Cluster CA Cert (should not need)'
-    ]
+        header = [
+            'Student Lab Access (Guac) Web Console URL',
+            'Student Lab Access (Guac) Username',   
+            'Student Lab Access (Guac) Password', 
+            'nopCommerce Windows App URL',
+            'OpenCart Linux App URL',
+            'EKS SockShop App URL',
+            'Student Internal/Inside Corporate Subnet',
+            'Student External/Outside "Internet" Subnet',
+            'MS Active Directory IP',
+            'ISE Server IP',
+            'MS IIS nopCommerce Inside IP',
+            'MS IIS nopCommerce Outside IP',
+            'MS SQL Private IP',
+            'Apache OpenCart Inside IP',
+            'Apache OpenCart Outside IP',
+            'MySQL Private IP',
+            'Ansible IP',
+            'Tetration Edge IP',
+            'Tetration Data Ingest IP 1',
+            'Tetration Data Ingest IP 2',
+            'Tetration Data Ingest IP 3',
+            'ASAv Inside IP',
+            'ASAv Outside IP',
+            'Metasploit Attacker IP',
+            'Ubuntu18.04 Employee IP',
+            'Ubuntu18.04 SysAdmin IP',
+            'Student AWS External Orchestrator Access Key',
+            'Student AWS External Orchestrator Secret Key',
+            'Student AWS Region',
+            'Student VPC Flow Log S3 Bucket',
+            'EKS Cluster API Endpoint (use for external orchestrator)',
+            'EKS Cluster CA Cert (should not need)'
+        ]
 
-    columnar_output = [
-        f"Student Lab Access (Guac) Web Console URL,https://{output['CiscoHOLGuacamolePublic']}\n",
-        f"Student Lab Access (Guac) Username,{output['CiscoHOLStudentName']}\n",
-        f"Student Lab Access (Guac) Password,{output['CiscoHOLStudentPassword']}\n",
-        f"nopCommerce Windows App URL,http://{output['CiscoHOLIISPublic']}\n",
-        f"OpenCart Linux App URL,http://{output['CiscoHOLApachePublic']}\n",
-        f"EKS SockShop App URL,http://{student['eks_dns']}\n",
-        f"Student Internal/Inside Corporate Subnet,{output['CiscoHOLPublicSubnet01']}\n",
-        f"Student External/Outside Internet Subnet,{output['CiscoHOLPrivateSubnet']}\n",
-        f"MS Active Directory IP,{output['CiscoHOLActiveDirectory']}\n",
-        f"ISE Server IP,{output['CiscoHOLISE']}\n",
-        f"MS IIS nopCommerce Inside IP,{output['CiscoHOLIISPrivate']}\n",
-        f"MS IIS nopCommerce Outside IP,{output['CiscoHOLIISOutsidePrivate']}\n",
-        f"MS SQL Private IP,{output['CiscoHOLMSSQL']}\n",
-        f"Apache OpenCart Inside IP,{output['CiscoHOLApachePrivate']}\n",
-        f"Apache OpenCart Outside IP,{output['CiscoHOLApacheOutsidePrivate']}\n"
-        f"MySQL Private IP,{output['CiscoHOLMySql']}\n",
-        f"Ansible IP,{output['CiscoHOLAnsible']}\n",
-        f"Tetration Edge IP,{output['CiscoHOLTetrationEdge']}\n",
-        f"Tetration Data Ingest IP 1,{output['TetNetworkInterfaces01Data']}\n",
-        f"Tetration Data Ingest IP 2,{output['TetNetworkInterfaces02Data']}\n",
-        f"Tetration Data Ingest IP 3,{output['TetNetworkInterfaces03Data']}\n",
-        f"ASAv Inside IP,{output['CiscoHOLASAvPrivate03']}\n",
-        f"ASAv Outside IP,{output['CiscoHOLASAvPrivate02']}\n",
-        f"Metasploit Attacker IP,{output['CiscoHOLAttacker']}\n",
-        f"Ubuntu18.04 Employee IP,{output['CiscoHOLUbuntu1804Employee']}\n",
-        f"Ubuntu18.04 SysAdmin IP,{output['CiscoHOLUbuntu1804SysAdmin']}\n",
-        f"Student AWS External Orchestrator Access Key,{output['StudentAccessKey']}\n",
-        f"Student AWS External Orchestrator Secret Key,{output['StudentSecretKey']}\n",
-        f"Student AWS Region,{output['CiscoHOLAWSRegion']}\n",
-        f"Student VPC Flow Log S3 Bucket,{output['CiscoHOLVPCFlowLogBucket']}\n",
-        f"EKS Cluster API Endpoint (use for external orchestrator),{eks_endpoint_fqdn_only}\n",
-        f"EKS Cluster CA Cert (should not need),{output['EKSClusterCertificate']}"
-    ]
-    
-    filename = 'reports/' + datetime.today().strftime('%Y-%m-%d-%H-%M-%S-') + output['CiscoHOLStudentName'] + '-report.csv'
+        columnar_output = [
+            f"Student Lab Access (Guac) Web Console URL,https://{output['CiscoHOLGuacamolePublic']}\n",
+            f"Student Lab Access (Guac) Username,{output['CiscoHOLStudentName']}\n",
+            f"Student Lab Access (Guac) Password,{output['CiscoHOLStudentPassword']}\n",
+            f"nopCommerce Windows App URL,http://{output['CiscoHOLIISPublic']}\n",
+            f"OpenCart Linux App URL,http://{output['CiscoHOLApachePublic']}\n",
+            f"EKS SockShop App URL,http://{student['eks_dns']}\n",
+            f"Student Internal/Inside Corporate Subnet,{output['CiscoHOLPublicSubnet01']}\n",
+            f"Student External/Outside Internet Subnet,{output['CiscoHOLPrivateSubnet']}\n",
+            f"MS Active Directory IP,{output['CiscoHOLActiveDirectory']}\n",
+            f"ISE Server IP,{output['CiscoHOLISE']}\n",
+            f"MS IIS nopCommerce Inside IP,{output['CiscoHOLIISPrivate']}\n",
+            f"MS IIS nopCommerce Outside IP,{output['CiscoHOLIISOutsidePrivate']}\n",
+            f"MS SQL Private IP,{output['CiscoHOLMSSQL']}\n",
+            f"Apache OpenCart Inside IP,{output['CiscoHOLApachePrivate']}\n",
+            f"Apache OpenCart Outside IP,{output['CiscoHOLApacheOutsidePrivate']}\n"
+            f"MySQL Private IP,{output['CiscoHOLMySql']}\n",
+            f"Ansible IP,{output['CiscoHOLAnsible']}\n",
+            f"Tetration Edge IP,{output['CiscoHOLTetrationEdge']}\n",
+            f"Tetration Data Ingest IP 1,{output['TetNetworkInterfaces01Data']}\n",
+            f"Tetration Data Ingest IP 2,{output['TetNetworkInterfaces02Data']}\n",
+            f"Tetration Data Ingest IP 3,{output['TetNetworkInterfaces03Data']}\n",
+            f"ASAv Inside IP,{output['CiscoHOLASAvPrivate03']}\n",
+            f"ASAv Outside IP,{output['CiscoHOLASAvPrivate02']}\n",
+            f"Metasploit Attacker IP,{output['CiscoHOLAttacker']}\n",
+            f"Ubuntu18.04 Employee IP,{output['CiscoHOLUbuntu1804Employee']}\n",
+            f"Ubuntu18.04 SysAdmin IP,{output['CiscoHOLUbuntu1804SysAdmin']}\n",
+            f"Student AWS External Orchestrator Access Key,{output['StudentAccessKey']}\n",
+            f"Student AWS External Orchestrator Secret Key,{output['StudentSecretKey']}\n",
+            f"Student AWS Region,{output['CiscoHOLAWSRegion']}\n",
+            f"Student VPC Flow Log S3 Bucket,{output['CiscoHOLVPCFlowLogBucket']}\n",
+            f"EKS Cluster API Endpoint (use for external orchestrator),{eks_endpoint_fqdn_only}\n",
+            f"EKS Cluster CA Cert (should not need),{output['EKSClusterCertificate']}"
+        ]
+        
+        filename = 'reports/' + datetime.today().strftime('%Y-%m-%d-%H-%M-%S-') + output['CiscoHOLStudentName'] + '-report.csv'
 
-    if not os.path.exists('reports'):
-        os.makedirs('reports')
-
-    with open(filename, 'w') as file:
-        file.writelines(columnar_output)
+        if not os.path.exists('reports'):
+            os.makedirs('reports')
+        
+        print(f"INFO: Writing file: {filename} to reports/.")
+        with open(filename, 'w') as file:
+            file.writelines(columnar_output)
     
     # the old way
     # with open(filename, 'w', newline='') as file:
