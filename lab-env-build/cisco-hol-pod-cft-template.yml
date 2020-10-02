@@ -1218,9 +1218,8 @@ Resources:
           #!/bin/bash
           rm -rf /opt/*
           pip install requests-ntlm --upgrade
-          sh -c 'cd /opt && git clone https://github.com/deftcon/ansible-tetration-sensor.git'
-          sh -c 'cd /opt && git clone https://github.com/deftcon/ansible_asa.git'
-          cat <<EOF > /opt/ansible-tetration-sensor/inventory/hosts
+          sh -c 'cd /opt && git clone https://github.com/deftcon/TVB-assets'
+          cat <<EOF > /opt/TVB-assets/tvb-agent/inventory/hosts
           [centos]
           ${CiscoHOLEC2Apache.PrivateIp}
           ${CiscoHOLEC2MySQL.PrivateIp}
@@ -1246,8 +1245,8 @@ Resources:
           ansible_winrm_server_cert_validation=ignore
           validate_certs=false
           EOF
-          sed -i "s/^None//g" /opt/ansible-tetration-sensor/inventory/hosts
-          cat <<EOF > /opt/ansible_asa/inventory/hosts
+          sed -i "s/^None//g" /opt/TVB-assets/tvb-agent/inventory/hosts
+          cat <<EOF > /opt/TVB-assets/tvb-asa/inventory/hosts
           [asa]
           ${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress}
           [asa:vars]
@@ -1256,7 +1255,7 @@ Resources:
           ansible_connection=network_cli
           ansible_network_os=asa
           EOF
-          sed -i "s/^None//g" /opt/ansible_asa/inventory/hosts
+          sed -i "s/^None//g" /opt/TVB-assets/tvb-asa/inventory/hosts
           sed -i "s/^PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
           systemctl restart sshd
           systemctl restart network
@@ -1321,7 +1320,7 @@ Resources:
           </AnyConnectProfile>
           EOF
           sshpass -p 'tet123$$!' scp -o StrictHostKeyChecking=no /home/ciscolab/anyconnect-profile.xml admin@${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress}:disk0:anyconnect-profile.xml &> /tmp/anyconnect-init.log
-          ansible-playbook /opt/ansible_asa/asa_vpn.yml -i /opt/ansible_asa/inventory/hosts
+          ansible-playbook /opt/TVB-assets/tvb-asa/asa_vpn.yml -i /opt/TVB-assets/tvb-asa/inventory/hosts
       NetworkInterfaces: 
         - AssociatePublicIpAddress: "true"
           DeviceIndex: "0"
