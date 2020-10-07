@@ -1,6 +1,6 @@
 # Cisco Tetration Virtual Bootcamp
 
-## (DO FIRST>> right-click above "View on GitHub" and Open in a new tab/window)
+<a href="https://github.com/deftcon/Tetration-Virtual-Bootcamp/tree/master/lab-env-build" target="_blank">Click Here First to open this repo in GitHub</a>
  
 ## Lab Environment Deployment
 
@@ -8,15 +8,13 @@
 
 This lab environment build deploys entirely to AWS with the current unique exception of Cisco ISE, which requires deployment to an on-prem vCenter environment with a VPN connection and route table addition. Note importantly that this lab-build DOES NOT deploy any type of instance(s) for the Tetration cluster itself (TaaS/Tetration-V, etc), and ONLY deploys that which you see below in the "Complete Lab Diagram" inside of the "AWS Cloud" box with the already noted exception of ISE, as well as the exception of the necessary AMIs, which must be copied from Deft's AWS account and is detailed below in the next sub-section.  
   
-It is REQUIRED that you have your own instance of Tetration, whether On-Prem, Tet-V, or TaaS makes no difference, only that you have one provisioned. This instance of Tetration does not require provisioning prior to the deployment of this lab environment, however this lab environment won't do you much good without Tetration. 
-
-<a href="https://app.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501" style="font-weight:bold" target="_blank">"Complete Lab Diagram"  
-<img src="../bootcamp/diagrams/images/diagrams_003.png"></a>  
-
+It is REQUIRED that you have your own instance of Tetration, whether On-Prem, Tet-V, or TaaS makes no difference, only that you have one provisioned. This instance of Tetration does not require provisioning prior to the deployment of this lab environment, however this lab environment won't do you much good without Tetration.   
+  
+<a href="https://www.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501">Complete Lab Diagram<img src="https://lucid.app/publicSegments/view/c88b4faf-7135-48ba-8344-1a75d6dc8fbe/image.png" style="width:100%;height:100%;"></a>  
+  
+  
 
 #### AMIs Required Prior to AWS Lab Environment Deployment
-
-There are a number of AMIs that will be copied from Deft's AWS account in the Ohio region (us-east-2) prior to being able to deploy this lab environment to AWS successfully.  
 
 From the AWS Console,  navigate to the EC2 service and change to the `us-east-2` region (Ohio).  Then select AMIs and change the view to "Private Images". If the AMIs listed below are not listed, <a href="https://github.com/deftcon/Tetration-Virtual-Bootcamp/issues/1" target="_blank">please open an issue on GitHub similar to this one</a>. 
   
@@ -154,9 +152,9 @@ Say you chose `10.0.0.0/16` as your primary range, and `198.18.0.0/16` as your s
 > Note that the default subnet value for the secondary range is `198.18.0.0/16` and was chosen specifically becuase it both represented a "real internet, non-RFC1918 IP range", and also that it falls in the *'Reserved'* range, specifically that "This block has been allocated for use in benchmark tests of network interconnect devices" per [RFC5735](https://tools.ietf.org/html/rfc5735){:target="_blank"}. It could initially be argued that a range such as `198.51.100.0/24` or `203.0.113.0/24` would seem more appropos as they were created so that "This block is assigned as "TEST-NET-2/3" for use in documentation and example code", but they weren't large enough (/24), so the decision was made soundly to provide a real-world-like environment whilst simultaneously avoiding any blackholing any legitimate internet traffic from within the lab environment. 
 
 Here is a diagram that will help to explain the subnets described above in a bit better visual detail: 
-![Subnet Diagram](../bootcamp/diagrams/images/diagrams_003.png)
-More can be found [in the Diagrams section](../bootcamp/diagrams/){:target="_blank"}.
-
+<a href="https://www.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501" target="_blank"><img src="https://lucid.app/publicSegments/view/c88b4faf-7135-48ba-8344-1a75d6dc8fbe/image.png" style="width:100%;height:100%;"></a>  
+More can be found [in the Diagrams section](../bootcamp/diagrams/){:target="_blank"}.  
+  
 
 #### IAM Role API Credentials - Scope and Permissions
 
