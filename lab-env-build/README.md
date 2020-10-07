@@ -8,16 +8,10 @@ This lab environment build deploys entirely to AWS with the current unique excep
   
 It is REQUIRED that you have your own instance of Tetration, whether On-Prem, Tet-V, or TaaS makes no difference, only that you have one provisioned. This instance of Tetration does not require provisioning prior to the deployment of this lab environment, however this lab environment won't do you much good without Tetration.  
   
----  
-
-<div style="width: 640px; height: 480px; margin: 10px; position: relative;"><iframe allowfullscreen frameborder="0" style="width:640px; height:480px" src="https://lucid.app/documents/embeddedchart/425e1b97-194e-413a-b793-0df939a87501" id="9ELCtIAUSL6I"></iframe></div>
-
----  
-  
-
 <a href="https://app.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501" style="font-weight:bold" target="_blank">"Complete Lab Diagram"  
 <img src="../bootcamp/diagrams/images/diagrams_003.png"></a>  
-
+  
+  
 
 #### AMIs Required Prior to AWS Lab Environment Deployment
 
