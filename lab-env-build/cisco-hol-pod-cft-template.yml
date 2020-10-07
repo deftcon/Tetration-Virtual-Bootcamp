@@ -1395,7 +1395,7 @@ Resources:
                       <param name="password">tet123\$\$!</param>
                       <param name="font-name">terminus</param>
                   </connection>
-                  <connection name="05) End Users - Ubuntu18.04 - Employee Alternative">
+                  <connection name="05) End Users - Ubuntu18.04 - Employee Desktop">
                       <protocol>rdp</protocol>
                       <param name="hostname">${CiscoHOLEC2Ubuntu1804Employee.PrivateIp}</param>
                       <param name="port">3389</param>
@@ -1404,7 +1404,7 @@ Resources:
                       <param name="security">any</param>
                       <param name="ignore-cert">true</param>
                   </connection>	
-                  <connection name="06) End Users - Ubuntu18.04 - SysAdmin Alternative">
+                  <connection name="06) End Users - Ubuntu18.04 - SysAdmin Desktop">
                       <protocol>rdp</protocol>
                       <param name="hostname">${CiscoHOLEC2Ubuntu1804SysAdmin.PrivateIp}</param>
                       <param name="port">3389</param>

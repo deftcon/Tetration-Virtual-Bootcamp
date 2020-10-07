@@ -9,8 +9,8 @@ In this module, we'll download the installation scripts for Windows and Linux fr
 ---  
 This diagram depicts how you will deploy Tetration Agents out to each of your workloads in your lab environment. Deployment will occur by performing the following tasks:
    1. Connect to the Guac server via HTTPS
-   2. Click on and connecting to the Ansible machine
-   3. Verify and, if necessary, edit the inventory for deployment by first changing directories with `cd /opt/ansible-tetration-sensor/` running `sudo nano inventory/hosts` and when prompted with `[sudo] password for ciscolab:`, entering the standard lab password of `tet123$$!`. 
+   2. Click on "Common Services - Ansible" to connect to the Ansible machine
+   3. Verify and, if necessary, edit the inventory for deployment by first changing directories with `cd /opt/TVB-assets/tvb-agent` running `sudo nano inventory/hosts` and when prompted with `[sudo] password for ciscolab:`, entering the standard lab password of `tet123$$!`. 
 
 <a href="https://www.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501" target="_blank"><img src="../diagrams/images/diagrams_007.png" style="width:100%;height:100%;"></a>  
 
@@ -111,7 +111,7 @@ Log into the Apache Guacamole server and open a session to the Ansible machine.
 
 <div class="step" id="step-008"><a href="#step-008" style="font-weight:bold">Step 008</a></div>  
 
-Copy the scripts from the desktop to the Ansible machine by clicking and dragging them from the desktop to the Ansible console window.  A file copy dialogue should be displayed in the lower right-hand corner.   Once complete,  do an `ls` to list the directory on the Ansible machine and make sure the files are present.
+Copy the scripts from the desktop to the Ansible machine by clicking and dragging them from the desktop to the Ansible console window.  A file copy dialogue should be displayed in the lower right-hand corner.   Once complete,  do an `ls` to list the directory on the Ansible machine and make sure the files are present.  The files will be copied to the home directory of the `ciscolab` user. If you have changed directories do a `cd ~` to change back to the home directory and then do an `ls`.  
 
 <a href="images/module_03-02_008.png"><img src="images/module_03-02_008.png" style="width:100%;height:100%;"></a>  
 
@@ -119,7 +119,7 @@ Copy the scripts from the desktop to the Ansible machine by clicking and draggin
 
 <div class="step" id="step-009"><a href="#step-009" style="font-weight:bold">Step 009</a></div>  
 
-Switch to the directory containing the Ansible playbooks with the command `cd /opt/ansible-tetration-sensor/` and then `cd inventory` to switch to the Inventory directory.  Type the command `cat hosts` and examine the contents in the inventory file. The Linux and Windows machine IP addresses as listed in your student spreadsheet should already be populated in the [centos] section for Linux and the [win] section for Windows.
+Switch to the directory containing the Ansible playbooks with the command `cd /opt/TVB-Assets/tvb-agent` and then `cd inventory` to switch to the Inventory directory.  Type the command `cat hosts` and examine the contents in the inventory file. The Linux and Windows machine IP addresses as listed in your student spreadsheet should already be populated in the [centos] section for Linux and the [win] section for Windows.
 
 <a href="images/module_03-02_009.png"><img src="images/module_03-02_009.png" style="width:100%;height:100%;"></a>  
 
