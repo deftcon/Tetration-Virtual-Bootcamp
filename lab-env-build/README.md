@@ -1,6 +1,6 @@
 # Cisco Tetration Virtual Bootcamp
 
-## (DO FIRST>> right-click above "View on GitHub" and Open in a new tab/window)
+<a href="https://github.com/deftcon/Tetration-Virtual-Bootcamp/tree/master/lab-env-build" target="_blank">Click Here First to open this repo in GitHub</a>
  
 ## Lab Environment Deployment
 
@@ -11,7 +11,7 @@ It is REQUIRED that you have your own instance of Tetration, whether On-Prem, Te
 <a href="https://app.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501" style="font-weight:bold" target="_blank">"Complete Lab Diagram"  
 <img src="../bootcamp/diagrams/images/diagrams_003.png"></a>  
   
-  
+
 
 #### AMIs Required Prior to AWS Lab Environment Deployment
 
