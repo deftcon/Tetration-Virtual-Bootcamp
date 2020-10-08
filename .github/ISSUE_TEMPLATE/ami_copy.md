@@ -9,4 +9,4 @@ Would you mind adding my AWS Account ID so that I may copy the AMIs over and per
 Your AWS Account Number here:
 
 Issues with providing your AWS Act ID here? 
-No worries. Simply send an email to [tvb@deftcon.io](mailto:tvb@deftcon.io) with this info and we will get it taken care of on the DL.
+No worries. Simply send an email to tvb@deftcon.io with this info and we will get it taken care of on the DL.
