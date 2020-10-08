@@ -4,7 +4,7 @@
  
 ## Lab Environment Deployment
 
-<a href="https://deftcon-tetration-virtual-bootcamp.s3.us-east-2.amazonaws.com/setup/lab_setup.mp4" style="font-weight:bold"><img src="https://tetration.guru/bootcamp-w-vids/diagrams/images/video_icon_small.png">Lab Setup Walk-Through :: Runtime: 7 mins</a>
+<a href="https://learningnetwork.cisco.com/s/learning-activity-detail-standard-lp?ltui__urlRecordId=a0t3i000004MRV4AAO&ltui__urlRedirect=learning-activity-detail-standard-lp&ltui__parentUrl=learning-plan-detail-standard" target="_blank" style="font-weight:bold"><img src="https://tetration.guru/bootcamp-w-vids/diagrams/images/video_icon_small.png">Lab Setup Walk-Through Video can be found here on CLN</a>
 
 This lab environment build deploys entirely to AWS with the current unique exception of Cisco ISE, which requires deployment to an on-prem vCenter environment with a VPN connection and route table addition. Note importantly that this lab-build DOES NOT deploy any type of instance(s) for the Tetration cluster itself (TaaS/Tetration-V, etc), and ONLY deploys that which you see below in the "Complete Lab Diagram" inside of the "AWS Cloud" box with the already noted exception of ISE, as well as the exception of the necessary AMIs, which must be copied from Deft's AWS account and is detailed below in the next sub-section.  
   
@@ -16,22 +16,12 @@ It is REQUIRED that you have your own instance of Tetration, whether On-Prem, Te
 
 #### AMIs Required Prior to AWS Lab Environment Deployment
 
-From the AWS Console,  navigate to the EC2 service and change to the `us-east-2` region (Ohio).  Then select AMIs and change the view to "Private Images". If the AMIs listed below are not listed, <a href="https://github.com/deftcon/Tetration-Virtual-Bootcamp/issues/1" target="_blank">please open an issue on GitHub similar to this one</a>. 
+There are a number of custom-built AMI images that require copying before deploying this lab environment. These images reside in Deftcon's GitHub account, and require us to add _**your**_ AWS Account ID to each AMI and Snapshot, therefore <a href="https://github.com/deftcon/Tetration-Virtual-Bootcamp/issues/1" target="_blank">please open an issue on GitHub similar to this one</a> and specify your AWS Account ID. You should receive an email in 24 hours or less (often much faster) indicating the permissions have been added and that you are ready to proceed with the below instructions.  
   
-ldap_ami: ami-0f7a08583b3138159     
-mssql_ami: ami-09782396834215732  
-iis_ami: ami-091df3f67b36e2250  
-tet_data_ami: ami-0cf7fd4e75d7d91ab  
-tet_edge_ami: ami-05d08946ffda72d18  
-employee_ubuntu_ami: ami-0af925e340025c9f9  
-sysadmin_ubuntu_ami: ami-0af925e340025c9f9  
-mysql_ami: ami-051ba5822fc02da4b   
-apache_ami: ami-0c85d8851d66cd9f9  
-ansible_ami: ami-0083b10a007c92d2d  
-guacamole_ami: ami-007f96a1ed0595540 
-attack_server_ami: ami-04f958d48e22e185c  
-mysql_ami: ami-051ba5822fc02da4b  
-attack_server_ami: ami-04f958d48e22e185c
+---  
+NOTE: You cannot move on and run `ami_create.py` as instructed below until _**after**_ you receive an email reply indicating the permissions have been added to allow you access to the necessary AMIs. Failure to follow this will result in both the `ami_create.py` and the `launch.py` failing miserably. 
+---  
+  
 
 For a few of the images, you must Subscribe to use them in AWS Marketplace before they can be launched.  Please follow the links below and proceed to "Continue to Subscribe".   
 
