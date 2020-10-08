@@ -1,7 +1,7 @@
 # Cisco Tetration Virtual Bootcamp
-
-<a href="https://github.com/deftcon/Tetration-Virtual-Bootcamp/tree/master/lab-env-build" target="_blank">Click Here First to open this repo in GitHub</a>
- 
+  
+<a href="https://github.com/deftcon/Tetration-Virtual-Bootcamp/tree/master/lab-env-build" target="_blank">Click Here First to open this repo in GitHub</a>  
+  
 ## Lab Environment Deployment
 
 <a href="https://learningnetwork.cisco.com/s/learning-activity-detail-standard-lp?ltui__urlRecordId=a0t3i000004MRV4AAO&ltui__urlRedirect=learning-activity-detail-standard-lp&ltui__parentUrl=learning-plan-detail-standard" target="_blank" style="font-weight:bold"><img src="https://tetration.guru/bootcamp-w-vids/diagrams/images/video_icon_small.png">Lab Setup Walk-Through Video can be found here on CLN</a>
@@ -10,7 +10,7 @@ This lab environment build deploys entirely to AWS with the current unique excep
   
 It is REQUIRED that you have your own instance of Tetration, whether On-Prem, Tet-V, or TaaS makes no difference, only that you have one provisioned. This instance of Tetration does not require provisioning prior to the deployment of this lab environment, however this lab environment won't do you much good without Tetration.   
   
-<a href="https://www.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501">Complete Lab Diagram<img src="https://lucid.app/publicSegments/view/c88b4faf-7135-48ba-8344-1a75d6dc8fbe/image.png" style="width:100%;height:100%;"></a>  
+<a href="https://www.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501" target="_blank">Complete Lab Diagram<img src="https://lucid.app/publicSegments/view/c88b4faf-7135-48ba-8344-1a75d6dc8fbe/image.png" style="width:100%;height:100%;"></a>  
   
   
 
@@ -19,9 +19,9 @@ It is REQUIRED that you have your own instance of Tetration, whether On-Prem, Te
 There are a number of custom-built AMI images that require copying before deploying this lab environment. These images reside in Deftcon's GitHub account, and require us to add _**your**_ AWS Account ID to each AMI and Snapshot, therefore <a href="https://github.com/deftcon/Tetration-Virtual-Bootcamp/issues/1" target="_blank">please open an issue on GitHub similar to this one</a> and specify your AWS Account ID. You should receive an email in 24 hours or less (often much faster) indicating the permissions have been added and that you are ready to proceed with the below instructions.  
   
 ---  
-NOTE: You cannot move on and run `ami_create.py` as instructed below until _**after**_ you receive an email reply indicating the permissions have been added to allow you access to the necessary AMIs. Failure to follow this will result in both the `ami_create.py` and the `launch.py` failing miserably. 
+NOTE: You cannot move on and run `ami_create.py` as instructed below until _**after**_ you receive an email reply indicating the permissions have been added to allow you access to the necessary AMIs. Failure to follow this will result in both the `ami_create.py` and the `launch.py` failing miserably.
+
 ---  
-  
 
 For a few of the images, you must Subscribe to use them in AWS Marketplace before they can be launched.  Please follow the links below and proceed to "Continue to Subscribe".   
 
