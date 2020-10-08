@@ -9,10 +9,10 @@ A clear and concise description of what the bug is.
 
 **Reproduce unintended behavior. Describe that behavior here**
 Steps to reproduce the behavior:
-1. Go to 'abc'
-2. Click on 'ghi'
-3. Scroll down to 'xyz'
-4. See specific error: .....
+1. Go to '...'
+2. Click on '....'
+3. Scroll down to '.....'
+4. See specific error: ......
 
 **Expected behavior**
 A clear and concise description of what you expected to happen.
