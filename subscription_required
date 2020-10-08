@@ -1,0 +1,11 @@
+ldap_ami: ami-0f7a08583b3138159 # << Simple AMI Copy
+mssql_ami: ami-09782396834215732 # << Simple AMI Copy
+iis_ami: ami-091df3f67b36e2250 # << Simple AMI Copy
+tet_data_ami: ami-0cf7fd4e75d7d91ab # << Simple AMI Copy
+tet_edge_ami: ami-05d08946ffda72d18 # << Simple AMI Copy
+employee_ubuntu_ami: ami-0af925e340025c9f9 # << Simple AMI Copy 
+sysadmin_ubuntu_ami: ami-0af925e340025c9f9 # << Simple AMI Copy 
+attack_server_ami: ami-04f958d48e22e185c # << Requires Lanuch, Accept Subscription, then AMI Create. 
+mysql_ami: ami-051ba5822fc02da4b # << Requires Lanuch, Accept Subscription, then AMI Create.  https://aws.amazon.com/marketplace/pp?sku=aw0evgkw8e5c1q413zgy5pjce
+apache_ami: ami-0c85d8851d66cd9f9 # << Requires Lanuch, Accept Subscription, then AMI Create. https://aws.amazon.com/marketplace/pp?sku=aw0evgkw8e5c1q413zgy5pjce
+ansible_ami: ami-0083b10a007c92d2d # << Requires Lanuch, Accept Subscription, then AMI Create. https://aws.amazon.com/marketplace/pp?sku=aw0evgkw8e5c1q413zgy5pjce

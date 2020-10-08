@@ -739,12 +739,13 @@ Resources:
         SubnetId: !Ref CiscoHOLSubnet01
 
   # Create Elastic IP Addresses
-  # CiscoHOLEC2TetDataEIP1:
-  #   Type: AWS::EC2::EIP
-  #   Properties:
-  #     Tags:
-  #       - Key: Name
-  #         Value: !Sub "cisco-hol-${StudentName}-eip-TetData-${Region}${Subnet01AvailabilityZone}"
+  # IF you have more than five (5) EIPs already associated to your AWS VPC, comment out the next 6 lines!
+  CiscoHOLEC2TetDataEIP1:
+    Type: AWS::EC2::EIP
+    Properties:
+      Tags:
+        - Key: Name
+          Value: !Sub "cisco-hol-${StudentName}-eip-TetData-${Region}${Subnet01AvailabilityZone}"
   
   # Elastic IP Association  
   CiscoHOLAssociateEIPTetData:
@@ -907,6 +908,7 @@ Resources:
           - !Ref CiscoHOLSubnet01
           - !Ref CiscoHOLSubnet02
       RoleArn: !GetAtt EKSClusterInstanceRole.Arn
+      Version: '1.15'
   
   # Node Launch Configuration
   EKSWorkerNodeLaunchConfig:
@@ -1108,8 +1110,8 @@ Resources:
           tunnel-group LAB-PROFILE type remote-access
           tunnel-group LAB-PROFILE general-attributes
             address-pool LAB-POOL
-            authentication-server-group ISE-R-AAA
-            accounting-server-group ISE-R-AAA
+            ! authentication-server-group ISE-R-AAA
+            ! accounting-server-group ISE-R-AAA
             ! Above ISE Auth and Acctg can be commented out to enable LOCAL Auth if no ISE host present
           default-group-policy LAB-PROFILE
           tunnel-group LAB-PROFILE webvpn-attributes
@@ -1393,7 +1395,7 @@ Resources:
                       <param name="password">tet123\$\$!</param>
                       <param name="font-name">terminus</param>
                   </connection>
-                  <connection name="05) End Users - Ubuntu18.04 - Employee Alternative">
+                  <connection name="05) End Users - Ubuntu18.04 - Employee Desktop">
                       <protocol>rdp</protocol>
                       <param name="hostname">${CiscoHOLEC2Ubuntu1804Employee.PrivateIp}</param>
                       <param name="port">3389</param>
@@ -1402,7 +1404,7 @@ Resources:
                       <param name="security">any</param>
                       <param name="ignore-cert">true</param>
                   </connection>	
-                  <connection name="06) End Users - Ubuntu18.04 - SysAdmin Alternative">
+                  <connection name="06) End Users - Ubuntu18.04 - SysAdmin Desktop">
                       <protocol>rdp</protocol>
                       <param name="hostname">${CiscoHOLEC2Ubuntu1804SysAdmin.PrivateIp}</param>
                       <param name="port">3389</param>
@@ -1500,12 +1502,13 @@ Resources:
           Primary: 'true'
 
   # Create Elastic IP Addresses
-  # CiscoHOLGuacamoleEIP:
-  #   Type: AWS::EC2::EIP
-  #   Properties:
-  #     Tags:
-  #       - Key: Name
-  #         Value: !Sub "cisco-hol-${StudentName}-eip-guacamole-${Region}${Subnet01AvailabilityZone}"
+  # IF you have more than five (5) EIPs already associated to your AWS VPC, comment out the next 6 lines!
+  CiscoHOLGuacamoleEIP:
+    Type: AWS::EC2::EIP
+    Properties:
+      Tags:
+        - Key: Name
+          Value: !Sub "cisco-hol-${StudentName}-eip-guacamole-${Region}${Subnet01AvailabilityZone}"
   
   # Elastic IP Association  
   CiscoHOLAssociateEIPGuacamole:

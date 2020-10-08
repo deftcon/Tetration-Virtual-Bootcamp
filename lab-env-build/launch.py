@@ -13,10 +13,11 @@ import urllib
 from datetime import datetime
 
 PARAMETERS_FILE = './parameters.yml'
-CFT_POD_FILE = './cisco-hol-pod-cft-template.yml'
 
 params = yaml.load(open(PARAMETERS_FILE), Loader=yaml.Loader)
 
+
+CFT_POD_FILE = 'cisco-hol-pod-cft-template.yml'
 
 ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY_ID')
 SECRET_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
@@ -30,8 +31,11 @@ if SECRET_KEY == None or SECRET_KEY == '':
 
 
 REGION = params['aws_region']
-VPC_ID = params['vpc_id']
-INTERNET_GATEWAY_ID = params['internet_gateway_id']
+
+if 'vpc_id' in params:
+    VPC_ID = params['vpc_id']
+    INTERNET_GATEWAY_ID = params['internet_gateway_id']
+
 SUBNET_RANGE_PRIMARY = params['subnet_range_primary']
 SUBNET_RANGE_SECONDARY = params['subnet_range_secondary']
 STUDENT_COUNT = params['student_count']
@@ -54,7 +58,7 @@ ELASTIC_IPS = []
 def password_generator(size=14, chars=string.ascii_letters + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
-
+# Gets the public IP address of system running this script
 def get_public_ip():
     result = json.load(urllib.request.urlopen('https://api.ipify.org/?format=json'))
     return result['ip']
@@ -69,38 +73,40 @@ try:
     print('INFO: Management Cidr:', MANAGEMENT_CIDR)
 except:
     print(f'ERROR: Unable To Grab Your Public IP for the Management CIDR')
+    exit(1)
 #######################################################################
 
 
 #######################################################################
-# Verify VPC Id Provided ##############################################
+# Verify VPC Id Provided, if using existing ###########################
 #######################################################################
-try:
-    print(f'INFO: Checking VPC ID: {VPC_ID}...')
+if 'vpc_id' in params:
+    try:
+        print(f'INFO: Checking VPC ID: {VPC_ID}...')
+        ec2 = session.resource('ec2')
+        vpc = ec2.Vpc(VPC_ID)
+        print(f'INFO: VPC ID Verified: {vpc.vpc_id}...')
+    except:
+        print(f'ERROR: VPC Check Failed! Please provide a valid VPC Id...')
+        exit(1)
+#######################################################################
+
+
+#######################################################################
+# Check Existing Subnets if deploying into existing ###################
+#######################################################################
+    print(f'INFO: Checking Existing Subnets...')
+    filters = [{'Name':'vpcId', 'Values':[VPC_ID]}]
+
     ec2 = session.resource('ec2')
-    vpc = ec2.Vpc(VPC_ID)
-    print(f'INFO: VPC ID Verified: {vpc.vpc_id}...')
-except:
-    print(f'ERROR: VPC Check Failed! Please provide a valid VPC Id...')
-    exit(1)
-#######################################################################
+    subnets_count = len(list(ec2.subnets.filter(Filters=filters)))
+
+    if subnets_count > 0:
+        print(f'ERROR: {subnets_count} Subnets Found In Current VPC...')
+        exit(1)
 
 
-#######################################################################
-# Check Existing Subnets ##############################################
-#######################################################################
-print(f'INFO: Checking Existing Subnets...')
-filters = [{'Name':'vpcId', 'Values':[VPC_ID]}]
-
-ec2 = session.resource('ec2')
-subnets_count = len(list(ec2.subnets.filter(Filters=filters)))
-
-if subnets_count > 0:
-    print(f'ERROR: {subnets_count} Subnets Found In Current VPC...')
-    exit(1)
-
-
-print(f'INFO: Subnet Check Completed...')
+    print(f'INFO: Subnet Check Completed...')
 #######################################################################
 
 
@@ -208,20 +214,90 @@ print(f'INFO: Student Accounts Collection Created...')
 #######################################################################
 # Confirm Deploy Before Proceeding ####################################
 #######################################################################
-print(f'You are about to deploy {STUDENT_COUNT} student pod(s) to {VPC_ID} in the {REGION} Region')
+if 'vpc_id' in params:
+    print(f'You are about to deploy {STUDENT_COUNT} student pod(s) to {VPC_ID} in the {REGION} Region')
+else:
+    print(f'You are about to deploy {STUDENT_COUNT} student pod(s) to a new VPC in the {REGION} Region')
 rusure_response = input('Are you sure you wish to proceed with this deployment (y/Y to continue)? ')
 if rusure_response.lower() != 'y':
     print('No pods were created, exiting now.')
     exit(1)
-#######################################################################
 
+#######################################################################
+# CREATE VPC IF NOT SPECIFIED IN PARAMETERS FILE
+#######################################################################
+if not 'vpc_id' in params:
+    # Create VPC
+    client = boto3.client('ec2', region_name=REGION)
+    vpc = client.create_vpc(
+        CidrBlock=SUBNET_RANGE_PRIMARY,
+        TagSpecifications=[
+            {
+                'ResourceType': 'vpc',
+                'Tags': [
+                {
+                    'Key': 'Name',
+                    'Value': 'Tetration HoL'
+                },
+                ]
+            },
+        ]
+    )
+    VPC_ID = vpc['Vpc']['VpcId']
+    print(f"Created VPC with ID {VPC_ID} and CIDR block {SUBNET_RANGE_PRIMARY}")
+
+    # Create Secondary CIDR
+    sec_cidr = client.associate_vpc_cidr_block(CidrBlock=SUBNET_RANGE_SECONDARY, VpcId=VPC_ID)
+    print(f"Created Secondary CIDR block {SUBNET_RANGE_SECONDARY} on VPC {VPC_ID}")
+
+    # Create Internet Gateway
+    inet_gateway = client.create_internet_gateway(
+        TagSpecifications=[
+            {
+                'ResourceType': 'internet-gateway',
+                'Tags': [
+                    {
+                        'Key': 'Name',
+                        'Value': 'Tetration HoL'
+                    },
+                ]
+            },
+        ],
+    )
+    INTERNET_GATEWAY_ID = inet_gateway['InternetGateway']['InternetGatewayId']
+    print(f"Created Internet Gateway with ID {INTERNET_GATEWAY_ID}")
+
+    # Associate Internet Gateway with VPC
+    ec2 = boto3.resource('ec2', region_name=REGION)
+    ig = ec2.InternetGateway(INTERNET_GATEWAY_ID)
+    ig_associate = ig.attach_to_vpc(VpcId=VPC_ID)
+    print(f"Associated Internet Gateway with ID {INTERNET_GATEWAY_ID} to VPC {VPC_ID}")
+
+#######################################################################
+# CREATE THE S3 BUCKET FOR THE CFT TEMPLATE
+#######################################################################
+s3 = session.client('s3')
+try:
+    print(f"Creating S3 Bucket {S3_BUCKET}")
+    response = s3.create_bucket(
+            Bucket=S3_BUCKET, CreateBucketConfiguration={
+            'LocationConstraint': boto3.session.Session().region_name
+            },
+            ACL='private')
+
+except Exception as e:
+    if 'BucketAlreadyOwnedByYou' in e.response['Error']['Code']:
+        print(f"Bucket {S3_BUCKET} already exists, skipping")
+    else:
+        print(f"Error while creating bucket: {e}")
+        exit(1)
 
 #######################################################################
 # Upload CFT TO S3 Bucket #############################################
 #######################################################################
 print('INFO: Uploading Template To S3...')
 s3 = boto3.resource('s3')
-s3.meta.client.upload_file('cisco-hol-pod-cft-template.yml', S3_BUCKET, 'cisco-hol-pod-cft-template.yml')
+s3.meta.client.upload_file(CFT_POD_FILE, S3_BUCKET, CFT_POD_FILE)
 print('INFO: CFT Template Uploaded To S3...')
 #######################################################################
 
@@ -247,8 +323,6 @@ for student in STUDENTS_LIST:
             {'ParameterKey': 'StudentPassword', 'ParameterValue': student['account_password']},
             {'ParameterKey': 'ManagementCidrBlock', 'ParameterValue': MANAGEMENT_CIDR},
 
-            {'ParameterKey': 'VpcID', 'ParameterValue': VPC_ID},
-            {'ParameterKey': 'InternetGatewayId', 'ParameterValue': INTERNET_GATEWAY_ID},
             {'ParameterKey': 'Subnet01CidrBlock', 'ParameterValue': f"{student['public_subnet_01']}/24"},
             {'ParameterKey': 'Subnet02CidrBlock', 'ParameterValue': f"{student['public_subnet_02']}/24"},
             {'ParameterKey': 'Subnet03CidrBlock', 'ParameterValue': f"{student['private_subnet']}/24"},
@@ -291,15 +365,18 @@ for student in STUDENTS_LIST:
             {'ParameterKey': 'Ubuntu1804SysAdminImageID', 'ParameterValue': params['sysadmin_ubuntu_ami']},
             {'ParameterKey': 'AttackerImageID', 'ParameterValue': params['attack_server_ami']},
             {'ParameterKey': 'GuacamoleImageID', 'ParameterValue': params['guacamole_ami']},
-            {'ParameterKey': 'EKSWorkerImageID', 'ParameterValue': params['eks_worker_ami']}
-        ]
+            {'ParameterKey': 'EKSWorkerImageID', 'ParameterValue': params['eks_worker_ami']},
+            {'ParameterKey': 'VpcID', 'ParameterValue': VPC_ID},
+            {'ParameterKey': 'InternetGatewayId', 'ParameterValue': INTERNET_GATEWAY_ID}
+            ]
 
         print('INFO:', aws_parameters)
-
+        templateURL = f"https://{S3_BUCKET}.s3.{boto3.session.Session().region_name}.amazonaws.com/{CFT_POD_FILE }"
+        print(templateURL)
         result = cloudformation.create_stack(
             StackName=student['account_name'],
             # TemplateBody=cloudformation_template,
-            TemplateURL=f"https://{S3_BUCKET}.s3.{REGION}.amazonaws.com/cisco-hol-pod-cft-template.yml",
+            TemplateURL=templateURL,
             Parameters=aws_parameters,
             Capabilities=[
                 'CAPABILITY_IAM', 'CAPABILITY_NAMED_IAM',
@@ -307,7 +384,7 @@ for student in STUDENTS_LIST:
         )
 
         STACKS_LIST.append(student['account_name'])
-
+        
     except Exception as e:
         print(e)
         exit(1)
@@ -385,7 +462,19 @@ try:
 except Exception as e:
     print(e)
     exit(1)
+
 #######################################################################
+# If new VPC created, populate it into parameters.yml for rollback
+######################################################################
+if not 'vpc_id' in params:
+    with open ('parameters.yml', 'r') as f:
+        params_file = f.readlines()
+    for x, line in enumerate(params_file):
+        if 'vpc_id' in line:
+            params_file[x] = f"vpc_id: {VPC_ID}\n"
+    with open('parameters.yml', 'w') as f:
+        f.writelines(params_file)
+
 
 #######################################################################
 # Generate CSV Reports ################################################
@@ -454,50 +543,90 @@ try:
 
         ])
 
-    header = [
-        'Student Lab Access (Guac) Web Console URL',
-        'Student Lab Access (Guac) Username',   
-        'Student Lab Access (Guac) Password', 
-        'nopCommerce Windows App URL',
-        'OpenCart Linux App URL',
-        'EKS SockShop App URL',
-        'Student Internal/Inside Corporate Subnet',
-        'Student External/Outside "Internet" Subnet',
-        'MS Active Directory IP',
-        'ISE Server IP',
-        'MS IIS nopCommerce Inside IP',
-        'MS IIS nopCommerce Outside IP',
-        'MS SQL Private IP',
-        'Apache OpenCart Inside IP',
-        'Apache OpenCart Outside IP',
-        'MySQL Private IP',
-        'Ansible IP',
-        'Tetration Edge IP',
-        'Tetration Data Ingest IP 1',
-        'Tetration Data Ingest IP 2',
-        'Tetration Data Ingest IP 3',
-        'ASAv Inside IP',
-        'ASAv Outside IP',
-        'Metasploit Attacker IP',
-        'Ubuntu18.04 Employee IP',
-        'Ubuntu18.04 SysAdmin IP',
-        'Student AWS External Orchestrator Access Key',
-        'Student AWS External Orchestrator Secret Key',
-        'Student AWS Region',
-        'Student VPC Flow Log S3 Bucket',
-        'EKS Cluster API Endpoint (use for external orchestrator)',
-        'EKS Cluster CA Cert (should not need)'
-    ]
+        header = [
+            'Student Lab Access (Guac) Web Console URL',
+            'Student Lab Access (Guac) Username',   
+            'Student Lab Access (Guac) Password', 
+            'nopCommerce Windows App URL',
+            'OpenCart Linux App URL',
+            'EKS SockShop App URL',
+            'Student Internal/Inside Corporate Subnet',
+            'Student External/Outside "Internet" Subnet',
+            'MS Active Directory IP',
+            'ISE Server IP',
+            'MS IIS nopCommerce Inside IP',
+            'MS IIS nopCommerce Outside IP',
+            'MS SQL Private IP',
+            'Apache OpenCart Inside IP',
+            'Apache OpenCart Outside IP',
+            'MySQL Private IP',
+            'Ansible IP',
+            'Tetration Edge IP',
+            'Tetration Data Ingest IP 1',
+            'Tetration Data Ingest IP 2',
+            'Tetration Data Ingest IP 3',
+            'ASAv Inside IP',
+            'ASAv Outside IP',
+            'Metasploit Attacker IP',
+            'Ubuntu18.04 Employee IP',
+            'Ubuntu18.04 SysAdmin IP',
+            'Student AWS External Orchestrator Access Key',
+            'Student AWS External Orchestrator Secret Key',
+            'Student AWS Region',
+            'Student VPC Flow Log S3 Bucket',
+            'EKS Cluster API Endpoint (use for external orchestrator)',
+            'EKS Cluster CA Cert (should not need)'
+        ]
 
-    filename = 'reports/' + datetime.today().strftime('%H-%M-%S %Y-%m-%d') + '-report.csv'
+        columnar_output = [
+            f"Student Lab Access (Guac) Web Console URL,https://{output['CiscoHOLGuacamolePublic']}\n",
+            f"Student Lab Access (Guac) Username,{output['CiscoHOLStudentName']}\n",
+            f"Student Lab Access (Guac) Password,{output['CiscoHOLStudentPassword']}\n",
+            f"nopCommerce Windows App URL,http://{output['CiscoHOLIISPublic']}\n",
+            f"OpenCart Linux App URL,http://{output['CiscoHOLApachePublic']}\n",
+            f"EKS SockShop App URL,http://{student['eks_dns']}\n",
+            f"Student Internal/Inside Corporate Subnet,{output['CiscoHOLPublicSubnet01']}\n",
+            f"Student External/Outside Internet Subnet,{output['CiscoHOLPrivateSubnet']}\n",
+            f"MS Active Directory IP,{output['CiscoHOLActiveDirectory']}\n",
+            f"ISE Server IP,{output['CiscoHOLISE']}\n",
+            f"MS IIS nopCommerce Inside IP,{output['CiscoHOLIISPrivate']}\n",
+            f"MS IIS nopCommerce Outside IP,{output['CiscoHOLIISOutsidePrivate']}\n",
+            f"MS SQL Private IP,{output['CiscoHOLMSSQL']}\n",
+            f"Apache OpenCart Inside IP,{output['CiscoHOLApachePrivate']}\n",
+            f"Apache OpenCart Outside IP,{output['CiscoHOLApacheOutsidePrivate']}\n"
+            f"MySQL Private IP,{output['CiscoHOLMySql']}\n",
+            f"Ansible IP,{output['CiscoHOLAnsible']}\n",
+            f"Tetration Edge IP,{output['CiscoHOLTetrationEdge']}\n",
+            f"Tetration Data Ingest IP 1,{output['TetNetworkInterfaces01Data']}\n",
+            f"Tetration Data Ingest IP 2,{output['TetNetworkInterfaces02Data']}\n",
+            f"Tetration Data Ingest IP 3,{output['TetNetworkInterfaces03Data']}\n",
+            f"ASAv Inside IP,{output['CiscoHOLASAvPrivate03']}\n",
+            f"ASAv Outside IP,{output['CiscoHOLASAvPrivate02']}\n",
+            f"Metasploit Attacker IP,{output['CiscoHOLAttacker']}\n",
+            f"Ubuntu18.04 Employee IP,{output['CiscoHOLUbuntu1804Employee']}\n",
+            f"Ubuntu18.04 SysAdmin IP,{output['CiscoHOLUbuntu1804SysAdmin']}\n",
+            f"Student AWS External Orchestrator Access Key,{output['StudentAccessKey']}\n",
+            f"Student AWS External Orchestrator Secret Key,{output['StudentSecretKey']}\n",
+            f"Student AWS Region,{output['CiscoHOLAWSRegion']}\n",
+            f"Student VPC Flow Log S3 Bucket,{output['CiscoHOLVPCFlowLogBucket']}\n",
+            f"EKS Cluster API Endpoint (use for external orchestrator),{eks_endpoint_fqdn_only}\n",
+            f"EKS Cluster CA Cert (should not need),{output['EKSClusterCertificate']}"
+        ]
+        
+        filename = 'reports/' + datetime.today().strftime('%Y-%m-%d-%H-%M-%S-') + output['CiscoHOLStudentName'] + '-report.csv'
 
-    if not os.path.exists('reports'):
-        os.makedirs('reports')
-
-    with open(filename, 'w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(header)
-        writer.writerows(records)
+        if not os.path.exists('reports'):
+            os.makedirs('reports')
+        
+        print(f"INFO: Writing file: {filename} to reports/.")
+        with open(filename, 'w') as file:
+            file.writelines(columnar_output)
+    
+    # the old way
+    # with open(filename, 'w', newline='') as file:
+    #     writer = csv.writer(file)
+    #     writer.writerow(header)
+    #     writer.writerows(records)
 
 except Exception as e:
     print(e)

@@ -112,7 +112,7 @@ Open a session to the Ansible machine through Apache Guacamole.
 
 <div class="step" id="step-010"><a href="#step-010" style="font-weight:bold">Step 010</a></div>  
 
-There should be a file called `eks_credentials` in the home directory,  enter the command `ls` to list the directory and locate the file.  
+There should be a file called `eks_credentials` in the /opt directory,  enter the command `ls` to list the directory and locate the file.  
 
 <a href="images/module_03-04_010.png"><img src="images/module_03-04_010.png" style="width:100%;height:100%;"></a>  
 

@@ -181,7 +181,7 @@ Once the appliance is done rebooting, reconnect to the session.
 
 <div class="step" id="step-016"><a href="#step-016" style="font-weight:bold">Step 016</a></div>  
 
-Copy the resolv.conf file to /etc/resolv.conf.  Use the command `sudo cp resolf.conf /etc/resolv.conf`.    
+Copy the resolv.conf file to /etc/resolv.conf.  Use the command `sudo cp resolv.conf /etc/resolv.conf`.    
 
 <a href="images/module_05_016.png"><img src="images/module_05_016.png" style="width:100%;height:100%;"></a>  
 
