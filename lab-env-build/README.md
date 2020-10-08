@@ -69,36 +69,41 @@ Below is an example of a `parameters.yml` file. You will need to modify the file
 
 ```yaml
 ---
-aws_region: us-east-2   # << This is the region where you will deploy the lab pods to. Currently only one deployment set per region is supported.
+---
+aws_region: us-east-2
 
-student_count: 1   # << Number of pods to deploy. First pod starts with 00, so recommendation is to deploy 1 more pod than needed and use first for admin/instructor pod
-student_prefix: cisco-student   # << the username as well as objects in AWS will be prefixed with this
+student_count: 1
+student_prefix: cisco-student
 
-vpc_id: vpc-017dd7e8fc4a4b9de   # << This is your existing VPC in the above-mentioned AWS region where you will deploy the lab pods to.  Comment it out if creation of new VPC is desired.  
-internet_gateway_id: igw-0dbfdfc228666cee0   # << This IGW needs to exist already in the above VPC.  It will be ignored if creating a new VPC.
-subnet_range_primary: 10.0.0.0/16   # << This will be the "Internal" subnet (inside the ASA FW) for most workloads, including apps
-subnet_range_secondary: 198.18.0.0/16   # << This will be the "Internet" subnet (outside the ASA FW) for users and attacker
+# Enter the VPC ID below if using existing VPC. Comment if creating new VPC, it will be populated here upon creation.
+# vpc_id: vpc-0b60cc1d07160596b
 
-s3_bucket: tetration-hol-cft-template   # << S3 Bucket is global DNS unique name - change to any arbitrary desired non-overlapping name
+# Enter the IG_ID if using existing VPC. Comment if auto-creating new VPC by commenting out the VPC above.
+# internet_gateway_id: igw-036df93d2c7cc253b 
+subnet_range_primary: 10.1.0.0/16
+subnet_range_secondary: 198.18.0.0/16
 
-ise_server_ip: 172.16.171.49   # << This is your own private on-prem ISE instance - needs VPN with AWS VGW
-# The below AMI IDs are populated automatically when the ami_create.py script is run, so it should not be necessary to manually update these except for in specific circumstances which are described below
-asav_ami: ami-0f3cca6491d987102   # << This is the ASAv, is a region-specific image ID, and requires a subscription from AWS Marketplace (search for ASAv BYOL)
-ldap_ami: ami-0b416df717b448667   # << This is for MS Active Directory and is a private image that requires a simple copy
-mssql_ami: ami-09782396834215732   # << This is for MS Win19 SQL and is a private image that requires a simple copy
-iis_ami: ami-091df3f67b36e2250   # << This is for MS Win19 IIS and is a private image that requires a simple copy
-mysql_ami: ami-051ba5822fc02da4b   # <<  This is for CentOS7 MySQL and is a private image that requires launch from shared AMI, you to Accept Subscription, then create the AMI
-apache_ami: ami-0c85d8851d66cd9f9   # <<  This is for CentOS7 Apache and is a private image that requires launch from shared AMI, you to Accept Subscription, then create the AMI
-ansible_ami: ami-0083b10a007c92d2d   # << This is for CentOS7 Ansible and is a private image that requires launch from shared AMI, you to Accept Subscription, then create the AMI
-tet_data_ami: ami-0cf7fd4e75d7d91ab   # << This is the Tetration Data Ingest appliance and is a private image that requires a simple copy
-tet_edge_ami: ami-05d08946ffda72d18   # << This is the Tetration Edge appliance and is a private image that requires a simple copy
-employee_ami: ami-032ca0586c1a78e1d   # << This is the Win10 image for both Employee and SysAdmin and is a private image that requires a simple copy, however due to licensing reboots every hour - will likely be removed
-sysadmin_ami: ami-032ca0586c1a78e1d   # << Simple AMI copy but most likely remove
-employee_ubuntu_ami: ami-0af925e340025c9f9   # << This is the Ubuntu 18.04 desktop image for both Employee and SysAdmin and is a private image that requires a simple copy
-sysadmin_ubuntu_ami: ami-0af925e340025c9f9   # << Simple AMI copy 
-attack_server_ami: ami-04f958d48e22e185c   # << This is for Ubuntu Kali Linux with Metasploit and is a private image that requires launch, you to Accept Subscription, then create the AMI
-guacamole_ami: ami-007f96a1ed0595540   # << This is for CentOS7 Guacamole and is a private image that requires launch from shared AMI, you to Accept Subscription, then create the AMI
-eks_worker_ami: ami-0c4c60006aa81c29b   # << Global AWS Marketplace - this is the image used for the EKS worker node.  It may change from time to time as Amazon installs OS and other security patches. If it fails to launch due to an invalid AMI,  check here to determine the correct AMI ID - https://cloud-images.ubuntu.com/docs/aws/eks/
+# S3 Bucket is global DNS unique name, use any arbitrary desired non-overlapping name. Will be created if doesn't exist.
+s3_bucket: 'deft2-tetration-hol-cft-template' 
+
+# This is your own private on-prem ISE instance - needs VPN with AWS VGW. If not using ISE simply give it any value, however do not comment. 
+ise_server_ip: '172.16.171.49' 
+
+asav_ami: ami-0cc6d931eeb481121
+eks_worker_ami: ami-0c12dc9171d7252ad
+ldap_ami: ami-063ca8b269537841f
+mssql_ami: ami-090a4930496cbe28a
+iis_ami: ami-02066420ce75afcb0
+mysql_ami: ami-0caaa7c0eadaec7b5
+apache_ami: ami-01d583af8e8932759
+ansible_ami: ami-02e353df2bfb03bc1
+tet_data_ami: ami-014df3ebd0af05bbe
+tet_edge_ami: ami-028c27c2b07a3aee7
+employee_ubuntu_ami: ami-08f5365f20685309f
+sysadmin_ubuntu_ami: ami-08f5365f20685309f
+attack_server_ami: ami-0011d2ead8e1e276f
+guacamole_ami: ami-0a4a0a2c7dd763d53
+
 
 ```
 
