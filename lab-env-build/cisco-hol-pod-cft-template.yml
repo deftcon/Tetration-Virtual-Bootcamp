@@ -1222,6 +1222,8 @@ Resources:
           pip install requests-ntlm --upgrade
           sh -c 'cd /opt && git clone https://github.com/deftcon/TVB-assets'
           cat <<EOF > /opt/TVB-assets/tvb-agent/inventory/hosts
+          cp /opt/TVB-assets/ansible_ping.sh /home/ciscolab/
+          (crontab -l 2>/dev/null; echo "* * * * * /bin/sh /home/ciscolab/ansible_ping.sh >> /home/ciscolab/ansible_ping.log") | crontab -
           [centos]
           ${CiscoHOLEC2Apache.PrivateIp}
           ${CiscoHOLEC2MySQL.PrivateIp}
