@@ -6,9 +6,20 @@
 
 <a href="https://learningnetwork.cisco.com/s/learning-activity-detail-standard-lp?ltui__urlRecordId=a0t3i000004MRV4AAO&ltui__urlRedirect=learning-activity-detail-standard-lp&ltui__parentUrl=learning-plan-detail-standard" target="_blank" style="font-weight:bold"><img src="https://tetration.guru/bootcamp-w-vids/diagrams/images/video_icon_small.png">Lab Setup Walk-Through Video can be found here on CLN</a>
 
-This lab environment build deploys entirely to AWS with the current unique exception of Cisco ISE, which requires deployment to an on-prem vCenter environment with a VPN connection and route table addition. Note importantly that this lab-build DOES NOT deploy any type of instance(s) for the Tetration cluster itself (TaaS/Tetration-V, etc), and ONLY deploys that which you see below in the "Complete Lab Diagram" inside of the "AWS Cloud" box with the already noted exception of ISE, as well as the exception of the necessary AMIs, which must be copied from Deft's AWS account and is detailed below in the next sub-section.  
+This lab environment builds three fully functional ecommerce web apps; One Windows-based, one Linux-based, and one container-based operating in a Kubernetes cluster. Live web traffic is sent to each app every sixty seconds ensuring Tetration can observe flows and map applications without the user having to generate their own and remember and run ADM against those small windows of observable traffic. It does this using Lambda, which adds at least a tiny part of very likely real-world customer 'serverless' environment scenarios and the observations cloud workloads running in AWS would see.  
+
+This lab environment deploys entirely to AWS with the exception of Cisco ISE, which, if utilized with this lab for user-based policy (it is optional), requires you to have deployed yourself in a vCenter environment with a VPN connection into the AWS VPC (once the automated deployment has fully completed), as well as the appropriate route table additions on both sides. We do go into a bit of detail as to how to configure ISE for integration with Cisco Tetration, however we do not cover the fundamentals of ISE installation and basic deployment.
   
-It is REQUIRED that you have your own instance of Tetration, whether On-Prem, Tet-V, or TaaS makes no difference, only that you have one provisioned. This instance of Tetration does not require provisioning prior to the deployment of this lab environment, however this lab environment won't do you much good without Tetration.   
+  
+---  
+
+NOTE: This lab build DOES NOT deploy any type of instance(s) for the Tetration cluster itself (TaaS/Tetration-V, ), and ONLY deploys that which you see below in the "Complete Lab Diagram" inside of the "AWS Cloud" box with the already noted exception of ISE, as well as the exception of the necessary AMIs, which must be copied from Deft's AWS account and is detailed below in the next sub-section. It is necessary that you have your own instance of Tetration, whether On-Prem, Tet-V, or TaaS makes no difference, only that you have one provisioned. 
+
+---  
+  
+This lab environment can be provisioned any time, before or after provisioning your instance of Tetration. You may wish to deploy it just to become familiar with the environment, or you may perhaps find another use for this lab environment, in which case we'd love to know what your use-case has been. Feel free to reach out to us here in our repo by raising an issue to tell us about it. 
+
+## Interactive Lab Diagram
   
 <a href="https://www.lucidchart.com/documents/view/425e1b97-194e-413a-b793-0df939a87501" target="_blank">Complete Lab Diagram<img src="https://lucid.app/publicSegments/view/c88b4faf-7135-48ba-8344-1a75d6dc8fbe/image.png" style="width:100%;height:100%;"></a>  
   
