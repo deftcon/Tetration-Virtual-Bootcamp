@@ -16,7 +16,7 @@ logformat = '%(asctime)s - %(levelname)s - %(message)s'
 logging.basicConfig(level='INFO', format=logformat)
 logger = logging.getLogger('ami_create')
 
-with open ('ami_orig.yml','r') as f:
+with open ('amis/ami_orig.yml','r') as f:
     ami_dict = yaml.safe_load(f)
 
 obj_list = []
@@ -122,8 +122,8 @@ def ami_lookup(yaml_file):
         amis = yaml.safe_load(f)
     return amis.get(aws_region)
 
-ami_dict['eks_worker_ami'] = dict(new_id=ami_lookup('eks_worker_amis.yml'))
-ami_dict['asav_ami'] = dict(new_id=ami_lookup('asav_amis.yml'))
+ami_dict['eks_worker_ami'] = dict(new_id=ami_lookup('amis/eks_worker_amis.yml'))
+ami_dict['asav_ami'] = dict(new_id=ami_lookup('amis/asav_amis.yml'))
 
       
 logger.info("Updating parameters.yml")
