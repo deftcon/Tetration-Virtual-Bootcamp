@@ -15,7 +15,7 @@ This lab environment deploys entirely to AWS with the exception of Cisco ISE, wh
   
 ---  
 
-NOTE: This lab build DOES NOT deploy any type of instance(s) for the Tetration cluster itself (TaaS/Tetration-V, ), and ONLY deploys that which you see below in the "Complete Lab Diagram" inside of the "AWS Cloud" box with the already noted exception of ISE, as well as the exception of the necessary AMIs, which must be copied from Deft's AWS account and is detailed below in the next sub-section. It is necessary that you have your own instance of Tetration, whether On-Prem, Tet-V, or TaaS makes no difference, only that you have one provisioned. 
+> NOTE: This lab build DOES NOT deploy any type of instance(s) for the Tetration cluster itself (TaaS/Tetration-V, ), and ONLY deploys that which you see below in the "Complete Lab Diagram" inside of the "AWS Cloud" box with the already noted exception of ISE, as well as the exception of the necessary AMIs, which must be copied from Deft's AWS account and is detailed below in the next sub-section. It is necessary that you have your own instance of Tetration, whether On-Prem, Tet-V, or TaaS makes no difference, only that you have one provisioned. 
 
 ---  
   

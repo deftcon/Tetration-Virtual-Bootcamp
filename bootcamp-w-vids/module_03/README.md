@@ -11,9 +11,9 @@
 
 ## SubModules for Module 03
 [Module 03.01: Data Sources - Collection Rules](../module_03-01/)  
-[Module 03.02: Data Sources - Collection Rules](../module_03-02/)  
-[Module 03.03: Data Sources - Collection Rules](../module_03-03/)  
-[Module 03.04: Data Sources - Collection Rules](../module_03-04/)  
+[Module 03.02: Data Sources - Agents](../module_03-02/)  
+[Module 03.03: Data Sources - Annotations](../module_03-03/)  
+[Module 03.04: Data Sources - External Orchestrators](../module_03-04/)  
   
 ---  
   

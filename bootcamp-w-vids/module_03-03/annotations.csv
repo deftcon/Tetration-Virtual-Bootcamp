@@ -1,0 +1,10 @@
+IP,AppCluster,AppGroup,AppName,AppSDLC,Cloud,Geo,OnPrem,Org,PodSubnet,Region
+1.1.1.1,DB,Commerce,OpenCart,Lab,AWS,US,,Tetration,,us-east-1
+1.1.1.2,App,Commerce,nopCommerce,Lab,AWS,US,,Tetration,,us-east-1
+1.1.1.3,DB,Commerce,nopCommerce,Lab,AWS,US,,Tetration,,us-east-1
+1.1.1.4,Ansible,Common,Ansible,Lab,AWS,US,,Tetration,,us-east-1
+1.1.1.5,App,Commerce,OpenCart,Lab,AWS,US,,Tetration,,us-east-1
+1.1.1.6,GC-DC-DNS,Common,Active Directory,Lab,AWS,US,,Tetration,,us-east-1
+10.0.0.0/8,,,,,,,,,internal,
+172.16.0.0/12,,,,,,,,,internal,
+192.168.0.0/16,,,,,,,,,internal,
