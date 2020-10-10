@@ -1,5 +1,5 @@
 ---
-aws_region: us-east-2
+aws_region: us-east-1
 
 student_count: 1
 student_prefix: cisco-student
@@ -18,17 +18,17 @@ s3_bucket: 'deft2-tetration-hol-cft-template'
 # This is your own private on-prem ISE instance - needs VPN with AWS VGW. If not using ISE simply give it any value, however do not comment. 
 ise_server_ip: '172.16.171.49' 
 
-asav_ami: ami-0cc6d931eeb481121
-eks_worker_ami: ami-0c12dc9171d7252ad
-ldap_ami: ami-063ca8b269537841f
-mssql_ami: ami-090a4930496cbe28a
-iis_ami: ami-02066420ce75afcb0
-mysql_ami: ami-0caaa7c0eadaec7b5
-apache_ami: ami-01d583af8e8932759
-ansible_ami: ami-02e353df2bfb03bc1
-tet_data_ami: ami-014df3ebd0af05bbe
-tet_edge_ami: ami-028c27c2b07a3aee7
-employee_ubuntu_ami: ami-08f5365f20685309f
-sysadmin_ubuntu_ami: ami-08f5365f20685309f
-attack_server_ami: ami-0011d2ead8e1e276f
-guacamole_ami: ami-0a4a0a2c7dd763d53
+asav_ami: ami-0baf97ff07e48f3ac
+eks_worker_ami: ami-000c56e8536aaaf50
+ldap_ami: ami-0db9b81817c984bdd
+mssql_ami: ami-0b41d0a11ba443487
+iis_ami: ami-0ef8762e7a7a31f71
+mysql_ami: ami-099ce27c91dc7acf1
+apache_ami: ami-07f1c002ecbd32ffb
+ansible_ami: ami-034bb08047d8f4175
+tet_data_ami: ami-058d47f3e33d76822
+tet_edge_ami: ami-08d6bd2823976c9e3
+employee_ubuntu_ami: ami-043beb0d213b72f66
+sysadmin_ubuntu_ami: ami-043beb0d213b72f66
+attack_server_ami: ami-0a4f5a620f90ec638
+guacamole_ami: ami-077d63cae8421bcb9

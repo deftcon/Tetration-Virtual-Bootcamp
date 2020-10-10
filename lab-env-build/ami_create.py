@@ -22,7 +22,7 @@ with open ('amis/ami_orig.yml','r') as f:
 obj_list = []
 
 for ami in ami_dict.keys():
-    logger.info(f"Creating EC2 image {ami_dict[ami]['name']}")
+    logger.info(f"Creating EC2 image ami_create_tmp-{ami_dict[ami]['name']}")
     # Creating temporary EC2 instance
     ec2_ohio = boto3.resource('ec2', region_name='us-east-2')
     instances = ec2_ohio.create_instances(
@@ -37,7 +37,7 @@ for ami in ami_dict.keys():
                 'Tags': [
                     {
                         'Key': 'Name',
-                        'Value': f"tmp-{ami_dict[ami]['name']}"
+                        'Value': f"ami_create_tmp-{ami_dict[ami]['name']}"
                     },
                 ]
             },
@@ -45,17 +45,26 @@ for ami in ami_dict.keys():
 
     )
 
-    logger.info(f"Waiting for {ami_dict[ami]['name']} to start")
+    logger.info(f"Waiting for ami_create_tmp-{ami_dict[ami]['name']} to start")
     # Wait for instance to move to running state
     instances[0].wait_until_running()
 
     # Creating AMI from the temporary EC2 instance
     for instance in instances:
-        logger.info(f"Creating AMI {ami_dict[ami]['name']}")
-        image_obj = instance.create_image(
+        
+        if aws_region == 'us-east-2':
+            logger.info(f"Creating AMI {ami_dict[ami]['name']}")
+            image_obj = instance.create_image(
             Description=ami_dict[ami]['name'],
             Name=ami_dict[ami]['name']
-        )
+            )
+        else:
+             logger.info(f"Creating AMI ami_create_tmp-{ami_dict[ami]['name']}")
+            image_obj = instance.create_image(
+                Description=f"ami_create_tmp-{ami_dict[ami]['name']}",
+                Name=f"ami_create_tmp-{ami_dict[ami]['name']}"
+            )
+
         obj_list.append((instances[0], image_obj))
         ami_dict[ami]['new_id'] = image_obj.id
 
