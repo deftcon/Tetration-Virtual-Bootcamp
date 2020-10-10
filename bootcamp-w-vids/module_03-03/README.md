@@ -40,7 +40,7 @@ In this module,  we'll configure Static Annotations for the endpoints in the lab
 
 <div class="step" id="step-001"><a href="#step-001" style="font-weight:bold">Step 001</a></div>  
 
-[Right-click here and choose 'Save Link As ...' to access the provided annotations.csv file](annotations.csv).
+To access the annotations.csv file [Click here to download](annotations.csv).
 
 <a href="images/module_03-03_001.png"><img src="images/module_03-03_001.png" style="width:100%;height:100%;"></a>  
 
