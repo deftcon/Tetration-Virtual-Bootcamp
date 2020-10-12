@@ -209,7 +209,44 @@ except:
 
 print(f'INFO: Student Accounts Collection Created...')
 #######################################################################
+# Collect scheduling information
+#######################################################################
+def validate_time(prompt, begin_time=None):
+    while True:
+        t = input(prompt)
+        pattern = "[0-2][0-9]:[0-5][0-9]"
+        m = re.match(pattern, t)
+        if m:
+            if begin_time:
+                begin = datetime.strptime(begin_time, '%H:%M').time()
+                end = datetime.strptime(t, '%H:%M').time()
+                if end > begin:
+                    return m.group()
+                else:
+                    print(f"End time {t} is before start time {begin_time}, please try again!")
+            else:
+                return m.group()
+        else:
+            print(f"Invalid time {t} entered, please enter the time using 24hr format XX:XX")
 
+def get_tz(prompt):
+    with open('tz_info', 'r') as f:
+        y = yaml.safe_load(f)
+    print('Timezone Selections:')
+    for key in y.keys():
+        print(f"{key}: {y[key]}")
+    while True:
+        selection = input(prompt)
+        if selection.isdigit() and int(selection) > 0 and int(selection) < 432:
+            return y[selection]
+        else:
+            print("Invalid timezone selection, please try again")
+
+print("In order to reduce AWS costs, instances should be run only during class hours.")
+print("Schedule the lab at least 30 minutes prior to class start in order to give the instances time to boot up.")
+BEGIN_TIME = validate_time("Please enter the start time in 24-hour format (00:00-23:59): ")
+END_TIME = validate_time("Please enter the end time in 24-hour format (00:00-23:59): ", BEGIN_TIME)
+TIMEZONE = get_tz("Enter the number corresponding to your timezone in the above list: ")
 
 #######################################################################
 # Confirm Deploy Before Proceeding ####################################
@@ -218,6 +255,7 @@ if 'vpc_id' in params:
     print(f'You are about to deploy {STUDENT_COUNT} student pod(s) to {VPC_ID} in the {REGION} Region')
 else:
     print(f'You are about to deploy {STUDENT_COUNT} student pod(s) to a new VPC in the {REGION} Region')
+print(f"The lab will start at {BEGIN_TIME} and stop each day at {END_TIME} in the {TIMEZONE} timezone")
 rusure_response = input('Are you sure you wish to proceed with this deployment (y/Y to continue)? ')
 if rusure_response.lower() != 'y':
     print('No pods were created, exiting now.')
@@ -633,7 +671,89 @@ except Exception as e:
     exit(1)
 
 #######################################################################
+# Creating Schedule
+#######################################################################
+try:
+    cloudformation = session.client('cloudformation')
 
+    # Check to see if stack already exists in this region
+    stacks = cloudformation.describe_stacks()['Stacks']
+    stack = [True for item in stacks if item['StackName'] == 'tethol-instance-scheduler']
 
+    if not stack:    
+        with open ('cisco-hol-scheduler-cft-template.yml', 'r') as f:
+            cft = f.read()
+
+        aws_parameters = [{'ParameterKey': 'Regions', 'ParameterValue': REGION},
+        {'ParameterKey': 'StartedTags', 'ParameterValue': r"SchedulerMessage=Started on {year}/{month}/{day} at {hour}:{minute} {timezone}"},
+        {'ParameterKey': 'StoppedTags', 'ParameterValue':  r"SchedulerMessage=Stopped on {year}/{month}/{day} at {hour}:{minute} {timezone}"},
+        {'ParameterKey': 'CrossAccountRoles', 'ParameterValue': ""}
+        ]
+
+        print('INFO: Creating stack tethol-instance-scheduler')
+        result = cloudformation.create_stack(
+            StackName="tethol-instance-scheduler",
+            TemplateBody=cft,
+            Parameters=aws_parameters,
+            Capabilities=[
+                        'CAPABILITY_IAM', 'CAPABILITY_NAMED_IAM',
+                    ])
+        # Wait for cloudformation stack to be created
+        while True:
+            status = cloudformation.describe_stacks(
+                StackName='tethol-instance-scheduler')['Stacks'][0]['StackStatus']
+            if status == 'CREATE_COMPLETE':
+                print(f"INFO: Creating cloudformation stack tethol-instance-scheduler. Status={status}")
+                break
+            else:
+                print(f"INFO: Creating cloudformation stack tethol-instance-scheduler. Status={status}")
+                time.sleep(5)
+    else:
+        print("INFO: Cloudformation stack tethol-instance-scheduler already exists in this region, skipping!")
+
+    # Get the ServiceAccountToken
+    outputs = cloudformation.describe_stacks(
+            StackName='tethol-instance-scheduler'
+        )['Stacks'][0]['Outputs']
+
+    servicetoken = [item['OutputValue'] for item in outputs if item['OutputKey'] == 'ServiceInstanceScheduleServiceToken'][0]
+
+    aws_parameters = [
+    {'ParameterKey': 'TimeZone', 'ParameterValue': TIMEZONE},
+    {'ParameterKey': 'BeginTime', 'ParameterValue': BEGIN_TIME},
+    {'ParameterKey': 'EndTime', 'ParameterValue':  END_TIME},
+    {'ParameterKey': 'ServiceToken', 'ParameterValue': servicetoken}
+    ]
+
+    with open ('cisco-hol-class-schedule-cft-template.yml', 'r') as f:
+        cft = f.read()
+
+    print('INFO: Creating schedule tethol-class-schedule')
+    result = cloudformation.create_stack(
+        StackName="tethol-class-schedule",
+        TemplateBody=cft,
+        Parameters=aws_parameters,
+        Capabilities=[
+                    'CAPABILITY_IAM', 'CAPABILITY_NAMED_IAM',
+                ])
+
+    # Wait for class-schedule creation
+    while True:
+        status = cloudformation.describe_stacks(
+            StackName='tethol-class-schedule')['Stacks'][0]['StackStatus']
+        if status == 'CREATE_COMPLETE':
+            print(f"INFO: Creating cloudformation stack tethol-class-schedule. Status={status}")
+            break
+        else:
+            print(f"INFO: Creating cloudformation stack tethol-class-schedule. Status={status}")
+            time.sleep(5)
+
+except Exception as e:
+    print(f"WARN: {e}")
+#######################################################################
+# Finishing up
+#######################################################################
+
+print(f'INFO: The report was written to: {filename}')
 print('Exiting! All The Tasks Are Completed Successfully...')
 exit(0)

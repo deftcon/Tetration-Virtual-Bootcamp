@@ -460,6 +460,8 @@ Resources:
           Value: Active Directory
         - Key: AppCluster
           Value: GC-DC-DNS
+        - Key: Schedule
+          Value: class-schedule
       UserData:
         Fn::Base64: !Sub |
           <powershell>
@@ -511,6 +513,8 @@ Resources:
           Value: nopCommerce 
         - Key: AppCluster
           Value: DB
+        - Key: Schedule
+          Value: class-schedule
       UserData:
         Fn::Base64: !Sub |
           <powershell>
@@ -556,6 +560,8 @@ Resources:
           Value: nopCommerce
         - Key: AppCluster
           Value: App
+        - Key: Schedule
+          Value: class-schedule
       UserData:
         Fn::Base64: !Sub |
           <powershell>
@@ -609,6 +615,8 @@ Resources:
           Value: OpenCart
         - Key: AppCluster
           Value: DB
+        - Key: Schedule
+          Value: class-schedule
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash
@@ -652,6 +660,8 @@ Resources:
           Value: OpenCart
         - Key: AppCluster
           Value: App
+        - Key: Schedule
+          Value: class-schedule
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash
@@ -694,6 +704,8 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub "cisco-hol-${StudentName}-ec2-tet-data-centos7-${Region}${Subnet01AvailabilityZone}"
+        - Key: Schedule
+          Value: class-schedule
       NetworkInterfaces: 
         - NetworkInterfaceId: !Ref 'TetNetworkInterfaces01'
           DeviceIndex: '0'
@@ -763,6 +775,8 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub "cisco-hol-${StudentName}-ec2-tet-edge-centos7-${Region}${Subnet01AvailabilityZone}"
+        - Key: Schedule
+          Value: class-schedule
       NetworkInterfaces: 
         - AssociatePublicIpAddress: "true"
           DeviceIndex: "0"
@@ -779,6 +793,8 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub "cisco-hol-${StudentName}-ec2-ubuntu1804-employee-${Region}${Subnet02AvailabilityZone}"
+        - Key: Schedule
+          Value: class-schedule
       UserData:
         Fn::Base64: !Sub |
           !/bin/bash
@@ -802,6 +818,8 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub "cisco-hol-${StudentName}-ec2-ubuntu1804-sysadmin-${Region}${Subnet02AvailabilityZone}"
+        - Key: Schedule
+          Value: class-schedule
       UserData:
         Fn::Base64: !Sub |
           !/bin/bash
@@ -825,6 +843,8 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub "cisco-hol-${StudentName}-ec2-attacker-${Region}${Subnet02AvailabilityZone}"
+        - Key: Schedule
+          Value: class-schedule
       UserData:
         Fn::Base64: !Sub |
           !/bin/bash
@@ -979,6 +999,8 @@ Resources:
           Value: AWS
         - Key: Region
           Value: !Sub "${Region}"
+        - Key: Schedule
+          Value: class-schedule
       UserData: 
         Fn::Base64: !Sub |
           hostname cisco-hol-asav
@@ -1215,6 +1237,8 @@ Resources:
           Value: Ansible
         - Key: AppCluster
           Value: Ansible
+        - Key: Schedule
+          Value: class-schedule
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash
@@ -1353,6 +1377,8 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub "cisco-hol-${StudentName}-ec2-guacamole-centos7-${Region}${Subnet01AvailabilityZone}"
+        - Key: Schedule
+          Value: class-schedule
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash

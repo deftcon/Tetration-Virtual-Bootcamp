@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: 2010-09-09
+Metadata:
+  'AWS::CloudFormation::Designer': {}
+Parameters:
+  ServiceToken:
+    Type: String
+  TimeZone:
+    Type: String
+  BeginTime:
+    Type: String
+  EndTime:
+    Type: String
+
+Resources:
+  TetHoLHours:
+    Type: 'Custom::ServiceInstanceSchedule'
+    Properties:
+      Name: class-schedule
+      NoStackPrefix: 'True'
+      Description: TetHol Class Schedule
+      ServiceToken: !Sub >-
+         ${ServiceToken}
+      Enforced: 'True'
+      Timezone: !Sub "${TimeZone}"
+      Periods:
+        - Description: TetHoL operating hours
+          BeginTime: !Sub "${BeginTime}"
+          EndTime: !Sub "${EndTime}"
+          WeekDays: Mon-Fri
