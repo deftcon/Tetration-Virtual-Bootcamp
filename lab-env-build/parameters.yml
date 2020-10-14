@@ -5,7 +5,7 @@ student_count: 1
 student_prefix: cisco-student
 
 # Enter the VPC ID below if using existing VPC. Comment if creating new VPC, it will be populated here upon creation.
-vpc_id: vpc-0f7e98ab606236278
+# vpc_id: vpc-0f7e98ab606236278
 
 # Enter the IG_ID if using existing VPC. Comment if auto-creating new VPC by commenting out the VPC above.
 #internet_gateway_id: igw-03ba648c46f5d4614
@@ -13,7 +13,7 @@ subnet_range_primary: 10.1.0.0/16
 subnet_range_secondary: 198.18.0.0/16
 
 # S3 Bucket is global DNS unique name, use any arbitrary desired non-overlapping name. Will be created if doesn't exist.
-s3_bucket: 'deft2-tetration-hol-cft-template' 
+s3_bucket: 'deft-tetration-hol-cft-template' 
 
 # This is your own private on-prem ISE instance - needs VPN with AWS VGW. If not using ISE simply give it any value, however do not comment. 
 ise_server_ip: '172.16.171.49' 
