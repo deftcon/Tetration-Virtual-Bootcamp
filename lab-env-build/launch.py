@@ -385,417 +385,417 @@ print('INFO: CFT Template Uploaded To S3...')
 #######################################################################
 # Run POD Cloud Formation #############################################
 #######################################################################
-# for student in STUDENTS_LIST:
+for student in STUDENTS_LIST:
 
-#     try:
+    try:
 
-#         outside_pod_ips = list(ipaddress.ip_network(f"{student['private_subnet']}/24").hosts())
+        outside_pod_ips = list(ipaddress.ip_network(f"{student['private_subnet']}/24").hosts())
 
-#         cloudformation = session.client('cloudformation')
-#         cloudformation_template = open(CFT_POD_FILE, 'r').read()
+        cloudformation = session.client('cloudformation')
+        cloudformation_template = open(CFT_POD_FILE, 'r').read()
 
-#         aws_parameters = [
-#             {'ParameterKey': 'AccessKey', 'ParameterValue': ACCESS_KEY},
-#             {'ParameterKey': 'SecretKey', 'ParameterValue': SECRET_KEY},
+        aws_parameters = [
+            {'ParameterKey': 'AccessKey', 'ParameterValue': ACCESS_KEY},
+            {'ParameterKey': 'SecretKey', 'ParameterValue': SECRET_KEY},
 
-#             {'ParameterKey': 'StudentIndex', 'ParameterValue': str(STUDENTS_LIST.index(student))},
-#             {'ParameterKey': 'StudentName', 'ParameterValue': student['account_name']},
-#             {'ParameterKey': 'StudentPassword', 'ParameterValue': student['account_password']},
-#             {'ParameterKey': 'ManagementCidrBlock', 'ParameterValue': MANAGEMENT_CIDR},
+            {'ParameterKey': 'StudentIndex', 'ParameterValue': str(STUDENTS_LIST.index(student))},
+            {'ParameterKey': 'StudentName', 'ParameterValue': student['account_name']},
+            {'ParameterKey': 'StudentPassword', 'ParameterValue': student['account_password']},
+            {'ParameterKey': 'ManagementCidrBlock', 'ParameterValue': MANAGEMENT_CIDR},
 
-#             {'ParameterKey': 'Subnet01CidrBlock', 'ParameterValue': f"{student['public_subnet_01']}/24"},
-#             {'ParameterKey': 'Subnet02CidrBlock', 'ParameterValue': f"{student['public_subnet_02']}/24"},
-#             {'ParameterKey': 'Subnet03CidrBlock', 'ParameterValue': f"{student['private_subnet']}/24"},
+            {'ParameterKey': 'Subnet01CidrBlock', 'ParameterValue': f"{student['public_subnet_01']}/24"},
+            {'ParameterKey': 'Subnet02CidrBlock', 'ParameterValue': f"{student['public_subnet_02']}/24"},
+            {'ParameterKey': 'Subnet03CidrBlock', 'ParameterValue': f"{student['private_subnet']}/24"},
 
-#             {'ParameterKey': 'ASAvInsideSubnet', 'ParameterValue': student['public_subnet_01']},
-#             {'ParameterKey': 'ASAvOutsideSubnet', 'ParameterValue': student['private_subnet']},
+            {'ParameterKey': 'ASAvInsideSubnet', 'ParameterValue': student['public_subnet_01']},
+            {'ParameterKey': 'ASAvOutsideSubnet', 'ParameterValue': student['private_subnet']},
 
-#             {'ParameterKey': 'GuacamoleElasticIp', 'ParameterValue': student['guacamole_elastic_ip']},
-#             {'ParameterKey': 'GuacamoleElasticIpAllocationId', 'ParameterValue': student['guacamole_elastic_ip_allocation_id']},
+            {'ParameterKey': 'GuacamoleElasticIp', 'ParameterValue': student['guacamole_elastic_ip']},
+            {'ParameterKey': 'GuacamoleElasticIpAllocationId', 'ParameterValue': student['guacamole_elastic_ip_allocation_id']},
 
-#             {'ParameterKey': 'TetDataElasticIp', 'ParameterValue': student['tet_data_elastic_ip']},
-#             {'ParameterKey': 'TetDataElasticIpAllocationId', 'ParameterValue': student['tet_data_elastic_ip_allocation_id']},
+            {'ParameterKey': 'TetDataElasticIp', 'ParameterValue': student['tet_data_elastic_ip']},
+            {'ParameterKey': 'TetDataElasticIpAllocationId', 'ParameterValue': student['tet_data_elastic_ip_allocation_id']},
 
-#             {'ParameterKey': 'Region', 'ParameterValue': REGION},
-#             {'ParameterKey': 'Subnet01AvailabilityZone', 'ParameterValue': 'a'},
-#             {'ParameterKey': 'Subnet02AvailabilityZone', 'ParameterValue': 'b'},
-#             {'ParameterKey': 'Subnet03AvailabilityZone', 'ParameterValue': 'a'},
+            {'ParameterKey': 'Region', 'ParameterValue': REGION},
+            {'ParameterKey': 'Subnet01AvailabilityZone', 'ParameterValue': 'a'},
+            {'ParameterKey': 'Subnet02AvailabilityZone', 'ParameterValue': 'b'},
+            {'ParameterKey': 'Subnet03AvailabilityZone', 'ParameterValue': 'a'},
 
-#             {'ParameterKey': 'ISEIPAddress', 'ParameterValue': params['ise_server_ip']},
+            {'ParameterKey': 'ISEIPAddress', 'ParameterValue': params['ise_server_ip']},
 
-#             {'ParameterKey': 'AttackerPrivateIp', 'ParameterValue': str(outside_pod_ips[13])},
-#             {'ParameterKey': 'IISOutsidePrivateIp', 'ParameterValue': str(outside_pod_ips[14])},
-#             {'ParameterKey': 'ApacheOutsidePrivateIp', 'ParameterValue': str(outside_pod_ips[15])},
-#             {'ParameterKey': 'ASAvOutsidePrivateIp01', 'ParameterValue': str(outside_pod_ips[16])},
-#             {'ParameterKey': 'ASAvOutsidePrivateIp02', 'ParameterValue': str(outside_pod_ips[17])},
-#             {'ParameterKey': 'Ubuntu1804EmployeePrivateIp', 'ParameterValue': str(outside_pod_ips[18])},
-#             {'ParameterKey': 'Ubuntu1804SysAdminPrivateIp', 'ParameterValue': str(outside_pod_ips[19])},
-#             {'ParameterKey': 'GuacamoleOutsidePrivateIp', 'ParameterValue': str(outside_pod_ips[20])},
+            {'ParameterKey': 'AttackerPrivateIp', 'ParameterValue': str(outside_pod_ips[13])},
+            {'ParameterKey': 'IISOutsidePrivateIp', 'ParameterValue': str(outside_pod_ips[14])},
+            {'ParameterKey': 'ApacheOutsidePrivateIp', 'ParameterValue': str(outside_pod_ips[15])},
+            {'ParameterKey': 'ASAvOutsidePrivateIp01', 'ParameterValue': str(outside_pod_ips[16])},
+            {'ParameterKey': 'ASAvOutsidePrivateIp02', 'ParameterValue': str(outside_pod_ips[17])},
+            {'ParameterKey': 'Ubuntu1804EmployeePrivateIp', 'ParameterValue': str(outside_pod_ips[18])},
+            {'ParameterKey': 'Ubuntu1804SysAdminPrivateIp', 'ParameterValue': str(outside_pod_ips[19])},
+            {'ParameterKey': 'GuacamoleOutsidePrivateIp', 'ParameterValue': str(outside_pod_ips[20])},
 
-#             {'ParameterKey': 'ASAvImageID', 'ParameterValue': params['asav_ami']},
-#             {'ParameterKey': 'LDAPImageID', 'ParameterValue': params['ldap_ami']},
-#             {'ParameterKey': 'MSSQLImageID', 'ParameterValue': params['mssql_ami']},
-#             {'ParameterKey': 'IISImageID', 'ParameterValue': params['iis_ami']},
-#             {'ParameterKey': 'MySQLImageID', 'ParameterValue': params['mysql_ami']},
-#             {'ParameterKey': 'ApacheImageID', 'ParameterValue': params['apache_ami']},
-#             {'ParameterKey': 'AnsibleImageID', 'ParameterValue': params['ansible_ami']},
-#             {'ParameterKey': 'TetrationDataIngestImageID', 'ParameterValue': params['tet_data_ami']},
-#             {'ParameterKey': 'TetrationEdgeImageID', 'ParameterValue': params['tet_edge_ami']},
-#             {'ParameterKey': 'Ubuntu1804EmployeeImageID', 'ParameterValue': params['employee_ubuntu_ami']},
-#             {'ParameterKey': 'Ubuntu1804SysAdminImageID', 'ParameterValue': params['sysadmin_ubuntu_ami']},
-#             {'ParameterKey': 'AttackerImageID', 'ParameterValue': params['attack_server_ami']},
-#             {'ParameterKey': 'GuacamoleImageID', 'ParameterValue': params['guacamole_ami']},
-#             {'ParameterKey': 'EKSWorkerImageID', 'ParameterValue': params['eks_worker_ami']},
-#             {'ParameterKey': 'VpcID', 'ParameterValue': VPC_ID},
-#             {'ParameterKey': 'InternetGatewayId', 'ParameterValue': INTERNET_GATEWAY_ID}
-#             ]
+            {'ParameterKey': 'ASAvImageID', 'ParameterValue': params['asav_ami']},
+            {'ParameterKey': 'LDAPImageID', 'ParameterValue': params['ldap_ami']},
+            {'ParameterKey': 'MSSQLImageID', 'ParameterValue': params['mssql_ami']},
+            {'ParameterKey': 'IISImageID', 'ParameterValue': params['iis_ami']},
+            {'ParameterKey': 'MySQLImageID', 'ParameterValue': params['mysql_ami']},
+            {'ParameterKey': 'ApacheImageID', 'ParameterValue': params['apache_ami']},
+            {'ParameterKey': 'AnsibleImageID', 'ParameterValue': params['ansible_ami']},
+            {'ParameterKey': 'TetrationDataIngestImageID', 'ParameterValue': params['tet_data_ami']},
+            {'ParameterKey': 'TetrationEdgeImageID', 'ParameterValue': params['tet_edge_ami']},
+            {'ParameterKey': 'Ubuntu1804EmployeeImageID', 'ParameterValue': params['employee_ubuntu_ami']},
+            {'ParameterKey': 'Ubuntu1804SysAdminImageID', 'ParameterValue': params['sysadmin_ubuntu_ami']},
+            {'ParameterKey': 'AttackerImageID', 'ParameterValue': params['attack_server_ami']},
+            {'ParameterKey': 'GuacamoleImageID', 'ParameterValue': params['guacamole_ami']},
+            {'ParameterKey': 'EKSWorkerImageID', 'ParameterValue': params['eks_worker_ami']},
+            {'ParameterKey': 'VpcID', 'ParameterValue': VPC_ID},
+            {'ParameterKey': 'InternetGatewayId', 'ParameterValue': INTERNET_GATEWAY_ID}
+            ]
 
-#         print('INFO:', aws_parameters)
-#         templateURL = f"https://{S3_BUCKET}.s3.{boto3.session.Session().region_name}.amazonaws.com/{CFT_POD_FILE }"
-#         print(templateURL)
-#         result = cloudformation.create_stack(
-#             StackName=student['account_name'],
-#             # TemplateBody=cloudformation_template,
-#             TemplateURL=templateURL,
-#             Parameters=aws_parameters,
-#             Capabilities=[
-#                 'CAPABILITY_IAM', 'CAPABILITY_NAMED_IAM',
-#             ]
-#         )
+        print('INFO:', aws_parameters)
+        templateURL = f"https://{S3_BUCKET}.s3.{boto3.session.Session().region_name}.amazonaws.com/{CFT_POD_FILE }"
+        print(templateURL)
+        result = cloudformation.create_stack(
+            StackName=student['account_name'],
+            # TemplateBody=cloudformation_template,
+            TemplateURL=templateURL,
+            Parameters=aws_parameters,
+            Capabilities=[
+                'CAPABILITY_IAM', 'CAPABILITY_NAMED_IAM',
+            ]
+        )
 
-#         STACKS_LIST.append(student['account_name'])
+        STACKS_LIST.append(student['account_name'])
         
-#     except Exception as e:
-#         print(e)
-#         exit(1)
-# #######################################################################
+    except Exception as e:
+        print(e)
+        exit(1)
+#######################################################################
 
-# #######################################################################
-# # Wait For Stack Creation #############################################
-# #######################################################################
-# completed_stacks = []
-# while True:
+#######################################################################
+# Wait For Stack Creation #############################################
+#######################################################################
+completed_stacks = []
+while True:
 
-#     try:
+    try:
 
-#         for stack_name in STACKS_LIST:
+        for stack_name in STACKS_LIST:
 
-#             if stack_name in completed_stacks:
-#                 continue
+            if stack_name in completed_stacks:
+                continue
 
-#             cloudformation = session.client('cloudformation')
+            cloudformation = session.client('cloudformation')
 
-#             status = cloudformation.describe_stacks(
-#                 StackName=stack_name
-#             )
+            status = cloudformation.describe_stacks(
+                StackName=stack_name
+            )
 
-#             if status['Stacks'][0]['StackStatus'] == 'CREATE_COMPLETE':
-#                 completed_stacks.append(stack_name)
+            if status['Stacks'][0]['StackStatus'] == 'CREATE_COMPLETE':
+                completed_stacks.append(stack_name)
 
-#             if status['Stacks'][0]['StackStatus'] == 'ROLLBACK_IN_PROGRESS' or  status['Stacks'][0]['StackStatus'] == 'ROLLBACK_COMPLETE':
-#                 print(f"ERROR: Stack Failed => {stack_name}")
-#                 print('ERROR: Unable To Complete CloudFormation Deployment.')
-#                 exit(1)
+            if status['Stacks'][0]['StackStatus'] == 'ROLLBACK_IN_PROGRESS' or  status['Stacks'][0]['StackStatus'] == 'ROLLBACK_COMPLETE':
+                print(f"ERROR: Stack Failed => {stack_name}")
+                print('ERROR: Unable To Complete CloudFormation Deployment.')
+                exit(1)
 
-#             print(f"INFO: StackName: {stack_name}, Status: {status['Stacks'][0]['StackStatus']}")
+            print(f"INFO: StackName: {stack_name}, Status: {status['Stacks'][0]['StackStatus']}")
 
-#         if len(STACKS_LIST) == len(completed_stacks):
-#             print('INFO: CloudFormation Completed Successfully...')
-#             break
+        if len(STACKS_LIST) == len(completed_stacks):
+            print('INFO: CloudFormation Completed Successfully...')
+            break
 
-#         time.sleep(10)
+        time.sleep(10)
 
-#     except Exception as e:
-#         print(e)
-#         exit(1)
-# #######################################################################
+    except Exception as e:
+        print(e)
+        exit(1)
+#######################################################################
 
-# #######################################################################
-# # Assemble EKS ELB DNS Records ########################################
-# #######################################################################
-# try:
+#######################################################################
+# Assemble EKS ELB DNS Records ########################################
+#######################################################################
+try:
 
-#     print('INFO: Initializing EKS DNS Assembly...')
+    print('INFO: Initializing EKS DNS Assembly...')
 
-#     time.sleep(120)
+    time.sleep(120)
 
-#     for student in STUDENTS_LIST:
+    for student in STUDENTS_LIST:
 
-#         client = session.client('elb')
+        client = session.client('elb')
 
-#         eks_elbs = client.describe_load_balancers()['LoadBalancerDescriptions']
+        eks_elbs = client.describe_load_balancers()['LoadBalancerDescriptions']
 
-#         elb_tags = client.describe_tags(
-#             LoadBalancerNames=list(map(lambda e: e['LoadBalancerName'], eks_elbs))
-#         )
+        elb_tags = client.describe_tags(
+            LoadBalancerNames=list(map(lambda e: e['LoadBalancerName'], eks_elbs))
+        )
 
-#         for elb in elb_tags['TagDescriptions']:
-#             for tag in elb['Tags']:
-#                 for key in tag:
-#                     if student['account_name'] in tag[key]:
-#                         student['eks_dns'] = list(filter(lambda e: e['LoadBalancerName'] == elb['LoadBalancerName'], eks_elbs))[0]['DNSName']
-#                         break
+        for elb in elb_tags['TagDescriptions']:
+            for tag in elb['Tags']:
+                for key in tag:
+                    if student['account_name'] in tag[key]:
+                        student['eks_dns'] = list(filter(lambda e: e['LoadBalancerName'] == elb['LoadBalancerName'], eks_elbs))[0]['DNSName']
+                        break
     
 
-#     print('INFO: EKS DNS Assembly Completed...')
+    print('INFO: EKS DNS Assembly Completed...')
 
-# except Exception as e:
-#     print(e)
-#     exit(1)
+except Exception as e:
+    print(e)
+    exit(1)
 
-# #######################################################################
-# # If new VPC created, populate it into parameters.yml for rollback
-# ######################################################################
-# if not 'vpc_id' in params:
-#     with open ('parameters.yml', 'r') as f:
-#         params_file = f.readlines()
-#     for x, line in enumerate(params_file):
-#         if 'vpc_id' in line:
-#             params_file[x] = f"vpc_id: {VPC_ID}\n"
-#     with open('parameters.yml', 'w') as f:
-#         f.writelines(params_file)
+#######################################################################
+# If new VPC created, populate it into parameters.yml for rollback
+######################################################################
+if not 'vpc_id' in params:
+    with open ('parameters.yml', 'r') as f:
+        params_file = f.readlines()
+    for x, line in enumerate(params_file):
+        if 'vpc_id' in line:
+            params_file[x] = f"vpc_id: {VPC_ID}\n"
+    with open('parameters.yml', 'w') as f:
+        f.writelines(params_file)
 
 
-# #######################################################################
-# # Generate CSV Reports ################################################
-# ######################################################################
+#######################################################################
+# Generate CSV Reports ################################################
+######################################################################
 
-# try:
+try:
 
-#     records = []
+    records = []
 
-#     for stack_name in STACKS_LIST:
+    for stack_name in STACKS_LIST:
 
-#         print(f"INFO: StackName: {stack_name}, Status: Generating CSV Report...")
+        print(f"INFO: StackName: {stack_name}, Status: Generating CSV Report...")
 
-#         cloudformation = session.client('cloudformation')
+        cloudformation = session.client('cloudformation')
 
-#         stack = cloudformation.describe_stacks(
-#             StackName=stack_name
-#         )
+        stack = cloudformation.describe_stacks(
+            StackName=stack_name
+        )
 
-#         student = list(filter(lambda student: student['account_name'] == stack_name, STUDENTS_LIST))[0]
+        student = list(filter(lambda student: student['account_name'] == stack_name, STUDENTS_LIST))[0]
 
-#         output = {}
+        output = {}
 
-#         for o in stack['Stacks'][0]['Outputs']:
-#             output[o['OutputKey']] = o['OutputValue']
+        for o in stack['Stacks'][0]['Outputs']:
+            output[o['OutputKey']] = o['OutputValue']
 
-#         eks_endpoint = output['EKSClusterEndpoint']
-#         eks_endpoint_fqdn_only = (eks_endpoint.split('//'))[1]
+        eks_endpoint = output['EKSClusterEndpoint']
+        eks_endpoint_fqdn_only = (eks_endpoint.split('//'))[1]
 
-#         records.append([
-#             f"https://{output['CiscoHOLGuacamolePublic']}",
-#             output['CiscoHOLStudentName'],
-#             output['CiscoHOLStudentPassword'],
-#             f"http://{output['CiscoHOLIISPublic']}",
-#             f"http://{output['CiscoHOLApachePublic']}",
-#             f"http://{student['eks_dns']}",
-#             output['CiscoHOLPublicSubnet01'],
-#             output['CiscoHOLPrivateSubnet'],
-#             output['CiscoHOLActiveDirectory'],
-#             output['CiscoHOLISE'],
-#             output['CiscoHOLIISPrivate'],
-#             output['CiscoHOLIISOutsidePrivate'],
-#             output['CiscoHOLMSSQL'],
-#             output['CiscoHOLApachePrivate'],
-#             output['CiscoHOLApacheOutsidePrivate'],
-#             output['CiscoHOLMySql'],
-#             output['CiscoHOLAnsible'],
-#             output['CiscoHOLTetrationEdge'],
-#             output['TetNetworkInterfaces01Data'],
-#             output['TetNetworkInterfaces02Data'],
-#             output['TetNetworkInterfaces03Data'],
-#             output['CiscoHOLASAvPrivate03'],
-#             output['CiscoHOLASAvPrivate02'],
-#             output['CiscoHOLAttacker'],
-#             output['CiscoHOLUbuntu1804Employee'],
-#             output['CiscoHOLUbuntu1804SysAdmin'],
-#             output['StudentAccessKey'],
-#             output['StudentSecretKey'],
-#             output['CiscoHOLAWSRegion'],
-#             output['CiscoHOLVPCFlowLogBucket'],
-#             f"{eks_endpoint_fqdn_only}",
-#             output['EKSClusterCertificate'],
-#             # output['cisco-hol-cisco-student-00-public-subnet-01-us-east-2a'],
-#             # cisco-hol-cisco-student-00-vpc-flow-logs-us-east-2a
-#             # aws key will need perms to read this log
+        records.append([
+            f"https://{output['CiscoHOLGuacamolePublic']}",
+            output['CiscoHOLStudentName'],
+            output['CiscoHOLStudentPassword'],
+            f"http://{output['CiscoHOLIISPublic']}",
+            f"http://{output['CiscoHOLApachePublic']}",
+            f"http://{student['eks_dns']}",
+            output['CiscoHOLPublicSubnet01'],
+            output['CiscoHOLPrivateSubnet'],
+            output['CiscoHOLActiveDirectory'],
+            output['CiscoHOLISE'],
+            output['CiscoHOLIISPrivate'],
+            output['CiscoHOLIISOutsidePrivate'],
+            output['CiscoHOLMSSQL'],
+            output['CiscoHOLApachePrivate'],
+            output['CiscoHOLApacheOutsidePrivate'],
+            output['CiscoHOLMySql'],
+            output['CiscoHOLAnsible'],
+            output['CiscoHOLTetrationEdge'],
+            output['TetNetworkInterfaces01Data'],
+            output['TetNetworkInterfaces02Data'],
+            output['TetNetworkInterfaces03Data'],
+            output['CiscoHOLASAvPrivate03'],
+            output['CiscoHOLASAvPrivate02'],
+            output['CiscoHOLAttacker'],
+            output['CiscoHOLUbuntu1804Employee'],
+            output['CiscoHOLUbuntu1804SysAdmin'],
+            output['StudentAccessKey'],
+            output['StudentSecretKey'],
+            output['CiscoHOLAWSRegion'],
+            output['CiscoHOLVPCFlowLogBucket'],
+            f"{eks_endpoint_fqdn_only}",
+            output['EKSClusterCertificate'],
+            # output['cisco-hol-cisco-student-00-public-subnet-01-us-east-2a'],
+            # cisco-hol-cisco-student-00-vpc-flow-logs-us-east-2a
+            # aws key will need perms to read this log
 
-#         ])
+        ])
 
-#         header = [
-#             'Student Lab Access (Guac) Web Console URL',
-#             'Student Lab Access (Guac) Username',   
-#             'Student Lab Access (Guac) Password', 
-#             'nopCommerce Windows App URL',
-#             'OpenCart Linux App URL',
-#             'EKS SockShop App URL',
-#             'Student Internal/Inside Corporate Subnet',
-#             'Student External/Outside "Internet" Subnet',
-#             'MS Active Directory IP',
-#             'ISE Server IP',
-#             'MS IIS nopCommerce Inside IP',
-#             'MS IIS nopCommerce Outside IP',
-#             'MS SQL Private IP',
-#             'Apache OpenCart Inside IP',
-#             'Apache OpenCart Outside IP',
-#             'MySQL Private IP',
-#             'Ansible IP',
-#             'Tetration Edge IP',
-#             'Tetration Data Ingest IP 1',
-#             'Tetration Data Ingest IP 2',
-#             'Tetration Data Ingest IP 3',
-#             'ASAv Inside IP',
-#             'ASAv Outside IP',
-#             'Metasploit Attacker IP',
-#             'Ubuntu18.04 Employee IP',
-#             'Ubuntu18.04 SysAdmin IP',
-#             'Student AWS External Orchestrator Access Key',
-#             'Student AWS External Orchestrator Secret Key',
-#             'Student AWS Region',
-#             'Student VPC Flow Log S3 Bucket',
-#             'EKS Cluster API Endpoint (use for external orchestrator)',
-#             'EKS Cluster CA Cert (should not need)'
-#         ]
+        header = [
+            'Student Lab Access (Guac) Web Console URL',
+            'Student Lab Access (Guac) Username',   
+            'Student Lab Access (Guac) Password', 
+            'nopCommerce Windows App URL',
+            'OpenCart Linux App URL',
+            'EKS SockShop App URL',
+            'Student Internal/Inside Corporate Subnet',
+            'Student External/Outside "Internet" Subnet',
+            'MS Active Directory IP',
+            'ISE Server IP',
+            'MS IIS nopCommerce Inside IP',
+            'MS IIS nopCommerce Outside IP',
+            'MS SQL Private IP',
+            'Apache OpenCart Inside IP',
+            'Apache OpenCart Outside IP',
+            'MySQL Private IP',
+            'Ansible IP',
+            'Tetration Edge IP',
+            'Tetration Data Ingest IP 1',
+            'Tetration Data Ingest IP 2',
+            'Tetration Data Ingest IP 3',
+            'ASAv Inside IP',
+            'ASAv Outside IP',
+            'Metasploit Attacker IP',
+            'Ubuntu18.04 Employee IP',
+            'Ubuntu18.04 SysAdmin IP',
+            'Student AWS External Orchestrator Access Key',
+            'Student AWS External Orchestrator Secret Key',
+            'Student AWS Region',
+            'Student VPC Flow Log S3 Bucket',
+            'EKS Cluster API Endpoint (use for external orchestrator)',
+            'EKS Cluster CA Cert (should not need)'
+        ]
 
-#         columnar_output = [
-#             f"Student Lab Access (Guac) Web Console URL,https://{output['CiscoHOLGuacamolePublic']}\n",
-#             f"Student Lab Access (Guac) Username,{output['CiscoHOLStudentName']}\n",
-#             f"Student Lab Access (Guac) Password,{output['CiscoHOLStudentPassword']}\n",
-#             f"nopCommerce Windows App URL,http://{output['CiscoHOLIISPublic']}\n",
-#             f"OpenCart Linux App URL,http://{output['CiscoHOLApachePublic']}\n",
-#             f"EKS SockShop App URL,http://{student['eks_dns']}\n",
-#             f"Student Internal/Inside Corporate Subnet,{output['CiscoHOLPublicSubnet01']}\n",
-#             f"Student External/Outside Internet Subnet,{output['CiscoHOLPrivateSubnet']}\n",
-#             f"MS Active Directory IP,{output['CiscoHOLActiveDirectory']}\n",
-#             f"ISE Server IP,{output['CiscoHOLISE']}\n",
-#             f"MS IIS nopCommerce Inside IP,{output['CiscoHOLIISPrivate']}\n",
-#             f"MS IIS nopCommerce Outside IP,{output['CiscoHOLIISOutsidePrivate']}\n",
-#             f"MS SQL Private IP,{output['CiscoHOLMSSQL']}\n",
-#             f"Apache OpenCart Inside IP,{output['CiscoHOLApachePrivate']}\n",
-#             f"Apache OpenCart Outside IP,{output['CiscoHOLApacheOutsidePrivate']}\n"
-#             f"MySQL Private IP,{output['CiscoHOLMySql']}\n",
-#             f"Ansible IP,{output['CiscoHOLAnsible']}\n",
-#             f"Tetration Edge IP,{output['CiscoHOLTetrationEdge']}\n",
-#             f"Tetration Data Ingest IP 1,{output['TetNetworkInterfaces01Data']}\n",
-#             f"Tetration Data Ingest IP 2,{output['TetNetworkInterfaces02Data']}\n",
-#             f"Tetration Data Ingest IP 3,{output['TetNetworkInterfaces03Data']}\n",
-#             f"ASAv Inside IP,{output['CiscoHOLASAvPrivate03']}\n",
-#             f"ASAv Outside IP,{output['CiscoHOLASAvPrivate02']}\n",
-#             f"Metasploit Attacker IP,{output['CiscoHOLAttacker']}\n",
-#             f"Ubuntu18.04 Employee IP,{output['CiscoHOLUbuntu1804Employee']}\n",
-#             f"Ubuntu18.04 SysAdmin IP,{output['CiscoHOLUbuntu1804SysAdmin']}\n",
-#             f"Student AWS External Orchestrator Access Key,{output['StudentAccessKey']}\n",
-#             f"Student AWS External Orchestrator Secret Key,{output['StudentSecretKey']}\n",
-#             f"Student AWS Region,{output['CiscoHOLAWSRegion']}\n",
-#             f"Student VPC Flow Log S3 Bucket,{output['CiscoHOLVPCFlowLogBucket']}\n",
-#             f"EKS Cluster API Endpoint (use for external orchestrator),{eks_endpoint_fqdn_only}\n",
-#             f"EKS Cluster CA Cert (should not need),{output['EKSClusterCertificate']}"
-#         ]
+        columnar_output = [
+            f"Student Lab Access (Guac) Web Console URL,https://{output['CiscoHOLGuacamolePublic']}\n",
+            f"Student Lab Access (Guac) Username,{output['CiscoHOLStudentName']}\n",
+            f"Student Lab Access (Guac) Password,{output['CiscoHOLStudentPassword']}\n",
+            f"nopCommerce Windows App URL,http://{output['CiscoHOLIISPublic']}\n",
+            f"OpenCart Linux App URL,http://{output['CiscoHOLApachePublic']}\n",
+            f"EKS SockShop App URL,http://{student['eks_dns']}\n",
+            f"Student Internal/Inside Corporate Subnet,{output['CiscoHOLPublicSubnet01']}\n",
+            f"Student External/Outside Internet Subnet,{output['CiscoHOLPrivateSubnet']}\n",
+            f"MS Active Directory IP,{output['CiscoHOLActiveDirectory']}\n",
+            f"ISE Server IP,{output['CiscoHOLISE']}\n",
+            f"MS IIS nopCommerce Inside IP,{output['CiscoHOLIISPrivate']}\n",
+            f"MS IIS nopCommerce Outside IP,{output['CiscoHOLIISOutsidePrivate']}\n",
+            f"MS SQL Private IP,{output['CiscoHOLMSSQL']}\n",
+            f"Apache OpenCart Inside IP,{output['CiscoHOLApachePrivate']}\n",
+            f"Apache OpenCart Outside IP,{output['CiscoHOLApacheOutsidePrivate']}\n"
+            f"MySQL Private IP,{output['CiscoHOLMySql']}\n",
+            f"Ansible IP,{output['CiscoHOLAnsible']}\n",
+            f"Tetration Edge IP,{output['CiscoHOLTetrationEdge']}\n",
+            f"Tetration Data Ingest IP 1,{output['TetNetworkInterfaces01Data']}\n",
+            f"Tetration Data Ingest IP 2,{output['TetNetworkInterfaces02Data']}\n",
+            f"Tetration Data Ingest IP 3,{output['TetNetworkInterfaces03Data']}\n",
+            f"ASAv Inside IP,{output['CiscoHOLASAvPrivate03']}\n",
+            f"ASAv Outside IP,{output['CiscoHOLASAvPrivate02']}\n",
+            f"Metasploit Attacker IP,{output['CiscoHOLAttacker']}\n",
+            f"Ubuntu18.04 Employee IP,{output['CiscoHOLUbuntu1804Employee']}\n",
+            f"Ubuntu18.04 SysAdmin IP,{output['CiscoHOLUbuntu1804SysAdmin']}\n",
+            f"Student AWS External Orchestrator Access Key,{output['StudentAccessKey']}\n",
+            f"Student AWS External Orchestrator Secret Key,{output['StudentSecretKey']}\n",
+            f"Student AWS Region,{output['CiscoHOLAWSRegion']}\n",
+            f"Student VPC Flow Log S3 Bucket,{output['CiscoHOLVPCFlowLogBucket']}\n",
+            f"EKS Cluster API Endpoint (use for external orchestrator),{eks_endpoint_fqdn_only}\n",
+            f"EKS Cluster CA Cert (should not need),{output['EKSClusterCertificate']}"
+        ]
         
-#         filename = 'reports/' + datetime.today().strftime('%Y-%m-%d-%H-%M-%S-') + output['CiscoHOLStudentName'] + '-report.csv'
+        filename = 'reports/' + datetime.today().strftime('%Y-%m-%d-%H-%M-%S-') + output['CiscoHOLStudentName'] + '-report.csv'
 
-#         if not os.path.exists('reports'):
-#             os.makedirs('reports')
+        if not os.path.exists('reports'):
+            os.makedirs('reports')
         
-#         print(f"INFO: Writing file: {filename} to reports/.")
-#         with open(filename, 'w') as file:
-#             file.writelines(columnar_output)
+        print(f"INFO: Writing file: {filename} to reports/.")
+        with open(filename, 'w') as file:
+            file.writelines(columnar_output)
     
-#     # the old way
-#     # with open(filename, 'w', newline='') as file:
-#     #     writer = csv.writer(file)
-#     #     writer.writerow(header)
-#     #     writer.writerows(records)
+    # the old way
+    # with open(filename, 'w', newline='') as file:
+    #     writer = csv.writer(file)
+    #     writer.writerow(header)
+    #     writer.writerows(records)
 
-# except Exception as e:
-#     print(e)
-#     exit(1)
+except Exception as e:
+    print(e)
+    exit(1)
 
-# #######################################################################
-# # Creating Schedule
-# #######################################################################
-# try:
-#     cloudformation = session.client('cloudformation')
+#######################################################################
+# Creating Schedule
+#######################################################################
+try:
+    cloudformation = session.client('cloudformation')
 
-#     # Check to see if stack already exists in this region
-#     stacks = cloudformation.describe_stacks()['Stacks']
-#     stack = [True for item in stacks if item['StackName'] == 'tethol-instance-scheduler']
+    # Check to see if stack already exists in this region
+    stacks = cloudformation.describe_stacks()['Stacks']
+    stack = [True for item in stacks if item['StackName'] == 'tethol-instance-scheduler']
 
-#     if not stack:    
-#         with open ('cisco-hol-scheduler-cft-template.yml', 'r') as f:
-#             cft = f.read()
+    if not stack:    
+        with open ('cisco-hol-scheduler-cft-template.yml', 'r') as f:
+            cft = f.read()
 
-#         aws_parameters = [{'ParameterKey': 'Regions', 'ParameterValue': REGION},
-#         {'ParameterKey': 'StartedTags', 'ParameterValue': r"SchedulerMessage=Started on {year}/{month}/{day} at {hour}:{minute} {timezone}"},
-#         {'ParameterKey': 'StoppedTags', 'ParameterValue':  r"SchedulerMessage=Stopped on {year}/{month}/{day} at {hour}:{minute} {timezone}"},
-#         {'ParameterKey': 'CrossAccountRoles', 'ParameterValue': ""}
-#         ]
+        aws_parameters = [{'ParameterKey': 'Regions', 'ParameterValue': REGION},
+        {'ParameterKey': 'StartedTags', 'ParameterValue': r"SchedulerMessage=Started on {year}/{month}/{day} at {hour}:{minute} {timezone}"},
+        {'ParameterKey': 'StoppedTags', 'ParameterValue':  r"SchedulerMessage=Stopped on {year}/{month}/{day} at {hour}:{minute} {timezone}"},
+        {'ParameterKey': 'CrossAccountRoles', 'ParameterValue': ""}
+        ]
 
-#         print('INFO: Creating stack tethol-instance-scheduler')
-#         result = cloudformation.create_stack(
-#             StackName="tethol-instance-scheduler",
-#             TemplateBody=cft,
-#             Parameters=aws_parameters,
-#             Capabilities=[
-#                         'CAPABILITY_IAM', 'CAPABILITY_NAMED_IAM',
-#                     ])
-#         # Wait for cloudformation stack to be created
-#         while True:
-#             status = cloudformation.describe_stacks(
-#                 StackName='tethol-instance-scheduler')['Stacks'][0]['StackStatus']
-#             if status == 'CREATE_COMPLETE':
-#                 print(f"INFO: Creating cloudformation stack tethol-instance-scheduler. Status={status}")
-#                 break
-#             else:
-#                 print(f"INFO: Creating cloudformation stack tethol-instance-scheduler. Status={status}")
-#                 time.sleep(5)
-#     else:
-#         print("INFO: Cloudformation stack tethol-instance-scheduler already exists in this region, skipping!")
+        print('INFO: Creating stack tethol-instance-scheduler')
+        result = cloudformation.create_stack(
+            StackName="tethol-instance-scheduler",
+            TemplateBody=cft,
+            Parameters=aws_parameters,
+            Capabilities=[
+                        'CAPABILITY_IAM', 'CAPABILITY_NAMED_IAM',
+                    ])
+        # Wait for cloudformation stack to be created
+        while True:
+            status = cloudformation.describe_stacks(
+                StackName='tethol-instance-scheduler')['Stacks'][0]['StackStatus']
+            if status == 'CREATE_COMPLETE':
+                print(f"INFO: Creating cloudformation stack tethol-instance-scheduler. Status={status}")
+                break
+            else:
+                print(f"INFO: Creating cloudformation stack tethol-instance-scheduler. Status={status}")
+                time.sleep(5)
+    else:
+        print("INFO: Cloudformation stack tethol-instance-scheduler already exists in this region, skipping!")
 
-#     # Get the ServiceAccountToken
-#     outputs = cloudformation.describe_stacks(
-#             StackName='tethol-instance-scheduler'
-#         )['Stacks'][0]['Outputs']
+    # Get the ServiceAccountToken
+    outputs = cloudformation.describe_stacks(
+            StackName='tethol-instance-scheduler'
+        )['Stacks'][0]['Outputs']
 
-#     servicetoken = [item['OutputValue'] for item in outputs if item['OutputKey'] == 'ServiceInstanceScheduleServiceToken'][0]
+    servicetoken = [item['OutputValue'] for item in outputs if item['OutputKey'] == 'ServiceInstanceScheduleServiceToken'][0]
 
-#     aws_parameters = [
-#     {'ParameterKey': 'TimeZone', 'ParameterValue': TIMEZONE},
-#     {'ParameterKey': 'BeginTime', 'ParameterValue': BEGIN_TIME},
-#     {'ParameterKey': 'EndTime', 'ParameterValue':  END_TIME},
-#     {'ParameterKey': 'ServiceToken', 'ParameterValue': servicetoken}
-#     ]
+    aws_parameters = [
+    {'ParameterKey': 'TimeZone', 'ParameterValue': TIMEZONE},
+    {'ParameterKey': 'BeginTime', 'ParameterValue': BEGIN_TIME},
+    {'ParameterKey': 'EndTime', 'ParameterValue':  END_TIME},
+    {'ParameterKey': 'ServiceToken', 'ParameterValue': servicetoken}
+    ]
 
-#     with open ('cisco-hol-class-schedule-cft-template.yml', 'r') as f:
-#         cft = f.read()
+    with open ('cisco-hol-class-schedule-cft-template.yml', 'r') as f:
+        cft = f.read()
 
-#     print('INFO: Creating schedule tethol-class-schedule')
-#     result = cloudformation.create_stack(
-#         StackName="tethol-class-schedule",
-#         TemplateBody=cft,
-#         Parameters=aws_parameters,
-#         Capabilities=[
-#                     'CAPABILITY_IAM', 'CAPABILITY_NAMED_IAM',
-#                 ])
+    print('INFO: Creating schedule tethol-class-schedule')
+    result = cloudformation.create_stack(
+        StackName="tethol-class-schedule",
+        TemplateBody=cft,
+        Parameters=aws_parameters,
+        Capabilities=[
+                    'CAPABILITY_IAM', 'CAPABILITY_NAMED_IAM',
+                ])
 
-#     # Wait for class-schedule creation
-#     while True:
-#         status = cloudformation.describe_stacks(
-#             StackName='tethol-class-schedule')['Stacks'][0]['StackStatus']
-#         if status == 'CREATE_COMPLETE':
-#             print(f"INFO: Creating cloudformation stack tethol-class-schedule. Status={status}")
-#             break
-#         else:
-#             print(f"INFO: Creating cloudformation stack tethol-class-schedule. Status={status}")
-#             time.sleep(5)
+    # Wait for class-schedule creation
+    while True:
+        status = cloudformation.describe_stacks(
+            StackName='tethol-class-schedule')['Stacks'][0]['StackStatus']
+        if status == 'CREATE_COMPLETE':
+            print(f"INFO: Creating cloudformation stack tethol-class-schedule. Status={status}")
+            break
+        else:
+            print(f"INFO: Creating cloudformation stack tethol-class-schedule. Status={status}")
+            time.sleep(5)
 
-# except Exception as e:
-#     print(f"WARN: {e}")
-# #######################################################################
-# # Finishing up
-# #######################################################################
+except Exception as e:
+    print(f"WARN: {e}")
+#######################################################################
+# Finishing up
+#######################################################################
 
-# print(f'INFO: The report was written to: {filename}')
-# print('Exiting! All The Tasks Are Completed Successfully...')
-# exit(0)
+print(f'INFO: The report was written to: {filename}')
+print('Exiting! All The Tasks Are Completed Successfully...')
+exit(0)
