@@ -202,6 +202,17 @@ for student in STUDENTS_LIST:
         
 print(f'INFO: EKS Load Balancers Deletion Complete...')
 #######################################################################
+# Delete class schedule
+#######################################################################
+print(f'INFO: Deleting the class schedule')
+try:
+    cloudformation = session.client('cloudformation')
+
+    result = cloudformation.delete_stack(
+        StackName='tethol-class-schedule'
+    )
+except Exception as e:
+    print('WARN: ', e)
 
 
 #######################################################################
