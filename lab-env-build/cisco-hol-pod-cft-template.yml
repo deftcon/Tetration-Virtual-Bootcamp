@@ -729,6 +729,13 @@ Resources:
           DeviceIndex: '1'
         - NetworkInterfaceId: !Ref 'TetNetworkInterfaces03'
           DeviceIndex: '2'
+      BlockDeviceMappings:
+        - DeviceName: "/dev/sda1"
+          Ebs:
+            VolumeType: "gp2"
+            VolumeSize: "196"
+            Encrypted: "false"
+            DeleteOnTermination: "true"
   
   TetNetworkInterfaces01:
       Type: AWS::EC2::NetworkInterface
@@ -799,6 +806,13 @@ Resources:
           GroupSet: 
             - !Ref CiscoHOLPublicSecurityGroup
           SubnetId: !Ref CiscoHOLSubnet01
+      BlockDeviceMappings:
+        - DeviceName: "/dev/sda1"
+          Ebs:
+            VolumeType: "gp2"
+            VolumeSize: "196"
+            Encrypted: "false"
+            DeleteOnTermination: "true"
 
   # Ubuntu 18.04 Employee (AnyConnect)
   CiscoHOLEC2Ubuntu1804Employee:
