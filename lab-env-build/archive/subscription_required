@@ -9,3 +9,4 @@ attack_server_ami: ami-04f958d48e22e185c # << Requires Lanuch, Accept Subscripti
 mysql_ami: ami-051ba5822fc02da4b # << Requires Lanuch, Accept Subscription, then AMI Create.  https://aws.amazon.com/marketplace/pp?sku=aw0evgkw8e5c1q413zgy5pjce
 apache_ami: ami-0c85d8851d66cd9f9 # << Requires Lanuch, Accept Subscription, then AMI Create. https://aws.amazon.com/marketplace/pp?sku=aw0evgkw8e5c1q413zgy5pjce
 ansible_ami: ami-0083b10a007c92d2d # << Requires Lanuch, Accept Subscription, then AMI Create. https://aws.amazon.com/marketplace/pp?sku=aw0evgkw8e5c1q413zgy5pjce
+
