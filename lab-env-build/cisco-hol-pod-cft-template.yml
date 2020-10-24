@@ -205,6 +205,12 @@ Parameters:
   EKSWorkerImageID:
     Type: String
     Description: Please enter Image Id for EKS Worker Node
+  ScheduleName:
+    Type: String  
+    Description: Name of the schedule to be assigned to the instances
+  NamingSuffix:
+    Type: String
+    Description: Last 6 digits of VPC_ID to use as suffix on names for uniqueness
 
 Resources:
 
@@ -363,7 +369,7 @@ Resources:
           Value: !Sub "${Region}"
         - Key: AppSDLC
           Value: Lab
-        - Key: !Sub "kubernetes.io/cluster/${StudentName}-eks-cluster-${Region}"
+        - Key: !Sub "kubernetes.io/cluster/${StudentName}-eks-cluster-${Region}-${NamingSuffix}"
           Value: 'owned'
   
   CiscoHOLPrivateSecurityGroup:
@@ -431,7 +437,7 @@ Resources:
           Value: !Sub "${Region}"
         - Key: AppSDLC
           Value: Lab
-        - Key: !Sub "kubernetes.io/cluster/${StudentName}-eks-cluster-${Region}"
+        - Key: !Sub "kubernetes.io/cluster/${StudentName}-eks-cluster-${Region}-${NamingSuffix}"
           Value: 'owned'
 
   # Provision EC2 Instances
@@ -461,7 +467,9 @@ Resources:
         - Key: AppCluster
           Value: GC-DC-DNS
         - Key: Schedule
-          Value: class-schedule
+          Value: !Sub ${ScheduleName}
+        - Key: Pod
+          Value: !Sub ${StudentName}
       UserData:
         Fn::Base64: !Sub |
           <powershell>
@@ -514,7 +522,9 @@ Resources:
         - Key: AppCluster
           Value: DB
         - Key: Schedule
-          Value: class-schedule
+          Value: !Sub ${ScheduleName}
+        - Key: Pod
+          Value: !Sub ${StudentName}
       UserData:
         Fn::Base64: !Sub |
           <powershell>
@@ -561,7 +571,9 @@ Resources:
         - Key: AppCluster
           Value: App
         - Key: Schedule
-          Value: class-schedule
+          Value: !Sub ${ScheduleName}
+        - Key: Pod
+          Value: !Sub ${StudentName}
       UserData:
         Fn::Base64: !Sub |
           <powershell>
@@ -616,7 +628,9 @@ Resources:
         - Key: AppCluster
           Value: DB
         - Key: Schedule
-          Value: class-schedule
+          Value: !Sub ${ScheduleName}
+        - Key: Pod
+          Value: !Sub ${StudentName}
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash
@@ -661,7 +675,9 @@ Resources:
         - Key: AppCluster
           Value: App
         - Key: Schedule
-          Value: class-schedule
+          Value: !Sub ${ScheduleName}
+        - Key: Pod
+          Value: !Sub ${StudentName}
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash
@@ -705,7 +721,7 @@ Resources:
         - Key: Name
           Value: !Sub "cisco-hol-${StudentName}-ec2-tet-data-centos7-${Region}${Subnet01AvailabilityZone}"
         - Key: Schedule
-          Value: class-schedule
+          Value: !Sub ${ScheduleName}
       NetworkInterfaces: 
         - NetworkInterfaceId: !Ref 'TetNetworkInterfaces01'
           DeviceIndex: '0'
@@ -713,6 +729,13 @@ Resources:
           DeviceIndex: '1'
         - NetworkInterfaceId: !Ref 'TetNetworkInterfaces03'
           DeviceIndex: '2'
+      BlockDeviceMappings:
+        - DeviceName: "/dev/sda1"
+          Ebs:
+            VolumeType: "gp2"
+            VolumeSize: "196"
+            Encrypted: "false"
+            DeleteOnTermination: "true"
   
   TetNetworkInterfaces01:
       Type: AWS::EC2::NetworkInterface
@@ -752,12 +775,12 @@ Resources:
 
   # Create Elastic IP Addresses
   # IF you have more than five (5) EIPs already associated to your AWS VPC, comment out the next 6 lines!
-  CiscoHOLEC2TetDataEIP1:
-    Type: AWS::EC2::EIP
-    Properties:
-      Tags:
-        - Key: Name
-          Value: !Sub "cisco-hol-${StudentName}-eip-TetData-${Region}${Subnet01AvailabilityZone}"
+  # CiscoHOLEC2TetDataEIP1:
+  #   Type: AWS::EC2::EIP
+  #   Properties:
+  #     Tags:
+  #       - Key: Name
+  #         Value: !Sub "cisco-hol-${StudentName}-eip-TetData-${Region}${Subnet01AvailabilityZone}"
   
   # Elastic IP Association  
   CiscoHOLAssociateEIPTetData:
@@ -776,13 +799,20 @@ Resources:
         - Key: Name
           Value: !Sub "cisco-hol-${StudentName}-ec2-tet-edge-centos7-${Region}${Subnet01AvailabilityZone}"
         - Key: Schedule
-          Value: class-schedule
+          Value: !Sub ${ScheduleName}
       NetworkInterfaces: 
         - AssociatePublicIpAddress: "true"
           DeviceIndex: "0"
           GroupSet: 
             - !Ref CiscoHOLPublicSecurityGroup
           SubnetId: !Ref CiscoHOLSubnet01
+      BlockDeviceMappings:
+        - DeviceName: "/dev/sda1"
+          Ebs:
+            VolumeType: "gp2"
+            VolumeSize: "196"
+            Encrypted: "false"
+            DeleteOnTermination: "true"
 
   # Ubuntu 18.04 Employee (AnyConnect)
   CiscoHOLEC2Ubuntu1804Employee:
@@ -794,7 +824,9 @@ Resources:
         - Key: Name
           Value: !Sub "cisco-hol-${StudentName}-ec2-ubuntu1804-employee-${Region}${Subnet02AvailabilityZone}"
         - Key: Schedule
-          Value: class-schedule
+          Value: !Sub ${ScheduleName}
+        - Key: Pod
+          Value: !Sub ${StudentName}
       UserData:
         Fn::Base64: !Sub |
           !/bin/bash
@@ -819,7 +851,9 @@ Resources:
         - Key: Name
           Value: !Sub "cisco-hol-${StudentName}-ec2-ubuntu1804-sysadmin-${Region}${Subnet02AvailabilityZone}"
         - Key: Schedule
-          Value: class-schedule
+          Value: !Sub ${ScheduleName}
+        - Key: Pod
+          Value: !Sub ${StudentName}
       UserData:
         Fn::Base64: !Sub |
           !/bin/bash
@@ -844,7 +878,7 @@ Resources:
         - Key: Name
           Value: !Sub "cisco-hol-${StudentName}-ec2-attacker-${Region}${Subnet02AvailabilityZone}"
         - Key: Schedule
-          Value: class-schedule
+          Value: !Sub ${ScheduleName}
       UserData:
         Fn::Base64: !Sub |
           !/bin/bash
@@ -873,7 +907,7 @@ Resources:
           Action:
             - sts:AssumeRole
       Path: "/"
-      RoleName: !Join [ "-", [ !Ref 'AWS::StackName', "EKS-Cluster-Role", !Ref 'AWS::Region' ] ]
+      RoleName: !Join [ "-", [ !Ref 'AWS::StackName', "EKS-Cluster-Role", !Ref 'AWS::Region', !Ref NamingSuffix ] ]
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
         - arn:aws:iam::aws:policy/AmazonEKSServicePolicy
@@ -893,7 +927,7 @@ Resources:
             Action:
               - sts:AssumeRole
       Path: /
-      RoleName: !Join [ "-", [ !Ref 'AWS::StackName', "EKS-Worker-Role", !Ref 'AWS::Region' ] ]
+      RoleName: !Join [ "-", [ !Ref 'AWS::StackName', "EKS-Worker-Role", !Ref 'AWS::Region', !Ref NamingSuffix ] ]
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
         - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
@@ -919,7 +953,7 @@ Resources:
   EKSCluster:
     Type: "AWS::EKS::Cluster"
     Properties:
-      Name: !Sub "cisco-hol-${StudentName}-eks-cluster-${Region}"
+      Name: !Sub "cisco-hol-${StudentName}-eks-cluster-${Region}-${NamingSuffix}"
       ResourcesVpcConfig:
         SecurityGroupIds:
           - !Ref CiscoHOLWebSecurityGroup
@@ -974,8 +1008,8 @@ Resources:
       Tags:
       - Key: Name
         PropagateAtLaunch: "true"
-        Value: !Sub "cisco-hol-${StudentName}-eks-worker-${Region}"
-      - Key: !Sub kubernetes.io/cluster/${StudentName}-eks-cluster-${Region}
+        Value: !Sub "cisco-hol-${StudentName}-eks-worker-${Region}-${NamingSuffix}"
+      - Key: !Sub kubernetes.io/cluster/${StudentName}-eks-cluster-${Region}-${NamingSuffix}
         Value: owned
         PropagateAtLaunch: "true"
 
@@ -1000,7 +1034,7 @@ Resources:
         - Key: Region
           Value: !Sub "${Region}"
         - Key: Schedule
-          Value: class-schedule
+          Value: !Sub ${ScheduleName}
       UserData: 
         Fn::Base64: !Sub |
           hostname cisco-hol-asav
@@ -1238,7 +1272,9 @@ Resources:
         - Key: AppCluster
           Value: Ansible
         - Key: Schedule
-          Value: class-schedule
+          Value: !Sub ${ScheduleName}
+        - Key: Pod
+          Value: !Sub ${StudentName}
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash
@@ -1377,8 +1413,11 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub "cisco-hol-${StudentName}-ec2-guacamole-centos7-${Region}${Subnet01AvailabilityZone}"
+        - Key: Pod
+          Value: !Sub ${StudentName}
         - Key: Schedule
-          Value: class-schedule
+          Value: !Sub ${ScheduleName}
+        
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash
@@ -1531,12 +1570,12 @@ Resources:
 
   # Create Elastic IP Addresses
   # IF you have more than five (5) EIPs already associated to your AWS VPC, comment out the next 6 lines!
-  CiscoHOLGuacamoleEIP:
-    Type: AWS::EC2::EIP
-    Properties:
-      Tags:
-        - Key: Name
-          Value: !Sub "cisco-hol-${StudentName}-eip-guacamole-${Region}${Subnet01AvailabilityZone}"
+  # CiscoHOLGuacamoleEIP:
+  #   Type: AWS::EC2::EIP
+  #   Properties:
+  #     Tags:
+  #       - Key: Name
+  #         Value: !Sub "cisco-hol-${StudentName}-eip-guacamole-${Region}${Subnet01AvailabilityZone}"
   
   # Elastic IP Association  
   CiscoHOLAssociateEIPGuacamole:
@@ -1544,6 +1583,7 @@ Resources:
     Properties:
       AllocationId: !Ref GuacamoleElasticIpAllocationId
       NetworkInterfaceId: !Ref GuacamoleNetworkInterfaces01
+
 
   # Lambda Function Basic Execution Role
   LambdaExecutionRole:
@@ -1684,7 +1724,7 @@ Resources:
   CiscoHOLIAMUser:
     Type: AWS::IAM::User
     Properties: 
-      UserName: !Join [ "-", [ !Ref StudentName, !Ref 'AWS::Region' ] ]
+      UserName: !Join [ "-", [ !Ref StudentName, !Ref 'AWS::Region', !Ref 'NamingSuffix' ] ]
 
   CiscoHOLIAMPolicy:
     Type: AWS::IAM::Policy
