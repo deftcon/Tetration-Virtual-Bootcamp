@@ -333,8 +333,8 @@ if answer.upper() == 'Y':
     START_DAY = validate_day("Please enter the numerical day of the month the class starts: ")
     END_MONTH = validate_month("Please enter the number corresponding to the month the class ends: ")
     END_DAY = validate_day("Please enter the numerical day of the month the class ends: ")
-    BEGIN_TIME = validate_time("Please enter the start time in 24-hour format (00:00-23:59): ")
-    END_TIME = validate_time("Please enter the end time in 24-hour format (00:00-23:59): ", BEGIN_TIME)
+    BEGIN_TIME = validate_time("Please enter the time the lab should start each day in 24-hour format (00:00-23:59): ")
+    END_TIME = validate_time("Please enter the time the lab should stop each day in 24-hour format (00:00-23:59): ", BEGIN_TIME)
     TIMEZONE = validate_tz("Enter the number corresponding to your timezone in the above list: ")
 else:
     use_schedule = False

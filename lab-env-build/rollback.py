@@ -58,7 +58,6 @@ try:
                 if name == 'Tetration HoL':
                     answer = input(f"Do you want to delete the lab environment for VPC {vpc.id} (Y/N)? ")
                     if answer.upper() == 'Y':
-                        print('This should break!')
                         VPC_ID = vpc.id
                         break
         if VPC_ID:
