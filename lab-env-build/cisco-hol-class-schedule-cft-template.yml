@@ -1,0 +1,40 @@
+AWSTemplateFormatVersion: 2010-09-09
+Metadata:
+  'AWS::CloudFormation::Designer': {}
+Parameters:
+  ServiceToken:
+    Type: String
+  TimeZone:
+    Type: String
+  BeginTime:
+    Type: String
+  EndTime:
+    Type: String
+  Month:
+    Type: String
+  MonthDays:
+    Type: String
+  ScheduleName:
+    Type: String
+  ScheduleDesc:
+    Type: String
+  PeriodDesc:
+    Type: String
+
+Resources:
+  TetHoLHours:
+    Type: 'Custom::ServiceInstanceSchedule'
+    Properties:
+      Name: !Sub "${ScheduleName}"
+      NoStackPrefix: 'True'
+      Description: !Sub "${ScheduleDesc}"
+      ServiceToken: !Sub >-
+         ${ServiceToken}
+      Enforced: 'True'
+      Timezone: !Sub "${TimeZone}"
+      Periods:
+        - Description: !Sub "${PeriodDesc}"
+          BeginTime: !Sub "${BeginTime}"
+          EndTime: !Sub "${EndTime}"
+          Months: !Sub "${Month}"
+          MonthDays: !Sub "${MonthDays}"

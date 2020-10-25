@@ -28,7 +28,7 @@ else:
     operation = 'Added'
 
 for ami in ami_dict.values():
-    ec2 = boto3.resource('ec2')
+    ec2 = boto3.resource('ec2', region_name="us-east-2")
     logger.info(f"Loading image {ami['id']}")
     source_ami = ec2.Image(ami['id'])
     source_ami.load()
