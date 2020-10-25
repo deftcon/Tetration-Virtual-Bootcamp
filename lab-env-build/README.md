@@ -306,16 +306,8 @@ INFO: CloudFormation Rollback Completed Successfully...
 
 Currently deploying this lab environment only supports a single 'deployment set' per region, where 'deployment set' is defined as any numerical value defined in `parameters.yml` under the `student_count` field. It essentially is the number of student pods you are deploying at any one time. You must have 2x EIPs per student allocated to your region, as per the above section labeled "Requirements / Dependencies". Removing the single deployment option per region is an enhancement that we aim to add shortly. 
 
-Currently there is a limitation that prevents any ability to increment student pod count once deployed. Since it would take a bit of an effort to add, it is something we will be looking at however, don't aim to add anytime soon.
-
-
-##### LICENSE
-
-
-This lab is provided using the <a href="https://github.com/deftcon/cisco-tetration-hol/blob/master/LICENSE" target="_blank">GPL-3.0</a>. You may fork this repo and use it mostly as you like, however you must retain the same GPL license, and you must give credit. This lab was created by <a href="https://github.com/raheel-anwar" target="_blank">Raheel Anwar</a>, <a href="https://github.com/mamullen13316" target="_blank">Matt Mullen<a>, and <a href="https://github.com/highspeedsnow" target="_blank">Mark Snow</a>. All video content was created, directed, and edited by <a href="https://www.instagram.com/highspeedsnow" target="_blank">Mark</a> and was shot by both Mark and Matt. 
-
-
----
-
+Currently there is a limitation that prevents any ability to increment student pod count once deployed. Since it would take a bit of an effort to add, it is something we will be looking at however, don't aim to add anytime soon.  
+  
+---  
+  
 [Go to Top of Page](README.md)
-
