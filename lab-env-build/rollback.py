@@ -371,9 +371,23 @@ try:
                                     sg.delete()
                             print(f'INFO: Deleting vpc {vpc.id}')
                             vpc.delete()
-                    
+
 except Exception as e:
     print(f'ERROR: While deleting VPC_ID {e}')
+    sys.exit(1)
+
+#######################################################################
+# Empty and delete the S3 bucket
+#######################################################################
+
+try:
+    s3 = session.resource('s3')
+    bucket = s3.Bucket(f'tetration-hol-cft-template-{NAMING_SUFFIX}')
+    bucket.objects.all().delete()
+    bucket.delete()
+    print(f'INFO: Deleted S3 bucket tetration-hol-cft-template-{NAMING_SUFFIX}')
+except Exception as e:
+    print(f'ERROR: While deleting S3 Bucket tetration-hol-cft-template-{NAMING_SUFFIX}:  {e}')
     sys.exit(1)
 
 print('INFO: Rollback completed successfully!')

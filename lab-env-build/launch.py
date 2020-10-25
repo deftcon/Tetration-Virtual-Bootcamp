@@ -104,14 +104,13 @@ if use_existing_vpc:
     except ClientError as e:
         print(f'ERROR: VPC Check Failed with error {e}')
         sys.exit(1)
+
 #######################################################################
 
 SUBNET_RANGE_PRIMARY = params['subnet_range_primary']
 SUBNET_RANGE_SECONDARY = params['subnet_range_secondary']
 # STUDENT_COUNT = params['student_count']
 STUDENT_PREFIX = params['student_prefix']
-
-S3_BUCKET = params['s3_bucket']
 
 MANAGEMENT_CIDR = ''
 
@@ -339,30 +338,34 @@ if answer.upper() == 'Y':
 else:
     use_schedule = False
 
-# Create a start time 6 hours earlier than configured to allow flows for ADM 
-dt = datetime.strptime(BEGIN_TIME, '%H:%M')
-t = timedelta(hours=6)
-dt_start = dt - t
-ADM_START_TIME = dt_start.strftime('%H:%M')
-# Handles case where class start and end are in same month
-if START_MONTH == END_MONTH:
-    MONTHDAYS = f"{START_DAY}-{END_DAY}"
-    ADM_MONTH = START_MONTH
-    ADM_DAY = str(int(START_DAY) + 1)
-# Handles case where class starts end of month and overlaps into next month
-else:
-    MONTHDAYS = f"{START_DAY}-L"
-    date_obj = datetime(datetime.now().year, int(START_MONTH), int(START_DAY))
-    days_in_month = calendar.monthrange(datetime.now().year,date_obj.month)[1]
-    if int(START_DAY) == days_in_month:
-        ADM_MONTH = END_MONTH
-        ADM_DAY = "1"
-    else:
+if use_schedule:
+    # Create a start time 6 hours earlier than configured to allow flows for ADM 
+    dt = datetime.strptime(BEGIN_TIME, '%H:%M')
+    t = timedelta(hours=6)
+    dt_start = dt - t
+    ADM_START_TIME = dt_start.strftime('%H:%M')
+    # Handles case where class start and end are in same month
+    if START_MONTH == END_MONTH:
+        MONTHDAYS = f"{START_DAY}-{END_DAY}"
         ADM_MONTH = START_MONTH
         ADM_DAY = str(int(START_DAY) + 1)
+    # Handles case where class starts end of month and overlaps into next month
+    else:
+        MONTHDAYS = f"{START_DAY}-L"
+        date_obj = datetime(datetime.now().year, int(START_MONTH), int(START_DAY))
+        days_in_month = calendar.monthrange(datetime.now().year,date_obj.month)[1]
+        if int(START_DAY) == days_in_month:
+            ADM_MONTH = END_MONTH
+            ADM_DAY = "1"
+        else:
+            ADM_MONTH = START_MONTH
+            ADM_DAY = str(int(START_DAY) + 1)
 
-month_dict = {1:'jan',2:'feb',3:'mar',4:'apr',5:'may',6:'jun',7:'jul',8:'aug',9:'sep',10:'oct',11:'nov',12:'dec'}
-SCHEDULE_NAME = f"{month_dict[int(START_MONTH)]}{START_DAY}-to-{month_dict[int(END_MONTH)]}{END_DAY}-{BEGIN_TIME.replace(':','')}-{END_TIME.replace(':','')}"
+    month_dict = {1:'jan',2:'feb',3:'mar',4:'apr',5:'may',6:'jun',7:'jul',8:'aug',9:'sep',10:'oct',11:'nov',12:'dec'}
+    SCHEDULE_NAME = f"{month_dict[int(START_MONTH)]}{START_DAY}-to-{month_dict[int(END_MONTH)]}{END_DAY}-{BEGIN_TIME.replace(':','')}-{END_TIME.replace(':','')}"
+else:
+    SCHEDULE_NAME = "Always-On"
+
 
 #######################################################################
 # Confirm Deploy Before Proceeding ####################################
@@ -400,6 +403,7 @@ if not use_existing_vpc:
     )
     VPC_ID = vpc['Vpc']['VpcId']
     print(f"INFO: Created VPC with ID {VPC_ID} and CIDR block {SUBNET_RANGE_PRIMARY}")
+    NAMING_SUFFIX = VPC_ID[-6:]
 
     # Create Secondary CIDR
     sec_cidr = client.associate_vpc_cidr_block(CidrBlock=SUBNET_RANGE_SECONDARY, VpcId=VPC_ID)
@@ -455,17 +459,19 @@ def create_bucket(bucket_name, config, region=None):
                                     CreateBucketConfiguration=location)
     except ClientError as e:
         if 'BucketAlreadyOwnedByYou' in e.response['Error']['Code']:
-            print(f"INFO: Bucket {S3_BUCKET} already exists, skipping")
+            print(f"INFO: Bucket {bucket_name} already exists, skipping")
         elif 'BucketAlreadyExists' in e.response['Error']['Code']:
-            print(f"INFO: Bucket {S3_BUCKET} already exists, skipping")
+            print(f"INFO: Bucket {bucket_name} already exists, skipping")
         else:
             print(f"ERROR: Error while creating S3 bucket {e}")
             sys.exit(1)
         return False
     return True
 
+S3_BUCKET = f"tetration-hol-cft-template-{NAMING_SUFFIX}"
+
 print(f"INFO: Creating S3 Bucket {S3_BUCKET}")
-boto_config = Config(region_name = REGION)
+boto_config = Config(region_name=REGION)
 if REGION == 'us-east-1':
     result = create_bucket(S3_BUCKET, boto_config)
 else:
@@ -494,8 +500,6 @@ for student in STUDENTS_LIST:
 
         cloudformation = session.client('cloudformation', region_name=REGION)
         cloudformation_template = open(CFT_POD_FILE, 'r').read()
-
-        NAMING_SUFFIX = VPC_ID[-6:]
 
         aws_parameters = [
             {'ParameterKey': 'AccessKey', 'ParameterValue': ACCESS_KEY},

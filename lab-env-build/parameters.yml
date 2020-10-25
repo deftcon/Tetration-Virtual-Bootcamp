@@ -1,7 +1,5 @@
 ---
 aws_region: us-east-1
-
-student_count: 2
 student_prefix: cisco-student
 
 # Enter the VPC ID below if using existing VPC. Comment if creating new VPC, it will be populated here upon creation.
@@ -11,9 +9,6 @@ student_prefix: cisco-student
 #internet_gateway_id: igw-03ba648c46f5d4614
 subnet_range_primary: 10.1.0.0/16
 subnet_range_secondary: 198.18.0.0/16
-
-# S3 Bucket is global DNS unique name, use any arbitrary desired non-overlapping name. Will be created if doesn't exist.
-s3_bucket: 'deft-mm-tetration-hol-cft-template' 
 
 # This is your own private on-prem ISE instance - needs VPN with AWS VGW. If not using ISE simply give it any value, however do not comment. 
 ise_server_ip: '172.16.171.49' 
