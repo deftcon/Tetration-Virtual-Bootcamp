@@ -59,10 +59,10 @@ for ami in ami_dict.keys():
             Name=ami_dict[ami]['name']
             )
         else:
-             logger.info(f"Creating AMI ami_create_tmp-{ami_dict[ami]['name']}")
+            logger.info(f"Creating AMI ami_create_tmp-{ami_dict[ami]['name']}")
             image_obj = instance.create_image(
-                Description=f"ami_create_tmp-{ami_dict[ami]['name']}",
-                Name=f"ami_create_tmp-{ami_dict[ami]['name']}"
+            Description=f"ami_create_tmp-{ami_dict[ami]['name']}",
+            Name=f"ami_create_tmp-{ami_dict[ami]['name']}"
             )
 
         obj_list.append((instances[0], image_obj))
