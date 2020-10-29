@@ -19,7 +19,7 @@ This lab environment deploys entirely to AWS with the exception of Cisco ISE, wh
 
 ---  
   
-This lab environment can be provisioned any time, before or after provisioning your instance of Tetration. You may wish to deploy it just to become familiar with the environment, or you may perhaps find another use for this lab environment, in which case we'd love to know what your use-case has been. Feel free to reach out to us here in our repo by raising an issue to tell us about it. 
+This lab environment can be provisioned any time, before or after provisioning your instance of Tetration. You may wish to deploy it just to become familiar with the environment, or you may perhaps find another use for this lab environment, in which case <a href="https://github.com/deftcon/Tetration-Virtual-Bootcamp/issues/new?template=use_case.md" target="_blank">we'd love to know what your use-case is</a>. If you have any feature requests, those go <a href="https://github.com/deftcon/Tetration-Virtual-Bootcamp/issues/new?template=feature_request.md" target="_blank">here</a>. Bugs go <a href="https://github.com/deftcon/Tetration-Virtual-Bootcamp/issues/new?template=bug_report.md" target="_blank">here</a>. 
 
 ## Interactive Lab Diagram
   
@@ -29,7 +29,7 @@ This lab environment can be provisioned any time, before or after provisioning y
 
 #### AMIs Required Prior to AWS Lab Environment Deployment
 
-There are a number of custom-built AMI images that require copying before deploying this lab environment. These images reside in Deftcon's GitHub account, and require us to add _**your**_ AWS Account ID to each AMI and Snapshot, therefore <a href="https://github.com/deftcon/Tetration-Virtual-Bootcamp/issues/1" target="_blank">please open an issue on GitHub similar to this one</a> and specify your AWS Account ID. You should receive an email in 24 hours or less (often much faster) indicating the permissions have been added and that you are ready to proceed with the below instructions.  
+There are a number of custom-built AMI images that require copying before deploying this lab environment. These images reside in Deftcon's GitHub account, and require us to add _**your**_ AWS Account ID to each AMI and Snapshot, therefore <a href="https://github.com/deftcon/Tetration-Virtual-Bootcamp/issues/new?template=ami_copy.md" target="_blank">please open an issue on GitHub similar to this one</a> and specify your AWS Account ID. You should receive an email in 24 hours or less (often much faster) indicating the permissions have been added and that you are ready to proceed with the below instructions.  
   
 ---  
 NOTE: You cannot move on and run `ami_create.py` as instructed below until _**after**_ you receive an email reply indicating the permissions have been added to allow you access to the necessary AMIs. Failure to follow this will result in both the `ami_create.py` and the `launch.py` failing miserably.
