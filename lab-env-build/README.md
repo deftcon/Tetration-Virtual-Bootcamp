@@ -29,7 +29,7 @@ This lab environment can be provisioned any time, before or after provisioning y
 
 #### AMIs Required Prior to AWS Lab Environment Deployment
 
-There are a number of custom-built AMI images that require copying before deploying this lab environment. These images reside in Deftcon's GitHub account, and require us to add _**your**_ AWS Account ID to each AMI and Snapshot, therefore <a href="https://github.com/deftcon/Tetration-Virtual-Bootcamp/issues/new?template=ami_copy.md" target="_blank">please open an issue on GitHub similar to this one</a> and specify your AWS Account ID. You should receive an email in 24 hours or less (often much faster) indicating the permissions have been added and that you are ready to proceed with the below instructions.  
+There are a number of custom-built AMI images that require copying before deploying this lab environment. These images reside in Deftcon's GitHub account, and require us to add _**your**_ AWS Account ID to each AMI and Snapshot, therefore <a href="https://github.com/deftcon/Tetration-Virtual-Bootcamp/issues/new?template=ami_copy.md" target="_blank">fill out this form specifying your AWS Account ID</a>. You should receive an email in 24 hours or less (often much faster) indicating the permissions have been added and that you are ready to proceed with the below instructions.  
   
 ---  
 NOTE: You cannot move on and run `ami_create.py` as instructed below until _**after**_ you receive an email reply indicating the permissions have been added to allow you access to the necessary AMIs. Failure to follow this will result in both the `ami_create.py` and the `launch.py` failing miserably.
