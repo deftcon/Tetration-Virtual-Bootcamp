@@ -561,8 +561,10 @@ for student in STUDENTS_LIST:
             {'ParameterKey': 'ScheduleName', 'ParameterValue': SCHEDULE_NAME},
             {'ParameterKey': 'NamingSuffix', 'ParameterValue': NAMING_SUFFIX}
             ]
+        
+        aws_params_json_formatted_str = json.dumps(aws_parameters, indent=2)
+        print('INFO:', aws_params_json_formatted_str)
 
-        print('INFO:', aws_parameters)
         templateURL = f"https://{S3_BUCKET}.s3.{REGION}.amazonaws.com/{CFT_POD_FILE }"
         print(templateURL)
         result = cloudformation.create_stack(
@@ -624,6 +626,12 @@ while True:
 #######################################################################
 # Assemble EKS ELB DNS Records ########################################
 #######################################################################
+print('INFO: Preparing to initialize the EKS DNS Assembly...')
+time.sleep(5)
+print('INFO: Preparing to initialize the EKS DNS Assembly...')
+time.sleep(5)
+print('INFO: Preparing to initialize the EKS DNS Assembly...')
+time.sleep(5)
 try:
 
     print('INFO: Initializing EKS DNS Assembly...')
