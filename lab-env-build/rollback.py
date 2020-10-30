@@ -30,6 +30,7 @@ REGION = params['aws_region']
 # VPC_ID = params['vpc_id']
 SUBNET_RANGE_PRIMARY = params['subnet_range_primary']
 SUBNET_RANGE_SECONDARY = params['subnet_range_secondary']
+# student_count has been removed from parameters.yml file, consider removing next line altogether sometime
 STUDENT_COUNT = params['student_count']
 STUDENT_PREFIX = params['student_prefix']
 
