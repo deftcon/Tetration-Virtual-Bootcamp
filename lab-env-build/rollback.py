@@ -30,7 +30,6 @@ REGION = params['aws_region']
 # VPC_ID = params['vpc_id']
 SUBNET_RANGE_PRIMARY = params['subnet_range_primary']
 SUBNET_RANGE_SECONDARY = params['subnet_range_secondary']
-# student_count has been removed from parameters.yml file, consider removing next line altogether sometime
 STUDENT_COUNT = params['student_count']
 STUDENT_PREFIX = params['student_prefix']
 
@@ -49,7 +48,6 @@ STACKS_LIST = []
 try:
     print(f'INFO: Retrieving VPC_ID...')
     ec2 = session.resource('ec2', region_name=REGION)
-#    vpc = ec2.Vpc(VPC_ID)
     vpcs = list(ec2.vpcs.all())
     VPC_ID = None
     for vpc in vpcs:
@@ -57,6 +55,7 @@ try:
             for tag in vpc.tags:
                 name = tag.get('Value')
                 if name == 'Tetration HoL':
+                    print(f"INFO: Found VPC {vpc.id} with tag 'Tetration HoL'")
                     answer = input(f"Do you want to delete the lab environment for VPC {vpc.id} (Y/N)? ")
                     if answer.upper() == 'Y':
                         VPC_ID = vpc.id
@@ -147,7 +146,7 @@ if rusure_response1 == 'Y':
         print('No pods were destroyed, sys.exiting now.')
         sys.exit(1)
 else:
-    print('No pods were destroyed, sys.exiting now.')
+    print('No pods were destroyed, exiting now.')
     sys.exit(1)
 
 #######################################################################
@@ -200,7 +199,10 @@ for student in STUDENTS_LIST:
 
         s3 = session.resource('s3')
         bucket = s3.Bucket(bucket_name)
-        bucket.objects.all().delete()
+        print(f"INFO: Emptying s3 bucket {bucket_name}")
+        bucket.objects.delete()
+        time.sleep(10)
+        print(f"INFO: Deleting s3 bucket {bucket_name}")
         bucket.delete()
 
         print(f'INFO: S3 Bucket Deleted: {bucket_name}')
@@ -209,6 +211,10 @@ for student in STUDENTS_LIST:
 
         if 'does not exist' in str(e):
             print(f'INFO: S3 Bucket {bucket_name} Does Not Exist...')
+        elif 'BucketNotEmpty' in str(e):
+            print(f'ERROR: S3 Bucket {bucket_name} is not empty even though we already emptied it.')
+            print(f'Exiting')
+            sys.exit(1)
         else:
             print('WARN: ', e)
 
@@ -317,6 +323,11 @@ while True:
 
             print(f"INFO: StackName: {stack_name}, Status: {status['Stacks'][0]['StackStatus']}")
 
+            if "DELETE_FAILED" in status['Stacks'][0]['StackStatus']:
+                print(f'ERROR: Deletion failed for stack {stack_name}, please check the CloudFormation dashboard on the AWS console')
+                print('Exiting')
+                sys.exit(1)
+
         if len(STUDENTS_LIST) == len(deleted_stacks):
             print('INFO: CloudFormation Rollback Completed Successfully...')
             break
@@ -384,7 +395,7 @@ except Exception as e:
 try:
     s3 = session.resource('s3')
     bucket = s3.Bucket(f'tetration-hol-cft-template-{NAMING_SUFFIX}')
-    bucket.objects.all().delete()
+    bucket.objects.delete()
     bucket.delete()
     print(f'INFO: Deleted S3 bucket tetration-hol-cft-template-{NAMING_SUFFIX}')
 except Exception as e:

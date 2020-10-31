@@ -21,8 +21,6 @@ PARAMETERS_FILE = './parameters.yml'
 
 params = yaml.load(open(PARAMETERS_FILE), Loader=yaml.Loader)
 
-VPC_ID = 'vpc-9999aaaabbbbcccc0'
-
 CFT_POD_FILE = 'cisco-hol-pod-cft-template.yml'
 
 ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY_ID')
@@ -130,34 +128,33 @@ def get_public_ip():
 #######################################################################
 # Get Management Cidr Block ###########################################
 #######################################################################
-try:
-    print(f'INFO: Fetching Your Public IP for AWS SG Access "All Traffic" ...')
-    MANAGEMENT_CIDR = f"{get_public_ip()}/32"
-    print('INFO: Management Cidr:', MANAGEMENT_CIDR)
-except:
-    print(f'MINOR: Unable To Grab Your Public IP for the Management CIDR')
-    print(f'MINOR: Not a major issue, so continuing ...')
-    MANAGEMENT_CIDR = '1.1.1.1/32'
-    pass
+# try:
+#     print(f'INFO: Fetching Your Public IP for AWS SG Access "All Traffic" ...')
+#     MANAGEMENT_CIDR = f"{get_public_ip()}/32"
+#     print('INFO: Management Cidr:', MANAGEMENT_CIDR)
+# except:
+#     print(f'MINOR: Unable To Grab Your Public IP for the Management CIDR')
+#     print(f'MINOR: Not a major issue, so continuing ...')
+#     MANAGEMENT_CIDR = '1.1.1.1/32'
+#     pass
 
-MANAGEMENT_CIDR = '1.1.1.1/32'
+# MANAGEMENT_CIDR = '1.1.1.1/32'
 
 #######################################################################
 # Check Existing Subnets if deploying into existing ###################
 #######################################################################
-print(f'INFO: Checking Existing Subnets...')
-filters = [{'Name':'vpcId', 'Values':[VPC_ID]}]
+if use_existing_vpc:
+    print(f'INFO: Checking Existing Subnets...')
+    filters = [{'Name':'vpcId', 'Values':[VPC_ID]}]
 
-ec2 = session.resource('ec2', region_name=REGION)
-subnets_count = len(list(ec2.subnets.filter(Filters=filters)))
+    ec2 = session.resource('ec2', region_name=REGION)
+    subnets_count = len(list(ec2.subnets.filter(Filters=filters)))
 
-if subnets_count > 0:
-    print(f'ERROR: {subnets_count} Subnets Found In Current VPC...')
-    sys.exit(1)
+    if subnets_count > 0:
+        print(f'ERROR: {subnets_count} Subnets Found In Current VPC...')
+        sys.exit(1)
 
-
-print(f'INFO: Subnet Check Completed...')
-
+    print(f'INFO: Subnet Check Completed...')
 
 #######################################################################
 # Check Available Elastic IPs #########################################
@@ -511,7 +508,7 @@ for student in STUDENTS_LIST:
             {'ParameterKey': 'StudentIndex', 'ParameterValue': str(STUDENTS_LIST.index(student))},
             {'ParameterKey': 'StudentName', 'ParameterValue': student['account_name']},
             {'ParameterKey': 'StudentPassword', 'ParameterValue': student['account_password']},
-            {'ParameterKey': 'ManagementCidrBlock', 'ParameterValue': MANAGEMENT_CIDR},
+            # {'ParameterKey': 'ManagementCidrBlock', 'ParameterValue': MANAGEMENT_CIDR},
 
             {'ParameterKey': 'Subnet01CidrBlock', 'ParameterValue': f"{student['public_subnet_01']}/24"},
             {'ParameterKey': 'Subnet02CidrBlock', 'ParameterValue': f"{student['public_subnet_02']}/24"},
@@ -975,5 +972,5 @@ if use_schedule:
 #######################################################################
 
 print(f'INFO: The report was written to: {filename}')
-print('sys.exiting! All The Tasks Are Completed Successfully...')
+print('Exiting! All The Tasks Are Completed Successfully...')
 sys.exit(0)

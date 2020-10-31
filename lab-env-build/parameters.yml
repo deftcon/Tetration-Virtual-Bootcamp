@@ -15,15 +15,15 @@ ise_server_ip: '172.16.171.49'
 
 asav_ami: ami-03ad81377648fcb21
 eks_worker_ami: ami-0f85d876fff2b916e
-ldap_ami: ami-0e7c330d6d9e5ff1c
-mssql_ami: ami-0700baa0de511dd9f
-iis_ami: ami-0137e19db9d904bfa
-mysql_ami: ami-00fda0b71017b4e7d
-apache_ami: ami-0d15af0fca67b0a61
-ansible_ami: ami-0feac86a8c0d7b8d6
-tet_data_ami: ami-0936a5d2f6c8c7326
-tet_edge_ami: ami-0514536b50ad7b42d
-employee_ubuntu_ami: ami-0d2401534d96fac31
-sysadmin_ubuntu_ami: ami-0d2401534d96fac31
-attack_server_ami: ami-01dfcfe9030b977e9
-guacamole_ami: ami-0b9676ed6197e7ec6
+ldap_ami: ami-066fc40d5b70b4a89
+mssql_ami: ami-004ffe94435ef5737
+iis_ami: ami-091420ca501193e72
+mysql_ami: ami-056e7e401c08e8ef0
+apache_ami: ami-0296d9bc6cefc1c4c
+ansible_ami: ami-05f6d5ade9625385b
+tet_data_ami: ami-0066b63b22894e388
+tet_edge_ami: ami-0dbc455417eaaa4e8
+employee_ubuntu_ami: ami-007ea247058280101
+sysadmin_ubuntu_ami: ami-007ea247058280101
+attack_server_ami: ami-0b44974d34312e059
+guacamole_ami: ami-0fa2ed7d4c39282ba

@@ -88,9 +88,9 @@ Parameters:
     NoEcho: True
     Type: String
     Description: Please enter password
-  ManagementCidrBlock:
-    Type: String
-    Description: Please enter the Management Cidr Block
+  # ManagementCidrBlock:
+  #   Type: String
+  #   Description: Please enter the Management Cidr Block
   VpcID:
     Type: String
     Description: Please enter the VPC Id
@@ -347,10 +347,10 @@ Resources:
           FromPort: 0
           ToPort: 65535
           CidrIp: !Sub "${ISEIPAddress}/32"
-        - IpProtocol: -1
-          FromPort: 0
-          ToPort: 65535
-          CidrIp: !Ref ManagementCidrBlock
+        # - IpProtocol: -1
+        #   FromPort: 0
+        #   ToPort: 65535
+        #   CidrIp: !Ref ManagementCidrBlock
       SecurityGroupEgress:
         - IpProtocol: -1
           FromPort: 0
@@ -382,10 +382,10 @@ Resources:
           FromPort: 0
           ToPort: 65535
           CidrIp: !Ref Subnet03CidrBlock
-        - IpProtocol: -1
-          FromPort: 0
-          ToPort: 65535
-          CidrIp: !Ref ManagementCidrBlock
+        # - IpProtocol: -1
+        #   FromPort: 0
+        #   ToPort: 65535
+        #   CidrIp: !Ref ManagementCidrBlock
       SecurityGroupEgress:
         - IpProtocol: -1
           FromPort: 0
