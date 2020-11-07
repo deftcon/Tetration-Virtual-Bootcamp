@@ -26,15 +26,15 @@ CFT_POD_FILE = 'cisco-hol-pod-cft-template.yml'
 
 ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY_ID')
 SECRET_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-API_GATEWAY_URL = os.environ.get('API_GATEWAY_URL')
-API_GATEWAY_KEY = os.environ.get('API_GATEWAY_KEY')
+API_GATEWAY_URL = "https://fh3aao7bri.execute-api.us-east-1.amazonaws.com/prod"
+API_GATEWAY_KEY = "iBO39NUUc1401nMYkNWvM1jbA4YAHhKD1z4wpIlh"
 
-if not API_GATEWAY_URL:
-    print('ERROR: You must define the environment variable API_GATEWAY_URL. See the README.md for details')
-    sys.exit(1)
-if not API_GATEWAY_KEY:
-    print('ERROR: You must define the environment variable API_GATEWAY_KEY. See the README.md for details')
-    sys.exit(1)
+# if not API_GATEWAY_URL:
+#     print('ERROR: You must define the environment variable API_GATEWAY_URL. See the README.md for details')
+#     sys.exit(1)
+# if not API_GATEWAY_KEY:
+#     print('ERROR: You must define the environment variable API_GATEWAY_KEY. See the README.md for details')
+#     sys.exit(1)
 
 if ACCESS_KEY == None or ACCESS_KEY == '':
     ACCESS_KEY = params['aws_access_key']
@@ -82,7 +82,7 @@ def get_user_input(prompt, valid_pattern):
       m = re.match(valid_pattern, answer)
       if m:
           return answer
- 
+
 print("You may deploy into an existing AWS VPC, or a new VPC can be created.")
 print("To deploy into an existing VPC, the VPC ID and the ID of the Internet Gateway in the existing VPC will be needed.")
 print("If you do not choose to use an existing VPC, a new VPC and Internet Gateway will be created")
@@ -129,9 +129,9 @@ def password_generator(size=14, chars=string.ascii_letters + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
 # Gets the public IP address of system running this script
-def get_public_ip():
-    result = json.load(urllib.request.urlopen('https://api.ipify.org/?format=json'))
-    return result['ip']
+# def get_public_ip():
+#     result = json.load(urllib.request.urlopen('https://api.ipify.org/?format=json'))
+#     return result['ip']
 
 
 #######################################################################
@@ -577,8 +577,8 @@ for student in STUDENTS_LIST:
             {'ParameterKey': 'NamingSuffix', 'ParameterValue': NAMING_SUFFIX}
             ]
         
-        aws_params_json_formatted_str = json.dumps(aws_parameters, indent=2)
-        print('INFO:', aws_params_json_formatted_str)
+        # aws_params_json_formatted_str = json.dumps(aws_parameters, indent=2)
+        # print('INFO:', aws_params_json_formatted_str)
 
         templateURL = f"https://{S3_BUCKET}.s3.{REGION}.amazonaws.com/{CFT_POD_FILE }"
         print(templateURL)

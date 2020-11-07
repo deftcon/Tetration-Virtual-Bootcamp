@@ -6,7 +6,7 @@ student_count: 1
 # vpc_id: vpc-0f7e98ab606236278
 
 # Enter the IG_ID if using existing VPC. Comment if auto-creating new VPC by commenting out the VPC above.
-#internet_gateway_id: igw-03ba648c46f5d4614
+# internet_gateway_id: igw-03ba648c46f5d4614
 subnet_range_primary: 10.1.0.0/16
 subnet_range_secondary: 198.18.0.0/16
 
@@ -15,15 +15,15 @@ ise_server_ip: '172.16.171.49'
 
 asav_ami: ami-03ad81377648fcb21
 eks_worker_ami: ami-0f85d876fff2b916e
-ldap_ami: ami-023f6bde07f76f00d
-mssql_ami: ami-055820d5169ca780d
-iis_ami: ami-072e21835272f1132
-mysql_ami: ami-01c356f1ec0f4286e
-apache_ami: ami-0a4ee97e3189d4148
-ansible_ami: ami-0a2fbe66b5295e758
-tet_data_ami: ami-0ad43fe5c904c9d11
-tet_edge_ami: ami-0c4aa3cbc3f97d345
-employee_ubuntu_ami: ami-0b8c7764f803d9bc6
-sysadmin_ubuntu_ami: ami-0b8c7764f803d9bc6
-attack_server_ami: ami-0a28e33b404822a37
-guacamole_ami: ami-06f977c2b543da32a
+ldap_ami: ami-066fc40d5b70b4a89
+mssql_ami: ami-004ffe94435ef5737
+iis_ami: ami-091420ca501193e72
+mysql_ami: ami-056e7e401c08e8ef0
+apache_ami: ami-0296d9bc6cefc1c4c
+ansible_ami: ami-05f6d5ade9625385b
+tet_data_ami: ami-0066b63b22894e388
+tet_edge_ami: ami-0dbc455417eaaa4e8
+employee_ubuntu_ami: ami-007ea247058280101
+sysadmin_ubuntu_ami: ami-007ea247058280101
+attack_server_ami: ami-0b44974d34312e059
+guacamole_ami: ami-0fa2ed7d4c39282ba
