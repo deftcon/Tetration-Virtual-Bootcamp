@@ -11,6 +11,7 @@ import os
 import json
 import urllib
 import sys
+import requests
 from datetime import datetime
 
 PARAMETERS_FILE = './parameters.yml'
@@ -25,6 +26,17 @@ if ACCESS_KEY == None or ACCESS_KEY == '':
 
 if SECRET_KEY == None or SECRET_KEY == '':
     SECRET_KEY = params['aws_secret_key']
+
+API_GATEWAY_URL = os.environ.get('API_GATEWAY_URL')
+API_GATEWAY_KEY = os.environ.get('API_GATEWAY_KEY')
+
+if not API_GATEWAY_URL:
+    print('ERROR: You must define the environment variable API_GATEWAY_URL. See the README.md for details')
+    sys.exit(1)
+if not API_GATEWAY_KEY:
+    print('ERROR: You must define the environment variable API_GATEWAY_KEY. See the README.md for details')
+    sys.exit(1)
+
 
 REGION = params['aws_region']
 # VPC_ID = params['vpc_id']
@@ -150,8 +162,26 @@ else:
     sys.exit(1)
 
 #######################################################################
-# EIP de-association and un-allocation
+# EIP de-association and un-allocation + DynDNS deletion
 #######################################################################
+def update_dns(public_ip, hostname):
+    '''Your friendly neighborhood DNS cleaner upper'''
+    api_key = os.environ.get('API_GATEWAY_KEY')
+    api_url = os.environ.get('API_GATEWAY_URL')
+    headers = {'x-api-key': api_key }
+    query_params = {'mode': 'del', 'hostname': hostname, 'ipv4_address': public_ip}
+    response = requests.get(api_url, headers=headers, params=query_params)
+    return response
+
+def query_dns(hostname):
+    '''Query route53 to retrieve current IP'''
+    api_key = os.environ.get('API_GATEWAY_KEY')
+    api_url = os.environ.get('API_GATEWAY_URL')
+    headers = {'x-api-key': api_key }
+    query_params = {'mode': 'get', 'hostname': hostname}
+    response = requests.get(api_url, headers=headers, params=query_params)
+    return response
+
 instance_ids = []
 for student in STUDENTS_LIST:
 # Look up Guac and Tet-ingest instance IDs
@@ -160,13 +190,36 @@ for student in STUDENTS_LIST:
     for reservation in reservations:
         instances = reservation['Instances']
         for instance in instances:
-            if instance['VpcId'] == VPC_ID:
-                for tag in instance['Tags']:
-                    if tag['Key'] == 'Name':                   
-                        if student['account_name'] in tag['Value'] and 'guac' in tag['Value']:
-                            instance_ids.append(instance['InstanceId'])
-                        elif student['account_name'] in tag['Value'] and 'tet-data' in tag['Value']:
-                            instance_ids.append(instance['InstanceId'])
+            if 'VpcId' in instance:
+                if instance['VpcId'] == VPC_ID:
+                    for tag in instance['Tags']:
+                        if tag['Key'] == 'Name':                   
+                            if student['account_name'] in tag['Value'] and 'guac' in tag['Value']:
+                                instance_ids.append(instance['InstanceId'])
+                            elif student['account_name'] in tag['Value'] and 'tet-data' in tag['Value']:
+                                instance_ids.append(instance['InstanceId'])
+                        if tag['Key'] == 'DNS':
+                            if student['account_name'] in tag['Value']:
+                                print(f"INFO: Looking up current IP address for {tag['Value']}")
+                                r = query_dns(tag['Value'])
+                                if r.status_code == 200:
+                                    content = json.loads(r.content)
+                                    if content:
+                                        if 'return_message' in content:
+                                            print(f"INFO: found IP address {content['return_message']}")
+                                            public_ip = content['return_message']
+                                        else:
+                                            print(f"WARN: did not find an IP address for host {tag['Value']}")
+                                else:
+                                    print(f"ERROR: DNS lookup failed for hostname {tag['Value']}")
+                                hostname = tag['Value']
+                                print(f'INFO: Deleting DNS entry for hostname: {hostname} IP Address: {public_ip}')
+                                response = update_dns(public_ip, hostname)
+                                if response.status_code == 200:
+                                    print(f'INFO: DNS update successful')
+                                else:
+                                    print(f'ERROR: DNS update failed for hostname {hostname} IP Address: {public_ip}')
+                                    print(f'ERROR: Status code: {response.status_code}, Reason: {response.reason}')
 
 # Loop through all EIPs and release the ones associated with the instance IDs 
 addresses_dict = ec2.describe_addresses()
@@ -270,6 +323,20 @@ try:
 except Exception as e:
     print('WARN: ', e)
 print(f"INFO: Deleted class schedule tethol-class-schedule-{NAMING_SUFFIX}")
+
+#######################################################################
+# Delete DynDNS Updater
+#######################################################################
+print(f'INFO: Deleting the DNS updater Lambda function tethol-dns-updater-{NAMING_SUFFIX}')
+try:
+    cloudformation = session.client('cloudformation')
+
+    result = cloudformation.delete_stack(
+        StackName=f'tethol-dns-updater-{NAMING_SUFFIX}'
+    )
+except Exception as e:
+    print('WARN: ', e)
+print(f"INFO: Deleted DNS updater Lambda function tethol-dns-updater-{NAMING_SUFFIX}")
 
 #######################################################################
 # Delete Students POD In CloudFormation ###############################
