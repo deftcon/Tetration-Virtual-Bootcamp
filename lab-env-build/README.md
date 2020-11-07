@@ -60,6 +60,15 @@ export AWS_SECRET_ACCESS_KEY=<YOUR AWS SECRET KEY>
 ```  
 > Generating API keys can be accomplished by navigating to the Identity and Access Management (IAM) service in the AWS console.  Under Users, select your user account and click on the `Security credentials` tab. 
 
+In addition, when the AMIs were shared with your account you should have also been emailed the API Gateway URL and API Gateway Key.  These are used to dynamically update the DNS records of the public-facing web servers when they are booted. They will also need to be entered as environment variables on your system as shown below. 
+
+```
+export API_GATEWAY_URL=<API GATEWAY URL>
+export API_GATEWAY_KEY=<API GATEWAY KEY>
+```
+> If you did not receive this information,  please open an issue  https://github.com/deftcon/Tetration-Virtual-Bootcamp/issues
+
+
 The script can then be run with the below command.  The region command-line argument is optional, and if omitted the AMIs will be created in the us-east-2 region.  If you plan to run the lab from an AWS region other than us-east-2, specify `--region` followed by the region name to have the AMIs copied to the destination region. 
 
 ```

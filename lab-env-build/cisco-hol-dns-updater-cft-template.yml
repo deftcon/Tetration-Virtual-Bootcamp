@@ -1,0 +1,83 @@
+Parameters:
+  S3Bucket:
+    Type: String
+    Description: Name of S3 bucket containing lambda function zip file
+  APIGatewayURL:
+    Type: String
+    Description: URL to reach the Dynamic DNS API gateway
+  APIGatewayKey:
+    Type: String
+    Description: The key for the Dynamic DNS API gateway
+  InstanceList:
+    Type: CommaDelimitedList
+    Description: List of instance IDs to be tracked
+  NamingSuffix:
+    Type: String
+    Description: Suffix appended to objects for uniqueness
+
+Resources:
+    LambdaDynDNSExecutionRole:
+        Type: "AWS::IAM::Role"
+        Properties:
+            AssumeRolePolicyDocument:
+              Version: 2012-10-17
+              Statement:
+               - Effect: Allow
+                 Principal:
+                   Service:
+                     - lambda.amazonaws.com
+                 Action:
+                   - sts:AssumeRole
+            ManagedPolicyArns:
+            - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+            - arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess
+
+    LambdaFunctionDNSUpdater:
+        Type: AWS::Lambda::Function
+        Properties:
+            Code:
+                S3Bucket: !Sub ${S3Bucket}
+                S3Key: tvb-dyndns.zip
+            Description: "Updates DNS when instances come up"
+            Environment:
+                Variables:
+                    API_URL: !Sub ${APIGatewayURL}
+                    X_API_KEY: !Sub ${APIGatewayKey}
+            FunctionName: !Sub "tethol-dns-updater-${NamingSuffix}"
+            Handler: tvb-dyndns.lambda_handler
+            Runtime: python3.8
+            Role: !Sub ${LambdaDynDNSExecutionRole.Arn}
+
+    EventBridgeRule:
+        Type: AWS::Events::Rule
+        Properties:
+            Name: instance_transition_to_running
+            Description: Triggers when the IIS and/or Apache instances transition to running
+            EventPattern:
+                source:
+                    - "aws.ec2"
+                detail-type:
+                    - "EC2 Instance State-change Notification"
+                detail:
+                    state:
+                      - "running"
+                    instance-id: !Ref InstanceList
+            State: ENABLED
+            Targets: 
+                  - 
+                    Arn: 
+                        Fn::GetAtt: 
+                            - "LambdaFunctionDNSUpdater"
+                            - "Arn"
+                    Id: "TetHol_DNS_Updater"
+
+    PermissionForEventsToInvokeLambda: 
+        Type: AWS::Lambda::Permission
+        Properties: 
+            FunctionName: !GetAtt LambdaFunctionDNSUpdater.Arn
+            Action: "lambda:InvokeFunction"
+            Principal: "events.amazonaws.com"
+            SourceArn: 
+                Fn::GetAtt: 
+                    - "EventBridgeRule"
+                    - "Arn"

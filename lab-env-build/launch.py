@@ -12,6 +12,7 @@ import json
 import urllib
 import calendar
 import sys
+import requests
 from datetime import datetime
 from datetime import timedelta
 from botocore.config import Config
@@ -25,10 +26,18 @@ CFT_POD_FILE = 'cisco-hol-pod-cft-template.yml'
 
 ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY_ID')
 SECRET_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+API_GATEWAY_URL = os.environ.get('API_GATEWAY_URL')
+API_GATEWAY_KEY = os.environ.get('API_GATEWAY_KEY')
+
+if not API_GATEWAY_URL:
+    print('ERROR: You must define the environment variable API_GATEWAY_URL. See the README.md for details')
+    sys.exit(1)
+if not API_GATEWAY_KEY:
+    print('ERROR: You must define the environment variable API_GATEWAY_KEY. See the README.md for details')
+    sys.exit(1)
 
 if ACCESS_KEY == None or ACCESS_KEY == '':
     ACCESS_KEY = params['aws_access_key']
-
 
 if SECRET_KEY == None or SECRET_KEY == '':
     SECRET_KEY = params['aws_secret_key']
@@ -488,6 +497,15 @@ s3 = boto3.resource('s3', region_name=REGION)
 s3.meta.client.upload_file(CFT_POD_FILE, S3_BUCKET, CFT_POD_FILE)
 print('INFO: CFT Template Uploaded To S3...')
 
+#######################################################################
+# Upload DNS Updater Lambda Function TO S3 Bucket #####################
+#######################################################################
+print(f'INFO: Uploading lambda_function/tvb-dyndns.zip To S3 bucket {S3_BUCKET}')
+DNS_UPDATER_FILE = os.path.join(os.getcwd(),'lambda_function','tvb-dyndns.zip')
+DNS_UPDATER_NAME = 'tvb-dyndns.zip'
+s3 = boto3.resource('s3', region_name=REGION)
+s3.meta.client.upload_file(DNS_UPDATER_FILE, S3_BUCKET, DNS_UPDATER_NAME)
+print(f'INFO: lambda_function/tvb-dyndns.zip Uploaded To S3 bucket {S3_BUCKET}')
 
 #######################################################################
 # Run POD Cloud Formation #############################################
@@ -620,6 +638,7 @@ while True:
         print(e)
         sys.exit(1)
 
+
 #######################################################################
 # Assemble EKS ELB DNS Records ########################################
 #######################################################################
@@ -641,9 +660,9 @@ try:
 
         eks_elbs = client.describe_load_balancers()['LoadBalancerDescriptions']
 
+        # Below fixes the problem where ELB is in different VPC from EKS worker by adding a check for VPC_ID
         elb_tags = client.describe_tags(
-            LoadBalancerNames=list(map(lambda e: e['LoadBalancerName'], eks_elbs))
-        )
+            LoadBalancerNames = [e['LoadBalancerName'] for e in eks_elbs if e['VPCId'] == VPC_ID])       
 
         for elb in elb_tags['TagDescriptions']:
             for tag in elb['Tags']:
@@ -652,14 +671,12 @@ try:
                         student['eks_dns'] = list(filter(lambda e: e['LoadBalancerName'] == elb['LoadBalancerName'], eks_elbs))[0]['DNSName']
                         elb_name = elb['LoadBalancerName']
                         break
-    
-
-    
 
 #######################################################################################
-# # Attach EKS worker node to ELB - workaround for instance not getting attached to ELB 
+# Attach EKS worker node to ELB - workaround for instance not getting attached to ELB 
 #######################################################################################
         ec2 = session.client('ec2',region_name=REGION)
+        waiter = ec2.get_waiter('instance_status_ok')
         reservations = ec2.describe_instances()['Reservations']
         for reservation in reservations:
             instances = reservation['Instances']
@@ -668,8 +685,20 @@ try:
                     if tag['Key'] == 'Name':
                         if student['account_name'] in tag['Value'] and 'eks' in tag['Value'] and NAMING_SUFFIX in tag['Value']:
                             instance_id = instance['InstanceId']
-                            print(f"INFO: Registering instance {tag['Value']} with elb {elb_name}")
-                            client.register_instances_with_load_balancer(LoadBalancerName=elb_name, Instances=[{'InstanceId': instance_id}])
+                            print(f'Waiting for EKS worker node {instance_id} to pass health checks')
+                            waiter.wait(InstanceIds=[instance_id])
+                            print(f"EKS worker node {instance_id} now has status of 'ok'!")
+                            while True:
+                                print(f"INFO: Registering instance {tag['Value']} with elb {elb_name}")
+                                client.register_instances_with_load_balancer(LoadBalancerName=elb_name, Instances=[{'InstanceId': instance_id}])
+                                print(f"INFO: Checking to see if the instance attached to the ELB")
+                                client = session.client('elb', region_name=REGION)
+                                elb = client.describe_load_balancers(LoadBalancerNames=[elb_name])
+                                if elb['LoadBalancerDescriptions'][0]['Instances'][0]['InstanceId'] == instance_id:
+                                    print(f"INFO: Instance {instance_id} is attached to elb {elb_name}")
+                                    break
+                                else:
+                                    print(f"INFO: Instance {instance_id} not attached to the ELB {elb_name}, trying again")
                             break
     
     print('INFO: EKS DNS Assembly Completed...')
@@ -677,6 +706,89 @@ try:
 except Exception as e:
     print(e)
     sys.exit(1)
+
+
+#######################################################################
+# Gather the list of Instance IDs to track and create DNS Updater stack
+#######################################################################
+def update_dns(public_ip, hostname):
+    '''Performs the initial DNS update during instance creation'''
+    api_key = os.environ.get('API_GATEWAY_KEY')
+    api_url = os.environ.get('API_GATEWAY_URL')
+    headers = {'x-api-key': api_key }
+    query_params = {'mode':'set', 'hostname': hostname, 'ipv4_address': public_ip}
+    response = requests.get(api_url, headers=headers, params=query_params)
+    return response
+
+print("INFO: Beginning deployment of DNS updater stack")
+try:
+    instance_ids = []
+    ec2 = session.client('ec2',region_name=REGION)
+    print("INFO: Retrieving the instance IDs of the EC2 instances to track (Apache and IIS servers)")
+    reservations = ec2.describe_instances()['Reservations']
+    for reservation in reservations:
+        instances = reservation['Instances']
+        for instance in instances:
+            if instance['State']['Name'] == 'running':
+                for tag in instance['Tags']:
+                    if tag['Key'] == 'Name':
+                        if 'apache' in tag['Value'] or 'iis' in tag['Value']:
+                            instance_ids.append(instance['InstanceId'])
+                    # Perform initial DNS update, reading hostname from the tag and getting Public IP from the instance
+                    if tag['Key'] == 'DNS':
+                        public_ip = instance['PublicIpAddress']
+                        hostname = tag['Value']
+                        print(f'INFO: Updating DNS for hostname: {hostname} IP Address: {public_ip}')
+                        response = update_dns(public_ip, hostname)
+                        if response.status_code == 200:
+                            print(f'INFO: DNS update successful')
+                        else:
+                            print(f'ERROR: DNS update failed for hostname {hostname} IP Address: {public_ip}')
+                            print(f'ERROR: Status code: {response.status_code}, Reason: {response.reason}')
+    
+    cloudformation = session.client('cloudformation', region_name=REGION)
+    
+    INSTANCE_IDS = ''
+    for x, instance in enumerate(instance_ids):
+        INSTANCE_IDS += instance
+        if not x == len(instance_ids)-1:
+            INSTANCE_IDS += ','     
+
+    aws_parameters = [
+        {'ParameterKey': 'S3Bucket', 'ParameterValue': S3_BUCKET},
+        {'ParameterKey': 'APIGatewayURL', 'ParameterValue': API_GATEWAY_URL},
+        {'ParameterKey': 'APIGatewayKey', 'ParameterValue': API_GATEWAY_KEY},
+        {'ParameterKey': 'InstanceList', 'ParameterValue': INSTANCE_IDS},
+        {'ParameterKey': 'NamingSuffix', 'ParameterValue': NAMING_SUFFIX}
+    ]
+    
+    with open('cisco-hol-dns-updater-cft-template.yml', 'r') as f:
+        dns_updater_cft = f.read()
+
+    print(f'INFO: Creating stack tethol-dns-updater-{NAMING_SUFFIX}')
+    result = cloudformation.create_stack(
+        StackName=f"tethol-dns-updater-{NAMING_SUFFIX}",
+        TemplateBody=dns_updater_cft,
+        Parameters=aws_parameters,
+        Capabilities=[
+                    'CAPABILITY_IAM', 'CAPABILITY_NAMED_IAM',
+                ])
+
+    # Wait for DNS updater creation
+    while True:
+        status = cloudformation.describe_stacks(
+            StackName=f'tethol-dns-updater-{NAMING_SUFFIX}')['Stacks'][0]['StackStatus']
+        if status == 'CREATE_COMPLETE':
+            print(f"INFO: Creating cloudformation stack tethol-dns-updater-{NAMING_SUFFIX}. Status={status}")
+            break
+        else:
+            print(f"INFO: Creating cloudformation stack tethol-dns-updater-{NAMING_SUFFIX}. Status={status}")
+            time.sleep(5)
+
+except Exception as e:
+    print(e)
+    sys.exit(1)
+
 
 #######################################################################
 # Populate selected AWS region and student_count into parameters.yml for rollback
@@ -723,8 +835,8 @@ try:
             f"https://{output['CiscoHOLGuacamolePublic']}",
             output['CiscoHOLStudentName'],
             output['CiscoHOLStudentPassword'],
-            f"http://{output['CiscoHOLIISPublic']}",
-            f"http://{output['CiscoHOLApachePublic']}",
+            f"http://{output['CiscoHOLIISDNS']}",
+            f"http://{output['CiscoHOLApacheDNS']}",
             f"http://{student['eks_dns']}",
             output['CiscoHOLPublicSubnet01'],
             output['CiscoHOLPrivateSubnet'],
@@ -797,8 +909,8 @@ try:
             f"Student Lab Access (Guac) Web Console URL,https://{output['CiscoHOLGuacamolePublic']}\n",
             f"Student Lab Access (Guac) Username,{output['CiscoHOLStudentName']}\n",
             f"Student Lab Access (Guac) Password,{output['CiscoHOLStudentPassword']}\n",
-            f"nopCommerce Windows App URL,http://{output['CiscoHOLIISPublic']}\n",
-            f"OpenCart Linux App URL,http://{output['CiscoHOLApachePublic']}\n",
+            f"nopCommerce Windows App URL,http://{output['CiscoHOLIISDNS']}\n",
+            f"OpenCart Linux App URL,http://{output['CiscoHOLApacheDNS']}\n",
             f"EKS SockShop App URL,http://{student['eks_dns']}\n",
             f"Student Internal/Inside Corporate Subnet,{output['CiscoHOLPublicSubnet01']}\n",
             f"Student External/Outside Internet Subnet,{output['CiscoHOLPrivateSubnet']}\n",

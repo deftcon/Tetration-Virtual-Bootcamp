@@ -574,6 +574,8 @@ Resources:
           Value: !Sub ${ScheduleName}
         - Key: Pod
           Value: !Sub ${StudentName}
+        - Key: DNS
+          Value: !Sub ${StudentName}-${Region}-${NamingSuffix}-nopcommerce.lab.tetration.guru
       UserData:
         Fn::Base64: !Sub |
           <powershell>
@@ -678,6 +680,8 @@ Resources:
           Value: !Sub ${ScheduleName}
         - Key: Pod
           Value: !Sub ${StudentName}
+        - Key: DNS
+          Value: !Sub ${StudentName}-${Region}-${NamingSuffix}-opencart.lab.tetration.guru
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash
@@ -1600,7 +1604,7 @@ Resources:
               - sts:AssumeRole
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
-
+  
   # Lambda Load Generator For IIS
   LambdaFunctionIIS:
     Type: AWS::Lambda::Function
@@ -1831,9 +1835,9 @@ Outputs:
   CiscoHOLIISPrivate:
     Description: IIS Server Inside Private IP
     Value: !GetAtt CiscoHOLEC2IIS.PrivateIp
-  CiscoHOLIISPublic:
-    Description: IIS Server Public IP
-    Value: !GetAtt CiscoHOLEC2IIS.PublicIp
+  CiscoHOLIISDNS:
+    Description: IIS Server DNS Name
+    Value: !Sub ${StudentName}-${Region}-${NamingSuffix}-nopcommerce.lab.tetration.guru
   CiscoHOLIISOutsidePrivate:
     Description: IIS Server Outside Private IP
     Value: !Ref IISOutsidePrivateIp
@@ -1843,9 +1847,9 @@ Outputs:
   CiscoHOLApachePrivate:
     Description: Apache Server Inside Private IP
     Value: !GetAtt CiscoHOLEC2Apache.PrivateIp
-  CiscoHOLApachePublic:
-    Description: Apache Server Public IP
-    Value: !GetAtt CiscoHOLEC2Apache.PublicIp
+  CiscoHOLApacheDNS:
+    Description: Apache Server DNS Name
+    Value: !Sub ${StudentName}-${Region}-${NamingSuffix}-opencart.lab.tetration.guru
   CiscoHOLApacheOutsidePrivate:
     Description: Apache Server Outside Private IP
     Value: !Ref ApacheOutsidePrivateIp
