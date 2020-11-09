@@ -46,29 +46,104 @@ Accept the terms for each product and after a few moments a date should appear u
 
 ---
 
-The lab environment launcher requires Python 3.7 or later as well as a few packages which can be installed by running a pip install on the provided requirements file. We highly recommend setting up a <a href="https://docs.python.org/3/library/venv.html" target="_blank">Python venv</a> for each AWS account that you plan to work with, storing your AWS credentials for each account in the `~/.venvs/<your_venv_env_name>/bin/activate` file, thus also isolating any pip requirements and not allowing them to adversely affect other Python scripts you run that may have requiring differing versions of these same modules, as well as to prevent the converse from occuring. 
+The lab environment launcher requires Python 3.7 or later as well as a few packages which can be installed by running a pip install on the provided requirements file. We highly recommend setting up a <a href="https://docs.python.org/3/library/venv.html" target="_blank">Python Virtual Environment (venv)</a> for each AWS account that you plan to work with. This will allow you to store your AWS account credentials inside the specific virtual environment you create for this lab launcher, which also will aid greatly by isolating any Python modules that must be installed to fullfil the requirements for Python here, while not allowing any specific versions required to adversely impact any other Python code you may have. 
+  
 
+To create a new Python venv on MacOS or Linux:
 ```
-pip install -r requirements.txt
+python3 -m venv ~/.venvs/<your_venv_env_name>
 ```
   
-You will also need to retrieve your AWS API Keys and export them as environment variables in your terminal session as shown below:  
+  
+Next you must generate API keys for an IAM user in your AWS account and either export them to your OS Environment Variables (and continue to do this anytime you start a new shell), or you may opt to store them in a shell startup file that triggers the export upon every new shell creation. 
+
+> NOTE: Generating API keys can be accomplished by navigating to the Identity and Access Management (IAM) service in the AWS console.  Under Users, select your user account and click on the `Security credentials` tab. 
+
+If you choose to export them upon each new shell creation, simply export your environment variables in your terminal session as shown below:  
 ```
 export AWS_ACCESS_KEY_ID=<YOUR AWS ACCESS KEY>
 export AWS_SECRET_ACCESS_KEY=<YOUR AWS SECRET KEY>
 ```  
-> Generating API keys can be accomplished by navigating to the Identity and Access Management (IAM) service in the AWS console.  Under Users, select your user account and click on the `Security credentials` tab. 
+  
 
-In addition, when the AMIs were shared with your account you should have also been emailed the API Gateway URL and API Gateway Key.  These are used to dynamically update the DNS records of the public-facing web servers when they are booted. They will also need to be entered as environment variables on your system as shown below. 
+However, for a much more scalable and easy to use approach, you may consider storing them in a shell startup file. 
 
+> NOTE: This next task involves something that some consider to be a huge security no-no and something that may be quite risky, depending. If you are operating on a machine that may be outside your control at any time, this is a serious security risk and you should consider if you truly wish to store your AWS credentials in a plain text file. Beware. Your milage may vary. Enter at your own risk. There be dragons here. Yadda yadda. That being said - we use it, and it is wonderful, especially switching between different AWS Account IDs! You have been warned.
+
+Edit your new venv activation file:
 ```
-export API_GATEWAY_URL=<API GATEWAY URL>
-export API_GATEWAY_KEY=<API GATEWAY KEY>
+vi ~/.venvs/<your_venv_env_name>/bin/activate
 ```
-> If you did not receive this information,  please open an issue  https://github.com/deftcon/Tetration-Virtual-Bootcamp/issues
+  
+  
+> Note: If you happen to use an alternative shell such as the absolutely wonderful <a href="https://fishshell.com/" target="_blank">fishshell</a>, you will need to edit a slightly different activation file:
+```
+vi ~/.venvs/<your_venv_env_name>/bin/activate.fish
+```
+  
+  
+Store your AWS credentials in your new venv activation file:
+(note I am using the fishshell here, thus you may see extra stuff such as "set -gx" that you would not otherwise see in the plain bash activate file)
+```
+... skip down to the section that begins with "# unset irrelevant variables":
+  
+# unset irrelevant variables
+deactivate nondestructive
+
+set -gx VIRTUAL_ENV "/Users/msnow/.venvs/aws-deftcon"
+
+set -gx _OLD_VIRTUAL_PATH $PATH
+set -gx PATH "$VIRTUAL_ENV/bin" $PATH
 
 
-The script can then be run with the below command.  The region command-line argument is optional, and if omitted the AMIs will be created in the us-east-2 region.  If you plan to run the lab from an AWS region other than us-east-2, specify `--region` followed by the region name to have the AMIs copied to the destination region. 
+### And insert your own section that sets your AWS credentials.
+### You may find it helpful to list the IAM account that you used to create your 
+### API Access/Secret key pair, and list the date so that you can later delete that 
+### API key and recreate new keys, in keeping with good AWS security practices.
+
+### Insert your section below, perhaps similar to something like this:
+
+# set Deft Consult AWS creds (user@email  20-Oct-20)
+set -gx AWS_ACCESS_KEY_ID "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+set -gx AWS_SECRET_ACCESS_KEY "NOWIKNOWMYABCSNEXTTIMEWONTYOUSINGWITHME?"
+
+
+### Save the file and quit:
+ESC
+:wq
+```
+  
+  
+Now enter into that virtual environment:
+```
+source ~/.venvs/<your_venv_env_name>/bin/activate
+```
+  
+  
+Or if you are using the alternative <a href="https://fishshell.com/" target="_blank">fishshell</a>:
+```
+source ~/.venvs/<your_venv_env_name>/bin/activate.fish
+```
+  
+  
+Now install the python module requirements:
+```
+pip install -r requirements.txt
+```
+  
+  
+
+And now you should be ready to begin executing the python scripts necessary to launch the lab environment. 
+  
+  
+---  
+  
+
+#### Executing the Scripts
+  
+
+
+The script to copy the necessary AMIs can then be run with the below command.  The region command-line argument is optional, and if omitted the AMIs will be created in the us-east-2 region.  If you plan to run the lab from an AWS region other than us-east-2, specify `--region` followed by the region name to have the AMIs copied to the destination region. 
 
 ```
 python ami_create.py --region us-east-1
