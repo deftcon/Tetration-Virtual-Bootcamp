@@ -27,15 +27,15 @@ if ACCESS_KEY == None or ACCESS_KEY == '':
 if SECRET_KEY == None or SECRET_KEY == '':
     SECRET_KEY = params['aws_secret_key']
 
-API_GATEWAY_URL = os.environ.get('API_GATEWAY_URL')
-API_GATEWAY_KEY = os.environ.get('API_GATEWAY_KEY')
+API_GATEWAY_URL = "https://fh3aao7bri.execute-api.us-east-1.amazonaws.com/prod"
+API_GATEWAY_KEY = "iBO39NUUc1401nMYkNWvM1jbA4YAHhKD1z4wpIlh"
 
-if not API_GATEWAY_URL:
-    print('ERROR: You must define the environment variable API_GATEWAY_URL. See the README.md for details')
-    sys.exit(1)
-if not API_GATEWAY_KEY:
-    print('ERROR: You must define the environment variable API_GATEWAY_KEY. See the README.md for details')
-    sys.exit(1)
+# if not API_GATEWAY_URL:
+#     print('ERROR: You must define the environment variable API_GATEWAY_URL. See the README.md for details')
+#     sys.exit(1)
+# if not API_GATEWAY_KEY:
+#     print('ERROR: You must define the environment variable API_GATEWAY_KEY. See the README.md for details')
+#     sys.exit(1)
 
 
 REGION = params['aws_region']
