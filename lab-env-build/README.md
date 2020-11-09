@@ -46,7 +46,7 @@ Accept the terms for each product and after a few moments a date should appear u
 
 ---
 
-The lab environment launcher requires Python 3.7 or later as well as a few packages which can be installed by running a pip install on the provided requirements file. We highly recommend setting up a <a href="https://docs.python.org/3/library/venv.html" target="_blank">Python venv</a> for each AWS account that you plan to work with, storing your AWS credentials for each account in the `~/.venvs/<your_venv_env_name>/bin/activate` file, thus also isolating any pip requirements and not allowing them to adversely affect other Python scripts you run that may have requiring differing versions of these same modules, as well, of course, as the converse. 
+The lab environment launcher requires Python 3.7 or later as well as a few packages which can be installed by running a pip install on the provided requirements file. We highly recommend setting up a <a href="https://docs.python.org/3/library/venv.html" target="_blank">Python venv</a> for each AWS account that you plan to work with, storing your AWS credentials for each account in the `~/.venvs/<your_venv_env_name>/bin/activate` file, thus also isolating any pip requirements and not allowing them to adversely affect other Python scripts you run that may have requiring differing versions of these same modules, as well as to prevent the converse from also occuring. 
 
 ```
 pip install -r requirements.txt
