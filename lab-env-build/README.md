@@ -44,13 +44,12 @@ For a few of the images, you must Subscribe to use them in AWS Marketplace befor
 
 Accept the terms for each product and after a few moments a date should appear under "Effective Date".  It is not necessary to proceed to "Continue to Configuration" as this would be used to manually deploy an instance,  and this will be accomplished by automation using the lab setup script. 
 
-Once you are subscribed to the above products,  a script called `ami_create.py` can be run to create new image files in your account and optionally copy them to another region. The script automates the process of creating the AMIs and populates the AMI IDs into the `parameters.yml` file which will later be used to launch all of the instances.  
+---
 
-`ami_create.py` requires Python 3.7 or later as well as the boto3 and pyyaml packages which can be installed by executing the following commands:
+The lab environment launcher requires Python 3.7 or later as well as a few packages which can be installed by running a pip install on the provided requirements file. We highly recommend setting up a <a href="https://docs.python.org/3/library/venv.html" target="_blank">Python venv</a> for each AWS account that you plan to work with, storing your AWS credentials for each account in the `~/.venvs/<your_venv_env_name>/bin/activate` file, thus also isolating any pip requirements and not allowing them to adversely affect other Python scripts you run that may have requiring differing versions of these same modules, as well, of course, as the converse. 
 
 ```
-pip install boto3
-pip install pyyaml
+pip install -r requirements.txt
 ```
   
 You will also need to retrieve your AWS API Keys and export them as environment variables in your terminal session as shown below:  
