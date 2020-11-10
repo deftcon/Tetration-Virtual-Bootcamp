@@ -51,7 +51,7 @@ Resources:
     EventBridgeRule:
         Type: AWS::Events::Rule
         Properties:
-            Name: instance_transition_to_running
+            Name: !Sub "instance_transition_to_running_${NamingSuffix}"
             Description: Triggers when the IIS and/or Apache instances transition to running
             EventPattern:
                 source:

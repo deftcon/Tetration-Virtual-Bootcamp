@@ -27,8 +27,8 @@ if ACCESS_KEY == None or ACCESS_KEY == '':
 if SECRET_KEY == None or SECRET_KEY == '':
     SECRET_KEY = params['aws_secret_key']
 
-API_GATEWAY_URL = os.environ.get('API_GATEWAY_URL')
-API_GATEWAY_KEY = os.environ.get('API_GATEWAY_KEY')
+API_GATEWAY_URL = "https://fh3aao7bri.execute-api.us-east-1.amazonaws.com/prod"
+API_GATEWAY_KEY = "iBO39NUUc1401nMYkNWvM1jbA4YAHhKD1z4wpIlh"
 
 if not API_GATEWAY_URL:
     print('ERROR: You must define the environment variable API_GATEWAY_URL. See the README.md for details')
@@ -166,8 +166,8 @@ else:
 #######################################################################
 def update_dns(public_ip, hostname):
     '''Your friendly neighborhood DNS cleaner upper'''
-    api_key = os.environ.get('API_GATEWAY_KEY')
-    api_url = os.environ.get('API_GATEWAY_URL')
+    api_key = API_GATEWAY_KEY
+    api_url = API_GATEWAY_URL
     headers = {'x-api-key': api_key }
     query_params = {'mode': 'del', 'hostname': hostname, 'ipv4_address': public_ip}
     response = requests.get(api_url, headers=headers, params=query_params)
@@ -175,8 +175,8 @@ def update_dns(public_ip, hostname):
 
 def query_dns(hostname):
     '''Query route53 to retrieve current IP'''
-    api_key = os.environ.get('API_GATEWAY_KEY')
-    api_url = os.environ.get('API_GATEWAY_URL')
+    api_key = API_GATEWAY_KEY
+    api_url = API_GATEWAY_URL
     headers = {'x-api-key': api_key }
     query_params = {'mode': 'get', 'hostname': hostname}
     response = requests.get(api_url, headers=headers, params=query_params)
@@ -254,10 +254,10 @@ for student in STUDENTS_LIST:
         bucket = s3.Bucket(bucket_name)
         print(f"INFO: Emptying s3 bucket {bucket_name}")
         bucket.objects.delete()
-        time.sleep(10)
+        while len(list(bucket.objects.iterator())) > 0:
+            print('INFO: Waiting for object deletion to complete')
         print(f"INFO: Deleting s3 bucket {bucket_name}")
         bucket.delete()
-
         print(f'INFO: S3 Bucket Deleted: {bucket_name}')
 
     except Exception as e:
@@ -385,7 +385,7 @@ while True:
                 )
             except:
                 deleted_stacks.append(stack_name)
-                print(f'WARN: {stack_name} Does Not Exist...')
+                print(f'WARN: {stack_name} does not exist or was deleted...')
                 continue
 
             print(f"INFO: StackName: {stack_name}, Status: {status['Stacks'][0]['StackStatus']}")
@@ -463,6 +463,8 @@ try:
     s3 = session.resource('s3')
     bucket = s3.Bucket(f'tetration-hol-cft-template-{NAMING_SUFFIX}')
     bucket.objects.delete()
+    while len(list(bucket.objects.iterator())) > 0:
+        print('INFO: Waiting for object deletion to complete')
     bucket.delete()
     print(f'INFO: Deleted S3 bucket tetration-hol-cft-template-{NAMING_SUFFIX}')
 except Exception as e:
