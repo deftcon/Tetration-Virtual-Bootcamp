@@ -1,0 +1,33 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An AWS Serverless Specification template describing your function.
+Resources:
+  tvbddnsmm:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: tvb-dyndns.lambda_handler
+      Runtime: python2.7
+      CodeUri: .
+      Description: ''
+      MemorySize: 512
+      Timeout: 5
+      Role: 'arn:aws:iam::155098718727:role/ddns-lab-tvb-lambda-ddns'
+      Events:
+        Api1:
+          Type: Api
+          Properties:
+            Path: /
+            Method: POST
+        Api2:
+          Type: Api
+          Properties:
+            Path: /
+            Method: GET
+      Environment:
+        Variables:
+          OWNER_AWS_REGION: us-east-2
+          ROUTE_53_RECORD_TTL: '60'
+          ROUTE_53_RECORD_TYPE: A
+          ROUTE_53_ZONE_ID: Z083751010TKOKO1V59Z1
+          SHARED_SECRET: test123
+      Tracing: Active

@@ -643,65 +643,90 @@ while True:
 # Assemble EKS ELB DNS Records ########################################
 #######################################################################
 print('INFO: Preparing to initialize the EKS DNS Assembly...')
-time.sleep(5)
-print('INFO: Preparing to initialize the EKS DNS Assembly...')
-time.sleep(5)
-print('INFO: Preparing to initialize the EKS DNS Assembly...')
-time.sleep(5)
+# time.sleep(5)
+# print('INFO: Preparing to initialize the EKS DNS Assembly...')
+# time.sleep(5)
+# print('INFO: Preparing to initialize the EKS DNS Assembly...')
+# time.sleep(5)
 try:
 
-    print('INFO: Initializing EKS DNS Assembly...')
+    # print('INFO: Initializing EKS DNS Assembly...')
 
-    time.sleep(120)
+    # time.sleep(120)
 
     for student in STUDENTS_LIST:
 
         client = session.client('elb', region_name=REGION)
+        # Check for ELB creation, retry until we get a response
+        eks_elbs = None
+        elb_name = None
+        retries = 0
+        while not eks_elbs or not elb_name:
+            print(f"INFO Initializing EKS DNS Assembly for student {student['account_name']}...")
+            eks_elbs = client.describe_load_balancers()['LoadBalancerDescriptions']
 
-        eks_elbs = client.describe_load_balancers()['LoadBalancerDescriptions']
+            loadbalancer_list = [e['LoadBalancerName'] for e in eks_elbs if e['VPCId'] == VPC_ID]
+            print(f"INFO: List of ELBs in VPC {VPC_ID}: {loadbalancer_list}")
 
-        # Below fixes the problem where ELB is in different VPC from EKS worker by adding a check for VPC_ID
-        elb_tags = client.describe_tags(
-            LoadBalancerNames = [e['LoadBalancerName'] for e in eks_elbs if e['VPCId'] == VPC_ID])       
+            if loadbalancer_list:    
+                elb_tags = client.describe_tags(LoadBalancerNames=loadbalancer_list)
 
-        for elb in elb_tags['TagDescriptions']:
-            for tag in elb['Tags']:
-                for key in tag:
-                    if student['account_name'] in tag[key]:
-                        student['eks_dns'] = list(filter(lambda e: e['LoadBalancerName'] == elb['LoadBalancerName'], eks_elbs))[0]['DNSName']
-                        elb_name = elb['LoadBalancerName']
-                        break
+                for elb in elb_tags['TagDescriptions']:
+                    for tag in elb['Tags']:
+                        for key in tag:
+                            if student['account_name'] in tag[key]:
+                                student['eks_dns'] = list(filter(lambda e: e['LoadBalancerName'] == elb['LoadBalancerName'], eks_elbs))[0]['DNSName']
+                                elb_name = elb['LoadBalancerName']
+                                print(f"INFO: elb {elb_name} for student {student['account_name']} was found!")
+                                break
+            else:
+                print("INFO: Waiting for ELB initialization, retry in 15 seconds")
+            retries += 1
+            if retries == 20:
+                print(f"ERROR: ELB was not found for student {student['account_name']} after 20 retries!")
+                break
+            time.sleep(15)
 
 #######################################################################################
 # Attach EKS worker node to ELB - workaround for instance not getting attached to ELB 
 #######################################################################################
-        ec2 = session.client('ec2',region_name=REGION)
-        waiter = ec2.get_waiter('instance_status_ok')
-        reservations = ec2.describe_instances()['Reservations']
-        for reservation in reservations:
-            instances = reservation['Instances']
-            for instance in instances:
-                for tag in instance['Tags']:
-                    if tag['Key'] == 'Name':
-                        if student['account_name'] in tag['Value'] and 'eks' in tag['Value'] and NAMING_SUFFIX in tag['Value']:
-                            instance_id = instance['InstanceId']
-                            print(f'Waiting for EKS worker node {instance_id} to pass health checks')
-                            waiter.wait(InstanceIds=[instance_id])
-                            print(f"EKS worker node {instance_id} now has status of 'ok'!")
-                            while True:
-                                print(f"INFO: Registering instance {tag['Value']} with elb {elb_name}")
-                                client.register_instances_with_load_balancer(LoadBalancerName=elb_name, Instances=[{'InstanceId': instance_id}])
-                                print(f"INFO: Checking to see if the instance attached to the ELB")
-                                client = session.client('elb', region_name=REGION)
-                                elb = client.describe_load_balancers(LoadBalancerNames=[elb_name])
-                                if elb['LoadBalancerDescriptions'][0]['Instances'][0]['InstanceId'] == instance_id:
-                                    print(f"INFO: Instance {instance_id} is attached to elb {elb_name}")
-                                    break
-                                else:
-                                    print(f"INFO: Instance {instance_id} not attached to the ELB {elb_name}, trying again")
-                            break
-    
-    print('INFO: EKS DNS Assembly Completed...')
+        if elb_name:
+            ec2 = session.client('ec2',region_name=REGION)
+            waiter = ec2.get_waiter('instance_status_ok')
+            reservations = ec2.describe_instances()['Reservations']
+            for reservation in reservations:
+                instances = reservation['Instances']
+                for instance in instances:
+                    for tag in instance['Tags']:
+                        if tag['Key'] == 'Name':
+                            if student['account_name'] in tag['Value'] and 'eks' in tag['Value'] and NAMING_SUFFIX in tag['Value']:
+                                instance_id = instance['InstanceId']
+                                print(f'Waiting for EKS worker node {instance_id} to pass health checks')
+                                waiter.wait(InstanceIds=[instance_id])
+                                print(f"EKS worker node {instance_id} now has status of 'ok'!")
+                                while True:
+                                    print(f"INFO: Registering instance {tag['Value']} with elb {elb_name}")
+                                    client.register_instances_with_load_balancer(LoadBalancerName=elb_name, Instances=[{'InstanceId': instance_id}])
+                                    print(f"INFO: Checking to see if the instance attached to the ELB")
+                                    client = session.client('elb', region_name=REGION)
+                                    elb = client.describe_load_balancers(LoadBalancerNames=[elb_name])
+                                    if elb['LoadBalancerDescriptions'][0]['Instances'][0]['InstanceId'] == instance_id:
+                                        print(f"INFO: Instance {instance_id} is attached to elb {elb_name}")
+                                        health = client.describe_instance_health(LoadBalancerName=elb_name)
+                                        if health:
+                                            if instance_id in health['InstanceStates'][0]['InstanceId']:
+                                                print(f"INFO: Instance status: {health['InstanceStates'][0]['State']}")
+                                                if health['InstanceStates'][0]['State'] == 'InService':
+                                                    break
+                                                else:
+                                                    print(f"INFO: Instance not in service yet. Retry in 15 seconds")
+                                                    time.sleep(15)
+                                    else:
+                                        print(f"INFO: Instance {instance_id} not attached to the ELB {elb_name}, trying again")
+                                break
+        else:
+            print(f"WARN: No ELB was found for student {student['account_name']}")                
+    print(f"INFO: EKS DNS Assembly Completed...")
 
 except Exception as e:
     print(e)
@@ -713,8 +738,10 @@ except Exception as e:
 #######################################################################
 def update_dns(public_ip, hostname):
     '''Performs the initial DNS update during instance creation'''
-    api_key = os.environ.get('API_GATEWAY_KEY')
-    api_url = os.environ.get('API_GATEWAY_URL')
+    # api_key = os.environ.get('API_GATEWAY_KEY')
+    # api_url = os.environ.get('API_GATEWAY_URL')
+    api_key = API_GATEWAY_KEY
+    api_url = API_GATEWAY_URL
     headers = {'x-api-key': api_key }
     query_params = {'mode':'set', 'hostname': hostname, 'ipv4_address': public_ip}
     response = requests.get(api_url, headers=headers, params=query_params)
@@ -780,6 +807,9 @@ try:
             StackName=f'tethol-dns-updater-{NAMING_SUFFIX}')['Stacks'][0]['StackStatus']
         if status == 'CREATE_COMPLETE':
             print(f"INFO: Creating cloudformation stack tethol-dns-updater-{NAMING_SUFFIX}. Status={status}")
+            break
+        if "ROLLBACK" in status:
+            print(f"WARN: Error during creation of cloudformation stack tethol-dns-updater-{NAMING_SUFFIX}. Status={status}")
             break
         else:
             print(f"INFO: Creating cloudformation stack tethol-dns-updater-{NAMING_SUFFIX}. Status={status}")
