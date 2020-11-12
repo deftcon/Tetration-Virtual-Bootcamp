@@ -50,7 +50,7 @@ def get_student_count(prompt):
         if m:
             return int(answer)
 
-STUDENT_COUNT = get_student_count("How many pod would you like to deploy (REM: 2 Elastic IPs per Pod will be required)? ")
+STUDENT_COUNT = get_student_count("How many pods would you like to deploy (REM: 2 Elastic IPs per Pod will be required)? ")
 
 def get_region(prompt):
     region_dict = {
