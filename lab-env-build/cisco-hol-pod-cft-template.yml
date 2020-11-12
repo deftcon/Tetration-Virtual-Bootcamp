@@ -501,7 +501,7 @@ Resources:
       - CiscoHOLEC2ActiveDirectory
     Properties:
       ImageId: !Ref MSSQLImageID
-      InstanceType: t2.large
+      InstanceType: t2.xlarge
       Tags:
         - Key: Name
           Value: !Sub "cisco-hol-${StudentName}-ec2-sql-win-2019-${Region}${Subnet01AvailabilityZone}"
@@ -550,7 +550,7 @@ Resources:
       - CiscoHOLEC2SQLServer
     Properties:
       ImageId: !Ref IISImageID
-      InstanceType: t2.large
+      InstanceType: t2.xlarge
       Tags:
         - Key: Name
           Value: !Sub "cisco-hol-${StudentName}-ec2-iis-win-2019-${Region}${Subnet01AvailabilityZone}"
