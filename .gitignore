@@ -1,2 +1,8 @@
-reports/
+~*
 *.DS_Store
+.bash_history
+.python_history
+.ansible
+.DS_Store
+.~lock*
+reports/
