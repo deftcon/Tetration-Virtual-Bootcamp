@@ -55,7 +55,7 @@ python3 -m venv ~/.venvs/<your_venv_env_name>
 ```
   
   
-Next you must generate API keys for an IAM user in your AWS account and either export them to your OS Environment Variables (and continue to do this anytime you start a new shell), or you may opt to store them in a shell startup file that triggers the export upon every new shell creation. 
+Next you must generate API keys for <a href="https://console.aws.amazon.com/iam/home" target="_blank">an IAM user in your AWS account</a> and either export them to your OS Environment Variables (and continue to do this anytime you start a new shell), or you may opt to store them in a shell startup file that triggers the export upon every new shell creation. 
 
 > NOTE: Generating API keys can be accomplished by navigating to the Identity and Access Management (IAM) service in the AWS console.  Under Users, select your user account and click on the `Security credentials` tab. 
 
