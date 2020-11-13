@@ -73,7 +73,7 @@ def get_region(prompt):
         if int(answer) > 0 and int(answer) < 13:
             return region_dict[answer][0]
 
-REGION = get_region('Please enter the AWS region you would like to deploy these pods to by entering the corresponding number: ')
+REGION = get_region('Please enter the AWS region you would like to deploy these pods in by entering the corresponding number: ')
 
 def get_user_input(prompt, valid_pattern):
     while True:
