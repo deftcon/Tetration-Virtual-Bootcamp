@@ -7,8 +7,8 @@ student_count: 1
 
 # Enter the IG_ID if using existing VPC. Comment if auto-creating new VPC by commenting out the VPC above.
 # internet_gateway_id: igw-03ba648c46f5d4614
-subnet_range_primary: 10.1.0.0/16
-subnet_range_secondary: 198.18.0.0/16
+subnet_range_primary: '10.1.0.0/16'
+subnet_range_secondary: '198.18.0.0/16'
 
 # This is your own private on-prem ISE instance - needs VPN with AWS VGW. If not using ISE simply give it any value, however do not comment. 
 ise_server_ip: '172.16.171.49' 

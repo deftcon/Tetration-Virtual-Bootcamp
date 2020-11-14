@@ -50,22 +50,25 @@ def get_pod_count(prompt):
         if m:
             return int(answer)
 
+<<<<<<< HEAD
 POD_COUNT = get_pod_count("How many pods are needed? ")
+=======
+STUDENT_COUNT = get_student_count("How many pods would you like to deploy (REM: 2 Elastic IPs per Pod will be required)? ")
+>>>>>>> master
 
 def get_region(prompt):
     region_dict = {
         '1': ('us-east-1','N. Virginia'),
         '2': ('us-east-2', 'Ohio'),
-        '3': ('us-west-1', 'N. California'),
-        '4': ('us-west-2', 'Oregon'),
-        '5': ('af-south-1', 'Africa - Cape Town)'),
-        '6': ('ap-east-1', 'Asia Pacific - Hong Kong'),
-        '7': ('ap-south-1', 'Asia Pacific - Mumbai'),
-        '8': ('ap-northeast-3', 'Asia Pacific - Osaka-Local'),
-        '9': ('ap-northeast-2', 'Asia Pacific - Seoul'),
-        '10': ('ap-southeast-1', 'Singapore'),
-        '11': ('ap-southeast-2', 'Asia Pacific - Sydney'),
-        '12': ('ap-northeast-1', 'Asia Pacific - Tokyo')
+        '3': ('us-west-2', 'Oregon'),
+        '4': ('af-south-1', 'Africa - Cape Town)'),
+        '5': ('ap-east-1', 'Asia Pacific - Hong Kong'),
+        '6': ('ap-south-1', 'Asia Pacific - Mumbai'),
+        '7': ('ap-northeast-3', 'Asia Pacific - Osaka-Local'),
+        '8': ('ap-northeast-2', 'Asia Pacific - Seoul'),
+        '9': ('ap-southeast-1', 'Singapore'),
+        '10': ('ap-southeast-2', 'Asia Pacific - Sydney'),
+        '11': ('ap-northeast-1', 'Asia Pacific - Tokyo')
     }
     for key in region_dict:
         print(f"{key}: {region_dict[key][0]} ({region_dict[key][1]})")
@@ -74,7 +77,7 @@ def get_region(prompt):
         if int(answer) > 0 and int(answer) < 13:
             return region_dict[answer][0]
 
-REGION = get_region('Please enter the number corresponding to the AWS region to which you will be deploying: ')
+REGION = get_region('Please enter the AWS region you would like to deploy these pods in by entering the corresponding number: ')
 
 def get_user_input(prompt, valid_pattern):
     while True:
@@ -83,17 +86,24 @@ def get_user_input(prompt, valid_pattern):
       if m:
           return answer
 
-print("You may deploy into an existing AWS VPC, or a new VPC can be created.")
-print("To deploy into an existing VPC, the VPC ID and the ID of the Internet Gateway in the existing VPC will be needed.")
-print("If you do not choose to use an existing VPC, a new VPC and Internet Gateway will be created")
-vpc_answer = get_user_input("Do you want to deploy into an existing VPC (Y/N)? ", "^[YyNn]$")
-if vpc_answer.upper() == 'Y':
-    VPC_ID = get_user_input("Enter the VPC ID: ", "^vpc-[0-9a-z]*")
+print(" ")
+print("These lab environment pods can be deployed into an existing VPC, or a new VPC can be created for you.")
+print("It is HIGHLY encouraged to allow this process to create the VPC and all components therein, for you.")
+print("One reason to choose the option to use an existing VPC is if you require more than two (2) pods (which require a total of 4 EIPs),")
+print("in which case you will need to make a request to AWS to increase the number of EIPs and have them allocated to a specific VPC-Id PRIOR to running this script.")
+print("To deploy into an existing VPC, the VPC ID and the ID of the Internet Gateway in the existing VPC will be needed,")
+print("as well as requiring the two (2) subnets chosen in the parameters.yml file to be associated to the VPC as attached CIDR Blocks.")
+print(" ")
+print("Again, unless you require more than 2 pods to be deployed, you should allow this script to create everything for you.")
+print(" ")
+vpc_answer = get_user_input("Do you require only 1 or 2 pods and wish to have everything, including the VPC, created for you? (Y/N) ", "^[YyNn]$")
+if vpc_answer.upper() == 'N':
+    VPC_ID = get_user_input("Enter your existing VPC ID: ", "^vpc-[0-9a-z]*")
     INTERNET_GATEWAY_ID = get_user_input("Enter the Internet Gateway ID: ", "^igw-[0-9a-z]*")
     use_existing_vpc = True
-elif vpc_answer.upper() == 'N':
+elif vpc_answer.upper() == 'Y':
     use_existing_vpc = False
-
+print(" ")
 
 #######################################################################
 # Verify VPC Id Provided, if using existing ###########################
@@ -115,10 +125,28 @@ if use_existing_vpc:
 
 #######################################################################
 
+<<<<<<< HEAD
 SUBNET_RANGE_PRIMARY = params['subnet_range_primary']
 SUBNET_RANGE_SECONDARY = params['subnet_range_secondary']
 # POD_COUNT = params['pod_count']
 POD_PREFIX = params['pod_prefix']
+=======
+print(" ")
+print("Next, we require two (2) /16 CIDR blocks that will be used to create each pod's 'Inside' (or Corporate) and 'Outside' (or psuedo-Internet) subnet.")
+print("Both CIDR blocks MUST end in /16. This is essentially due to the fact that we let you pick the first two octets, then use the third octet for each new pod #,")
+print("and the fourth octet for the hosts in each pod.")
+print(" ")
+primary_cidr_answer = get_user_input("Please enter a CIDR block to be used for the 'INSIDE' subnet for each Pod (MUST be in the format x.x.0.0/16): ", "^[0-9]+\.[0-9]+\.[0]+\.[0]+\/16$")
+secondary_cidr_answer = get_user_input("Please enter a CIDR block to be used for the 'OUTSIDE' subnet for each Pod (MUST be in the format x.x.0.0/16): ", "^[0-9]+\.[0-9]+\.[0]+\.[0]+\/16$")
+print(" ")
+
+# SUBNET_RANGE_PRIMARY = params['subnet_range_primary']
+# SUBNET_RANGE_SECONDARY = params['subnet_range_secondary']
+SUBNET_RANGE_PRIMARY = primary_cidr_answer
+SUBNET_RANGE_SECONDARY = secondary_cidr_answer
+# STUDENT_COUNT = params['student_count']
+STUDENT_PREFIX = params['student_prefix']
+>>>>>>> master
 
 MANAGEMENT_CIDR = ''
 
@@ -313,7 +341,7 @@ def validate_tz(prompt):
             print("ERROR: Invalid timezone selection, please try again")
 
 def validate_month(prompt):
-    month_dict = {1:'jan',2:'feb',3:'mar',4:'apr',5:'may',6:'jun',7:'jul',8:'aug',9:'sep',10:'oct',11:'nov',12:'dec'}
+    month_dict = {1:'Jan',2:'Feb',3:'Mar',4:'Apr',5:'May',6:'Jun',7:'Jul',8:'Aug',9:'Sep',10:'Oct',11:'Nov',12:'Dec'}
     for key in month_dict:
         print(f"{key}: {month_dict[key]}")
     while True:
@@ -326,32 +354,34 @@ def validate_day(prompt):
         answer = input(prompt)
         if int(answer) > 0 and int(answer) < 32:
             return answer
-print("***********************************************************************************************************************************")
-print("The lab can begin running continuously now or you can set a schedule indicating when the lab should be active.")
-print("Setting a schedule will help to manage the AWS cost, as the instances will only run during the time period specified.")
-print("When setting a schedule, the instances will be deployed now and will be placed in a shut down state until the scheduled time slot.")
-print("Note that there will still be some AWS billing incurred starting today for the resources associated with the stopped instances.")
-print("In addition the lab will spin up 6 hours early on day 2 to allow agents enough time to stream telemetry in order to run ADM.")
-print("This requires agents to be registered, annotations configured, and scopes to be created on day 1 of the training.")
-print("***********************************************************************************************************************************")
-answer = get_user_input("Would you like to set a schedule for the lab (Y/N) ", "^[YyNn]$")
+print(" ")
+print("************************************************************************************************************************************************************")
+print("The lab can run continuously or you can define a schedule which allows cost savings in AWS by powering off EC2 instances when not using the lab environment.")
+print("When setting a schedule, the instances will be deployed now and will be running at first, then upon inspection of both the defined schedule and the state ")
+print("of each EC2 instance, any running instances will be stopped (not terminated) and will spin up automatically when at the properly scheduled time.")
+print("Note that there will still be some AWS billing incurred starting today for the resources associated with the stopped instances and other lab components.")
+print("************************************************************************************************************************************************************")
+print(" ")
+answer = get_user_input("Would you like to define a schedule for the lab? (Y/N) ", "^[YyNn]$")
 if answer.upper() == 'Y':
     use_schedule = True
-    START_MONTH = validate_month("Please enter the number corresponding to the month the class starts: ")
-    START_DAY = validate_day("Please enter the numerical day of the month the class starts: ")
-    END_MONTH = validate_month("Please enter the number corresponding to the month the class ends: ")
-    END_DAY = validate_day("Please enter the numerical day of the month the class ends: ")
-    BEGIN_TIME = validate_time("Please enter the time the lab should start each day in 24-hour format (00:00-23:59): ")
-    END_TIME = validate_time("Please enter the time the lab should stop each day in 24-hour format (00:00-23:59): ", BEGIN_TIME)
-    TIMEZONE = validate_tz("Enter the number corresponding to your timezone in the above list: ")
+    START_MONTH = validate_month("Please enter the Starting Month for this session: ")
+    START_DAY = validate_day("Please enter the Starting Date for this session: ")
+    BEGIN_TIME = validate_time("Please enter the Starting Time (EACH DAY) for this session using a 24-hour format (00:00 - 23:59): ")
+    END_MONTH = validate_month("Please enter the Ending Month for this session: ")
+    END_DAY = validate_day("Please enter the Ending Date for this session: ")
+    END_TIME = validate_time("Please enter the Starting Time (EACH DAY) for this session using a 24-hour format (00:00 - 23:59): ", BEGIN_TIME)
+    TIMEZONE = validate_tz("Please enter the timezone you would like this schedule to be run against using the number of the TZ from the above list: ")
 else:
     use_schedule = False
 
 if use_schedule:
-    # Create a start time 6 hours earlier than configured to allow flows for ADM 
+    # Create a start time
     dt = datetime.strptime(BEGIN_TIME, '%H:%M')
-    t = timedelta(hours=6)
-    dt_start = dt - t
+    # option to add a delta to the starting time to allow things such as Tetration ADM runs (not needed for now so removing for cost)
+    # t = timedelta(hours=6)
+    # dt_start = dt - t
+    dt_start = dt
     ADM_START_TIME = dt_start.strftime('%H:%M')
     # Handles case where class start and end are in same month
     if START_MONTH == END_MONTH:
@@ -370,7 +400,7 @@ if use_schedule:
             ADM_MONTH = START_MONTH
             ADM_DAY = str(int(START_DAY) + 1)
 
-    month_dict = {1:'jan',2:'feb',3:'mar',4:'apr',5:'may',6:'jun',7:'jul',8:'aug',9:'sep',10:'oct',11:'nov',12:'dec'}
+    month_dict = {1:'Jan',2:'Feb',3:'Mar',4:'Apr',5:'May',6:'Jun',7:'Jul',8:'Aug',9:'Sep',10:'Oct',11:'Nov',12:'Dec'}
     SCHEDULE_NAME = f"{month_dict[int(START_MONTH)]}{START_DAY}-to-{month_dict[int(END_MONTH)]}{END_DAY}-{BEGIN_TIME.replace(':','')}-{END_TIME.replace(':','')}"
 else:
     SCHEDULE_NAME = "Always-On"
