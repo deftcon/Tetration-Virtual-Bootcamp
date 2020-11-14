@@ -42,7 +42,7 @@ if ACCESS_KEY == None or ACCESS_KEY == '':
 if SECRET_KEY == None or SECRET_KEY == '':
     SECRET_KEY = params['aws_secret_key']
 
-def get_student_count(prompt):
+def get_pod_count(prompt):
     while True:
         pattern = '^[0-9]+$'
         answer = input(prompt)
@@ -50,7 +50,7 @@ def get_student_count(prompt):
         if m:
             return int(answer)
 
-STUDENT_COUNT = get_student_count("How many students are needed? ")
+POD_COUNT = get_pod_count("How many pods are needed? ")
 
 def get_region(prompt):
     region_dict = {
@@ -117,13 +117,13 @@ if use_existing_vpc:
 
 SUBNET_RANGE_PRIMARY = params['subnet_range_primary']
 SUBNET_RANGE_SECONDARY = params['subnet_range_secondary']
-# STUDENT_COUNT = params['student_count']
-STUDENT_PREFIX = params['student_prefix']
+# POD_COUNT = params['pod_count']
+POD_PREFIX = params['pod_prefix']
 
 MANAGEMENT_CIDR = ''
 
 STACKS_LIST = []
-STUDENTS_LIST = []
+PODS_LIST = []
 
 def password_generator(size=14, chars=string.ascii_letters + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
@@ -189,11 +189,11 @@ for eip_dict in addresses_dict['Addresses']:
         eips_in_use += 1
 
 allocated_and_available = eips_allocated - eips_in_use
-print(f'INFO: Number of required Elastic IPs is {STUDENT_COUNT * 2}, you currently have {allocated_and_available} available for use')
+print(f'INFO: Number of required Elastic IPs is {POD_COUNT * 2}, you currently have {allocated_and_available} available for use')
 succeeded_count = 0
-if allocated_and_available < (STUDENT_COUNT * 2):   
-    print(f'INFO: Attempting to allocate {(STUDENT_COUNT * 2) - allocated_and_available} additional Elastic IPs...')
-    for i in range(1,((STUDENT_COUNT * 2) - allocated_and_available) + 1):
+if allocated_and_available < (POD_COUNT * 2):   
+    print(f'INFO: Attempting to allocate {(POD_COUNT * 2) - allocated_and_available} additional Elastic IPs...')
+    for i in range(1,((POD_COUNT * 2) - allocated_and_available) + 1):
         try:
             eip = client.allocate_address()
             ELASTIC_IPS.append({
@@ -202,8 +202,8 @@ if allocated_and_available < (STUDENT_COUNT * 2):
             succeeded_count += 1
         except ClientError as e:
             if 'AddressLimitExceeded' in str(e):
-                print(f'ERROR: Number of additional Elastic IPs is {(STUDENT_COUNT * 2) - allocated_and_available} and {succeeded_count} were able to be allocated.')
-                print(f'Please go to the AWS portal to request increase of EIP limit by {(STUDENT_COUNT * 2) - allocated_and_available - succeeded_count} or more addresses:')
+                print(f'ERROR: Number of additional Elastic IPs is {(POD_COUNT * 2) - allocated_and_available} and {succeeded_count} were able to be allocated.')
+                print(f'Please go to the AWS portal to request increase of EIP limit by {(POD_COUNT * 2) - allocated_and_available - succeeded_count} or more addresses:')
                 print(f'https://console.aws.amazon.com/support/home?#/case/create?issueType=service-limit-increase&limitType=vpc')
                 sys.exit(1)
         
@@ -223,12 +223,12 @@ try:
 
     print(f'INFO: {len(primary_ips)} Subnets Are Available...')
 
-    if len(primary_ips) < (STUDENT_COUNT * 2):
-        print(f'ERROR: Number Of Required Primary Subnets Are {STUDENT_COUNT * 2} But Only {len(primary_ips)} Are Available...')
+    if len(primary_ips) < (POD_COUNT * 2):
+        print(f'ERROR: Number Of Required Primary Subnets Are {POD_COUNT * 2} But Only {len(primary_ips)} Are Available...')
         sys.exit(1)
     
-    if len(secondary_ips) < STUDENT_COUNT:
-        print(f'ERROR: Number Of Required Secondary Subnets Are {STUDENT_COUNT} But Only {len(secondary_ips)} Are Available...')
+    if len(secondary_ips) < POD_COUNT:
+        print(f'ERROR: Number Of Required Secondary Subnets Are {POD_COUNT} But Only {len(secondary_ips)} Are Available...')
         sys.exit(1)
 
 except:
@@ -254,9 +254,9 @@ try:
 
     eip_index = 0
 
-    for i in range(STUDENT_COUNT):
-        STUDENTS_LIST.append({
-            'account_name': f'{STUDENT_PREFIX}-0{i}',
+    for i in range(POD_COUNT):
+        PODS_LIST.append({
+            'account_name': f'{POD_PREFIX}-0{i}',
             'account_password': password_generator(),
             'public_subnet_01': f'{public_subnet_01[i]}',
             'public_subnet_02': f'{public_subnet_02[i]}',
@@ -270,7 +270,7 @@ try:
 
         eip_index = eip_index + 2
 
-#    print(f'INFO: {STUDENTS_LIST}')
+#    print(f'INFO: {PODS_LIST}')
 
 except:
     print(f'ERROR: Invalid Subnet! Please provide a valid subnet range...')
@@ -380,9 +380,9 @@ else:
 # Confirm Deploy Before Proceeding ####################################
 #######################################################################
 if use_existing_vpc:
-    print(f'You are about to deploy {STUDENT_COUNT} student pod(s) to {VPC_ID} in the {REGION} Region')
+    print(f'You are about to deploy {POD_COUNT} pod pod(s) to {VPC_ID} in the {REGION} Region')
 else:
-    print(f'You are about to deploy {STUDENT_COUNT} student pod(s) to a new VPC in the {REGION} Region')
+    print(f'You are about to deploy {POD_COUNT} pod pod(s) to a new VPC in the {REGION} Region')
 if use_schedule:
     print(f"The lab will start at {BEGIN_TIME} and stop each day at {END_TIME} in the {TIMEZONE} timezone")
 rusure_response = input('Are you sure you wish to proceed with this deployment (y/Y to continue)? ')
@@ -477,7 +477,7 @@ def create_bucket(bucket_name, config, region=None):
         return False
     return True
 
-S3_BUCKET = f"tetration-hol-cft-template-{NAMING_SUFFIX}"
+S3_BUCKET = f"tetration-hol-files-{NAMING_SUFFIX}"
 
 print(f"INFO: Creating S3 Bucket {S3_BUCKET}")
 boto_config = Config(region_name=REGION)
@@ -510,11 +510,11 @@ print(f'INFO: lambda_function/tvb-dyndns.zip Uploaded To S3 bucket {S3_BUCKET}')
 #######################################################################
 # Run POD Cloud Formation #############################################
 #######################################################################
-for student in STUDENTS_LIST:
+for pod in PODS_LIST:
 
     try:
 
-        outside_pod_ips = list(ipaddress.ip_network(f"{student['private_subnet']}/24").hosts())
+        outside_pod_ips = list(ipaddress.ip_network(f"{pod['private_subnet']}/24").hosts())
 
         cloudformation = session.client('cloudformation', region_name=REGION)
         cloudformation_template = open(CFT_POD_FILE, 'r').read()
@@ -523,23 +523,23 @@ for student in STUDENTS_LIST:
             {'ParameterKey': 'AccessKey', 'ParameterValue': ACCESS_KEY},
             {'ParameterKey': 'SecretKey', 'ParameterValue': SECRET_KEY},
 
-            {'ParameterKey': 'StudentIndex', 'ParameterValue': str(STUDENTS_LIST.index(student))},
-            {'ParameterKey': 'StudentName', 'ParameterValue': student['account_name']},
-            {'ParameterKey': 'StudentPassword', 'ParameterValue': student['account_password']},
+            {'ParameterKey': 'StudentIndex', 'ParameterValue': str(PODS_LIST.index(pod))},
+            {'ParameterKey': 'StudentName', 'ParameterValue': pod['account_name']},
+            {'ParameterKey': 'StudentPassword', 'ParameterValue': pod['account_password']},
             # {'ParameterKey': 'ManagementCidrBlock', 'ParameterValue': MANAGEMENT_CIDR},
 
-            {'ParameterKey': 'Subnet01CidrBlock', 'ParameterValue': f"{student['public_subnet_01']}/24"},
-            {'ParameterKey': 'Subnet02CidrBlock', 'ParameterValue': f"{student['public_subnet_02']}/24"},
-            {'ParameterKey': 'Subnet03CidrBlock', 'ParameterValue': f"{student['private_subnet']}/24"},
+            {'ParameterKey': 'Subnet01CidrBlock', 'ParameterValue': f"{pod['public_subnet_01']}/24"},
+            {'ParameterKey': 'Subnet02CidrBlock', 'ParameterValue': f"{pod['public_subnet_02']}/24"},
+            {'ParameterKey': 'Subnet03CidrBlock', 'ParameterValue': f"{pod['private_subnet']}/24"},
 
-            {'ParameterKey': 'ASAvInsideSubnet', 'ParameterValue': student['public_subnet_01']},
-            {'ParameterKey': 'ASAvOutsideSubnet', 'ParameterValue': student['private_subnet']},
+            {'ParameterKey': 'ASAvInsideSubnet', 'ParameterValue': pod['public_subnet_01']},
+            {'ParameterKey': 'ASAvOutsideSubnet', 'ParameterValue': pod['private_subnet']},
 
-            {'ParameterKey': 'GuacamoleElasticIp', 'ParameterValue': student['guacamole_elastic_ip']},
-            {'ParameterKey': 'GuacamoleElasticIpAllocationId', 'ParameterValue': student['guacamole_elastic_ip_allocation_id']},
+            {'ParameterKey': 'GuacamoleElasticIp', 'ParameterValue': pod['guacamole_elastic_ip']},
+            {'ParameterKey': 'GuacamoleElasticIpAllocationId', 'ParameterValue': pod['guacamole_elastic_ip_allocation_id']},
 
-            {'ParameterKey': 'TetDataElasticIp', 'ParameterValue': student['tet_data_elastic_ip']},
-            {'ParameterKey': 'TetDataElasticIpAllocationId', 'ParameterValue': student['tet_data_elastic_ip_allocation_id']},
+            {'ParameterKey': 'TetDataElasticIp', 'ParameterValue': pod['tet_data_elastic_ip']},
+            {'ParameterKey': 'TetDataElasticIpAllocationId', 'ParameterValue': pod['tet_data_elastic_ip_allocation_id']},
 
             {'ParameterKey': 'Region', 'ParameterValue': REGION},
             {'ParameterKey': 'Subnet01AvailabilityZone', 'ParameterValue': 'a'},
@@ -583,7 +583,7 @@ for student in STUDENTS_LIST:
         templateURL = f"https://{S3_BUCKET}.s3.{REGION}.amazonaws.com/{CFT_POD_FILE }"
         print(templateURL)
         result = cloudformation.create_stack(
-            StackName=f"{student['account_name']}-{NAMING_SUFFIX}",
+            StackName=f"{pod['account_name']}-{NAMING_SUFFIX}",
             # TemplateBody=cloudformation_template,
             TemplateURL=templateURL,
             Parameters=aws_parameters,
@@ -592,7 +592,7 @@ for student in STUDENTS_LIST:
             ]
         )
 
-        STACKS_LIST.append(f"{student['account_name']}-{NAMING_SUFFIX}")
+        STACKS_LIST.append(f"{pod['account_name']}-{NAMING_SUFFIX}")
         
     except Exception as e:
         print(e)
@@ -654,7 +654,7 @@ try:
 
     # time.sleep(120)
 
-    for student in STUDENTS_LIST:
+    for pod in PODS_LIST:
 
         client = session.client('elb', region_name=REGION)
         # Check for ELB creation, retry until we get a response
@@ -662,7 +662,7 @@ try:
         elb_name = None
         retries = 0
         while not eks_elbs or not elb_name:
-            print(f"INFO Initializing EKS DNS Assembly for student {student['account_name']}...")
+            print(f"INFO Initializing EKS DNS Assembly for pod {pod['account_name']}...")
             eks_elbs = client.describe_load_balancers()['LoadBalancerDescriptions']
 
             loadbalancer_list = [e['LoadBalancerName'] for e in eks_elbs if e['VPCId'] == VPC_ID]
@@ -674,16 +674,16 @@ try:
                 for elb in elb_tags['TagDescriptions']:
                     for tag in elb['Tags']:
                         for key in tag:
-                            if student['account_name'] in tag[key]:
-                                student['eks_dns'] = list(filter(lambda e: e['LoadBalancerName'] == elb['LoadBalancerName'], eks_elbs))[0]['DNSName']
+                            if pod['account_name'] in tag[key]:
+                                pod['eks_dns'] = list(filter(lambda e: e['LoadBalancerName'] == elb['LoadBalancerName'], eks_elbs))[0]['DNSName']
                                 elb_name = elb['LoadBalancerName']
-                                print(f"INFO: elb {elb_name} for student {student['account_name']} was found!")
+                                print(f"INFO: elb {elb_name} for pod {pod['account_name']} was found!")
                                 break
             else:
                 print("INFO: Waiting for ELB initialization, retry in 15 seconds")
             retries += 1
             if retries == 20:
-                print(f"ERROR: ELB was not found for student {student['account_name']} after 20 retries!")
+                print(f"ERROR: ELB was not found for pod {pod['account_name']} after 20 retries!")
                 break
             time.sleep(15)
 
@@ -699,7 +699,7 @@ try:
                 for instance in instances:
                     for tag in instance['Tags']:
                         if tag['Key'] == 'Name':
-                            if student['account_name'] in tag['Value'] and 'eks' in tag['Value'] and NAMING_SUFFIX in tag['Value']:
+                            if pod['account_name'] in tag['Value'] and 'eks' in tag['Value'] and NAMING_SUFFIX in tag['Value']:
                                 instance_id = instance['InstanceId']
                                 print(f'Waiting for EKS worker node {instance_id} to pass health checks')
                                 waiter.wait(InstanceIds=[instance_id])
@@ -725,7 +725,7 @@ try:
                                         print(f"INFO: Instance {instance_id} not attached to the ELB {elb_name}, trying again")
                                 break
         else:
-            print(f"WARN: No ELB was found for student {student['account_name']}")                
+            print(f"WARN: No ELB was found for pod {pod['account_name']}")                
     print(f"INFO: EKS DNS Assembly Completed...")
 
 except Exception as e:
@@ -821,19 +821,42 @@ except Exception as e:
 
 
 #######################################################################
-# Populate selected AWS region and student_count into parameters.yml for rollback
+# Create state file for rollback
 ######################################################################
+arn = boto3.resource('iam').CurrentUser().arn
+ACCT_ID = re.search('[0-9]+', arn).group()
+ACCT_USER = arn[arn.find('/')+1:]
+STATE_S3_BUCKET = f"tethol-state-{ACCT_ID}"
+# Create bucket to store state,  if not already existing
+print(f"INFO: Creating S3 Bucket {S3_BUCKET}")
+boto_config = Config(region_name=REGION)
+if REGION == 'us-east-1':
+    result = create_bucket(STATE_S3_BUCKET, boto_config)
+else:
+    result = create_bucket(STATE_S3_BUCKET, boto_config, region=REGION)
 
-with open ('parameters.yml', 'r') as f:
-    params_file = f.readlines()
-for x, line in enumerate(params_file):
-    if 'aws_region' in line:
-        params_file[x] = f"aws_region: {REGION}\n"
-    if 'student_count' in line:
-        params_file[x] = f"student_count: {STUDENT_COUNT}\n"
-with open('parameters.yml', 'w') as f:
-    f.writelines(params_file)
+if result:
+    print(f"INFO: Created S3 bucket {STATE_S3_BUCKET}")
 
+STATE_FILE = f'tethol-state-{REGION}-{NAMING_SUFFIX}.yml'
+
+with open(f"/tmp/{STATE_FILE}", 'w') as f:
+    f.write(f"aws_region: {REGION}\n")
+    f.write(f"pod_count: {POD_COUNT}\n")
+    f.write(f"pod_prefix: {POD_PREFIX}\n")
+    f.write(f"vpc_id: {VPC_ID}\n")
+    f.write(f"subnet_range_primary: {SUBNET_RANGE_PRIMARY}\n")
+    f.write(f"subnet_range_secondary: {SUBNET_RANGE_SECONDARY}\n")
+
+CREATED_DATE = datetime.now().strftime('%h-%d-%Y %H:%M')
+
+metadata = {'created_date':CREATED_DATE, 'created_by':ACCT_USER, 'schedule':SCHEDULE_NAME, 'region': REGION, 'vpcid': VPC_ID}
+
+print(f"INFO: Uploading state file {STATE_FILE} To S3 bucket {STATE_S3_BUCKET}...")
+s3 = boto3.resource('s3', region_name=REGION)
+s3.meta.client.upload_file(f"/tmp/{STATE_FILE}", STATE_S3_BUCKET, STATE_FILE, ExtraArgs={"Metadata":metadata})
+print(f"INFO: Uploaded state file {STATE_FILE} to bucket {STATE_S3_BUCKET}...")
+os.remove(f"/tmp/{STATE_FILE}")
 #######################################################################
 # Generate CSV Reports ################################################
 ######################################################################
@@ -851,7 +874,7 @@ try:
             StackName=stack_name
         )
 
-        student = list(filter(lambda student: f"{student['account_name']}-{NAMING_SUFFIX}" == stack_name, STUDENTS_LIST))[0]
+        pod = list(filter(lambda pod: f"{pod['account_name']}-{NAMING_SUFFIX}" == stack_name, PODS_LIST))[0]
 
         output = {}
 
@@ -867,7 +890,7 @@ try:
             output['CiscoHOLStudentPassword'],
             f"http://{output['CiscoHOLIISDNS']}",
             f"http://{output['CiscoHOLApacheDNS']}",
-            f"http://{student['eks_dns']}",
+            f"http://{pod['eks_dns']}",
             output['CiscoHOLPublicSubnet01'],
             output['CiscoHOLPrivateSubnet'],
             output['CiscoHOLActiveDirectory'],
@@ -894,8 +917,8 @@ try:
             output['CiscoHOLVPCFlowLogBucket'],
             f"{eks_endpoint_fqdn_only}",
             output['EKSClusterCertificate'],
-            # output['cisco-hol-cisco-student-00-public-subnet-01-us-east-2a'],
-            # cisco-hol-cisco-student-00-vpc-flow-logs-us-east-2a
+            # output['cisco-hol-cisco-pod-00-public-subnet-01-us-east-2a'],
+            # cisco-hol-cisco-pod-00-vpc-flow-logs-us-east-2a
             # aws key will need perms to read this log
 
         ])
@@ -941,7 +964,7 @@ try:
             f"Student Lab Access (Guac) Password,{output['CiscoHOLStudentPassword']}\n",
             f"nopCommerce Windows App URL,http://{output['CiscoHOLIISDNS']}\n",
             f"OpenCart Linux App URL,http://{output['CiscoHOLApacheDNS']}\n",
-            f"EKS SockShop App URL,http://{student['eks_dns']}\n",
+            f"EKS SockShop App URL,http://{pod['eks_dns']}\n",
             f"Student Internal/Inside Corporate Subnet,{output['CiscoHOLPublicSubnet01']}\n",
             f"Student External/Outside Internet Subnet,{output['CiscoHOLPrivateSubnet']}\n",
             f"MS Active Directory IP,{output['CiscoHOLActiveDirectory']}\n",

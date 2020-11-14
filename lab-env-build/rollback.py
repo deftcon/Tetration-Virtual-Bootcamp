@@ -14,12 +14,45 @@ import sys
 import requests
 from datetime import datetime
 
-PARAMETERS_FILE = './parameters.yml'
-
-params = yaml.load(open(PARAMETERS_FILE), Loader=yaml.Loader)
-
 ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY_ID')
 SECRET_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+
+#######################################################################
+# Rollback selection from state files on S3 ###########################
+#######################################################################
+
+arn = boto3.resource('iam').CurrentUser().arn
+ACCT_ID = re.search('[0-9]+', arn).group()
+STATE_S3_BUCKET = f"tethol-state-{ACCT_ID}"
+s3 = boto3.resource('s3')
+bucket = s3.Bucket(name=STATE_S3_BUCKET)
+objects = list(bucket.objects.iterator())
+object_dict = {}
+count = 1
+for obj in objects:
+   if 'state' in obj.key:
+        object_dict[str(count)] = {'filename': obj.key, 'metadata': obj.get()['Metadata']}
+        count += 1
+while True:
+    print("{0:<10} {1:<20} {2:<20} {3:<30} {4:<20} {5:<25}".format('SELECTION', 'REGION', 'VPC', 'SCHEDULE', 'CREATED', 'CREATED BY'))
+    for key in object_dict.keys():
+        region = object_dict[key]['metadata']['region']
+        vpc = object_dict[key]['metadata']['vpcid']
+        schedule = object_dict[key]['metadata']['schedule']
+        created = object_dict[key]['metadata']['created_date']
+        created_by = object_dict[key]['metadata']['created_by']
+        print(f"{key:<10} {region:<20} {vpc:<20} {schedule:<30} {created:<20} {created_by:<25}")
+    print('\n')
+    answer = input("Please select the number corresponding to the deployment you would like to roll back: ")
+    if answer in object_dict.keys():
+        STATE_FILE = object_dict[answer]['filename']
+        break
+   
+def read_s3_contents(bucket_name, key):
+    response = s3.Object(bucket_name, key).get()
+    return response['Body'].read()
+
+params = yaml.safe_load(read_s3_contents(STATE_S3_BUCKET, STATE_FILE))
 
 if ACCESS_KEY == None or ACCESS_KEY == '':
     ACCESS_KEY = params['aws_access_key']
@@ -42,8 +75,8 @@ REGION = params['aws_region']
 # VPC_ID = params['vpc_id']
 SUBNET_RANGE_PRIMARY = params['subnet_range_primary']
 SUBNET_RANGE_SECONDARY = params['subnet_range_secondary']
-STUDENT_COUNT = params['student_count']
-STUDENT_PREFIX = params['student_prefix']
+POD_COUNT = params['pod_count']
+POD_PREFIX = params['pod_prefix']
 
 session = boto3.Session(
     aws_access_key_id=ACCESS_KEY,
@@ -51,7 +84,7 @@ session = boto3.Session(
     region_name=REGION
 )
 
-STUDENTS_LIST = []
+PODS_LIST = []
 STACKS_LIST = []
 
 #######################################################################
@@ -101,12 +134,12 @@ try:
 
     print(f'INFO: {len(primary_ips)} Subnets Are Available...')
 
-    if len(primary_ips) < (STUDENT_COUNT * 2):
-        print(f'ERROR: Number Of Required Primary Subnets Are {STUDENT_COUNT * 2} But Only {len(primary_ips)} Are Available...')
+    if len(primary_ips) < (POD_COUNT * 2):
+        print(f'ERROR: Number Of Required Primary Subnets Are {POD_COUNT * 2} But Only {len(primary_ips)} Are Available...')
         sys.exit(1)
     
-    if len(secondary_ips) < STUDENT_COUNT:
-        print(f'ERROR: Number Of Required Secondary Subnets Are {STUDENT_COUNT} But Only {len(secondary_ips)} Are Available...')
+    if len(secondary_ips) < POD_COUNT:
+        print(f'ERROR: Number Of Required Secondary Subnets Are {POD_COUNT} But Only {len(secondary_ips)} Are Available...')
         sys.exit(1)
 
 except:
@@ -130,15 +163,15 @@ try:
     public_subnet_01 = primary_ips[:len(primary_ips)//2]
     public_subnet_02 = primary_ips[len(primary_ips)//2:]
 
-    for i in range(STUDENT_COUNT):
-        STUDENTS_LIST.append({
-            'account_name': f'{STUDENT_PREFIX}-0{i}',
+    for i in range(POD_COUNT):
+        PODS_LIST.append({
+            'account_name': f'{POD_PREFIX}-0{i}',
             'public_subnet_01': f'{public_subnet_01[i]}',
             'public_subnet_02': f'{public_subnet_02[i]}',
             'private_subnet': f'{secondary_ips[i]}'
         })
 
-    print(f'INFO: {STUDENTS_LIST}')
+    print(f'INFO: {PODS_LIST}')
 
 except:
     print(f'ERROR: Invalid Subnet! Please provide a valid subnet range...')
@@ -150,7 +183,7 @@ print(f'INFO: Student Accounts Collection Created...')
 #######################################################################
 # Confirm Destroy Before Proceeding ###################################
 #######################################################################
-print(f'You are about to DESTROY all student pod(s) in {VPC_ID} in the {REGION} Region')
+print(f'You are about to DESTROY all pod pod(s) in {VPC_ID} in the {REGION} Region')
 rusure_response1 = input('Are you sure you wish to destroy all of these pods (type "Y" to continue)? ')
 if rusure_response1 == 'Y':
     rusure_response2 = input('ARE YOU ABSOLUTELY SURE (type "YES" to continue)? ')
@@ -183,7 +216,7 @@ def query_dns(hostname):
     return response
 
 instance_ids = []
-for student in STUDENTS_LIST:
+for pod in PODS_LIST:
 # Look up Guac and Tet-ingest instance IDs
     ec2 = session.client('ec2',region_name=REGION)
     reservations = ec2.describe_instances()['Reservations']
@@ -194,12 +227,12 @@ for student in STUDENTS_LIST:
                 if instance['VpcId'] == VPC_ID:
                     for tag in instance['Tags']:
                         if tag['Key'] == 'Name':                   
-                            if student['account_name'] in tag['Value'] and 'guac' in tag['Value']:
+                            if pod['account_name'] in tag['Value'] and 'guac' in tag['Value']:
                                 instance_ids.append(instance['InstanceId'])
-                            elif student['account_name'] in tag['Value'] and 'tet-data' in tag['Value']:
+                            elif pod['account_name'] in tag['Value'] and 'tet-data' in tag['Value']:
                                 instance_ids.append(instance['InstanceId'])
                         if tag['Key'] == 'DNS':
-                            if student['account_name'] in tag['Value']:
+                            if pod['account_name'] in tag['Value']:
                                 print(f"INFO: Looking up current IP address for {tag['Value']}")
                                 r = query_dns(tag['Value'])
                                 if r.status_code == 200:
@@ -236,7 +269,7 @@ for address in addresses_dict['Addresses']:
 # Delete VPC Flow Logs S3 Buckets #####################################
 #######################################################################
 print(f'INFO: Initializing VPC Flow Logs S3 Bucket Deletion...')
-for student in STUDENTS_LIST:
+for pod in PODS_LIST:
 
     bucket_name = ''
 
@@ -245,7 +278,7 @@ for student in STUDENTS_LIST:
         cloudformation = session.client('cloudformation')
 
         result = cloudformation.describe_stacks(
-            StackName=f"{student['account_name']}-{NAMING_SUFFIX}"
+            StackName=f"{pod['account_name']}-{NAMING_SUFFIX}"
         )
 
         bucket_name = list(filter(lambda o: o['OutputKey'] == 'CiscoHOLVPCFlowLogBucket', result['Stacks'][0]['Outputs']))[0]['OutputValue']
@@ -279,7 +312,7 @@ print(f'INFO: S3 Bucket Deletion Complete...')
 # Delete EKS Load Balancers ###########################################
 #######################################################################
 print('INFO: Initializing EKS Load Balancers Deletion...')
-for student in STUDENTS_LIST:
+for pod in PODS_LIST:
 
     try:
 
@@ -342,23 +375,23 @@ print(f"INFO: Deleted DNS updater Lambda function tethol-dns-updater-{NAMING_SUF
 # Delete Students POD In CloudFormation ###############################
 #######################################################################
 print('INFO: Commencing CloudFormation Stack Deletion...')
-for student in STUDENTS_LIST:
+for pod in PODS_LIST:
 
     try:
 
         cloudformation = session.client('cloudformation')
 
         result = cloudformation.delete_stack(
-            StackName=f"{student['account_name']}-{NAMING_SUFFIX}"
+            StackName=f"{pod['account_name']}-{NAMING_SUFFIX}"
         )
 
-        print(f"INFO: Stack deletion initiated for: {student['account_name']}-{NAMING_SUFFIX}...")
+        print(f"INFO: Stack deletion initiated for: {pod['account_name']}-{NAMING_SUFFIX}...")
 
-        STACKS_LIST.append(f"{student['account_name']}-{NAMING_SUFFIX}")
+        STACKS_LIST.append(f"{pod['account_name']}-{NAMING_SUFFIX}")
 
     except Exception as e:
         print('WARN: ', e)
-print(f"INFO: CloudFormation deletion initiated for {student['account_name']}-{NAMING_SUFFIX}...")
+print(f"INFO: CloudFormation deletion initiated for {pod['account_name']}-{NAMING_SUFFIX}...")
 #######################################################################
 
 
@@ -395,7 +428,7 @@ while True:
                 print('Exiting')
                 sys.exit(1)
 
-        if len(STUDENTS_LIST) == len(deleted_stacks):
+        if len(PODS_LIST) == len(deleted_stacks):
             print('INFO: CloudFormation Rollback Completed Successfully...')
             break
 
@@ -456,7 +489,7 @@ except Exception as e:
     sys.exit(1)
 
 #######################################################################
-# Empty and delete the S3 bucket
+# Empty and delete the S3 bucket for the CFT
 #######################################################################
 
 try:
@@ -470,5 +503,16 @@ try:
 except Exception as e:
     print(f'ERROR: While deleting S3 Bucket tetration-hol-cft-template-{NAMING_SUFFIX}:  {e}')
     sys.exit(1)
+
+#######################################################################
+# Delete the state file from S3
+#######################################################################
+try:
+    s3 = session.resource('s3')
+    print(f'INFO: Deleting state file {STATE_FILE} from S3 bucket {STATE_S3_BUCKET}')
+    s3.Object(bucket_name=STATE_S3_BUCKET, key=STATE_FILE).delete()
+    print(f"INFO: State file {STATE_FILE} deleted from S3 bucket {STATE_S3_BUCKET}")
+except Exception as e:
+    print(f'WARN: While deleting {STATE_FILE} from S3:  {e}')
 
 print('INFO: Rollback completed successfully!')
