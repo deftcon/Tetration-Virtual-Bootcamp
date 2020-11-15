@@ -1636,7 +1636,7 @@ Resources:
       Role: !Sub ${LambdaExecutionRole.Arn}
       Environment:
         Variables:
-          APP_URL: !GetAtt CiscoHOLEC2IIS.PublicIp
+          APP_URL: !Sub ${StudentName}-${Region}-${NamingSuffix}-nopcommerce.lab.tetration.guru
       Runtime: nodejs12.x
 
   LambdaScheduleIIS:
@@ -1688,7 +1688,7 @@ Resources:
       Role: !Sub ${LambdaExecutionRole.Arn}
       Environment:
         Variables:
-          APP_URL: !GetAtt CiscoHOLEC2Apache.PublicIp
+          APP_URL: !Sub ${StudentName}-${Region}-${NamingSuffix}-opencart.lab.tetration.guru
       Runtime: nodejs12.x
 
   LambdaScheduleApache:
