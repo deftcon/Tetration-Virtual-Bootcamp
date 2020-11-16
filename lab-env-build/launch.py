@@ -49,7 +49,7 @@ print('A session name is required to uniquely identify your deployment')
 print('The session name can be between 5 and 25 characters, with no special characters allowed except for a dash (-).')
 SESSION_NAME = get_session_name("Please enter the session name: ")
 
-CFT_POD_FILE = f'n0work-{SESSION_NAME}-pod-cft-template-.yml'
+CFT_POD_FILE = f'n0work-{SESSION_NAME}-pod-cft-template.yml'
 
 def get_pod_count(prompt):
     while True:
@@ -566,10 +566,10 @@ os.remove(f"/tmp/{STATE_FILE}")
 #######################################################################
 # Upload CFT TO S3 Bucket #############################################
 #######################################################################
-print('INFO: Uploading Template To S3...')
+print(f'INFO: Uploading CFT Template {CFT_POD_FILE} To S3...')
 s3 = boto3.resource('s3', region_name=REGION)
 s3.meta.client.upload_file('n0work-pod-cft-template.yml', S3_BUCKET, CFT_POD_FILE)
-print('INFO: CFT Template Uploaded To S3...')
+print(f'INFO: CFT Template {CFT_POD_FILE} Uploaded To S3...')
 
 #######################################################################
 # Upload DNS Updater Lambda Function TO S3 Bucket #####################
@@ -657,7 +657,7 @@ for pod in PODS_LIST:
         # aws_params_json_formatted_str = json.dumps(aws_parameters, indent=2)
         # print('INFO:', aws_params_json_formatted_str)
 
-        templateURL = f"https://{S3_BUCKET}.s3.{REGION}.amazonaws.com/{CFT_POD_FILE}"
+        templateURL = f"https://{S3_BUCKET}.s3.amazonaws.com/{CFT_POD_FILE}"
         print(templateURL)
         result = cloudformation.create_stack(
             StackName=f"n0work-{SESSION_NAME}-{pod['account_name']}",
@@ -789,17 +789,18 @@ try:
                                     print(f"INFO: Checking to see if the instance attached to the ELB")
                                     client = session.client('elb', region_name=REGION)
                                     elb = client.describe_load_balancers(LoadBalancerNames=[elb_name])
-                                    if elb['LoadBalancerDescriptions'][0]['Instances'][0]['InstanceId'] == instance_id:
-                                        print(f"INFO: Instance {instance_id} is attached to elb {elb_name}")
-                                        health = client.describe_instance_health(LoadBalancerName=elb_name)
-                                        if health:
-                                            if instance_id in health['InstanceStates'][0]['InstanceId']:
-                                                print(f"INFO: Instance status: {health['InstanceStates'][0]['State']}")
-                                                if health['InstanceStates'][0]['State'] == 'InService':
-                                                    break
-                                                else:
-                                                    print(f"INFO: Instance not in service yet. Retry in 15 seconds")
-                                                    time.sleep(15)
+                                    if elb['LoadBalancerDescriptions'][0]['Instances']:
+                                        if elb['LoadBalancerDescriptions'][0]['Instances'][0]['InstanceId'] == instance_id:
+                                            print(f"INFO: Instance {instance_id} is attached to elb {elb_name}")
+                                            health = client.describe_instance_health(LoadBalancerName=elb_name)
+                                            if health:
+                                                if instance_id in health['InstanceStates'][0]['InstanceId']:
+                                                    print(f"INFO: Instance status: {health['InstanceStates'][0]['State']}")
+                                                    if health['InstanceStates'][0]['State'] == 'InService':
+                                                        break
+                                                    else:
+                                                        print(f"INFO: Instance not in service yet. Retry in 15 seconds")
+                                                        time.sleep(15)
                                     else:
                                         print(f"INFO: Instance {instance_id} not attached to the ELB {elb_name}, trying again")
                                 break
