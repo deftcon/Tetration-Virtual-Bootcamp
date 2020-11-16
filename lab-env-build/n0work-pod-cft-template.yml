@@ -1636,7 +1636,11 @@ Resources:
       Role: !Sub ${LambdaExecutionRole.Arn}
       Environment:
         Variables:
+<<<<<<< HEAD:lab-env-build/n0work-pod-cft-template.yml
           APP_URL: !Sub ${SessionName}-${PodName}-nopcommerce.lab.tetration.guru
+=======
+          APP_URL: !Sub ${StudentName}-${Region}-${NamingSuffix}-nopcommerce.lab.tetration.guru
+>>>>>>> master:lab-env-build/cisco-hol-pod-cft-template.yml
       Runtime: nodejs12.x
 
   LambdaScheduleIIS:
@@ -1688,7 +1692,11 @@ Resources:
       Role: !Sub ${LambdaExecutionRole.Arn}
       Environment:
         Variables:
+<<<<<<< HEAD:lab-env-build/n0work-pod-cft-template.yml
           APP_URL: !Sub ${SessionName}-${PodName}-opencart.lab.tetration.guru
+=======
+          APP_URL: !Sub ${StudentName}-${Region}-${NamingSuffix}-opencart.lab.tetration.guru
+>>>>>>> master:lab-env-build/cisco-hol-pod-cft-template.yml
       Runtime: nodejs12.x
 
   LambdaScheduleApache:
