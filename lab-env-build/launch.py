@@ -20,8 +20,17 @@ from botocore.exceptions import ClientError
 
 import ami_create
 
+
 ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY_ID')
 SECRET_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+
+if not ACCESS_KEY or not SECRET_KEY:
+    print('ERROR: AWS_ACCESS_KEY_ID and/or AWS_SECRET_ACCESS_KEY not found in environment!')
+    print('''Please run the following in your terminal:
+    export AWS_ACCESS_KEY_ID=<YOUR AWS KEY>
+    export AWS_SECRET_ACCESS_KEY=<YOUR AWS SECRET>
+    ''')
+    sys.exit(1)
 API_GATEWAY_URL = "https://fh3aao7bri.execute-api.us-east-1.amazonaws.com/prod"
 API_GATEWAY_KEY = "iBO39NUUc1401nMYkNWvM1jbA4YAHhKD1z4wpIlh"
 
@@ -776,34 +785,35 @@ try:
             for reservation in reservations:
                 instances = reservation['Instances']
                 for instance in instances:
-                    for tag in instance['Tags']:
-                        if tag['Key'] == 'Name':
-                            if pod['account_name'] in tag['Value'] and 'eks' in tag['Value'] and SESSION_NAME in tag['Value']:
-                                instance_id = instance['InstanceId']
-                                print(f'Waiting for EKS worker node {instance_id} to pass health checks')
-                                waiter.wait(InstanceIds=[instance_id])
-                                print(f"EKS worker node {instance_id} now has status of 'ok'!")
-                                while True:
-                                    print(f"INFO: Registering instance {tag['Value']} with elb {elb_name}")
-                                    client.register_instances_with_load_balancer(LoadBalancerName=elb_name, Instances=[{'InstanceId': instance_id}])
-                                    print(f"INFO: Checking to see if the instance attached to the ELB")
-                                    client = session.client('elb', region_name=REGION)
-                                    elb = client.describe_load_balancers(LoadBalancerNames=[elb_name])
-                                    if elb['LoadBalancerDescriptions'][0]['Instances']:
-                                        if elb['LoadBalancerDescriptions'][0]['Instances'][0]['InstanceId'] == instance_id:
-                                            print(f"INFO: Instance {instance_id} is attached to elb {elb_name}")
-                                            health = client.describe_instance_health(LoadBalancerName=elb_name)
-                                            if health:
-                                                if instance_id in health['InstanceStates'][0]['InstanceId']:
-                                                    print(f"INFO: Instance status: {health['InstanceStates'][0]['State']}")
-                                                    if health['InstanceStates'][0]['State'] == 'InService':
-                                                        break
-                                                    else:
-                                                        print(f"INFO: Instance not in service yet. Retry in 15 seconds")
-                                                        time.sleep(15)
-                                    else:
-                                        print(f"INFO: Instance {instance_id} not attached to the ELB {elb_name}, trying again")
-                                break
+                    if not instance['State']['Name'] == 'terminated':
+                        for tag in instance['Tags']:
+                            if tag['Key'] == 'Name':
+                                if pod['account_name'] in tag['Value'] and 'eks' in tag['Value'] and SESSION_NAME in tag['Value']:
+                                    instance_id = instance['InstanceId']
+                                    print(f'Waiting for EKS worker node {instance_id} to pass health checks')
+                                    waiter.wait(InstanceIds=[instance_id])
+                                    print(f"EKS worker node {instance_id} now has status of 'ok'!")
+                                    while True:
+                                        print(f"INFO: Registering instance {tag['Value']} with elb {elb_name}")
+                                        client.register_instances_with_load_balancer(LoadBalancerName=elb_name, Instances=[{'InstanceId': instance_id}])
+                                        print(f"INFO: Checking to see if the instance attached to the ELB")
+                                        client = session.client('elb', region_name=REGION)
+                                        elb = client.describe_load_balancers(LoadBalancerNames=[elb_name])
+                                        if elb['LoadBalancerDescriptions'][0]['Instances']:
+                                            if elb['LoadBalancerDescriptions'][0]['Instances'][0]['InstanceId'] == instance_id:
+                                                print(f"INFO: Instance {instance_id} is attached to elb {elb_name}")
+                                                health = client.describe_instance_health(LoadBalancerName=elb_name)
+                                                if health:
+                                                    if instance_id in health['InstanceStates'][0]['InstanceId']:
+                                                        print(f"INFO: Instance status: {health['InstanceStates'][0]['State']}")
+                                                        if health['InstanceStates'][0]['State'] == 'InService':
+                                                            break
+                                                        else:
+                                                            print(f"INFO: Instance not in service yet. Retry in 15 seconds")
+                                                            time.sleep(15)
+                                        else:
+                                            print(f"INFO: Instance {instance_id} not attached to the ELB {elb_name}, trying again")
+                                    break
         else:
             print(f"WARN: No ELB was found for pod {pod['account_name']}")                
     print(f"INFO: EKS DNS Assembly Completed...")
