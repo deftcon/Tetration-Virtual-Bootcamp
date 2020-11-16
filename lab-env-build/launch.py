@@ -18,29 +18,38 @@ from datetime import timedelta
 from botocore.config import Config
 from botocore.exceptions import ClientError
 
-PARAMETERS_FILE = './parameters.yml'
-
-params = yaml.load(open(PARAMETERS_FILE), Loader=yaml.Loader)
-
-CFT_POD_FILE = 'cisco-hol-pod-cft-template.yml'
+import ami_create
 
 ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY_ID')
 SECRET_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 API_GATEWAY_URL = "https://fh3aao7bri.execute-api.us-east-1.amazonaws.com/prod"
 API_GATEWAY_KEY = "iBO39NUUc1401nMYkNWvM1jbA4YAHhKD1z4wpIlh"
 
-# if not API_GATEWAY_URL:
-#     print('ERROR: You must define the environment variable API_GATEWAY_URL. See the README.md for details')
-#     sys.exit(1)
-# if not API_GATEWAY_KEY:
-#     print('ERROR: You must define the environment variable API_GATEWAY_KEY. See the README.md for details')
-#     sys.exit(1)
+def get_session_name(prompt):
+    while True:
+        pattern = re.compile(r'^([^~+&@!#$%_?/:\']*)$')
+        answer = input(prompt)
+        if ' ' in answer:
+            print("Spaces are not allowed!")
+            continue
+        if '\\' in answer:
+            print("Backslash is not permitted!")
+            continue
+        if len(answer) < 5:
+            print("Length must be between 5 and 25 characters!")
+        if len(answer) > 25:
+            print("Length is limited to 25 characters!")
+            continue
+        m = re.match(pattern, answer)
+        if m:
+            return answer
+        else:
+            print("No special characters are allowed, except a dash (-)!")
+print('A session name is required to uniquely identify your deployment')
+print('The session name can be between 5 and 25 characters, with no special characters allowed except for a dash (-).')
+SESSION_NAME = get_session_name("Please enter the session name: ")
 
-if ACCESS_KEY == None or ACCESS_KEY == '':
-    ACCESS_KEY = params['aws_access_key']
-
-if SECRET_KEY == None or SECRET_KEY == '':
-    SECRET_KEY = params['aws_secret_key']
+CFT_POD_FILE = f'n0work-{SESSION_NAME}-pod-cft-template-.yml'
 
 def get_pod_count(prompt):
     while True:
@@ -50,11 +59,7 @@ def get_pod_count(prompt):
         if m:
             return int(answer)
 
-<<<<<<< HEAD
 POD_COUNT = get_pod_count("How many pods are needed? ")
-=======
-STUDENT_COUNT = get_student_count("How many pods would you like to deploy (REM: 2 Elastic IPs per Pod will be required)? ")
->>>>>>> master
 
 def get_region(prompt):
     region_dict = {
@@ -125,12 +130,6 @@ if use_existing_vpc:
 
 #######################################################################
 
-<<<<<<< HEAD
-SUBNET_RANGE_PRIMARY = params['subnet_range_primary']
-SUBNET_RANGE_SECONDARY = params['subnet_range_secondary']
-# POD_COUNT = params['pod_count']
-POD_PREFIX = params['pod_prefix']
-=======
 print(" ")
 print("Next, we require two (2) /16 CIDR blocks that will be used to create each pod's 'Inside' (or Corporate) and 'Outside' (or psuedo-Internet) subnet.")
 print("Both CIDR blocks MUST end in /16. This is essentially due to the fact that we let you pick the first two octets, then use the third octet for each new pod #,")
@@ -140,14 +139,8 @@ primary_cidr_answer = get_user_input("Please enter a CIDR block to be used for t
 secondary_cidr_answer = get_user_input("Please enter a CIDR block to be used for the 'OUTSIDE' subnet for each Pod (MUST be in the format x.x.0.0/16): ", "^[0-9]+\.[0-9]+\.[0]+\.[0]+\/16$")
 print(" ")
 
-# SUBNET_RANGE_PRIMARY = params['subnet_range_primary']
-# SUBNET_RANGE_SECONDARY = params['subnet_range_secondary']
 SUBNET_RANGE_PRIMARY = primary_cidr_answer
 SUBNET_RANGE_SECONDARY = secondary_cidr_answer
-# STUDENT_COUNT = params['student_count']
-STUDENT_PREFIX = params['student_prefix']
->>>>>>> master
-
 MANAGEMENT_CIDR = ''
 
 STACKS_LIST = []
@@ -267,10 +260,10 @@ except:
 print(f'INFO: Subnet Range Validation Completed...')
 
 #######################################################################
-# Create Student Accounts #############################################
+# Create Pod Accounts #############################################
 #######################################################################
 try:
-    print(f'INFO: Creating Student Accounts Collection...')
+    print(f'INFO: Creating Pod Accounts Collection...')
     primary_ips = list(ipaddress.ip_network(SUBNET_RANGE_PRIMARY).hosts())
     secondary_ips = list(ipaddress.ip_network(SUBNET_RANGE_SECONDARY).hosts())
 
@@ -284,7 +277,7 @@ try:
 
     for i in range(POD_COUNT):
         PODS_LIST.append({
-            'account_name': f'{POD_PREFIX}-0{i}',
+            'account_name': f'pod{i:04}',
             'account_password': password_generator(),
             'public_subnet_01': f'{public_subnet_01[i]}',
             'public_subnet_02': f'{public_subnet_02[i]}',
@@ -305,7 +298,7 @@ except:
     sys.exit(1)
 
 
-print(f'INFO: Student Accounts Collection Created...')
+print(f'INFO: Pod Accounts Collection Created...')
 #######################################################################
 # Collect scheduling information
 #######################################################################
@@ -366,10 +359,10 @@ answer = get_user_input("Would you like to define a schedule for the lab? (Y/N) 
 if answer.upper() == 'Y':
     use_schedule = True
     START_MONTH = validate_month("Please enter the Starting Month for this session: ")
-    START_DAY = validate_day("Please enter the Starting Date for this session: ")
+    START_DAY = validate_day("Please enter the Starting Day of the month (1-31) for this session: ")
     BEGIN_TIME = validate_time("Please enter the Starting Time (EACH DAY) for this session using a 24-hour format (00:00 - 23:59): ")
     END_MONTH = validate_month("Please enter the Ending Month for this session: ")
-    END_DAY = validate_day("Please enter the Ending Date for this session: ")
+    END_DAY = validate_day("Please enter the Ending Day of the month (1-31) for this session: ")
     END_TIME = validate_time("Please enter the Starting Time (EACH DAY) for this session using a 24-hour format (00:00 - 23:59): ", BEGIN_TIME)
     TIMEZONE = validate_tz("Please enter the timezone you would like this schedule to be run against using the number of the TZ from the above list: ")
 else:
@@ -410,9 +403,9 @@ else:
 # Confirm Deploy Before Proceeding ####################################
 #######################################################################
 if use_existing_vpc:
-    print(f'You are about to deploy {POD_COUNT} pod pod(s) to {VPC_ID} in the {REGION} Region')
+    print(f'You are about to deploy {POD_COUNT} pod(s) to {VPC_ID} in the {REGION} Region')
 else:
-    print(f'You are about to deploy {POD_COUNT} pod pod(s) to a new VPC in the {REGION} Region')
+    print(f'You are about to deploy {POD_COUNT} pod(s) to a new VPC in the {REGION} Region')
 if use_schedule:
     print(f"The lab will start at {BEGIN_TIME} and stop each day at {END_TIME} in the {TIMEZONE} timezone")
 rusure_response = input('Are you sure you wish to proceed with this deployment (y/Y to continue)? ')
@@ -420,61 +413,9 @@ if rusure_response.lower() != 'y':
     print('No pods were created, exiting now.')
     sys.exit(1)
 
-#######################################################################
-# CREATE VPC IF NOT SPECIFIED IN PARAMETERS FILE
-#######################################################################
-if not use_existing_vpc:
-    # Create VPC
-    client = boto3.client('ec2', region_name=REGION)
-    vpc = client.create_vpc(
-        CidrBlock=SUBNET_RANGE_PRIMARY,
-        TagSpecifications=[
-            {
-                'ResourceType': 'vpc',
-                'Tags': [
-                {
-                    'Key': 'Name',
-                    'Value': 'Tetration HoL'
-                },
-                ]
-            },
-        ]
-    )
-    VPC_ID = vpc['Vpc']['VpcId']
-    print(f"INFO: Created VPC with ID {VPC_ID} and CIDR block {SUBNET_RANGE_PRIMARY}")
-    NAMING_SUFFIX = VPC_ID[-6:]
-
-    # Create Secondary CIDR
-    sec_cidr = client.associate_vpc_cidr_block(CidrBlock=SUBNET_RANGE_SECONDARY, VpcId=VPC_ID)
-    print(f"INFO: Created Secondary CIDR block {SUBNET_RANGE_SECONDARY} on VPC {VPC_ID}")
-
-    # Create Internet Gateway
-    inet_gateway = client.create_internet_gateway(
-        TagSpecifications=[
-            {
-                'ResourceType': 'internet-gateway',
-                'Tags': [
-                    {
-                        'Key': 'Name',
-                        'Value': 'Tetration HoL'
-                    },
-                ]
-            },
-        ],
-    )
-    INTERNET_GATEWAY_ID = inet_gateway['InternetGateway']['InternetGatewayId']
-    print(f"INFO: Created Internet Gateway with ID {INTERNET_GATEWAY_ID}")
-
-    # Associate Internet Gateway with VPC
-    ec2 = boto3.resource('ec2', region_name=REGION)
-    ig = ec2.InternetGateway(INTERNET_GATEWAY_ID)
-    ig_associate = ig.attach_to_vpc(VpcId=VPC_ID)
-    print(f"INFO: Associated Internet Gateway with ID {INTERNET_GATEWAY_ID} to VPC {VPC_ID}")
-
-#######################################################################
-# CREATE THE S3 BUCKET FOR THE CFT TEMPLATE
-#######################################################################
-
+######################################################################
+# Create S3 bucket    ################################################
+######################################################################
 def create_bucket(bucket_name, config, region=None):
     """Create an S3 bucket in a specified region
 
@@ -507,8 +448,11 @@ def create_bucket(bucket_name, config, region=None):
         return False
     return True
 
-S3_BUCKET = f"tetration-hol-files-{NAMING_SUFFIX}"
-
+arn = boto3.resource('iam').CurrentUser().arn
+ACCT_ID = re.search('[0-9]+', arn).group()
+ACCT_USER = arn[arn.find('/')+1:]
+S3_BUCKET = f"n0work-{ACCT_ID}"
+# Create S3 bucket if not already existing
 print(f"INFO: Creating S3 Bucket {S3_BUCKET}")
 boto_config = Config(region_name=REGION)
 if REGION == 'us-east-1':
@@ -520,11 +464,111 @@ if result:
     print(f"INFO: Created S3 bucket {S3_BUCKET}")
 
 #######################################################################
+# Check for existing AMIs in S3 bucket for destination region
+# If no AMI file found, launch ami_create
+######################################################################
+def read_s3_contents(bucket_name, key):
+    response = s3.Object(bucket_name, key).get()
+    return response['Body'].read()
+
+s3 = boto3.resource('s3', region_name=REGION)
+AMI_FILE = f"{REGION}-ami-ids.yml"
+print(f"INFO: Checking bucket {S3_BUCKET} for AMI file {AMI_FILE} ")
+bucket = s3.Bucket(name=S3_BUCKET)
+objects = [x.key for x in list(bucket.objects.iterator())]
+if AMI_FILE in objects:
+    print(f"INFO: Loading AMI IDs from {AMI_FILE} in S3 bucket {S3_BUCKET}")
+    params = yaml.safe_load(read_s3_contents(S3_BUCKET, AMI_FILE)) 
+else:
+    print(f"INFO: No AMI file {AMI_FILE} in S3 bucket {S3_BUCKET}")
+    print(f"INFO: Launching AMI Creation! This will take a while.")
+    # Launch AMI Create
+    ami_create.run(REGION)
+    params = yaml.safe_load(read_s3_contents(S3_BUCKET, AMI_FILE))
+
+
+
+#######################################################################
+# CREATE VPC IF NOT SPECIFIED IN PARAMETERS FILE
+#######################################################################
+if not use_existing_vpc:
+    # Create VPC
+    client = boto3.client('ec2', region_name=REGION)
+    vpc = client.create_vpc(
+        CidrBlock=SUBNET_RANGE_PRIMARY,
+        TagSpecifications=[
+            {
+                'ResourceType': 'vpc',
+                'Tags': [
+                {
+                    'Key': 'Name',
+                    'Value': 'n0work'
+                },
+                ]
+            },
+        ]
+    )
+    VPC_ID = vpc['Vpc']['VpcId']
+    print(f"INFO: Created VPC with ID {VPC_ID} and CIDR block {SUBNET_RANGE_PRIMARY}")
+    #SESSION_NAME = VPC_ID[-6:]
+
+    # Create Secondary CIDR
+    sec_cidr = client.associate_vpc_cidr_block(CidrBlock=SUBNET_RANGE_SECONDARY, VpcId=VPC_ID)
+    print(f"INFO: Created Secondary CIDR block {SUBNET_RANGE_SECONDARY} on VPC {VPC_ID}")
+
+    # Create Internet Gateway
+    inet_gateway = client.create_internet_gateway(
+        TagSpecifications=[
+            {
+                'ResourceType': 'internet-gateway',
+                'Tags': [
+                    {
+                        'Key': 'Name',
+                        'Value': 'n0work '
+                    },
+                ]
+            },
+        ],
+    )
+    INTERNET_GATEWAY_ID = inet_gateway['InternetGateway']['InternetGatewayId']
+    print(f"INFO: Created Internet Gateway with ID {INTERNET_GATEWAY_ID}")
+
+    # Associate Internet Gateway with VPC
+    ec2 = boto3.resource('ec2', region_name=REGION)
+    ig = ec2.InternetGateway(INTERNET_GATEWAY_ID)
+    ig_associate = ig.attach_to_vpc(VpcId=VPC_ID)
+    print(f"INFO: Associated Internet Gateway with ID {INTERNET_GATEWAY_ID} to VPC {VPC_ID}")
+
+#######################################################################
+# Create state file for rollback
+######################################################################
+
+STATE_FILE = f'n0work-{SESSION_NAME}-{REGION}-state.yml'
+
+with open(f"/tmp/{STATE_FILE}", 'w') as f:
+    f.write(f"session_name: {SESSION_NAME}\n")
+    f.write(f"aws_region: {REGION}\n")
+    f.write(f"pod_count: {POD_COUNT}\n")
+    f.write(f"vpc_id: {VPC_ID}\n")
+    f.write(f"subnet_range_primary: {SUBNET_RANGE_PRIMARY}\n")
+    f.write(f"subnet_range_secondary: {SUBNET_RANGE_SECONDARY}\n")
+
+CREATED_DATE = datetime.now().strftime('%h-%d-%Y %H:%M')
+
+metadata = {'session_name': SESSION_NAME, 'created_date':CREATED_DATE, 'created_by':ACCT_USER, 'schedule':SCHEDULE_NAME, 'region': REGION, 'vpcid': VPC_ID}
+
+print(f"INFO: Uploading state file {STATE_FILE} To S3 bucket {S3_BUCKET}...")
+s3.meta.client.upload_file(f"/tmp/{STATE_FILE}", S3_BUCKET, STATE_FILE, ExtraArgs={"Metadata":metadata})
+print(f"INFO: Uploaded state file {STATE_FILE} to bucket {S3_BUCKET}...")
+os.remove(f"/tmp/{STATE_FILE}")
+
+
+#######################################################################
 # Upload CFT TO S3 Bucket #############################################
 #######################################################################
 print('INFO: Uploading Template To S3...')
 s3 = boto3.resource('s3', region_name=REGION)
-s3.meta.client.upload_file(CFT_POD_FILE, S3_BUCKET, CFT_POD_FILE)
+s3.meta.client.upload_file('n0work-pod-cft-template.yml', S3_BUCKET, CFT_POD_FILE)
 print('INFO: CFT Template Uploaded To S3...')
 
 #######################################################################
@@ -540,6 +584,10 @@ print(f'INFO: lambda_function/tvb-dyndns.zip Uploaded To S3 bucket {S3_BUCKET}')
 #######################################################################
 # Run POD Cloud Formation #############################################
 #######################################################################
+
+# Previously this was in parameters.yml.  Hard-coding for now so CFT can work.  
+params['ise_server_ip'] = '127.0.0.1'
+
 for pod in PODS_LIST:
 
     try:
@@ -547,15 +595,14 @@ for pod in PODS_LIST:
         outside_pod_ips = list(ipaddress.ip_network(f"{pod['private_subnet']}/24").hosts())
 
         cloudformation = session.client('cloudformation', region_name=REGION)
-        cloudformation_template = open(CFT_POD_FILE, 'r').read()
 
         aws_parameters = [
             {'ParameterKey': 'AccessKey', 'ParameterValue': ACCESS_KEY},
             {'ParameterKey': 'SecretKey', 'ParameterValue': SECRET_KEY},
 
-            {'ParameterKey': 'StudentIndex', 'ParameterValue': str(PODS_LIST.index(pod))},
-            {'ParameterKey': 'StudentName', 'ParameterValue': pod['account_name']},
-            {'ParameterKey': 'StudentPassword', 'ParameterValue': pod['account_password']},
+            {'ParameterKey': 'PodIndex', 'ParameterValue': str(PODS_LIST.index(pod))},
+            {'ParameterKey': 'PodName', 'ParameterValue': pod['account_name']},
+            {'ParameterKey': 'PodPassword', 'ParameterValue': pod['account_password']},
             # {'ParameterKey': 'ManagementCidrBlock', 'ParameterValue': MANAGEMENT_CIDR},
 
             {'ParameterKey': 'Subnet01CidrBlock', 'ParameterValue': f"{pod['public_subnet_01']}/24"},
@@ -604,17 +651,16 @@ for pod in PODS_LIST:
             {'ParameterKey': 'VpcID', 'ParameterValue': VPC_ID},
             {'ParameterKey': 'InternetGatewayId', 'ParameterValue': INTERNET_GATEWAY_ID},
             {'ParameterKey': 'ScheduleName', 'ParameterValue': SCHEDULE_NAME},
-            {'ParameterKey': 'NamingSuffix', 'ParameterValue': NAMING_SUFFIX}
+            {'ParameterKey': 'SessionName', 'ParameterValue': SESSION_NAME}
             ]
         
         # aws_params_json_formatted_str = json.dumps(aws_parameters, indent=2)
         # print('INFO:', aws_params_json_formatted_str)
 
-        templateURL = f"https://{S3_BUCKET}.s3.{REGION}.amazonaws.com/{CFT_POD_FILE }"
+        templateURL = f"https://{S3_BUCKET}.s3.{REGION}.amazonaws.com/{CFT_POD_FILE}"
         print(templateURL)
         result = cloudformation.create_stack(
-            StackName=f"{pod['account_name']}-{NAMING_SUFFIX}",
-            # TemplateBody=cloudformation_template,
+            StackName=f"n0work-{SESSION_NAME}-{pod['account_name']}",
             TemplateURL=templateURL,
             Parameters=aws_parameters,
             Capabilities=[
@@ -622,7 +668,7 @@ for pod in PODS_LIST:
             ]
         )
 
-        STACKS_LIST.append(f"{pod['account_name']}-{NAMING_SUFFIX}")
+        STACKS_LIST.append(f"n0work-{SESSION_NAME}-{pod['account_name']}")
         
     except Exception as e:
         print(e)
@@ -664,10 +710,13 @@ while True:
 
         time.sleep(10)
 
+
     except Exception as e:
         print(e)
         sys.exit(1)
 
+print(f'INFO: Deleting CFT file {CFT_POD_FILE} from S3 bucket {S3_BUCKET}')
+s3.meta.client.delete_object(Bucket=S3_BUCKET, Key=CFT_POD_FILE)
 
 #######################################################################
 # Assemble EKS ELB DNS Records ########################################
@@ -729,7 +778,7 @@ try:
                 for instance in instances:
                     for tag in instance['Tags']:
                         if tag['Key'] == 'Name':
-                            if pod['account_name'] in tag['Value'] and 'eks' in tag['Value'] and NAMING_SUFFIX in tag['Value']:
+                            if pod['account_name'] in tag['Value'] and 'eks' in tag['Value'] and SESSION_NAME in tag['Value']:
                                 instance_id = instance['InstanceId']
                                 print(f'Waiting for EKS worker node {instance_id} to pass health checks')
                                 waiter.wait(InstanceIds=[instance_id])
@@ -816,15 +865,15 @@ try:
         {'ParameterKey': 'APIGatewayURL', 'ParameterValue': API_GATEWAY_URL},
         {'ParameterKey': 'APIGatewayKey', 'ParameterValue': API_GATEWAY_KEY},
         {'ParameterKey': 'InstanceList', 'ParameterValue': INSTANCE_IDS},
-        {'ParameterKey': 'NamingSuffix', 'ParameterValue': NAMING_SUFFIX}
+        {'ParameterKey': 'SessionName', 'ParameterValue': SESSION_NAME}
     ]
     
-    with open('cisco-hol-dns-updater-cft-template.yml', 'r') as f:
+    with open('n0work-dns-updater-cft-template.yml', 'r') as f:
         dns_updater_cft = f.read()
 
-    print(f'INFO: Creating stack tethol-dns-updater-{NAMING_SUFFIX}')
+    print(f'INFO: Creating stack n0work-{SESSION_NAME}-dns-updater')
     result = cloudformation.create_stack(
-        StackName=f"tethol-dns-updater-{NAMING_SUFFIX}",
+        StackName=f"n0work-{SESSION_NAME}-dns-updater",
         TemplateBody=dns_updater_cft,
         Parameters=aws_parameters,
         Capabilities=[
@@ -834,15 +883,15 @@ try:
     # Wait for DNS updater creation
     while True:
         status = cloudformation.describe_stacks(
-            StackName=f'tethol-dns-updater-{NAMING_SUFFIX}')['Stacks'][0]['StackStatus']
+            StackName=f'n0work-{SESSION_NAME}-dns-updater')['Stacks'][0]['StackStatus']
         if status == 'CREATE_COMPLETE':
-            print(f"INFO: Creating cloudformation stack tethol-dns-updater-{NAMING_SUFFIX}. Status={status}")
+            print(f"INFO: Creating cloudformation stack n0work-{SESSION_NAME}-dns-updater. Status={status}")
             break
         if "ROLLBACK" in status:
-            print(f"WARN: Error during creation of cloudformation stack tethol-dns-updater-{NAMING_SUFFIX}. Status={status}")
+            print(f"WARN: Error during creation of cloudformation stack n0work-{SESSION_NAME}-dns-updater. Status={status}")
             break
         else:
-            print(f"INFO: Creating cloudformation stack tethol-dns-updater-{NAMING_SUFFIX}. Status={status}")
+            print(f"INFO: Creating cloudformation stack n0work-{SESSION_NAME}-dns-updater. Status={status}")
             time.sleep(5)
 
 except Exception as e:
@@ -850,43 +899,7 @@ except Exception as e:
     sys.exit(1)
 
 
-#######################################################################
-# Create state file for rollback
-######################################################################
-arn = boto3.resource('iam').CurrentUser().arn
-ACCT_ID = re.search('[0-9]+', arn).group()
-ACCT_USER = arn[arn.find('/')+1:]
-STATE_S3_BUCKET = f"tethol-state-{ACCT_ID}"
-# Create bucket to store state,  if not already existing
-print(f"INFO: Creating S3 Bucket {S3_BUCKET}")
-boto_config = Config(region_name=REGION)
-if REGION == 'us-east-1':
-    result = create_bucket(STATE_S3_BUCKET, boto_config)
-else:
-    result = create_bucket(STATE_S3_BUCKET, boto_config, region=REGION)
 
-if result:
-    print(f"INFO: Created S3 bucket {STATE_S3_BUCKET}")
-
-STATE_FILE = f'tethol-state-{REGION}-{NAMING_SUFFIX}.yml'
-
-with open(f"/tmp/{STATE_FILE}", 'w') as f:
-    f.write(f"aws_region: {REGION}\n")
-    f.write(f"pod_count: {POD_COUNT}\n")
-    f.write(f"pod_prefix: {POD_PREFIX}\n")
-    f.write(f"vpc_id: {VPC_ID}\n")
-    f.write(f"subnet_range_primary: {SUBNET_RANGE_PRIMARY}\n")
-    f.write(f"subnet_range_secondary: {SUBNET_RANGE_SECONDARY}\n")
-
-CREATED_DATE = datetime.now().strftime('%h-%d-%Y %H:%M')
-
-metadata = {'created_date':CREATED_DATE, 'created_by':ACCT_USER, 'schedule':SCHEDULE_NAME, 'region': REGION, 'vpcid': VPC_ID}
-
-print(f"INFO: Uploading state file {STATE_FILE} To S3 bucket {STATE_S3_BUCKET}...")
-s3 = boto3.resource('s3', region_name=REGION)
-s3.meta.client.upload_file(f"/tmp/{STATE_FILE}", STATE_S3_BUCKET, STATE_FILE, ExtraArgs={"Metadata":metadata})
-print(f"INFO: Uploaded state file {STATE_FILE} to bucket {STATE_S3_BUCKET}...")
-os.remove(f"/tmp/{STATE_FILE}")
 #######################################################################
 # Generate CSV Reports ################################################
 ######################################################################
@@ -904,7 +917,7 @@ try:
             StackName=stack_name
         )
 
-        pod = list(filter(lambda pod: f"{pod['account_name']}-{NAMING_SUFFIX}" == stack_name, PODS_LIST))[0]
+        pod = list(filter(lambda pod: f"n0work-{SESSION_NAME}-{pod['account_name']}" == stack_name, PODS_LIST))[0]
 
         output = {}
 
@@ -915,53 +928,53 @@ try:
         eks_endpoint_fqdn_only = (eks_endpoint.split('//'))[1]
 
         records.append([
-            f"https://{output['CiscoHOLGuacamolePublic']}",
-            output['CiscoHOLStudentName'],
-            output['CiscoHOLStudentPassword'],
-            f"http://{output['CiscoHOLIISDNS']}",
-            f"http://{output['CiscoHOLApacheDNS']}",
+            f"https://{output['n0workGuacamolePublic']}",
+            output['n0workPodName'],
+            output['n0workPodPassword'],
+            f"http://{output['n0workIISDNS']}",
+            f"http://{output['n0workApacheDNS']}",
             f"http://{pod['eks_dns']}",
-            output['CiscoHOLPublicSubnet01'],
-            output['CiscoHOLPrivateSubnet'],
-            output['CiscoHOLActiveDirectory'],
-            output['CiscoHOLISE'],
-            output['CiscoHOLIISPrivate'],
-            output['CiscoHOLIISOutsidePrivate'],
-            output['CiscoHOLMSSQL'],
-            output['CiscoHOLApachePrivate'],
-            output['CiscoHOLApacheOutsidePrivate'],
-            output['CiscoHOLMySql'],
-            output['CiscoHOLAnsible'],
-            output['CiscoHOLTetrationEdge'],
+            output['n0workPublicSubnet01'],
+            output['n0workPrivateSubnet'],
+            output['n0workActiveDirectory'],
+            output['n0workISE'],
+            output['n0workIISPrivate'],
+            output['n0workIISOutsidePrivate'],
+            output['n0workMSSQL'],
+            output['n0workApachePrivate'],
+            output['n0workApacheOutsidePrivate'],
+            output['n0workMySql'],
+            output['n0workAnsible'],
+            output['n0workTetrationEdge'],
             output['TetNetworkInterfaces01Data'],
             output['TetNetworkInterfaces02Data'],
             output['TetNetworkInterfaces03Data'],
-            output['CiscoHOLASAvPrivate03'],
-            output['CiscoHOLASAvPrivate02'],
-            output['CiscoHOLAttacker'],
-            output['CiscoHOLUbuntu1804Employee'],
-            output['CiscoHOLUbuntu1804SysAdmin'],
-            output['StudentAccessKey'],
-            output['StudentSecretKey'],
-            output['CiscoHOLAWSRegion'],
-            output['CiscoHOLVPCFlowLogBucket'],
+            output['n0workASAvPrivate03'],
+            output['n0workASAvPrivate02'],
+            output['n0workAttacker'],
+            output['n0workUbuntu1804Employee'],
+            output['n0workUbuntu1804SysAdmin'],
+            output['PodAccessKey'],
+            output['PodSecretKey'],
+            output['n0workAWSRegion'],
+            output['n0workVPCFlowLogBucket'],
             f"{eks_endpoint_fqdn_only}",
             output['EKSClusterCertificate'],
-            # output['cisco-hol-cisco-pod-00-public-subnet-01-us-east-2a'],
-            # cisco-hol-cisco-pod-00-vpc-flow-logs-us-east-2a
+            # output['n0work-cisco-pod-00-public-subnet-01-us-east-2a'],
+            # n0work-cisco-pod-00-vpc-flow-logs-us-east-2a
             # aws key will need perms to read this log
 
         ])
 
         header = [
-            'Student Lab Access (Guac) Web Console URL',
-            'Student Lab Access (Guac) Username',   
-            'Student Lab Access (Guac) Password', 
+            'Pod Lab Access (Guac) Web Console URL',
+            'Pod Lab Access (Guac) Username',   
+            'Pod Lab Access (Guac) Password', 
             'nopCommerce Windows App URL',
             'OpenCart Linux App URL',
             'EKS SockShop App URL',
-            'Student Internal/Inside Corporate Subnet',
-            'Student External/Outside "Internet" Subnet',
+            'Pod Internal/Inside Corporate Subnet',
+            'Pod External/Outside "Internet" Subnet',
             'MS Active Directory IP',
             'ISE Server IP',
             'MS IIS nopCommerce Inside IP',
@@ -980,50 +993,50 @@ try:
             'Metasploit Attacker IP',
             'Ubuntu18.04 Employee IP',
             'Ubuntu18.04 SysAdmin IP',
-            'Student AWS External Orchestrator Access Key',
-            'Student AWS External Orchestrator Secret Key',
-            'Student AWS Region',
-            'Student VPC Flow Log S3 Bucket',
+            'Pod AWS External Orchestrator Access Key',
+            'Pod AWS External Orchestrator Secret Key',
+            'Pod AWS Region',
+            'Pod VPC Flow Log S3 Bucket',
             'EKS Cluster API Endpoint (use for external orchestrator)',
             'EKS Cluster CA Cert (should not need)'
         ]
 
         columnar_output = [
-            f"Student Lab Access (Guac) Web Console URL,https://{output['CiscoHOLGuacamolePublic']}\n",
-            f"Student Lab Access (Guac) Username,{output['CiscoHOLStudentName']}\n",
-            f"Student Lab Access (Guac) Password,{output['CiscoHOLStudentPassword']}\n",
-            f"nopCommerce Windows App URL,http://{output['CiscoHOLIISDNS']}\n",
-            f"OpenCart Linux App URL,http://{output['CiscoHOLApacheDNS']}\n",
+            f"Pod Lab Access (Guac) Web Console URL,https://{output['n0workGuacamolePublic']}\n",
+            f"Pod Lab Access (Guac) Username,{output['n0workPodName']}\n",
+            f"Pod Lab Access (Guac) Password,{output['n0workPodPassword']}\n",
+            f"nopCommerce Windows App URL,http://{output['n0workIISDNS']}\n",
+            f"OpenCart Linux App URL,http://{output['n0workApacheDNS']}\n",
             f"EKS SockShop App URL,http://{pod['eks_dns']}\n",
-            f"Student Internal/Inside Corporate Subnet,{output['CiscoHOLPublicSubnet01']}\n",
-            f"Student External/Outside Internet Subnet,{output['CiscoHOLPrivateSubnet']}\n",
-            f"MS Active Directory IP,{output['CiscoHOLActiveDirectory']}\n",
-            f"ISE Server IP,{output['CiscoHOLISE']}\n",
-            f"MS IIS nopCommerce Inside IP,{output['CiscoHOLIISPrivate']}\n",
-            f"MS IIS nopCommerce Outside IP,{output['CiscoHOLIISOutsidePrivate']}\n",
-            f"MS SQL Private IP,{output['CiscoHOLMSSQL']}\n",
-            f"Apache OpenCart Inside IP,{output['CiscoHOLApachePrivate']}\n",
-            f"Apache OpenCart Outside IP,{output['CiscoHOLApacheOutsidePrivate']}\n"
-            f"MySQL Private IP,{output['CiscoHOLMySql']}\n",
-            f"Ansible IP,{output['CiscoHOLAnsible']}\n",
-            f"Tetration Edge IP,{output['CiscoHOLTetrationEdge']}\n",
+            f"Pod Internal/Inside Corporate Subnet,{output['n0workPublicSubnet01']}\n",
+            f"Pod External/Outside Internet Subnet,{output['n0workPrivateSubnet']}\n",
+            f"MS Active Directory IP,{output['n0workActiveDirectory']}\n",
+            f"ISE Server IP,{output['n0workISE']}\n",
+            f"MS IIS nopCommerce Inside IP,{output['n0workIISPrivate']}\n",
+            f"MS IIS nopCommerce Outside IP,{output['n0workIISOutsidePrivate']}\n",
+            f"MS SQL Private IP,{output['n0workMSSQL']}\n",
+            f"Apache OpenCart Inside IP,{output['n0workApachePrivate']}\n",
+            f"Apache OpenCart Outside IP,{output['n0workApacheOutsidePrivate']}\n"
+            f"MySQL Private IP,{output['n0workMySql']}\n",
+            f"Ansible IP,{output['n0workAnsible']}\n",
+            f"Tetration Edge IP,{output['n0workTetrationEdge']}\n",
             f"Tetration Data Ingest IP 1,{output['TetNetworkInterfaces01Data']}\n",
             f"Tetration Data Ingest IP 2,{output['TetNetworkInterfaces02Data']}\n",
             f"Tetration Data Ingest IP 3,{output['TetNetworkInterfaces03Data']}\n",
-            f"ASAv Inside IP,{output['CiscoHOLASAvPrivate03']}\n",
-            f"ASAv Outside IP,{output['CiscoHOLASAvPrivate02']}\n",
-            f"Metasploit Attacker IP,{output['CiscoHOLAttacker']}\n",
-            f"Ubuntu18.04 Employee IP,{output['CiscoHOLUbuntu1804Employee']}\n",
-            f"Ubuntu18.04 SysAdmin IP,{output['CiscoHOLUbuntu1804SysAdmin']}\n",
-            f"Student AWS External Orchestrator Access Key,{output['StudentAccessKey']}\n",
-            f"Student AWS External Orchestrator Secret Key,{output['StudentSecretKey']}\n",
-            f"Student AWS Region,{output['CiscoHOLAWSRegion']}\n",
-            f"Student VPC Flow Log S3 Bucket,{output['CiscoHOLVPCFlowLogBucket']}\n",
+            f"ASAv Inside IP,{output['n0workASAvPrivate03']}\n",
+            f"ASAv Outside IP,{output['n0workASAvPrivate02']}\n",
+            f"Metasploit Attacker IP,{output['n0workAttacker']}\n",
+            f"Ubuntu18.04 Employee IP,{output['n0workUbuntu1804Employee']}\n",
+            f"Ubuntu18.04 SysAdmin IP,{output['n0workUbuntu1804SysAdmin']}\n",
+            f"Pod AWS External Orchestrator Access Key,{output['PodAccessKey']}\n",
+            f"Pod AWS External Orchestrator Secret Key,{output['PodSecretKey']}\n",
+            f"Pod AWS Region,{output['n0workAWSRegion']}\n",
+            f"Pod VPC Flow Log S3 Bucket,{output['n0workVPCFlowLogBucket']}\n",
             f"EKS Cluster API Endpoint (use for external orchestrator),{eks_endpoint_fqdn_only}\n",
             f"EKS Cluster CA Cert (should not need),{output['EKSClusterCertificate']}"
         ]
         
-        filename = 'reports/' + datetime.today().strftime('%Y-%m-%d-%H-%M-%S-') + output['CiscoHOLStudentName'] + '-report.csv'
+        filename = 'reports/' + f'n0work-{SESSION_NAME}-' + output['n0workPodName'] + '-report.csv'
 
         if not os.path.exists('reports'):
             os.makedirs('reports')
@@ -1051,10 +1064,10 @@ if use_schedule:
 
         # Check to see if stack already exists in this region
         stacks = cloudformation.describe_stacks()['Stacks']
-        stack = [True for item in stacks if item['StackName'] == 'tethol-instance-scheduler']
+        stack = [True for item in stacks if item['StackName'] == 'n0work-instance-scheduler']
 
         if not stack:    
-            with open ('cisco-hol-scheduler-cft-template.yml', 'r') as f:
+            with open ('n0work-scheduler-cft-template.yml', 'r') as f:
                 cft = f.read()
 
             aws_parameters = [{'ParameterKey': 'Regions', 'ParameterValue': REGION},
@@ -1063,9 +1076,9 @@ if use_schedule:
             {'ParameterKey': 'CrossAccountRoles', 'ParameterValue': ""}
             ]
 
-            print('INFO: Creating stack tethol-instance-scheduler')
+            print('INFO: Creating stack n0work-instance-scheduler')
             result = cloudformation.create_stack(
-                StackName="tethol-instance-scheduler",
+                StackName="n0work-instance-scheduler",
                 TemplateBody=cft,
                 Parameters=aws_parameters,
                 Capabilities=[
@@ -1074,19 +1087,23 @@ if use_schedule:
             # Wait for cloudformation stack to be created
             while True:
                 status = cloudformation.describe_stacks(
-                    StackName='tethol-instance-scheduler')['Stacks'][0]['StackStatus']
+                    StackName='n0work-instance-scheduler')['Stacks'][0]['StackStatus']
                 if status == 'CREATE_COMPLETE':
-                    print(f"INFO: Creating cloudformation stack tethol-instance-scheduler. Status={status}")
+                    print(f"INFO: Creating cloudformation stack n0work-instance-scheduler. Status={status}")
                     break
+                elif 'ROLLBACK' in status:
+                    print(f"ERROR: Creating cloudformation stack n0work-instance-scheduler. Status={status}")
+                    print(f"ERROR: Check cloudformation events in the AWS dashboard")
+                    sys.exit(1)
                 else:
-                    print(f"INFO: Creating cloudformation stack tethol-instance-scheduler. Status={status}")
+                    print(f"INFO: Creating cloudformation stack n0work-instance-scheduler. Status={status}")
                     time.sleep(5)
         else:
-            print("INFO: Cloudformation stack tethol-instance-scheduler already exists in this region, skipping!")
+            print("INFO: Cloudformation stack n0work-instance-scheduler already exists in this region, skipping!")
 
         # Get the ServiceAccountToken
         outputs = cloudformation.describe_stacks(
-                StackName='tethol-instance-scheduler'
+                StackName='n0work-instance-scheduler'
             )['Stacks'][0]['Outputs']
 
         servicetoken = [item['OutputValue'] for item in outputs if item['OutputKey'] == 'ServiceInstanceScheduleServiceToken'][0]
@@ -1099,25 +1116,25 @@ if use_schedule:
 
         stack_payload = {
         "Resources": {
-            "TetHoLHours": {
+            "n0workHours": {
                 "Type": "Custom::ServiceInstanceSchedule",
                 "Properties": {
                     "Name": SCHEDULE_NAME,
                     "NoStackPrefix": "True",
-                    "Description": "TetHol Class Schedule",
+                    "Description": "n0work Class Schedule",
                     "ServiceToken": servicetoken,
                     "Enforced": "True",
                     "Timezone": TIMEZONE,
                     "Periods": [
                         {
-                            "Description": "TetHol Period 01",
+                            "Description": "n0work Period 01",
                             "BeginTime": BEGIN_TIME,
                             "EndTime": END_TIME,
                             "Months": START_MONTH,
                             "MonthDays": MONTHDAYS
                         },
                         {
-                            "Description": "TetHol Period 02 - 6hrs early for ADM run on day 2",
+                            "Description": "n0work Period 02 - 6hrs early for ADM run on day 2",
                             "BeginTime": ADM_START_TIME,
                             "EndTime": BEGIN_TIME,
                             "Months": ADM_MONTH,
@@ -1133,8 +1150,8 @@ if use_schedule:
         # Add a second period in the case the class falls on a month boundary.
         if START_MONTH != END_MONTH:
             MONTHDAYS = f"1-{END_DAY}"
-            stack_payload['Resources']['TetHoLHours']['Properties']['Periods'].append({
-                "Description": "TetHol Period 03",
+            stack_payload['Resources']['n0workHours']['Properties']['Periods'].append({
+                "Description": "n0work Period 03",
                 "BeginTime": BEGIN_TIME,
                 "EndTime": END_TIME,
                 "Months": END_MONTH,
@@ -1143,7 +1160,7 @@ if use_schedule:
 
         print(f'INFO: Creating schedule {SCHEDULE_NAME}')
         result = cloudformation.create_stack(
-            StackName=f"tethol-class-schedule-{NAMING_SUFFIX}",
+            StackName=f"n0work-{SESSION_NAME}-class-schedule",
             TemplateBody=json.dumps(stack_payload),
             Capabilities=[
                         'CAPABILITY_IAM', 'CAPABILITY_NAMED_IAM',
@@ -1152,12 +1169,12 @@ if use_schedule:
         # Wait for class-schedule creation
         while True:
             status = cloudformation.describe_stacks(
-                StackName=f'tethol-class-schedule-{NAMING_SUFFIX}')['Stacks'][0]['StackStatus']
+                StackName=f'n0work-{SESSION_NAME}-class-schedule')['Stacks'][0]['StackStatus']
             if status == 'CREATE_COMPLETE':
-                print(f"INFO: Creating cloudformation stack tethol-class-schedule. Status={status}")
+                print(f"INFO: Creating cloudformation stack n0work-{SESSION_NAME}-class-schedule. Status={status}")
                 break
             else:
-                print(f"INFO: Creating cloudformation stack tethol-class-schedule-{NAMING_SUFFIX}. Status={status}")
+                print(f"INFO: Creating cloudformation stack n0work-{SESSION_NAME}-class-schedule. Status={status}")
                 time.sleep(5)
 
     except Exception as e:

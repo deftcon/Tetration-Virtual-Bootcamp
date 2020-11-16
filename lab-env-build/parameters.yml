@@ -1,7 +1,7 @@
 ---
 aws_region: us-east-1
-student_prefix: cisco-student
-student_count: 1
+pod_prefix: cisco-pod
+pod_count: 1
 # Enter the VPC ID below if using existing VPC. Comment if creating new VPC, it will be populated here upon creation.
 # vpc_id: vpc-0f7e98ab606236278
 

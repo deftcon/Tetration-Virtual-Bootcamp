@@ -23,9 +23,9 @@ SECRET_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 
 arn = boto3.resource('iam').CurrentUser().arn
 ACCT_ID = re.search('[0-9]+', arn).group()
-STATE_S3_BUCKET = f"tethol-state-{ACCT_ID}"
+S3_BUCKET = f"n0work-{ACCT_ID}"
 s3 = boto3.resource('s3')
-bucket = s3.Bucket(name=STATE_S3_BUCKET)
+bucket = s3.Bucket(name=S3_BUCKET)
 objects = list(bucket.objects.iterator())
 object_dict = {}
 count = 1
@@ -34,14 +34,15 @@ for obj in objects:
         object_dict[str(count)] = {'filename': obj.key, 'metadata': obj.get()['Metadata']}
         count += 1
 while True:
-    print("{0:<10} {1:<20} {2:<20} {3:<30} {4:<20} {5:<25}".format('SELECTION', 'REGION', 'VPC', 'SCHEDULE', 'CREATED', 'CREATED BY'))
+    print("{0:<10} {1:<25} {2:<15} {3:<25} {4:<25} {5:<20} {6:<25}".format('SELECTION', 'SESSION', 'REGION', 'VPC', 'SCHEDULE', 'CREATED', 'CREATED BY'))
     for key in object_dict.keys():
+        session_name = object_dict[key]['metadata']['session_name']
         region = object_dict[key]['metadata']['region']
         vpc = object_dict[key]['metadata']['vpcid']
         schedule = object_dict[key]['metadata']['schedule']
         created = object_dict[key]['metadata']['created_date']
         created_by = object_dict[key]['metadata']['created_by']
-        print(f"{key:<10} {region:<20} {vpc:<20} {schedule:<30} {created:<20} {created_by:<25}")
+        print(f"{key:<10} {session_name:<25} {region:<15} {vpc:<25} {schedule:<25} {created:<20} {created_by:<25}")
     print('\n')
     answer = input("Please select the number corresponding to the deployment you would like to roll back: ")
     if answer in object_dict.keys():
@@ -52,7 +53,7 @@ def read_s3_contents(bucket_name, key):
     response = s3.Object(bucket_name, key).get()
     return response['Body'].read()
 
-params = yaml.safe_load(read_s3_contents(STATE_S3_BUCKET, STATE_FILE))
+params = yaml.safe_load(read_s3_contents(S3_BUCKET, STATE_FILE))
 
 if ACCESS_KEY == None or ACCESS_KEY == '':
     ACCESS_KEY = params['aws_access_key']
@@ -72,11 +73,12 @@ API_GATEWAY_KEY = "iBO39NUUc1401nMYkNWvM1jbA4YAHhKD1z4wpIlh"
 
 
 REGION = params['aws_region']
-# VPC_ID = params['vpc_id']
+VPC_ID = params['vpc_id']
 SUBNET_RANGE_PRIMARY = params['subnet_range_primary']
 SUBNET_RANGE_SECONDARY = params['subnet_range_secondary']
 POD_COUNT = params['pod_count']
-POD_PREFIX = params['pod_prefix']
+POD_PREFIX = 'pod'
+SESSION_NAME = params['session_name']
 
 session = boto3.Session(
     aws_access_key_id=ACCESS_KEY,
@@ -90,34 +92,34 @@ STACKS_LIST = []
 #######################################################################
 # Retrieve VPC_ID ##############################################
 #######################################################################
-try:
-    print(f'INFO: Retrieving VPC_ID...')
-    ec2 = session.resource('ec2', region_name=REGION)
-    vpcs = list(ec2.vpcs.all())
-    VPC_ID = None
-    for vpc in vpcs:
-        if vpc.tags:
-            for tag in vpc.tags:
-                name = tag.get('Value')
-                if name == 'Tetration HoL':
-                    print(f"INFO: Found VPC {vpc.id} with tag 'Tetration HoL'")
-                    answer = input(f"Do you want to delete the lab environment for VPC {vpc.id} (Y/N)? ")
-                    if answer.upper() == 'Y':
-                        VPC_ID = vpc.id
-                        break
-        if VPC_ID:
-            break
+# try:
+#     print(f'INFO: Retrieving VPC_ID...')
+#     ec2 = session.resource('ec2', region_name=REGION)
+#     vpcs = list(ec2.vpcs.all())
+#     VPC_ID = None
+#     for vpc in vpcs:
+#         if vpc.tags:
+#             for tag in vpc.tags:
+#                 name = tag.get('Value')
+#                 if name == 'Tetration HoL':
+#                     print(f"INFO: Found VPC {vpc.id} with tag 'Tetration HoL'")
+#                     answer = input(f"Do you want to delete the lab environment for VPC {vpc.id} (Y/N)? ")
+#                     if answer.upper() == 'Y':
+#                         VPC_ID = vpc.id
+#                         break
+#         if VPC_ID:
+#             break
                         
-    if not VPC_ID:
-        print('ERROR: No VPCs selected for deletion')
-        sys.exit(1)
+#     if not VPC_ID:
+#         print('ERROR: No VPCs selected for deletion')
+#         sys.exit(1)
                                        
-    print(f'INFO: VPC ID: {VPC_ID}')
-except Exception as e:
-    print(f'ERROR: While retrieving VPC_ID {e}')
-    sys.exit(1)
+#     print(f'INFO: VPC ID: {VPC_ID}')
+# except Exception as e:
+#     print(f'ERROR: While retrieving VPC_ID {e}')
+#     sys.exit(1)
 
-NAMING_SUFFIX = VPC_ID[-6:]
+# SESSION_NAME = VPC_ID[-6:]
 #######################################################################
 
 
@@ -150,10 +152,10 @@ print(f'INFO: Subnet Range Validation Completed...')
 
 
 #######################################################################
-# Discover Student Accounts ###########################################
+# Discover Pod Accounts ###########################################
 #######################################################################
 try:
-    print(f'INFO: Creating Student Accounts Collection...')
+    print(f'INFO: Creating Pod Accounts Collection...')
     primary_ips = list(ipaddress.ip_network(SUBNET_RANGE_PRIMARY).hosts())
     secondary_ips = list(ipaddress.ip_network(SUBNET_RANGE_SECONDARY).hosts())
 
@@ -165,7 +167,7 @@ try:
 
     for i in range(POD_COUNT):
         PODS_LIST.append({
-            'account_name': f'{POD_PREFIX}-0{i}',
+            'account_name': f'pod{i:04}',
             'public_subnet_01': f'{public_subnet_01[i]}',
             'public_subnet_02': f'{public_subnet_02[i]}',
             'private_subnet': f'{secondary_ips[i]}'
@@ -176,7 +178,7 @@ try:
 except:
     print(f'ERROR: Invalid Subnet! Please provide a valid subnet range...')
     sys.exit(1)
-print(f'INFO: Student Accounts Collection Created...')
+print(f'INFO: Pod Accounts Collection Created...')
 #######################################################################
 
 
@@ -232,6 +234,7 @@ for pod in PODS_LIST:
                             elif pod['account_name'] in tag['Value'] and 'tet-data' in tag['Value']:
                                 instance_ids.append(instance['InstanceId'])
                         if tag['Key'] == 'DNS':
+                            public_ip = None
                             if pod['account_name'] in tag['Value']:
                                 print(f"INFO: Looking up current IP address for {tag['Value']}")
                                 r = query_dns(tag['Value'])
@@ -246,13 +249,14 @@ for pod in PODS_LIST:
                                 else:
                                     print(f"ERROR: DNS lookup failed for hostname {tag['Value']}")
                                 hostname = tag['Value']
-                                print(f'INFO: Deleting DNS entry for hostname: {hostname} IP Address: {public_ip}')
-                                response = update_dns(public_ip, hostname)
-                                if response.status_code == 200:
-                                    print(f'INFO: DNS update successful')
-                                else:
-                                    print(f'ERROR: DNS update failed for hostname {hostname} IP Address: {public_ip}')
-                                    print(f'ERROR: Status code: {response.status_code}, Reason: {response.reason}')
+                                if public_ip:
+                                    print(f'INFO: Deleting DNS entry for hostname: {hostname} IP Address: {public_ip}')
+                                    response = update_dns(public_ip, hostname)
+                                    if response.status_code == 200:
+                                        print(f'INFO: DNS update successful')
+                                    else:
+                                        print(f'ERROR: DNS update failed for hostname {hostname} IP Address: {public_ip}')
+                                        print(f'ERROR: Status code: {response.status_code}, Reason: {response.reason}')
 
 # Loop through all EIPs and release the ones associated with the instance IDs 
 addresses_dict = ec2.describe_addresses()
@@ -278,10 +282,10 @@ for pod in PODS_LIST:
         cloudformation = session.client('cloudformation')
 
         result = cloudformation.describe_stacks(
-            StackName=f"{pod['account_name']}-{NAMING_SUFFIX}"
+            StackName=f"n0work-{SESSION_NAME}-{pod['account_name']}"
         )
 
-        bucket_name = list(filter(lambda o: o['OutputKey'] == 'CiscoHOLVPCFlowLogBucket', result['Stacks'][0]['Outputs']))[0]['OutputValue']
+        bucket_name = list(filter(lambda o: o['OutputKey'] == 'n0workVPCFlowLogBucket', result['Stacks'][0]['Outputs']))[0]['OutputValue']
 
         s3 = session.resource('s3')
         bucket = s3.Bucket(bucket_name)
@@ -330,7 +334,7 @@ for pod in PODS_LIST:
         for elb in elb_tags['TagDescriptions']:
             for tag in elb['Tags']:
                 for key in tag:
-                    if NAMING_SUFFIX in tag[key]:
+                    if SESSION_NAME in tag[key]:
                         elb_list = list(filter(lambda e: e['LoadBalancerName'] == elb['LoadBalancerName'], eks_elbs))
                         if (len(elb_list) > 0):
                             client.delete_load_balancer(
@@ -351,28 +355,28 @@ try:
     cloudformation = session.client('cloudformation')
 
     result = cloudformation.delete_stack(
-        StackName=f'tethol-class-schedule-{NAMING_SUFFIX}'
+        StackName=f"n0work-{SESSION_NAME}-class-schedule"
     )
 except Exception as e:
     print('WARN: ', e)
-print(f"INFO: Deleted class schedule tethol-class-schedule-{NAMING_SUFFIX}")
+print(f"INFO: Deleted class schedule n0work-{SESSION_NAME}-class-schedule")
 
 #######################################################################
 # Delete DynDNS Updater
 #######################################################################
-print(f'INFO: Deleting the DNS updater Lambda function tethol-dns-updater-{NAMING_SUFFIX}')
+print(f'INFO: Deleting the DNS updater Lambda function n0work-{SESSION_NAME}-dns-updater')
 try:
     cloudformation = session.client('cloudformation')
 
     result = cloudformation.delete_stack(
-        StackName=f'tethol-dns-updater-{NAMING_SUFFIX}'
+        StackName=f'n0work-{SESSION_NAME}-dns-updater'
     )
 except Exception as e:
     print('WARN: ', e)
-print(f"INFO: Deleted DNS updater Lambda function tethol-dns-updater-{NAMING_SUFFIX}")
+print(f"INFO: Deleted DNS updater Lambda function n0work-{SESSION_NAME}-dns-updater")
 
 #######################################################################
-# Delete Students POD In CloudFormation ###############################
+# Delete Pods In CloudFormation ###############################
 #######################################################################
 print('INFO: Commencing CloudFormation Stack Deletion...')
 for pod in PODS_LIST:
@@ -382,16 +386,16 @@ for pod in PODS_LIST:
         cloudformation = session.client('cloudformation')
 
         result = cloudformation.delete_stack(
-            StackName=f"{pod['account_name']}-{NAMING_SUFFIX}"
+            StackName=f"n0work-{SESSION_NAME}-{pod['account_name']}"
         )
 
-        print(f"INFO: Stack deletion initiated for: {pod['account_name']}-{NAMING_SUFFIX}...")
+        print(f"INFO: Stack deletion initiated for: n0work-{SESSION_NAME}-{pod['account_name']}...")
 
-        STACKS_LIST.append(f"{pod['account_name']}-{NAMING_SUFFIX}")
+        STACKS_LIST.append(f"n0work-{SESSION_NAME}-{pod['account_name']}")
 
     except Exception as e:
         print('WARN: ', e)
-print(f"INFO: CloudFormation deletion initiated for {pod['account_name']}-{NAMING_SUFFIX}...")
+print(f"INFO: CloudFormation deletion initiated for n0work-{SESSION_NAME}-{pod['account_name']}...")
 #######################################################################
 
 
@@ -445,21 +449,15 @@ try:
     ec2 = session.resource('ec2')
     igs = list(ec2.internet_gateways.all())
     for ig in igs:
-        if ig.tags:
-            for tag in ig.tags:
-                if tag.get('Key') == 'Name':
-                    name = tag.get('Value')
-                    if name == 'Tetration HoL':
-                        attached_vpc_id = ig.attachments[0]['VpcId']
-                        if attached_vpc_id == VPC_ID:
-                            print(f'INFO: Detaching Internet Gateway {ig.id} from {attached_vpc_id}')
-                            ig.detach_from_vpc(VpcId=attached_vpc_id)
-                            print(f'INFO: Deleting Internet Gateway {ig.id}')
-                            ig.delete()
+        attached_vpc_id = ig.attachments[0]['VpcId']
+        if attached_vpc_id == VPC_ID:
+            print(f'INFO: Detaching Internet Gateway {ig.id} from {attached_vpc_id}')
+            ig.detach_from_vpc(VpcId=attached_vpc_id)
+            print(f'INFO: Deleting Internet Gateway {ig.id}')
+            ig.delete()
 except Exception as e:
     print(f'ERROR: While deleting Internet Gateway {e}')
     sys.exit(1)
-
 
 
 #######################################################################
@@ -471,18 +469,13 @@ try:
     vpcs = list(ec2.vpcs.all())
     for vpc in vpcs:
         if vpc.id == VPC_ID:
-            if vpc.tags:
-                for tag in vpc.tags:
-                    if tag.get('Key') == 'Name':
-                        name = tag.get('Value')
-                        if name == 'Tetration HoL':
-                            sgs = vpc.security_groups.all()
-                            for sg in sgs:
-                                if not sg.group_name == 'default':
-                                    print(f'INFO: Deleting security group {sg.id}')
-                                    sg.delete()
-                            print(f'INFO: Deleting vpc {vpc.id}')
-                            vpc.delete()
+            sgs = vpc.security_groups.all()
+            for sg in sgs:
+                if not sg.group_name == 'default':
+                    print(f'INFO: Deleting security group {sg.id}')
+                    sg.delete()
+            print(f'INFO: Deleting vpc {vpc.id}')
+            vpc.delete()
 
 except Exception as e:
     print(f'ERROR: While deleting VPC_ID {e}')
@@ -492,26 +485,26 @@ except Exception as e:
 # Empty and delete the S3 bucket for the CFT
 #######################################################################
 
-try:
-    s3 = session.resource('s3')
-    bucket = s3.Bucket(f'tetration-hol-cft-template-{NAMING_SUFFIX}')
-    bucket.objects.delete()
-    while len(list(bucket.objects.iterator())) > 0:
-        print('INFO: Waiting for object deletion to complete')
-    bucket.delete()
-    print(f'INFO: Deleted S3 bucket tetration-hol-cft-template-{NAMING_SUFFIX}')
-except Exception as e:
-    print(f'ERROR: While deleting S3 Bucket tetration-hol-cft-template-{NAMING_SUFFIX}:  {e}')
-    sys.exit(1)
+# try:
+#     s3 = session.resource('s3')
+#     bucket = s3.Bucket(f'tetration-hol-cft-template-{SESSION_NAME}')
+#     bucket.objects.delete()
+#     while len(list(bucket.objects.iterator())) > 0:
+#         print('INFO: Waiting for object deletion to complete')
+#     bucket.delete()
+#     print(f'INFO: Deleted S3 bucket tetration-hol-cft-template-{SESSION_NAME}')
+# except Exception as e:
+#     print(f'ERROR: While deleting S3 Bucket tetration-hol-cft-template-{SESSION_NAME}:  {e}')
+#     sys.exit(1)
 
 #######################################################################
 # Delete the state file from S3
 #######################################################################
 try:
     s3 = session.resource('s3')
-    print(f'INFO: Deleting state file {STATE_FILE} from S3 bucket {STATE_S3_BUCKET}')
-    s3.Object(bucket_name=STATE_S3_BUCKET, key=STATE_FILE).delete()
-    print(f"INFO: State file {STATE_FILE} deleted from S3 bucket {STATE_S3_BUCKET}")
+    print(f'INFO: Deleting state file {STATE_FILE} from S3 bucket {S3_BUCKET}')
+    s3.Object(bucket_name=S3_BUCKET, key=STATE_FILE).delete()
+    print(f"INFO: State file {STATE_FILE} deleted from S3 bucket {S3_BUCKET}")
 except Exception as e:
     print(f'WARN: While deleting {STATE_FILE} from S3:  {e}')
 
