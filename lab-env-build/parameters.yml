@@ -1,7 +1,7 @@
 ---
-aws_region: us-west-2
-student_prefix: cisco-student
-student_count: 1
+aws_region: us-east-1
+pod_prefix: cisco-pod
+pod_count: 1
 # Enter the VPC ID below if using existing VPC. Comment if creating new VPC, it will be populated here upon creation.
 # vpc_id: vpc-0f7e98ab606236278
 
@@ -13,17 +13,17 @@ subnet_range_secondary: '198.18.0.0/16'
 # This is your own private on-prem ISE instance - needs VPN with AWS VGW. If not using ISE simply give it any value, however do not comment. 
 ise_server_ip: '172.16.171.49' 
 
-asav_ami: ami-03ad81377648fcb21
-eks_worker_ami: ami-0d3dd0a90d88054ac
-ldap_ami: ami-023f6bde07f76f00d
-mssql_ami: ami-055820d5169ca780d
-iis_ami: ami-072e21835272f1132
-mysql_ami: ami-01c356f1ec0f4286e
-apache_ami: ami-0a4ee97e3189d4148
-ansible_ami: ami-0a2fbe66b5295e758
-tet_data_ami: ami-0ad43fe5c904c9d11
-tet_edge_ami: ami-0c4aa3cbc3f97d345
-employee_ubuntu_ami: ami-0b8c7764f803d9bc6
-sysadmin_ubuntu_ami: ami-0b8c7764f803d9bc6
-attack_server_ami: ami-06fb8b1d5809dec8a
-guacamole_ami: ami-06f977c2b543da32a
+asav_ami: ami-0baf97ff07e48f3ac
+eks_worker_ami: ami-000c56e8536aaaf50
+ldap_ami: ami-0db9b81817c984bdd
+mssql_ami: ami-0b41d0a11ba443487
+iis_ami: ami-0ef8762e7a7a31f71
+mysql_ami: ami-099ce27c91dc7acf1
+apache_ami: ami-07f1c002ecbd32ffb
+ansible_ami: ami-034bb08047d8f4175
+tet_data_ami: ami-058d47f3e33d76822
+tet_edge_ami: ami-08d6bd2823976c9e3
+employee_ubuntu_ami: ami-043beb0d213b72f66
+sysadmin_ubuntu_ami: ami-043beb0d213b72f66
+attack_server_ami: ami-0a4f5a620f90ec638
+guacamole_ami: ami-077d63cae8421bcb9

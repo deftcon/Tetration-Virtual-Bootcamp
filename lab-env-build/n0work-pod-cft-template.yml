@@ -5,10 +5,10 @@ Metadata:
     ParameterGroups:
       -
         Label:
-          default: "Student Information"
+          default: "Pod Information"
         Parameters:
-          - StudentName
-          - StudentPassword
+          - PodName
+          - PodPassword
       -
         Label:
           default: "Network Configuration"
@@ -42,9 +42,9 @@ Metadata:
           - AttackerImageID
           - GuacamoleImageID 
     ParameterLabels:
-      StudentName:
+      PodName:
         default: "Your Name"
-      StudentPassword:
+      PodPassword:
         default: "Password"
       VpcID:
         default: "VPC ID"
@@ -78,13 +78,13 @@ Parameters:
     NoEcho: True
     Type: String
     Description: Please enter AWS Secret Key
-  StudentIndex:
+  PodIndex:
     Type: String
-    Description: Please enter student index number
-  StudentName:
+    Description: Please enter Pod index number
+  PodName:
     Type: String
-    Description: Please enter student name
-  StudentPassword:
+    Description: Please enter Pod name
+  PodPassword:
     NoEcho: True
     Type: String
     Description: Please enter password
@@ -208,9 +208,9 @@ Parameters:
   ScheduleName:
     Type: String  
     Description: Name of the schedule to be assigned to the instances
-  NamingSuffix:
+  SessionName:
     Type: String
-    Description: Last 6 digits of VPC_ID to use as suffix on names for uniqueness
+    Description: Unique identifier for the lab deployment
 
 Resources:
 
@@ -221,7 +221,7 @@ Resources:
       VpcId: !Ref VpcID
       Tags:
       - Key: Name
-        Value: !Sub "cisco-hol-${StudentName}-public-rt-${Region}"
+        Value: !Sub "n0work-${PodName}-public-rt-${Region}"
 
   # Create Private Route Table  
   PrivateRouteTable:
@@ -230,7 +230,7 @@ Resources:
       VpcId: !Ref VpcID
       Tags:
       - Key: Name
-        Value: !Sub "cisco-hol-${StudentName}-private-rt-${Region}"
+        Value: !Sub "n0work-${PodName}-private-rt-${Region}"
   
   # Public Defalut Route 
   PublicDefaultRoute: 
@@ -241,7 +241,7 @@ Resources:
       RouteTableId: !Ref PublicRouteTable
     
   # Subnets
-  CiscoHOLSubnet01:
+  n0workSubnet01:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VpcID
@@ -249,7 +249,7 @@ Resources:
       AvailabilityZone: !Sub "${Region}${Subnet01AvailabilityZone}"
       Tags:
         - Key: Name
-          Value: !Sub "cisco-hol-${StudentName}-public-subnet-01-${Region}${Subnet01AvailabilityZone}"
+          Value: !Sub "n0work-${PodName}-public-subnet-01-${Region}${Subnet01AvailabilityZone}"
         - Key: Org
           Value: Tetration
         - Key: Geo
@@ -261,7 +261,7 @@ Resources:
         - Key: AppSDLC
           Value: Lab
 
-  CiscoHOLSubnet02:
+  n0workSubnet02:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VpcID
@@ -269,7 +269,7 @@ Resources:
       AvailabilityZone: !Sub "${Region}${Subnet02AvailabilityZone}"
       Tags:
         - Key: Name
-          Value: !Sub "cisco-hol-${StudentName}-public-subnet-02-${Region}${Subnet02AvailabilityZone}"
+          Value: !Sub "n0work-${PodName}-public-subnet-02-${Region}${Subnet02AvailabilityZone}"
         - Key: Org
           Value: Tetration
         - Key: Geo
@@ -281,7 +281,7 @@ Resources:
         - Key: AppSDLC
           Value: Lab
 
-  CiscoHOLSubnet03:
+  n0workSubnet03:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VpcID
@@ -289,7 +289,7 @@ Resources:
       AvailabilityZone: !Sub "${Region}${Subnet03AvailabilityZone}"
       Tags:
         - Key: Name
-          Value: !Sub "cisco-hol-${StudentName}-private-subnet-${Region}${Subnet03AvailabilityZone}"
+          Value: !Sub "n0work-${PodName}-private-subnet-${Region}${Subnet03AvailabilityZone}"
         - Key: Org
           Value: Tetration
         - Key: Geo
@@ -302,30 +302,30 @@ Resources:
           Value: Lab
 
   # Route Table Associations
-  CiscoHOLRouteTableAssociation01:
+  n0workRouteTableAssociation01:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties: 
       RouteTableId: !Ref PublicRouteTable
-      SubnetId: !Ref CiscoHOLSubnet01
+      SubnetId: !Ref n0workSubnet01
       
-  CiscoHOLRouteTableAssociation02:
+  n0workRouteTableAssociation02:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties: 
       RouteTableId: !Ref PublicRouteTable
-      SubnetId: !Ref CiscoHOLSubnet02
+      SubnetId: !Ref n0workSubnet02
 
-  CiscoHOLRouteTableAssociation03:
+  n0workRouteTableAssociation03:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties: 
       RouteTableId: !Ref PrivateRouteTable
-      SubnetId: !Ref CiscoHOLSubnet03
+      SubnetId: !Ref n0workSubnet03
       
   # Security Groups
-  CiscoHOLPublicSecurityGroup:
+  n0workPublicSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       VpcId: !Ref VpcID
-      GroupDescription: !Sub "Cisco HOL Public Security Group For ${StudentName}"
+      GroupDescription: !Sub "n0work Public Security Group For ${PodName}"
       SecurityGroupIngress:
         - IpProtocol: -1
           FromPort: 0
@@ -342,7 +342,7 @@ Resources:
         - IpProtocol: -1
           FromPort: 0
           ToPort: 65535
-          CidrIp: !Sub "192.168.${StudentIndex}.0/24"
+          CidrIp: !Sub "192.168.${PodIndex}.0/24"
         - IpProtocol: -1
           FromPort: 0
           ToPort: 65535
@@ -358,7 +358,7 @@ Resources:
           CidrIp: 0.0.0.0/0
       Tags:
         - Key: Name
-          Value: !Sub "cisco-hol-${StudentName}-sg-public-${Region}"
+          Value: !Sub "n0work-${PodName}-sg-public-${Region}"
         - Key: Org
           Value: Tetration
         - Key: Geo
@@ -369,14 +369,14 @@ Resources:
           Value: !Sub "${Region}"
         - Key: AppSDLC
           Value: Lab
-        - Key: !Sub "kubernetes.io/cluster/${StudentName}-eks-cluster-${Region}-${NamingSuffix}"
+        - Key: !Sub "kubernetes.io/cluster/${PodName}-eks-cluster-${Region}-${SessionName}"
           Value: 'owned'
   
-  CiscoHOLPrivateSecurityGroup:
+  n0workPrivateSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       VpcId: !Ref VpcID
-      GroupDescription: !Sub "Cisco HOL Private Security Group For ${StudentName}"
+      GroupDescription: !Sub "n0work Private Security Group For ${PodName}"
       SecurityGroupIngress:
         - IpProtocol: -1
           FromPort: 0
@@ -393,7 +393,7 @@ Resources:
           CidrIp: 0.0.0.0/0
       Tags:
         - Key: Name
-          Value: !Sub "cisco-hol-${StudentName}-sg-private-${Region}"
+          Value: !Sub "n0work-${PodName}-sg-private-${Region}"
         - Key: Org
           Value: Tetration
         - Key: Geo
@@ -405,11 +405,11 @@ Resources:
         - Key: AppSDLC
           Value: Lab
 
-  CiscoHOLWebSecurityGroup:
+  n0workWebSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       VpcId: !Ref VpcID
-      GroupDescription: !Sub "Cisco HOL Web Security Group For ${StudentName}"
+      GroupDescription: !Sub "n0work Web Security Group For ${PodName}"
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 80
@@ -426,7 +426,7 @@ Resources:
           CidrIp: 0.0.0.0/0
       Tags:
         - Key: Name
-          Value: !Sub "cisco-hol-${StudentName}-sg-web-${Region}"
+          Value: !Sub "n0work-${PodName}-sg-web-${Region}"
         - Key: Org
           Value: Tetration
         - Key: Geo
@@ -437,19 +437,19 @@ Resources:
           Value: !Sub "${Region}"
         - Key: AppSDLC
           Value: Lab
-        - Key: !Sub "kubernetes.io/cluster/${StudentName}-eks-cluster-${Region}-${NamingSuffix}"
+        - Key: !Sub "kubernetes.io/cluster/${PodName}-eks-cluster-${Region}-${SessionName}"
           Value: 'owned'
 
   # Provision EC2 Instances
   # LDAP Server
-  CiscoHOLEC2ActiveDirectory:
+  n0workEC2ActiveDirectory:
     Type: AWS::EC2::Instance
     Properties:
       ImageId: !Ref LDAPImageID
       InstanceType: t2.medium
       Tags:
         - Key: Name
-          Value: !Sub "cisco-hol-${StudentName}-ec2-active-directory-win-2019-${Region}${Subnet01AvailabilityZone}"
+          Value: !Sub "${SessionName}-${PodName}-microsoft-ad-dc"
         - Key: Org
           Value: Tetration
         - Key: Geo
@@ -469,21 +469,21 @@ Resources:
         - Key: Schedule
           Value: !Sub ${ScheduleName}
         - Key: Pod
-          Value: !Sub ${StudentName}
+          Value: !Sub ${PodName}
       UserData:
         Fn::Base64: !Sub |
           <powershell>
           Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
-          route add 192.168.${StudentIndex}.0 mask 255.255.255.0 ${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress} -p
+          route add 192.168.${PodIndex}.0 mask 255.255.255.0 ${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress} -p
           route add ${ASAvOutsideSubnet} mask 255.255.255.0 ${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress} -p
           ipconfig /flushdns
           Clear-DnsClientCache
           Add-DnsServerPrimaryZone -NetworkId "${ASAvInsideSubnet}/24" -ReplicationScope Forest
-          Add-DnsServerResourceRecordA -Name tet-edge -ZoneName hol.local -IPv4Address ${CiscoHOLEC2TetEdge.PrivateIp}
-          Add-DnsServerResourceRecordA -Name edge -ZoneName hol.local -IPv4Address ${CiscoHOLEC2TetEdge.PrivateIp}
-          Add-DnsServerResourceRecordA -Name tet-data -ZoneName hol.local -IPv4Address ${CiscoHOLEC2TetData.PrivateIp}
-          Add-DnsServerResourceRecordA -Name tet-data-ingest -ZoneName hol.local -IPv4Address ${CiscoHOLEC2TetData.PrivateIp}
-          Add-DnsServerResourceRecordA -Name data-ingest -ZoneName hol.local -IPv4Address ${CiscoHOLEC2TetData.PrivateIp}
+          Add-DnsServerResourceRecordA -Name tet-edge -ZoneName hol.local -IPv4Address ${n0workEC2TetEdge.PrivateIp}
+          Add-DnsServerResourceRecordA -Name edge -ZoneName hol.local -IPv4Address ${n0workEC2TetEdge.PrivateIp}
+          Add-DnsServerResourceRecordA -Name tet-data -ZoneName hol.local -IPv4Address ${n0workEC2TetData.PrivateIp}
+          Add-DnsServerResourceRecordA -Name tet-data-ingest -ZoneName hol.local -IPv4Address ${n0workEC2TetData.PrivateIp}
+          Add-DnsServerResourceRecordA -Name data-ingest -ZoneName hol.local -IPv4Address ${n0workEC2TetData.PrivateIp}
           Add-DnsServerResourceRecordA -Name isev-small-2-4 -ZoneName hol.local -IPv4Address ${ISEIPAddress}
           Add-DnsServerResourceRecordA -Name ise -ZoneName hol.local -IPv4Address ${ISEIPAddress}
           </powershell>
@@ -491,20 +491,20 @@ Resources:
         - AssociatePublicIpAddress: "true"
           DeviceIndex: "0"
           GroupSet:
-            - !Ref CiscoHOLPublicSecurityGroup
-          SubnetId: !Ref CiscoHOLSubnet01
+            - !Ref n0workPublicSecurityGroup
+          SubnetId: !Ref n0workSubnet01
 
   # Windows DB Server
-  CiscoHOLEC2SQLServer:
+  n0workEC2SQLServer:
     Type: AWS::EC2::Instance
     DependsOn:
-      - CiscoHOLEC2ActiveDirectory
+      - n0workEC2ActiveDirectory
     Properties:
       ImageId: !Ref MSSQLImageID
       InstanceType: t2.large
       Tags:
         - Key: Name
-          Value: !Sub "cisco-hol-${StudentName}-ec2-sql-win-2019-${Region}${Subnet01AvailabilityZone}"
+          Value: !Sub "${SessionName}-${PodName}-nopcommerce-mssql"
         - Key: Org
           Value: Tetration
         - Key: Geo
@@ -524,14 +524,14 @@ Resources:
         - Key: Schedule
           Value: !Sub ${ScheduleName}
         - Key: Pod
-          Value: !Sub ${StudentName}
+          Value: !Sub ${PodName}
       UserData:
         Fn::Base64: !Sub |
           <powershell>
           Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
           $adapter = Get-NetAdapter -Name 'Ethernet*'
-          Set-DNSClientServerAddress -InterfaceAlias $adapter.Name -ServerAddresses ("${CiscoHOLEC2ActiveDirectory.PrivateIp}")
-          route add 192.168.${StudentIndex}.0 mask 255.255.255.0 ${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress} -p
+          Set-DNSClientServerAddress -InterfaceAlias $adapter.Name -ServerAddresses ("${n0workEC2ActiveDirectory.PrivateIp}")
+          route add 192.168.${PodIndex}.0 mask 255.255.255.0 ${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress} -p
           route add ${ASAvOutsideSubnet} mask 255.255.255.0 ${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress} -p
           ipconfig /flushdns
           Clear-DnsClientCache
@@ -540,20 +540,20 @@ Resources:
         - AssociatePublicIpAddress: "true"
           DeviceIndex: "0"
           GroupSet:
-            - !Ref CiscoHOLPublicSecurityGroup
-          SubnetId: !Ref CiscoHOLSubnet01
+            - !Ref n0workPublicSecurityGroup
+          SubnetId: !Ref n0workSubnet01
   
   # Windows IIS Server
-  CiscoHOLEC2IIS:
+  n0workEC2IIS:
     Type: AWS::EC2::Instance
     DependsOn:
-      - CiscoHOLEC2SQLServer
+      - n0workEC2SQLServer
     Properties:
       ImageId: !Ref IISImageID
       InstanceType: t2.large
       Tags:
         - Key: Name
-          Value: !Sub "cisco-hol-${StudentName}-ec2-iis-win-2019-${Region}${Subnet01AvailabilityZone}"
+          Value: !Sub "${SessionName}-${PodName}-nopcommerce-iis"
         - Key: Org
           Value: Tetration
         - Key: Geo
@@ -573,16 +573,16 @@ Resources:
         - Key: Schedule
           Value: !Sub ${ScheduleName}
         - Key: Pod
-          Value: !Sub ${StudentName}
+          Value: !Sub ${PodName}
         - Key: DNS
-          Value: !Sub ${StudentName}-${Region}-${NamingSuffix}-nopcommerce.lab.tetration.guru
+          Value: !Sub ${SessionName}-${PodName}-nopcommerce.lab.tetration.guru
       UserData:
         Fn::Base64: !Sub |
           <powershell>
           Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
           $adapter = Get-NetAdapter -Name 'Ethernet*'
-          Set-DNSClientServerAddress -InterfaceAlias $adapter.Name -ServerAddresses ("${CiscoHOLEC2ActiveDirectory.PrivateIp}")
-          route add 192.168.${StudentIndex}.0 mask 255.255.255.0 ${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress} -p
+          Set-DNSClientServerAddress -InterfaceAlias $adapter.Name -ServerAddresses ("${n0workEC2ActiveDirectory.PrivateIp}")
+          route add 192.168.${PodIndex}.0 mask 255.255.255.0 ${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress} -p
           route add ${ASAvOutsideSubnet} mask 255.255.255.0 ${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress} -p
           ipconfig /flushdns
           Clear-DnsClientCache
@@ -600,19 +600,19 @@ Resources:
         - AssociatePublicIpAddress: "true"
           DeviceIndex: "0"
           GroupSet:
-            - !Ref CiscoHOLPublicSecurityGroup
-            - !Ref CiscoHOLWebSecurityGroup
-          SubnetId: !Ref CiscoHOLSubnet01
+            - !Ref n0workPublicSecurityGroup
+            - !Ref n0workWebSecurityGroup
+          SubnetId: !Ref n0workSubnet01
 
   # Linux DB Server
-  CiscoHOLEC2MySQL:
+  n0workEC2MySQL:
     Type: AWS::EC2::Instance
     Properties:
       ImageId: !Ref MySQLImageID
       InstanceType: t2.micro
       Tags:
         - Key: Name
-          Value: !Sub "cisco-hol-${StudentName}-ec2-mysql-centos7-${Region}${Subnet01AvailabilityZone}"
+          Value: !Sub "${SessionName}-${PodName}-opencart-mysql"
         - Key: Org
           Value: Tetration
         - Key: Geo
@@ -632,34 +632,34 @@ Resources:
         - Key: Schedule
           Value: !Sub ${ScheduleName}
         - Key: Pod
-          Value: !Sub ${StudentName}
+          Value: !Sub ${PodName}
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash
           sed -i "s/^PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
           systemctl restart sshd
-          echo "DNS1=${CiscoHOLEC2ActiveDirectory.PrivateIp}" | tee -a /etc/sysconfig/network-scripts/ifcfg-eth0
-          route add -net 192.168.${StudentIndex}.0 netmask 255.255.255.0 gw ${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress} dev eth0
+          echo "DNS1=${n0workEC2ActiveDirectory.PrivateIp}" | tee -a /etc/sysconfig/network-scripts/ifcfg-eth0
+          route add -net 192.168.${PodIndex}.0 netmask 255.255.255.0 gw ${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress} dev eth0
           route add -net ${ASAvOutsideSubnet} netmask 255.255.255.0 gw ${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress} dev eth0
-          echo "192.168.${StudentIndex}.0/24 via ${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress} dev eth0" > /etc/sysconfig/network-scripts/route-eth0
+          echo "192.168.${PodIndex}.0/24 via ${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress} dev eth0" > /etc/sysconfig/network-scripts/route-eth0
           echo "${ASAvOutsideSubnet}/24 via ${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress} dev eth0" >> /etc/sysconfig/network-scripts/route-eth0
           systemctl restart network
       NetworkInterfaces: 
         - AssociatePublicIpAddress: "true"
           DeviceIndex: "0"
           GroupSet: 
-            - !Ref CiscoHOLPublicSecurityGroup
-          SubnetId: !Ref CiscoHOLSubnet01
+            - !Ref n0workPublicSecurityGroup
+          SubnetId: !Ref n0workSubnet01
   
   # Linux App Server
-  CiscoHOLEC2Apache:
+  n0workEC2Apache:
     Type: AWS::EC2::Instance
     Properties:
       ImageId: !Ref ApacheImageID
       InstanceType: t2.micro
       Tags:
         - Key: Name
-          Value: !Sub "cisco-hol-${StudentName}-ec2-apache-centos7-${Region}${Subnet01AvailabilityZone}"
+          Value: !Sub "${SessionName}-${PodName}-opencart-apache"
         - Key: Org
           Value: Tetration
         - Key: Geo
@@ -679,9 +679,9 @@ Resources:
         - Key: Schedule
           Value: !Sub ${ScheduleName}
         - Key: Pod
-          Value: !Sub ${StudentName}
+          Value: !Sub ${PodName}
         - Key: DNS
-          Value: !Sub ${StudentName}-${Region}-${NamingSuffix}-opencart.lab.tetration.guru
+          Value: !Sub ${SessionName}-${PodName}-opencart.lab.tetration.guru
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash
@@ -696,34 +696,34 @@ Resources:
           sed -i "s/^.*HTTP_CATALOG.*$/define('HTTP_CATALOG', 'http:\/\/'.\$_SERVER['HTTP_HOST'].'\/');/g" /var/www/html/admin/config.php
           sed -i "s/^.*HTTPS_SERVER.*$/define('HTTPS_SERVER', 'https:\/\/'.\$_SERVER['HTTP_HOST'].'\/admin\/');/g" /var/www/html/admin/config.php
           sed -i "s/^.*HTTPS_CATALOG.*$/define('HTTPS_CATALOG', 'https:\/\/'.\$_SERVER['HTTP_HOST'].'\/');/g" /var/www/html/admin/config.php
-          sed -i "s/{{db}}/${CiscoHOLEC2MySQL.PrivateIp}/g" /var/www/html/config.php
-          sed -i "s/{{db}}/${CiscoHOLEC2MySQL.PrivateIp}/g" /var/www/html/admin/config.php
+          sed -i "s/{{db}}/${n0workEC2MySQL.PrivateIp}/g" /var/www/html/config.php
+          sed -i "s/{{db}}/${n0workEC2MySQL.PrivateIp}/g" /var/www/html/admin/config.php
           sed -i "s/^PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
           chown apache:apache -R /var/www/html
           systemctl restart sshd
-          echo "DNS1=${CiscoHOLEC2ActiveDirectory.PrivateIp}" | tee -a /etc/sysconfig/network-scripts/ifcfg-eth0
-          route add -net 192.168.${StudentIndex}.0 netmask 255.255.255.0 gw ${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress} dev eth0
+          echo "DNS1=${n0workEC2ActiveDirectory.PrivateIp}" | tee -a /etc/sysconfig/network-scripts/ifcfg-eth0
+          route add -net 192.168.${PodIndex}.0 netmask 255.255.255.0 gw ${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress} dev eth0
           route add -net ${ASAvOutsideSubnet} netmask 255.255.255.0 gw ${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress} dev eth0
-          echo "192.168.${StudentIndex}.0/24 via ${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress} dev eth0" > /etc/sysconfig/network-scripts/route-eth0
+          echo "192.168.${PodIndex}.0/24 via ${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress} dev eth0" > /etc/sysconfig/network-scripts/route-eth0
           echo "${ASAvOutsideSubnet}/24 via ${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress} dev eth0" >> /etc/sysconfig/network-scripts/route-eth0
           systemctl restart network
       NetworkInterfaces: 
         - AssociatePublicIpAddress: "true"
           DeviceIndex: "0"
           GroupSet: 
-            - !Ref CiscoHOLPublicSecurityGroup
-            - !Ref CiscoHOLWebSecurityGroup
-          SubnetId: !Ref CiscoHOLSubnet01
+            - !Ref n0workPublicSecurityGroup
+            - !Ref n0workWebSecurityGroup
+          SubnetId: !Ref n0workSubnet01
 
   # Create Tetration Appliances
-  CiscoHOLEC2TetData:
+  n0workEC2TetData:
     Type: AWS::EC2::Instance
     Properties:
       ImageId: !Ref TetrationDataIngestImageID
       InstanceType: t2.small
       Tags:
         - Key: Name
-          Value: !Sub "cisco-hol-${StudentName}-ec2-tet-data-centos7-${Region}${Subnet01AvailabilityZone}"
+          Value: !Sub "${SessionName}-${PodName}-cisco-tet-data"
         - Key: Schedule
           Value: !Sub ${ScheduleName}
       NetworkInterfaces: 
@@ -746,70 +746,70 @@ Resources:
       Properties:
         Tags:
         - Key: name
-          Value: !Sub "${StudentName}-nic01-tet-data"
-        Description: !Sub "${StudentName} Tet Data Network Interface 01 for ASAv NAT Flow Stitching"
+          Value: !Sub "${PodName}-nic01-tet-data"
+        Description: !Sub "${PodName} Tet Data Network Interface 01 for ASAv NAT Flow Stitching"
         SourceDestCheck: 'false'
         GroupSet:
-        - !Ref CiscoHOLPublicSecurityGroup
-        SubnetId: !Ref CiscoHOLSubnet01
+        - !Ref n0workPublicSecurityGroup
+        SubnetId: !Ref n0workSubnet01
         
   TetNetworkInterfaces02:
       Type: AWS::EC2::NetworkInterface
       Properties:
         Tags:
         - Key: name
-          Value: !Sub "${StudentName}-nic02-tet-data"
-        Description: !Sub "${StudentName} Tet Data Network Interface 02 for AWS VPC Flow Logs"
+          Value: !Sub "${PodName}-nic02-tet-data"
+        Description: !Sub "${PodName} Tet Data Network Interface 02 for AWS VPC Flow Logs"
         SourceDestCheck: 'false'
         GroupSet:
-        - !Ref CiscoHOLPublicSecurityGroup
-        SubnetId: !Ref CiscoHOLSubnet01
+        - !Ref n0workPublicSecurityGroup
+        SubnetId: !Ref n0workSubnet01
   
   TetNetworkInterfaces03:
       Type: AWS::EC2::NetworkInterface
       Properties:
         Tags:
         - Key: name
-          Value: !Sub "${StudentName}-nic03-tet-data"
-        Description: !Sub "${StudentName} Tet Data Network Interface 03 for NOT CURRENTLY USED"
+          Value: !Sub "${PodName}-nic03-tet-data"
+        Description: !Sub "${PodName} Tet Data Network Interface 03 for NOT CURRENTLY USED"
         SourceDestCheck: 'false'
         GroupSet:
-        - !Ref CiscoHOLPublicSecurityGroup
-        SubnetId: !Ref CiscoHOLSubnet01
+        - !Ref n0workPublicSecurityGroup
+        SubnetId: !Ref n0workSubnet01
 
   # Create Elastic IP Addresses
   # IF you have more than five (5) EIPs already associated to your AWS VPC, comment out the next 6 lines!
-  # CiscoHOLEC2TetDataEIP1:
+  # n0workEC2TetDataEIP1:
   #   Type: AWS::EC2::EIP
   #   Properties:
   #     Tags:
   #       - Key: Name
-  #         Value: !Sub "cisco-hol-${StudentName}-eip-TetData-${Region}${Subnet01AvailabilityZone}"
+  #         Value: !Sub "n0work-${PodName}-eip-TetData-${Region}${Subnet01AvailabilityZone}"
   
   # Elastic IP Association  
-  CiscoHOLAssociateEIPTetData:
+  n0workAssociateEIPTetData:
     Type: AWS::EC2::EIPAssociation
     Properties:
       AllocationId: !Ref TetDataElasticIpAllocationId
       NetworkInterfaceId: !Ref TetNetworkInterfaces01
 
   # Create Tet Edge EC2
-  CiscoHOLEC2TetEdge:
+  n0workEC2TetEdge:
     Type: AWS::EC2::Instance
     Properties:
       ImageId: !Ref TetrationEdgeImageID
       InstanceType: t2.micro
       Tags:
         - Key: Name
-          Value: !Sub "cisco-hol-${StudentName}-ec2-tet-edge-centos7-${Region}${Subnet01AvailabilityZone}"
+          Value: !Sub "${SessionName}-${PodName}-cisco-tet-edge"
         - Key: Schedule
           Value: !Sub ${ScheduleName}
       NetworkInterfaces: 
         - AssociatePublicIpAddress: "true"
           DeviceIndex: "0"
           GroupSet: 
-            - !Ref CiscoHOLPublicSecurityGroup
-          SubnetId: !Ref CiscoHOLSubnet01
+            - !Ref n0workPublicSecurityGroup
+          SubnetId: !Ref n0workSubnet01
       BlockDeviceMappings:
         - DeviceName: "/dev/sda1"
           Ebs:
@@ -819,18 +819,18 @@ Resources:
             DeleteOnTermination: "true"
 
   # Ubuntu 18.04 Employee (AnyConnect)
-  CiscoHOLEC2Ubuntu1804Employee:
+  n0workEC2Ubuntu1804Employee:
     Type: AWS::EC2::Instance
     Properties:
       ImageId: !Ref Ubuntu1804EmployeeImageID
       InstanceType: t2.medium
       Tags:
         - Key: Name
-          Value: !Sub "cisco-hol-${StudentName}-ec2-ubuntu1804-employee-${Region}${Subnet02AvailabilityZone}"
+          Value: !Sub "${SessionName}-${PodName}-user-employee"
         - Key: Schedule
           Value: !Sub ${ScheduleName}
         - Key: Pod
-          Value: !Sub ${StudentName}
+          Value: !Sub ${PodName}
       UserData:
         Fn::Base64: !Sub |
           !/bin/bash
@@ -842,22 +842,22 @@ Resources:
           PrivateIpAddress: !Ref Ubuntu1804EmployeePrivateIp
           DeviceIndex: "0"
           GroupSet: 
-            - !Ref CiscoHOLPrivateSecurityGroup
-          SubnetId: !Ref CiscoHOLSubnet03
+            - !Ref n0workPrivateSecurityGroup
+          SubnetId: !Ref n0workSubnet03
 
   # Ubuntu 18.04 SysAdmin (AnyConnect)
-  CiscoHOLEC2Ubuntu1804SysAdmin:
+  n0workEC2Ubuntu1804SysAdmin:
     Type: AWS::EC2::Instance
     Properties:
       ImageId: !Ref Ubuntu1804SysAdminImageID
       InstanceType: t2.medium
       Tags:
         - Key: Name
-          Value: !Sub "cisco-hol-${StudentName}-ec2-ubuntu1804-sysadmin-${Region}${Subnet02AvailabilityZone}"
+          Value: !Sub "${SessionName}-${PodName}-user-sysadmin"
         - Key: Schedule
           Value: !Sub ${ScheduleName}
         - Key: Pod
-          Value: !Sub ${StudentName}
+          Value: !Sub ${PodName}
       UserData:
         Fn::Base64: !Sub |
           !/bin/bash
@@ -869,18 +869,18 @@ Resources:
           PrivateIpAddress: !Ref Ubuntu1804SysAdminPrivateIp
           DeviceIndex: "0"
           GroupSet: 
-            - !Ref CiscoHOLPrivateSecurityGroup
-          SubnetId: !Ref CiscoHOLSubnet03
+            - !Ref n0workPrivateSecurityGroup
+          SubnetId: !Ref n0workSubnet03
 
   # Metasploit Attack Server
-  CiscoHOLEC2Attacker:
+  n0workEC2Attacker:
     Type: AWS::EC2::Instance
     Properties:
       ImageId: !Ref AttackerImageID
       InstanceType: t2.micro
       Tags:
         - Key: Name
-          Value: !Sub "cisco-hol-${StudentName}-ec2-attacker-${Region}${Subnet02AvailabilityZone}"
+          Value: !Sub "${SessionName}-${PodName}-bad-guy"
         - Key: Schedule
           Value: !Sub ${ScheduleName}
       UserData:
@@ -894,8 +894,8 @@ Resources:
           PrivateIpAddress: !Ref AttackerPrivateIp
           DeviceIndex: "0"
           GroupSet: 
-            - !Ref CiscoHOLPrivateSecurityGroup
-          SubnetId: !Ref CiscoHOLSubnet03
+            - !Ref n0workPrivateSecurityGroup
+          SubnetId: !Ref n0workSubnet03
           
   # Create IAM Role For EKS Cluster
   EKSClusterInstanceRole:
@@ -911,7 +911,7 @@ Resources:
           Action:
             - sts:AssumeRole
       Path: "/"
-      RoleName: !Join [ "-", [ !Ref 'AWS::StackName', "EKS-Cluster-Role", !Ref 'AWS::Region', !Ref NamingSuffix ] ]
+      RoleName: !Join [ "-", [ !Ref 'AWS::StackName', "EKS-Cluster-Role", ] ]
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
         - arn:aws:iam::aws:policy/AmazonEKSServicePolicy
@@ -931,7 +931,7 @@ Resources:
             Action:
               - sts:AssumeRole
       Path: /
-      RoleName: !Join [ "-", [ !Ref 'AWS::StackName', "EKS-Worker-Role", !Ref 'AWS::Region', !Ref NamingSuffix ] ]
+      RoleName: !Join [ "-", [ !Ref 'AWS::StackName', "EKS-Worker-Role" ] ]
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
         - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
@@ -957,14 +957,14 @@ Resources:
   EKSCluster:
     Type: "AWS::EKS::Cluster"
     Properties:
-      Name: !Sub "cisco-hol-${StudentName}-eks-cluster-${Region}-${NamingSuffix}"
+      Name: !Sub "n0work-${PodName}-eks-cluster-${Region}-${SessionName}"
       ResourcesVpcConfig:
         SecurityGroupIds:
-          - !Ref CiscoHOLWebSecurityGroup
-          - !Ref CiscoHOLPublicSecurityGroup
+          - !Ref n0workWebSecurityGroup
+          - !Ref n0workPublicSecurityGroup
         SubnetIds:
-          - !Ref CiscoHOLSubnet01
-          - !Ref CiscoHOLSubnet02
+          - !Ref n0workSubnet01
+          - !Ref n0workSubnet02
       RoleArn: !GetAtt EKSClusterInstanceRole.Arn
       Version: '1.15'
   
@@ -984,7 +984,7 @@ Resources:
       InstanceType: t3.medium
       # KeyName: !Ref KeyName
       SecurityGroups:
-        - !Ref CiscoHOLPublicSecurityGroup
+        - !Ref n0workPublicSecurityGroup
       UserData: !Base64
         "Fn::Sub": |
           #!/bin/bash
@@ -1008,27 +1008,27 @@ Resources:
       MinSize: 1
       MaxSize: 2
       VPCZoneIdentifier:
-        - !Ref CiscoHOLSubnet01
+        - !Ref n0workSubnet01
       Tags:
       - Key: Name
         PropagateAtLaunch: "true"
-        Value: !Sub "cisco-hol-${StudentName}-eks-worker-${Region}-${NamingSuffix}"
-      - Key: !Sub kubernetes.io/cluster/${StudentName}-eks-cluster-${Region}-${NamingSuffix}
+        Value: !Sub "${SessionName}-${PodName}-eks-worker"
+      - Key: !Sub kubernetes.io/cluster/${PodName}-eks-cluster-${Region}-${SessionName}
         Value: owned
         PropagateAtLaunch: "true"
 
   # ASAv Firewall Server
-  CiscoHOLEC2ASAv:
+  n0workEC2ASAv:
     Type: AWS::EC2::Instance
     DependsOn:
-      - CiscoHOLEC2IIS
-      - CiscoHOLEC2Apache
+      - n0workEC2IIS
+      - n0workEC2Apache
     Properties:
       ImageId: !Ref ASAvImageID
       InstanceType: c4.large
       Tags:
         - Key: Name
-          Value: !Sub "cisco-hol-${StudentName}-ec2-asav-${Region}${Subnet01AvailabilityZone}"
+          Value: !Sub "${SessionName}-${PodName}-cisco-asav"
         - Key: Org
           Value: Tetration
         - Key: Geo
@@ -1041,7 +1041,7 @@ Resources:
           Value: !Sub ${ScheduleName}
       UserData: 
         Fn::Base64: !Sub |
-          hostname cisco-hol-asav
+          hostname n0work-asav
           domain-name hol.local
           crypto key generate rsa modulus 2048 noconfirm
           enable password tet123$$!
@@ -1050,7 +1050,7 @@ Resources:
           name 129.6.15.29 time-b.nist.gov
           name 129.6.15.30 time-c.nist.gov
           no mac-address auto
-          ip local pool LAB-POOL 192.168.${StudentIndex}.1-192.168.${StudentIndex}.254 mask 255.255.255.0
+          ip local pool LAB-POOL 192.168.${PodIndex}.1-192.168.${PodIndex}.254 mask 255.255.255.0
           interface GigabitEthernet0/0
            nameif outside
            security-level 0
@@ -1076,16 +1076,16 @@ Resources:
           dns domain-lookup inside
           dns domain-lookup management
           dns server-group DefaultDNS
-           name-server ${CiscoHOLEC2ActiveDirectory.PrivateIp}
+           name-server ${n0workEC2ActiveDirectory.PrivateIp}
            domain-name hol.local
           object network OBJ-LAB-SUBNET
-           subnet 192.168.${StudentIndex}.0 255.255.255.0
+           subnet 192.168.${PodIndex}.0 255.255.255.0
           object network nopCommerce-IIS
-           host ${CiscoHOLEC2IIS.PrivateIp}
+           host ${n0workEC2IIS.PrivateIp}
           object network OpenCart-App
-           host ${CiscoHOLEC2Apache.PrivateIp}
+           host ${n0workEC2Apache.PrivateIp}
           object-group network RemoteAccessVPN
-           network-object 192.168.${StudentIndex}.0 255.255.255.0
+           network-object 192.168.${PodIndex}.0 255.255.255.0
           access-list ssh standard permit any4 
           access-list standard standard permit any4 
           access-list outside-in extended permit icmp any any 
@@ -1156,7 +1156,7 @@ Resources:
            vpn-tunnel-protocol ikev1 ikev2 l2tp-ipsec ssl-client ssl-clientless
           group-policy LAB-PROFILE internal
           group-policy LAB-PROFILE attributes
-            dns-server value ${CiscoHOLEC2ActiveDirectory.PrivateIp}
+            dns-server value ${n0workEC2ActiveDirectory.PrivateIp}
             vpn-tunnel-protocol ssl-client 
             split-tunnel-policy tunnelspecified
             split-tunnel-network-list value LAB-LIST
@@ -1189,13 +1189,13 @@ Resources:
       Properties:
         Tags:
           - Key: name
-            Value: !Sub "${StudentName}-nic01-asav"
-        Description: !Sub "${StudentName} ASAv Network Interface 01"
+            Value: !Sub "${PodName}-nic01-asav"
+        Description: !Sub "${PodName} ASAv Network Interface 01"
         SourceDestCheck: 'false'
         GroupSet:
-          - !Ref CiscoHOLPrivateSecurityGroup
-          - !Ref CiscoHOLWebSecurityGroup
-        SubnetId: !Ref CiscoHOLSubnet03
+          - !Ref n0workPrivateSecurityGroup
+          - !Ref n0workWebSecurityGroup
+        SubnetId: !Ref n0workSubnet03
         PrivateIpAddresses:
           - PrivateIpAddress: !Ref ASAvOutsidePrivateIp01
             Primary: 'true'
@@ -1205,13 +1205,13 @@ Resources:
       Properties:
         Tags:
           - Key: name
-            Value: !Sub "${StudentName}-nic02-asav"
-        Description: !Sub "${StudentName} ASAv Network Interface 02"
+            Value: !Sub "${PodName}-nic02-asav"
+        Description: !Sub "${PodName} ASAv Network Interface 02"
         SourceDestCheck: 'false'
         GroupSet:
-          - !Ref CiscoHOLPrivateSecurityGroup
-          - !Ref CiscoHOLWebSecurityGroup
-        SubnetId: !Ref CiscoHOLSubnet03
+          - !Ref n0workPrivateSecurityGroup
+          - !Ref n0workWebSecurityGroup
+        SubnetId: !Ref n0workSubnet03
         PrivateIpAddresses:
           - PrivateIpAddress: !Ref ASAvOutsidePrivateIp02
             Primary: 'true'
@@ -1225,40 +1225,40 @@ Resources:
       Properties:
         Tags:
           - Key: name
-            Value: !Sub "${StudentName}-nic03-asav"
-        Description: !Sub "${StudentName} ASAv Network Interface 03"
+            Value: !Sub "${PodName}-nic03-asav"
+        Description: !Sub "${PodName} ASAv Network Interface 03"
         SourceDestCheck: 'false'
         GroupSet:
-          - !Ref CiscoHOLPublicSecurityGroup
-          - !Ref CiscoHOLWebSecurityGroup
-        SubnetId: !Ref CiscoHOLSubnet01
+          - !Ref n0workPublicSecurityGroup
+          - !Ref n0workWebSecurityGroup
+        SubnetId: !Ref n0workSubnet01
 
 #  We shouldn't need EIP for ASAv if contacting ISE via AWS VGW (should be case unless ISE happens to be NAT to Internet)
 #  # Create Elastic IP Addresses
-#  CiscoHOLASAvEIP:
+#  n0workASAvEIP:
 #    Type: AWS::EC2::EIP
 #  
 #  # Elastic IP Association  
-#  CiscoHOLAssociateEIPASAv:
+#  n0workAssociateEIPASAv:
 #    Type: AWS::EC2::EIPAssociation
 #    DependsOn:
-#      - CiscoHOLEC2ASAv
+#      - n0workEC2ASAv
 #    Properties:
-#      AllocationId: !GetAtt CiscoHOLASAvEIP.AllocationId
+#      AllocationId: !GetAtt n0workASAvEIP.AllocationId
 #      NetworkInterfaceId: !Ref ASAvNetworkInterfaces03
 
   # Ansible Server
-  CiscoHOLEC2Ansible:
+  n0workEC2Ansible:
     Type: AWS::EC2::Instance
     DependsOn:
-      - CiscoHOLEC2ASAv
+      - n0workEC2ASAv
       - EKSWorkerNodeGroup
     Properties:
       ImageId: !Ref AnsibleImageID
       InstanceType: t2.micro
       Tags:
         - Key: Name
-          Value: !Sub "cisco-hol-${StudentName}-ec2-ansible-centos7-${Region}${Subnet01AvailabilityZone}"
+          Value: !Sub "${SessionName}-${PodName}-ansible"
         - Key: Org
           Value: Tetration
         - Key: Geo
@@ -1278,7 +1278,7 @@ Resources:
         - Key: Schedule
           Value: !Sub ${ScheduleName}
         - Key: Pod
-          Value: !Sub ${StudentName}
+          Value: !Sub ${PodName}
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash
@@ -1289,22 +1289,22 @@ Resources:
           (crontab -l 2>/dev/null; echo "* * * * * /bin/sh /home/ciscolab/ansible_ping.sh >> /home/ciscolab/ansible_ping.log") | crontab -
           cat <<EOF > /opt/TVB-assets/tvb-agent/inventory/hosts
           [centos]
-          ${CiscoHOLEC2Apache.PrivateIp}
-          ${CiscoHOLEC2MySQL.PrivateIp}
+          ${n0workEC2Apache.PrivateIp}
+          ${n0workEC2MySQL.PrivateIp}
           [centos:vars]
           ansible_user=root
           ansible_password=tet123\$\$!
           ansible_sudo_pass=tet123\$\$!
           [ubuntu]
-          $(/var/eks-init/eks-worker.sh '${AccessKey}' '${SecretKey}' '${Region}' '${StudentName}-eks-worker-${Region}')
+          $(/var/eks-init/eks-worker.sh '${AccessKey}' '${SecretKey}' '${Region}' '${PodName}-eks-worker-${Region}')
           [ubuntu:vars]
           ansible_user=root
           ansible_password=tet123\$\$!
           ansible_sudo_pass=tet123\$\$!
           [win]
-          ${CiscoHOLEC2IIS.PrivateIp}
-          ${CiscoHOLEC2SQLServer.PrivateIp}
-          ${CiscoHOLEC2ActiveDirectory.PrivateIp}
+          ${n0workEC2IIS.PrivateIp}
+          ${n0workEC2SQLServer.PrivateIp}
+          ${n0workEC2ActiveDirectory.PrivateIp}
           [win:vars]
           ansible_user=HOL\ciscolab
           ansible_password=tet123\$\$!
@@ -1327,10 +1327,10 @@ Resources:
           sed -i "s/^PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
           systemctl restart sshd
           systemctl restart network
-          echo "DNS1=${CiscoHOLEC2ActiveDirectory.PrivateIp}" | tee -a /etc/sysconfig/network-scripts/ifcfg-eth0
-          route add -net 192.168.${StudentIndex}.0 netmask 255.255.255.0 gw ${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress} dev eth0
+          echo "DNS1=${n0workEC2ActiveDirectory.PrivateIp}" | tee -a /etc/sysconfig/network-scripts/ifcfg-eth0
+          route add -net 192.168.${PodIndex}.0 netmask 255.255.255.0 gw ${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress} dev eth0
           route add -net ${ASAvOutsideSubnet} netmask 255.255.255.0 gw ${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress} dev eth0
-          echo "192.168.${StudentIndex}.0/24 via ${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress} dev eth0" > /etc/sysconfig/network-scripts/route-eth0
+          echo "192.168.${PodIndex}.0/24 via ${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress} dev eth0" > /etc/sysconfig/network-scripts/route-eth0
           echo "${ASAvOutsideSubnet}/24 via ${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress} dev eth0" >> /etc/sysconfig/network-scripts/route-eth0
           pip install paramiko
           sleep 15
@@ -1393,32 +1393,32 @@ Resources:
         - AssociatePublicIpAddress: "true"
           DeviceIndex: "0"
           GroupSet: 
-            - !Ref CiscoHOLPublicSecurityGroup
-          SubnetId: !Ref CiscoHOLSubnet01
+            - !Ref n0workPublicSecurityGroup
+          SubnetId: !Ref n0workSubnet01
     
   # Guacamole server
-  CiscoHOLEC2Guacamole:
+  n0workEC2Guacamole:
     Type: AWS::EC2::Instance
     DependsOn:
-      - CiscoHOLEC2ActiveDirectory
-      - CiscoHOLEC2SQLServer
-      - CiscoHOLEC2IIS
-      - CiscoHOLEC2MySQL
-      - CiscoHOLEC2Apache
-      - CiscoHOLEC2Ansible
-      - CiscoHOLEC2TetData
-      - CiscoHOLEC2TetEdge
-      - CiscoHOLEC2Ubuntu1804Employee
-      - CiscoHOLEC2Ubuntu1804SysAdmin
-      - CiscoHOLEC2ASAv
+      - n0workEC2ActiveDirectory
+      - n0workEC2SQLServer
+      - n0workEC2IIS
+      - n0workEC2MySQL
+      - n0workEC2Apache
+      - n0workEC2Ansible
+      - n0workEC2TetData
+      - n0workEC2TetEdge
+      - n0workEC2Ubuntu1804Employee
+      - n0workEC2Ubuntu1804SysAdmin
+      - n0workEC2ASAv
     Properties:
       ImageId: !Ref GuacamoleImageID
       InstanceType: t2.small
       Tags:
         - Key: Name
-          Value: !Sub "cisco-hol-${StudentName}-ec2-guacamole-centos7-${Region}${Subnet01AvailabilityZone}"
+          Value: !Sub "${SessionName}-${PodName}-guac-pod-ui"
         - Key: Pod
-          Value: !Sub ${StudentName}
+          Value: !Sub ${PodName}
         - Key: Schedule
           Value: !Sub ${ScheduleName}
         
@@ -1428,11 +1428,11 @@ Resources:
           cat <<EOF > /etc/guacamole/user-mapping.xml
           <user-mapping>
               <authorize
-                  username="${StudentName}"
-                  password="${StudentPassword}">
+                  username="${PodName}"
+                  password="${PodPassword}">
                   <connection name="01) Windows 2019 App - nopCommerce - IIS Web Server">
                       <protocol>rdp</protocol>
-                      <param name="hostname">${CiscoHOLEC2IIS.PrivateIp}</param>
+                      <param name="hostname">${n0workEC2IIS.PrivateIp}</param>
                       <param name="port">3389</param>
                       <param name="username">ciscolab</param>
                       <param name="password">tet123\$\$!</param>
@@ -1442,7 +1442,7 @@ Resources:
                   </connection>
                   <connection name="02) Windows 2019 App - nopCommerce - MS-SQL DB Server">
                       <protocol>rdp</protocol>
-                      <param name="hostname">${CiscoHOLEC2SQLServer.PrivateIp}</param>
+                      <param name="hostname">${n0workEC2SQLServer.PrivateIp}</param>
                       <param name="port">3389</param>
                       <param name="username">ciscolab</param>
                       <param name="password">tet123\$\$!</param>
@@ -1452,7 +1452,7 @@ Resources:
                   </connection>
                   <connection name="03) Linux CentOS7 App - OpenCart eCommerce - Apache Web Server">
                       <protocol>ssh</protocol>
-                      <param name="hostname">${CiscoHOLEC2Apache.PrivateIp}</param>
+                      <param name="hostname">${n0workEC2Apache.PrivateIp}</param>
                       <param name="port">22</param>
                       <param name="username">ciscolab</param>
                       <param name="password">tet123\$\$!</param>
@@ -1460,7 +1460,7 @@ Resources:
                   </connection>
                   <connection name="04) Linux CentOS7 App - OpenCart eCommerce - MySQL DB Server">
                       <protocol>ssh</protocol>
-                      <param name="hostname">${CiscoHOLEC2MySQL.PrivateIp}</param>
+                      <param name="hostname">${n0workEC2MySQL.PrivateIp}</param>
                       <param name="port">22</param>
                       <param name="username">ciscolab</param>
                       <param name="password">tet123\$\$!</param>
@@ -1468,7 +1468,7 @@ Resources:
                   </connection>
                   <connection name="05) End Users - Ubuntu18.04 - Employee Desktop">
                       <protocol>rdp</protocol>
-                      <param name="hostname">${CiscoHOLEC2Ubuntu1804Employee.PrivateIp}</param>
+                      <param name="hostname">${n0workEC2Ubuntu1804Employee.PrivateIp}</param>
                       <param name="port">3389</param>
                       <param name="username">ciscolab</param>
                       <param name="password">tet123\$\$!</param>
@@ -1477,7 +1477,7 @@ Resources:
                   </connection>	
                   <connection name="06) End Users - Ubuntu18.04 - SysAdmin Desktop">
                       <protocol>rdp</protocol>
-                      <param name="hostname">${CiscoHOLEC2Ubuntu1804SysAdmin.PrivateIp}</param>
+                      <param name="hostname">${n0workEC2Ubuntu1804SysAdmin.PrivateIp}</param>
                       <param name="port">3389</param>
                       <param name="username">ciscolab</param>
                       <param name="password">tet123\$\$!</param>
@@ -1486,7 +1486,7 @@ Resources:
                   </connection>	
                   <connection name="07) Common Services - Ansible">
                       <protocol>ssh</protocol>
-                      <param name="hostname">${CiscoHOLEC2Ansible.PrivateIp}</param>
+                      <param name="hostname">${n0workEC2Ansible.PrivateIp}</param>
                       <param name="port">22</param>
                       <param name="username">ciscolab</param>
                       <param name="password">tet123\$\$!</param>
@@ -1495,7 +1495,7 @@ Resources:
                   </connection>	
                   <connection name="08) Common Services - Microsoft Active Directory 2019">
                       <protocol>rdp</protocol>
-                      <param name="hostname">${CiscoHOLEC2ActiveDirectory.PrivateIp}</param>
+                      <param name="hostname">${n0workEC2ActiveDirectory.PrivateIp}</param>
                       <param name="port">3389</param>
                       <param name="username">ciscolab</param>
                       <param name="password">tet123\$\$!</param>
@@ -1505,7 +1505,7 @@ Resources:
                   </connection>
                   <connection name="09) Attack Host - KaliLinux - Metasploit">
                       <protocol>ssh</protocol>
-                      <param name="hostname">${CiscoHOLEC2Attacker.PrivateIp}</param>
+                      <param name="hostname">${n0workEC2Attacker.PrivateIp}</param>
                       <param name="port">22</param>
                       <param name="username">ciscolab</param>
                       <param name="password">tet123\$\$!</param>
@@ -1514,7 +1514,7 @@ Resources:
                   </connection>	
                   <connection name="10) Tetration Edge Appliance">
                       <protocol>ssh</protocol>
-                      <param name="hostname">${CiscoHOLEC2TetEdge.PrivateIp}</param>
+                      <param name="hostname">${n0workEC2TetEdge.PrivateIp}</param>
                       <param name="port">22</param>
                       <param name="username">ciscolab</param>
                       <param name="password">tet123\$\$!</param>
@@ -1523,7 +1523,7 @@ Resources:
                   </connection>
                   <connection name="11) Tetration Data Ingest Appliance">
                       <protocol>ssh</protocol>
-                      <param name="hostname">${CiscoHOLEC2TetData.PrivateIp}</param>
+                      <param name="hostname">${n0workEC2TetData.PrivateIp}</param>
                       <param name="port">22</param>
                       <param name="username">ciscolab</param>
                       <param name="password">tet123\$\$!</param>
@@ -1534,7 +1534,7 @@ Resources:
           </user-mapping>
           EOF
           sed -i "s/^PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
-          echo "DNS1=${CiscoHOLEC2ActiveDirectory.PrivateIp}" | tee -a /etc/sysconfig/network-scripts/ifcfg-eth0
+          echo "DNS1=${n0workEC2ActiveDirectory.PrivateIp}" | tee -a /etc/sysconfig/network-scripts/ifcfg-eth0
           systemctl restart sshd
           systemctl restart network
           systemctl restart tomcat
@@ -1549,40 +1549,40 @@ Resources:
     Properties:
       Tags:
         - Key: name
-          Value: !Sub "${StudentName}-nic01-guacamole"
-      Description: !Sub "${StudentName} Guacamole Network Interface 01"
+          Value: !Sub "${PodName}-nic01-guacamole"
+      Description: !Sub "${PodName} Guacamole Network Interface 01"
       SourceDestCheck: 'false'
       GroupSet: 
-        - !Ref CiscoHOLPublicSecurityGroup
-        - !Ref CiscoHOLWebSecurityGroup
-      SubnetId: !Ref CiscoHOLSubnet01
+        - !Ref n0workPublicSecurityGroup
+        - !Ref n0workWebSecurityGroup
+      SubnetId: !Ref n0workSubnet01
 
   GuacamoleNetworkInterfaces02:
     Type: AWS::EC2::NetworkInterface
     Properties:
       Tags:
         - Key: name
-          Value: !Sub "${StudentName}-nic02-guacamole"
-      Description: !Sub "${StudentName} Guacamole Network Interface 02"
+          Value: !Sub "${PodName}-nic02-guacamole"
+      Description: !Sub "${PodName} Guacamole Network Interface 02"
       SourceDestCheck: 'false'
       GroupSet: 
-        - !Ref CiscoHOLPrivateSecurityGroup
-      SubnetId: !Ref CiscoHOLSubnet03
+        - !Ref n0workPrivateSecurityGroup
+      SubnetId: !Ref n0workSubnet03
       PrivateIpAddresses:
         - PrivateIpAddress: !Ref GuacamoleOutsidePrivateIp
           Primary: 'true'
 
   # Create Elastic IP Addresses
   # IF you have more than five (5) EIPs already associated to your AWS VPC, comment out the next 6 lines!
-  # CiscoHOLGuacamoleEIP:
+  # n0workGuacamoleEIP:
   #   Type: AWS::EC2::EIP
   #   Properties:
   #     Tags:
   #       - Key: Name
-  #         Value: !Sub "cisco-hol-${StudentName}-eip-guacamole-${Region}${Subnet01AvailabilityZone}"
+  #         Value: !Sub "n0work-${PodName}-eip-guacamole-${Region}${Subnet01AvailabilityZone}"
   
   # Elastic IP Association  
-  CiscoHOLAssociateEIPGuacamole:
+  n0workAssociateEIPGuacamole:
     Type: AWS::EC2::EIPAssociation
     Properties:
       AllocationId: !Ref GuacamoleElasticIpAllocationId
@@ -1609,7 +1609,7 @@ Resources:
   LambdaFunctionIIS:
     Type: AWS::Lambda::Function
     Properties:
-      Description: "Cisco HOL Load Generator Lambda For IIS"
+      Description: "n0work Load Generator Lambda For IIS"
       Code:
         ZipFile: |
           const http = require('http');
@@ -1636,13 +1636,13 @@ Resources:
       Role: !Sub ${LambdaExecutionRole.Arn}
       Environment:
         Variables:
-          APP_URL: !Sub ${StudentName}-${Region}-${NamingSuffix}-nopcommerce.lab.tetration.guru
+          APP_URL: !Sub ${SessionName}-${PodName}-nopcommerce.lab.tetration.guru
       Runtime: nodejs12.x
 
   LambdaScheduleIIS:
     Type: AWS::Events::Rule
     Properties:
-      Description: "Cisco HOL Load Generator Lambda Event"
+      Description: "n0work Load Generator Lambda Event"
       ScheduleExpression: rate(1 minute)
       State: ENABLED
       Targets:
@@ -1661,7 +1661,7 @@ Resources:
   LambdaFunctionApache:
     Type: AWS::Lambda::Function
     Properties:
-      Description: "Cisco HOL Load Generator Lambda For Apache"
+      Description: "n0work Load Generator Lambda For Apache"
       Code:
         ZipFile: |
           const http = require('http');
@@ -1688,13 +1688,13 @@ Resources:
       Role: !Sub ${LambdaExecutionRole.Arn}
       Environment:
         Variables:
-          APP_URL: !Sub ${StudentName}-${Region}-${NamingSuffix}-opencart.lab.tetration.guru
+          APP_URL: !Sub ${SessionName}-${PodName}-opencart.lab.tetration.guru
       Runtime: nodejs12.x
 
   LambdaScheduleApache:
     Type: AWS::Events::Rule
     Properties:
-      Description: "Cisco HOL Load Generator Lambda Event"
+      Description: "n0work Load Generator Lambda Event"
       ScheduleExpression: rate(1 minute)
       State: ENABLED
       Targets:
@@ -1710,32 +1710,32 @@ Resources:
       SourceArn: !Sub ${LambdaScheduleApache.Arn}
 
   # VPC Flow Logs
-  CiscoHOLVPCFlowLogS3Bucket:
+  n0workVPCFlowLogS3Bucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: !Sub "${VpcID}-cisco-hol-${StudentName}-vpc-flow-logs"
+      BucketName: !Sub "n0work-${SessionName}-${PodName}-vpc-flow-logs"
 
-  CiscoHOLVPCFlowLog:
+  n0workVPCFlowLog:
     Type: AWS::EC2::FlowLog
     Properties:
       LogDestinationType: s3
-      LogDestination: !GetAtt CiscoHOLVPCFlowLogS3Bucket.Arn
+      LogDestination: !GetAtt n0workVPCFlowLogS3Bucket.Arn
       ResourceId: !Ref VpcID
       ResourceType: VPC
       TrafficType: ALL
   
   # IAM User and API Keys
-  CiscoHOLIAMUser:
+  n0workIAMUser:
     Type: AWS::IAM::User
     Properties: 
-      UserName: !Join [ "-", [ !Ref StudentName, !Ref 'AWS::Region', !Ref 'NamingSuffix' ] ]
+      UserName: !Join [ "-", [ !Ref PodName, !Ref 'AWS::Region', !Ref 'SessionName' ] ]
 
-  CiscoHOLIAMPolicy:
+  n0workIAMPolicy:
     Type: AWS::IAM::Policy
     Properties:
       Users:
-        - !Ref CiscoHOLIAMUser
-      PolicyName: !Ref StudentName
+        - !Ref n0workIAMUser
+      PolicyName: !Ref PodName
       PolicyDocument:
         Version: 2012-10-17
         Statement:
@@ -1743,53 +1743,53 @@ Resources:
           Effect: Allow
           Action: s3:ListBucket
           Resource:
-          - !Sub "arn:aws:s3:::${CiscoHOLVPCFlowLogS3Bucket}"
+          - !Sub "arn:aws:s3:::${n0workVPCFlowLogS3Bucket}"
         - Sid: AllObjectActions
           Effect: Allow
           Action: s3:*Object
           Resource:
-          - !Sub "arn:aws:s3:::${CiscoHOLVPCFlowLogS3Bucket}/*"
+          - !Sub "arn:aws:s3:::${n0workVPCFlowLogS3Bucket}/*"
         - Effect: Allow
           Action: ec2:Describe*
           Resource: "*"
           #Condition:
           #  StringEquals:
-          #    ec2:ResourceTag/StudentName: !Ref StudentName
+          #    ec2:ResourceTag/PodName: !Ref PodName
         - Effect: Allow
           Action: elasticloadbalancing:Describe*
           Resource: "*"
           
-  CiscoHOLIAMUserAccessKey:
+  n0workIAMUserAccessKey:
     Type: AWS::IAM::AccessKey
     Properties:
-      UserName: !Ref CiscoHOLIAMUser
+      UserName: !Ref n0workIAMUser
 
 Outputs:
   # AWS Outputs
-  CiscoHOLAWSRegion:
+  n0workAWSRegion:
     Description: AWS Region
     Value: !Ref Region
   
-  # Student Outputs
-  CiscoHOLStudentName:
-    Description: Student Account Name
-    Value: !Ref StudentName
-  CiscoHOLStudentPassword:
-    Description: Student Account Password
-    Value: !Ref StudentPassword
+  # Pod Outputs
+  n0workPodName:
+    Description: Pod Account Name
+    Value: !Ref PodName
+  n0workPodPassword:
+    Description: Pod Account Password
+    Value: !Ref PodPassword
 
   # VPC Flow Log Bucket Name
-  CiscoHOLVPCFlowLogBucket:
+  n0workVPCFlowLogBucket:
     Description: VPC Flow Log Bucket Name
-    Value: !Ref CiscoHOLVPCFlowLogS3Bucket
+    Value: !Ref n0workVPCFlowLogS3Bucket
 
-  # Student AWS Credentials
-  StudentAccessKey:
-    Description: Student AWS Access Key
-    Value: !Ref CiscoHOLIAMUserAccessKey
-  StudentSecretKey:
-    Description: Student AWS Secret Key
-    Value: !GetAtt CiscoHOLIAMUserAccessKey.SecretAccessKey
+  # Pod AWS Credentials
+  PodAccessKey:
+    Description: Pod AWS Access Key
+    Value: !Ref n0workIAMUserAccessKey
+  PodSecretKey:
+    Description: Pod AWS Secret Key
+    Value: !GetAtt n0workIAMUserAccessKey.SecretAccessKey
 
   # EKS Cluster Outputs
   EKSClusterName:
@@ -1805,58 +1805,58 @@ Outputs:
     Description: EKS Worker Node IAM Role
     Value: !GetAtt EKSWorkerInstanceRole.Arn
 
-  CiscoHOLPublicSubnet01:
+  n0workPublicSubnet01:
     Description: Internal-Corporate Subnet Cidr Block
     Value: !Ref Subnet01CidrBlock
-  CiscoHOLPublicSubnet02:
+  n0workPublicSubnet02:
     Description: Internal-not-used Subnet Cidr Block
     Value: !Ref Subnet02CidrBlock
-  CiscoHOLPrivateSubnet:
+  n0workPrivateSubnet:
     Description: External-Internet Subnet Cidr Block
     Value: !Ref Subnet03CidrBlock
   
   # EC2 Instances Outputs
-  CiscoHOLASAvPrivate01:
+  n0workASAvPrivate01:
     Description: ASAv Firewall Management IP Address
     Value: !GetAtt ASAvNetworkInterfaces01.PrimaryPrivateIpAddress
-  CiscoHOLASAvPrivate02:
+  n0workASAvPrivate02:
     Description: ASAv Firewall Outside IP Address
     Value: !GetAtt ASAvNetworkInterfaces02.PrimaryPrivateIpAddress
-  CiscoHOLASAvPrivate03:
+  n0workASAvPrivate03:
     Description: ASAv Firewall Inside IP Address
     Value: !GetAtt ASAvNetworkInterfaces03.PrimaryPrivateIpAddress
 
-  CiscoHOLActiveDirectory:
+  n0workActiveDirectory:
     Description: Active Directory Server Private IP
-    Value: !GetAtt CiscoHOLEC2ActiveDirectory.PrivateIp
-  CiscoHOLMSSQL:
+    Value: !GetAtt n0workEC2ActiveDirectory.PrivateIp
+  n0workMSSQL:
     Description: MS SQL Server Private IP
-    Value: !GetAtt CiscoHOLEC2SQLServer.PrivateIp
-  CiscoHOLIISPrivate:
+    Value: !GetAtt n0workEC2SQLServer.PrivateIp
+  n0workIISPrivate:
     Description: IIS Server Inside Private IP
-    Value: !GetAtt CiscoHOLEC2IIS.PrivateIp
-  CiscoHOLIISDNS:
+    Value: !GetAtt n0workEC2IIS.PrivateIp
+  n0workIISDNS:
     Description: IIS Server DNS Name
-    Value: !Sub ${StudentName}-${Region}-${NamingSuffix}-nopcommerce.lab.tetration.guru
-  CiscoHOLIISOutsidePrivate:
+    Value: !Sub ${SessionName}-${PodName}-nopcommerce.lab.tetration.guru
+  n0workIISOutsidePrivate:
     Description: IIS Server Outside Private IP
     Value: !Ref IISOutsidePrivateIp
-  CiscoHOLMySql:
+  n0workMySql:
     Description: MySQL Server Private IP
-    Value: !GetAtt CiscoHOLEC2MySQL.PrivateIp
-  CiscoHOLApachePrivate:
+    Value: !GetAtt n0workEC2MySQL.PrivateIp
+  n0workApachePrivate:
     Description: Apache Server Inside Private IP
-    Value: !GetAtt CiscoHOLEC2Apache.PrivateIp
-  CiscoHOLApacheDNS:
+    Value: !GetAtt n0workEC2Apache.PrivateIp
+  n0workApacheDNS:
     Description: Apache Server DNS Name
-    Value: !Sub ${StudentName}-${Region}-${NamingSuffix}-opencart.lab.tetration.guru
-  CiscoHOLApacheOutsidePrivate:
+    Value: !Sub ${SessionName}-${PodName}-opencart.lab.tetration.guru
+  n0workApacheOutsidePrivate:
     Description: Apache Server Outside Private IP
     Value: !Ref ApacheOutsidePrivateIp
-  CiscoHOLAnsible:
+  n0workAnsible:
     Description: Ansible Server Private IP
-    Value: !GetAtt CiscoHOLEC2Ansible.PrivateIp
-  CiscoHOLISE:
+    Value: !GetAtt n0workEC2Ansible.PrivateIp
+  n0workISE:
     Description: ISE Server IP
     Value: !Ref ISEIPAddress
   TetNetworkInterfaces01Data:
@@ -1868,18 +1868,18 @@ Outputs:
   TetNetworkInterfaces03Data:
     Description: Tetration Data Ingest Private IP 3
     Value: !GetAtt TetNetworkInterfaces03.PrimaryPrivateIpAddress
-  CiscoHOLTetrationEdge:
+  n0workTetrationEdge:
     Description: Tetration Edge Private IP
-    Value: !GetAtt CiscoHOLEC2TetEdge.PrivateIp
-  CiscoHOLUbuntu1804Employee:
+    Value: !GetAtt n0workEC2TetEdge.PrivateIp
+  n0workUbuntu1804Employee:
     Description: Windows 10 Employee Private IP
-    Value: !GetAtt CiscoHOLEC2Ubuntu1804Employee.PrivateIp
-  CiscoHOLUbuntu1804SysAdmin:
+    Value: !GetAtt n0workEC2Ubuntu1804Employee.PrivateIp
+  n0workUbuntu1804SysAdmin:
     Description: Windows 10 SysAdmin Private IP
-    Value: !GetAtt CiscoHOLEC2Ubuntu1804SysAdmin.PrivateIp
-  CiscoHOLAttacker:
+    Value: !GetAtt n0workEC2Ubuntu1804SysAdmin.PrivateIp
+  n0workAttacker:
     Description: Metasploit Attacker Private IP
-    Value: !GetAtt CiscoHOLEC2Attacker.PrivateIp
-  CiscoHOLGuacamolePublic:
+    Value: !GetAtt n0workEC2Attacker.PrivateIp
+  n0workGuacamolePublic:
     Description: Guacamole Server Public IP
     Value: !Ref GuacamoleElasticIp

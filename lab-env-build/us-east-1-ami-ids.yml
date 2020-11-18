@@ -1,0 +1,14 @@
+ldap_ami: ami-0b92e4f620ef9a065
+mssql_ami: ami-0a721249f9c2100af
+iis_ami: ami-03a0c66d434a39373
+tet_data_ami: ami-07be3d10e2d5840f3
+tet_edge_ami: ami-0c47fa32784ead071
+attack_server_ami: ami-095f82ddd0105f28d
+guacamole_ami: ami-075aa8d6dbbd471f5
+mysql_ami: ami-051694a7d3e466752
+apache_ami: ami-0cbfdfbab9b9125a7
+ansible_ami: ami-036605e2ad7d67bd9
+employee_ubuntu_ami: ami-03a70986146860cd3
+sysadmin_ubuntu_ami: ami-03a70986146860cd3
+eks_worker_ami: ami-000c56e8536aaaf50
+asav_ami: ami-0baf97ff07e48f3ac

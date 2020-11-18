@@ -6,3 +6,4 @@
 .DS_Store
 .~lock*
 reports/
+__pycache__

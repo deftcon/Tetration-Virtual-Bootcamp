@@ -11,7 +11,7 @@ Parameters:
   InstanceList:
     Type: CommaDelimitedList
     Description: List of instance IDs to be tracked
-  NamingSuffix:
+  SessionName:
     Type: String
     Description: Suffix appended to objects for uniqueness
 
@@ -43,7 +43,7 @@ Resources:
                 Variables:
                     API_URL: !Sub ${APIGatewayURL}
                     X_API_KEY: !Sub ${APIGatewayKey}
-            FunctionName: !Sub "tethol-dns-updater-${NamingSuffix}"
+            FunctionName: !Sub "n0work-dns-updater-${SessionName}"
             Handler: tvb-dyndns.lambda_handler
             Runtime: python3.8
             Role: !Sub ${LambdaDynDNSExecutionRole.Arn}
@@ -51,7 +51,7 @@ Resources:
     EventBridgeRule:
         Type: AWS::Events::Rule
         Properties:
-            Name: !Sub "instance_transition_to_running_${NamingSuffix}"
+            Name: !Sub "instance_transition_to_running_${SessionName}"
             Description: Triggers when the IIS and/or Apache instances transition to running
             EventPattern:
                 source:
@@ -69,7 +69,7 @@ Resources:
                         Fn::GetAtt: 
                             - "LambdaFunctionDNSUpdater"
                             - "Arn"
-                    Id: "TetHol_DNS_Updater"
+                    Id: "n0work_DNS_Updater"
 
     PermissionForEventsToInvokeLambda: 
         Type: AWS::Lambda::Permission
