@@ -34,6 +34,43 @@ if not ACCESS_KEY or not SECRET_KEY:
 API_GATEWAY_URL = "https://fh3aao7bri.execute-api.us-east-1.amazonaws.com/prod"
 API_GATEWAY_KEY = "iBO39NUUc1401nMYkNWvM1jbA4YAHhKD1z4wpIlh"
 
+##################################################################################################
+# Functions to interact with Route53 using the API Gateway
+##################################################################################################
+
+def update_dns(public_ip, hostname):
+    '''Performs DNS update using the API gateway'''
+    api_key = API_GATEWAY_KEY
+    api_url = API_GATEWAY_URL
+    headers = {'x-api-key': api_key }
+    query_params = {'mode':'set', 'hostname': hostname, 'ipv4_address': public_ip}
+    response = requests.get(api_url, headers=headers, params=query_params)
+    return response
+
+def verify_dns(hostname):
+    '''Performs get on a Route53 record using the API gateway'''
+    api_key = API_GATEWAY_KEY
+    api_url = API_GATEWAY_URL
+    headers = {'x-api-key': api_key }
+    query_params = {'mode':'get', 'hostname': hostname }
+    response = requests.get(api_url, headers=headers, params=query_params)
+    return response
+
+def unique_session(session_name):
+    '''
+    Query Route53 for the session name. If exists then the name is in use.
+    Returns True if the session is unique (Null Query response)
+    Returns False if the session is not unique (Query success)
+    '''
+    r = verify_dns(f"{session_name}.lab.tetration.guru")
+    if json.loads(r.content):
+        content = json.loads(r.content)
+        if 'return_status' in content:
+            if content['return_status'] == 'success':
+                return False
+    else:
+        return True
+
 def get_session_name(prompt):
     while True:
         pattern = re.compile(r'^([^~+&@!#$%_?/:\']*)$')
@@ -51,7 +88,12 @@ def get_session_name(prompt):
             continue
         m = re.match(pattern, answer)
         if m:
-            return answer
+            if unique_session(answer):
+                update_dns('127.0.0.1', f"{answer}.lab.tetration.guru")
+                return answer
+            else:
+                print(f"The session name {answer} is already in use. Please ensure session name is unique.")
+                continue
         else:
             print("No special characters are allowed, except a dash (-)!")
 print('A session name is required to uniquely identify your deployment')
@@ -826,42 +868,34 @@ except Exception as e:
 #######################################################################
 # Gather the list of Instance IDs to track and create DNS Updater stack
 #######################################################################
-def update_dns(public_ip, hostname):
-    '''Performs the initial DNS update during instance creation'''
-    # api_key = os.environ.get('API_GATEWAY_KEY')
-    # api_url = os.environ.get('API_GATEWAY_URL')
-    api_key = API_GATEWAY_KEY
-    api_url = API_GATEWAY_URL
-    headers = {'x-api-key': api_key }
-    query_params = {'mode':'set', 'hostname': hostname, 'ipv4_address': public_ip}
-    response = requests.get(api_url, headers=headers, params=query_params)
-    return response
 
 print("INFO: Beginning deployment of DNS updater stack")
 try:
     instance_ids = []
     ec2 = session.client('ec2',region_name=REGION)
-    print("INFO: Retrieving the instance IDs of the EC2 instances to track (Apache and IIS servers)")
+    print("INFO: Retrieving the instance IDs of the EC2 instances for Dynamic DNS")
     reservations = ec2.describe_instances()['Reservations']
     for reservation in reservations:
         instances = reservation['Instances']
         for instance in instances:
             if instance['State']['Name'] == 'running':
-                for tag in instance['Tags']:
-                    if tag['Key'] == 'Name':
-                        if 'apache' in tag['Value'] or 'iis' in tag['Value']:
-                            instance_ids.append(instance['InstanceId'])
-                    # Perform initial DNS update, reading hostname from the tag and getting Public IP from the instance
-                    if tag['Key'] == 'DNS':
-                        public_ip = instance['PublicIpAddress']
-                        hostname = tag['Value']
-                        print(f'INFO: Updating DNS for hostname: {hostname} IP Address: {public_ip}')
-                        response = update_dns(public_ip, hostname)
-                        if response.status_code == 200:
-                            print(f'INFO: DNS update successful')
-                        else:
-                            print(f'ERROR: DNS update failed for hostname {hostname} IP Address: {public_ip}')
-                            print(f'ERROR: Status code: {response.status_code}, Reason: {response.reason}')
+                if 'PublicIpAddress' in instance:
+                    instance_ids.append(instance['InstanceId'])
+                    for tag in instance['Tags']:
+                        # if tag['Key'] == 'Name':
+                        #     if 'apache' in tag['Value'] or 'iis' in tag['Value']:
+                                # instance_ids.append(instance['InstanceId'])
+                        # Perform initial DNS update, reading hostname from the tag and getting Public IP from the instance
+                        if tag['Key'] == 'DNS':
+                            public_ip = instance['PublicIpAddress']
+                            hostname = tag['Value']
+                            print(f'INFO: Updating DNS for hostname: {hostname} IP Address: {public_ip}')
+                            response = update_dns(public_ip, hostname)
+                            if response.status_code == 200:
+                                print(f'INFO: DNS update successful')
+                            else:
+                                print(f'ERROR: DNS update failed for hostname {hostname} IP Address: {public_ip}')
+                                print(f'ERROR: Status code: {response.status_code}, Reason: {response.reason}')
     
     cloudformation = session.client('cloudformation', region_name=REGION)
     

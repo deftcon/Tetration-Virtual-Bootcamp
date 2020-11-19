@@ -508,4 +508,19 @@ try:
 except Exception as e:
     print(f'WARN: While deleting {STATE_FILE} from S3:  {e}')
 
+########################################################################
+# Delete the DNS record for the session from Route53
+########################################################################
+print(f"INFO: Deleting {SESSION_NAME}.lab.tetration.guru from Route53")
+resp = update_dns("127.0.0.1", f"{SESSION_NAME}.lab.tetration.guru")
+if resp.status_code == 200:
+    content = json.loads(resp.content)
+    if content:
+        if "return_message" in content:
+            print(f"INFO: Response from API - {content['return_message']}")
+        else:
+            print(f"WARN: {content['errorMessage']}")
+    else:
+        print(f"ERROR: Received HTTP {resp.status_code} {resp.reason}")
+
 print('INFO: Rollback completed successfully!')

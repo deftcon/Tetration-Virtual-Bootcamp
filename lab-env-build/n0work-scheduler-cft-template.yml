@@ -618,7 +618,7 @@ Parameters:
       name=value,name=value,.. that are set on stopped instances
   SchedulerFrequency:
     Type: String
-    Default: '5'
+    Default: '1'
     AllowedValues:
       - '1'
       - '2'

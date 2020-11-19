@@ -405,6 +405,7 @@ Resources:
         - Key: AppSDLC
           Value: Lab
 
+
   n0workWebSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -470,6 +471,8 @@ Resources:
           Value: !Sub ${ScheduleName}
         - Key: Pod
           Value: !Sub ${PodName}
+        - Key: DNS
+          Value: !Sub ${SessionName}-${PodName}-microsoft-ad-dc.lab.tetration.guru
       UserData:
         Fn::Base64: !Sub |
           <powershell>
@@ -525,6 +528,8 @@ Resources:
           Value: !Sub ${ScheduleName}
         - Key: Pod
           Value: !Sub ${PodName}
+        - Key: DNS
+          Value: !Sub ${SessionName}-${PodName}-nopcommerce-mssql.lab.tetration.guru
       UserData:
         Fn::Base64: !Sub |
           <powershell>
@@ -575,7 +580,7 @@ Resources:
         - Key: Pod
           Value: !Sub ${PodName}
         - Key: DNS
-          Value: !Sub ${SessionName}-${PodName}-nopcommerce.lab.tetration.guru
+          Value: !Sub ${SessionName}-${PodName}-nopcommerce-iis.lab.tetration.guru
       UserData:
         Fn::Base64: !Sub |
           <powershell>
@@ -633,6 +638,8 @@ Resources:
           Value: !Sub ${ScheduleName}
         - Key: Pod
           Value: !Sub ${PodName}
+        - Key: DNS
+          Value: !Sub ${SessionName}-${PodName}-opencart-mysql.lab.tetration.guru
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash
@@ -681,7 +688,7 @@ Resources:
         - Key: Pod
           Value: !Sub ${PodName}
         - Key: DNS
-          Value: !Sub ${SessionName}-${PodName}-opencart.lab.tetration.guru
+          Value: !Sub ${SessionName}-${PodName}-opencart-apache.lab.tetration.guru
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash
@@ -831,6 +838,8 @@ Resources:
           Value: !Sub ${ScheduleName}
         - Key: Pod
           Value: !Sub ${PodName}
+        - Key: DNS
+          Value: !Sub ${SessionName}-${PodName}-user-employee.lab.tetration.guru
       UserData:
         Fn::Base64: !Sub |
           !/bin/bash
@@ -858,6 +867,8 @@ Resources:
           Value: !Sub ${ScheduleName}
         - Key: Pod
           Value: !Sub ${PodName}
+        - Key: DNS
+          Value: !Sub ${SessionName}-${PodName}-user-sysadmin.lab.tetration.guru
       UserData:
         Fn::Base64: !Sub |
           !/bin/bash
@@ -883,6 +894,8 @@ Resources:
           Value: !Sub "${SessionName}-${PodName}-bad-guy"
         - Key: Schedule
           Value: !Sub ${ScheduleName}
+        - Key: DNS
+          Value: !Sub ${SessionName}-${PodName}-bad-guy.lab.tetration.guru
       UserData:
         Fn::Base64: !Sub |
           !/bin/bash
@@ -1258,7 +1271,7 @@ Resources:
       InstanceType: t2.micro
       Tags:
         - Key: Name
-          Value: !Sub "${SessionName}-${PodName}-ansible"
+          Value: !Sub "${SessionName}-${PodName}-rh-ansible"
         - Key: Org
           Value: Tetration
         - Key: Geo
@@ -1279,6 +1292,8 @@ Resources:
           Value: !Sub ${ScheduleName}
         - Key: Pod
           Value: !Sub ${PodName}
+        - Key: DNS
+          Value: !Sub ${SessionName}-${PodName}-rh-ansible.lab.tetration.guru
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash
@@ -1421,6 +1436,8 @@ Resources:
           Value: !Sub ${PodName}
         - Key: Schedule
           Value: !Sub ${ScheduleName}
+        - Key: DNS
+          Value: !Sub ${SessionName}-${PodName}-guac-pod-ui.lab.tetration.guru
         
       UserData:
         Fn::Base64: !Sub |
@@ -1837,7 +1854,7 @@ Outputs:
     Value: !GetAtt n0workEC2IIS.PrivateIp
   n0workIISDNS:
     Description: IIS Server DNS Name
-    Value: !Sub ${SessionName}-${PodName}-nopcommerce.lab.tetration.guru
+    Value: !Sub ${SessionName}-${PodName}-nopcommerce-iis.lab.tetration.guru
   n0workIISOutsidePrivate:
     Description: IIS Server Outside Private IP
     Value: !Ref IISOutsidePrivateIp
@@ -1849,7 +1866,7 @@ Outputs:
     Value: !GetAtt n0workEC2Apache.PrivateIp
   n0workApacheDNS:
     Description: Apache Server DNS Name
-    Value: !Sub ${SessionName}-${PodName}-opencart.lab.tetration.guru
+    Value: !Sub ${SessionName}-${PodName}-opencart-apache.lab.tetration.guru
   n0workApacheOutsidePrivate:
     Description: Apache Server Outside Private IP
     Value: !Ref ApacheOutsidePrivateIp
