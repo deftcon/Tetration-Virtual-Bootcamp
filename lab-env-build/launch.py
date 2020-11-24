@@ -13,6 +13,7 @@ import urllib
 import calendar
 import sys
 import requests
+import socket
 from datetime import datetime
 from datetime import timedelta
 from botocore.config import Config
@@ -625,12 +626,24 @@ print(f'INFO: CFT Template {CFT_POD_FILE} Uploaded To S3...')
 #######################################################################
 # Upload DNS Updater Lambda Function TO S3 Bucket #####################
 #######################################################################
-print(f'INFO: Uploading lambda_function/tvb-dyndns.zip To S3 bucket {S3_BUCKET}')
+# Lambda requires that the code be in an S3 bucket in the same region
+# as the function,  therefore we must create another bucket to store
+# the lambda code for the session
+LAMBDA_S3_BUCKET = f"n0work-{SESSION_NAME}-lambda"
+print(f"INFO: Creating S3 Bucket {LAMBDA_S3_BUCKET}")
+boto_config = Config(region_name=REGION)
+if REGION == 'us-east-1':
+    result = create_bucket(LAMBDA_S3_BUCKET, boto_config)
+else:
+    result = create_bucket(LAMBDA_S3_BUCKET, boto_config, region=REGION)
+if result:
+    print(f"INFO: Created S3 bucket {LAMBDA_S3_BUCKET}")
+print(f'INFO: Uploading lambda_function/tvb-dyndns.zip To S3 bucket {LAMBDA_S3_BUCKET}')
 DNS_UPDATER_FILE = os.path.join(os.getcwd(),'lambda_function','tvb-dyndns.zip')
 DNS_UPDATER_NAME = 'tvb-dyndns.zip'
 s3 = boto3.resource('s3', region_name=REGION)
-s3.meta.client.upload_file(DNS_UPDATER_FILE, S3_BUCKET, DNS_UPDATER_NAME)
-print(f'INFO: lambda_function/tvb-dyndns.zip Uploaded To S3 bucket {S3_BUCKET}')
+s3.meta.client.upload_file(DNS_UPDATER_FILE, LAMBDA_S3_BUCKET, DNS_UPDATER_NAME)
+print(f'INFO: lambda_function/tvb-dyndns.zip Uploaded To S3 bucket {LAMBDA_S3_BUCKET}')
 
 #######################################################################
 # Run POD Cloud Formation #############################################
@@ -805,7 +818,24 @@ try:
                     for tag in elb['Tags']:
                         for key in tag:
                             if pod['account_name'] in tag[key]:
-                                pod['eks_dns'] = list(filter(lambda e: e['LoadBalancerName'] == elb['LoadBalancerName'], eks_elbs))[0]['DNSName']
+                                dns_name = list(filter(lambda e: e['LoadBalancerName'] == elb['LoadBalancerName'], eks_elbs))[0]['DNSName']
+                                if dns_name:
+                                    elb_ip = None
+                                    while not elb_ip:
+                                        try:
+                                            elb_ip = socket.gethostbyname(dns_name)
+                                        except:
+                                            continue
+                                    hostname = f"{SESSION_NAME}-{pod['account_name']}-sock-shop.lab.tetration.guru"
+                                    pod['eks_dns'] = hostname
+                                    print(f'INFO: Updating DNS for hostname: {hostname} IP Address: {elb_ip}')
+                                    response = update_dns(elb_ip, hostname)
+                                    if response.status_code == 200:
+                                        print(f'INFO: DNS update successful')
+                                    else:
+                                        print(f'ERROR: DNS update failed for hostname {hostname} IP Address: {elb_ip}')
+                                        print(f'ERROR: Status code: {response.status_code}, Reason: {response.reason}')
+
                                 elb_name = elb['LoadBalancerName']
                                 print(f"INFO: elb {elb_name} for pod {pod['account_name']} was found!")
                                 break
@@ -835,6 +865,7 @@ try:
                                     print(f'Waiting for EKS worker node {instance_id} to pass health checks')
                                     waiter.wait(InstanceIds=[instance_id])
                                     print(f"EKS worker node {instance_id} now has status of 'ok'!")
+                                    inservice_count = 0
                                     while True:
                                         print(f"INFO: Registering instance {tag['Value']} with elb {elb_name}")
                                         client.register_instances_with_load_balancer(LoadBalancerName=elb_name, Instances=[{'InstanceId': instance_id}])
@@ -849,9 +880,15 @@ try:
                                                     if instance_id in health['InstanceStates'][0]['InstanceId']:
                                                         print(f"INFO: Instance status: {health['InstanceStates'][0]['State']}")
                                                         if health['InstanceStates'][0]['State'] == 'InService':
-                                                            break
+                                                            inservice_count += 1                                                          
+                                                            if inservice_count == 3:
+                                                                break
+                                                            else:
+                                                                print(f"INFO: InService count: {inservice_count}, check again in 5 sec...")
+                                                                time.sleep(5)
                                                         else:
                                                             print(f"INFO: Instance not in service yet. Retry in 15 seconds")
+                                                            inservice_count == 0
                                                             time.sleep(15)
                                         else:
                                             print(f"INFO: Instance {instance_id} not attached to the ELB {elb_name}, trying again")
@@ -897,6 +934,21 @@ try:
                                 print(f'ERROR: DNS update failed for hostname {hostname} IP Address: {public_ip}')
                                 print(f'ERROR: Status code: {response.status_code}, Reason: {response.reason}')
     
+    # add EIPs to DNS
+    for address in ec2.describe_addresses()['Addresses']:
+        resource = boto3.resource('ec2', region_name=REGION)
+        instance = resource.Instance(address['InstanceId'])
+        for tag in instance.tags:
+            if 'DNS' in tag['Key']:
+                print(f"INFO: Updating DNS for hostname: {tag['Value']} IP Address: {address['PublicIp']}")
+                response = update_dns(address['PublicIp'], tag['Value'])
+                if response.status_code == 200:
+                    print(f'INFO: DNS update successful')
+                else:
+                    print(f"ERROR: DNS update failed for hostname {tag['Value']} IP Address: {address['PublicIp']}")
+                    print(f"ERROR: Status code: {response.status_code}, Reason: {response.reason}")
+
+
     cloudformation = session.client('cloudformation', region_name=REGION)
     
     INSTANCE_IDS = ''
@@ -906,7 +958,7 @@ try:
             INSTANCE_IDS += ','     
 
     aws_parameters = [
-        {'ParameterKey': 'S3Bucket', 'ParameterValue': S3_BUCKET},
+        {'ParameterKey': 'S3Bucket', 'ParameterValue': LAMBDA_S3_BUCKET},
         {'ParameterKey': 'APIGatewayURL', 'ParameterValue': API_GATEWAY_URL},
         {'ParameterKey': 'APIGatewayKey', 'ParameterValue': API_GATEWAY_KEY},
         {'ParameterKey': 'InstanceList', 'ParameterValue': INSTANCE_IDS},
@@ -973,7 +1025,7 @@ try:
         eks_endpoint_fqdn_only = (eks_endpoint.split('//'))[1]
 
         records.append([
-            f"https://{output['n0workGuacamolePublic']}",
+            f"https://{output['n0workGuacamoleDNS']}",
             output['n0workPodName'],
             output['n0workPodPassword'],
             f"http://{output['n0workIISDNS']}",
@@ -1047,7 +1099,7 @@ try:
         ]
 
         columnar_output = [
-            f"Pod Lab Access (Guac) Web Console URL,https://{output['n0workGuacamolePublic']}\n",
+            f"Pod Lab Access (Guac) Web Console URL,https://{output['n0workGuacamoleDNS']}\n",
             f"Pod Lab Access (Guac) Username,{output['n0workPodName']}\n",
             f"Pod Lab Access (Guac) Password,{output['n0workPodPassword']}\n",
             f"nopCommerce Windows App URL,http://{output['n0workIISDNS']}\n",

@@ -1653,7 +1653,7 @@ Resources:
       Role: !Sub ${LambdaExecutionRole.Arn}
       Environment:
         Variables:
-          APP_URL: !Sub ${SessionName}-${PodName}-nopcommerce.lab.tetration.guru
+          APP_URL: !Sub ${SessionName}-${PodName}-nopcommerce-iis.lab.tetration.guru
       Runtime: nodejs12.x
 
   LambdaScheduleIIS:
@@ -1705,7 +1705,7 @@ Resources:
       Role: !Sub ${LambdaExecutionRole.Arn}
       Environment:
         Variables:
-          APP_URL: !Sub ${SessionName}-${PodName}-opencart.lab.tetration.guru
+          APP_URL: !Sub ${SessionName}-${PodName}-opencart-apache.lab.tetration.guru
       Runtime: nodejs12.x
 
   LambdaScheduleApache:
@@ -1842,7 +1842,6 @@ Outputs:
   n0workASAvPrivate03:
     Description: ASAv Firewall Inside IP Address
     Value: !GetAtt ASAvNetworkInterfaces03.PrimaryPrivateIpAddress
-
   n0workActiveDirectory:
     Description: Active Directory Server Private IP
     Value: !GetAtt n0workEC2ActiveDirectory.PrivateIp
@@ -1900,3 +1899,6 @@ Outputs:
   n0workGuacamolePublic:
     Description: Guacamole Server Public IP
     Value: !Ref GuacamoleElasticIp
+  n0workGuacamoleDNS:
+    Description: Guacamole Server Public DNS
+    Value: !Sub ${SessionName}-${PodName}-guac-pod-ui.lab.tetration.guru
