@@ -1302,6 +1302,18 @@ Resources:
           sh -c 'cd /opt && git clone https://github.com/deftcon/TVB-assets'
           cp /opt/TVB-assets/ansible_ping.sh /home/ciscolab/
           (crontab -l 2>/dev/null; echo "* * * * * /bin/sh /home/ciscolab/ansible_ping.sh >> /home/ciscolab/ansible_ping.log") | crontab -
+          cat <<EOF > /opt/TVB-assets/iis-healthcheck/hosts
+          [iis]
+          ${n0workEC2IIS.PrivateIp}
+          [iis:vars]
+          ansible_user=HOL\ciscolab
+          ansible_password=tet123\$\$!
+          ansible_connection=winrm
+          ansible_winrm_transport=ntlm
+          ansible_winrm_server_cert_validation=ignore
+          validate_certs=false
+          EOF
+          (crontab -l 2>/dev/null; echo "* * * * * ansible-playbook /opt/TVB-assets/iis-healthcheck/check_iis.yml -i /opt/TVB-assets/iis-healthcheck/hosts >> /home/ciscolab/ansible_iis_healthcheck.log") | crontab -
           cat <<EOF > /opt/TVB-assets/tvb-agent/inventory/hosts
           [centos]
           ${n0workEC2Apache.PrivateIp}
