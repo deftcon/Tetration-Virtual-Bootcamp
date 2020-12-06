@@ -149,7 +149,6 @@ print("It is HIGHLY encouraged to allow this process to create the VPC and all c
 print("One reason to choose the option to use an existing VPC is if you require more than two (2) pods (which require a total of 4 EIPs),")
 print("in which case you will need to make a request to AWS to increase the number of EIPs and have them allocated to a specific VPC-Id PRIOR to running this script.")
 print("To deploy into an existing VPC, the VPC ID and the ID of the Internet Gateway in the existing VPC will be needed,")
-print("as well as requiring the two (2) subnets chosen in the parameters.yml file to be associated to the VPC as attached CIDR Blocks.")
 print(" ")
 print("Again, unless you require more than 2 pods to be deployed, you should allow this script to create everything for you.")
 print(" ")
