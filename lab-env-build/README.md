@@ -32,7 +32,7 @@ This lab environment can be provisioned any time, before or after provisioning y
 There are a number of custom-built AMI images that require copying before deploying this lab environment. These images reside in Deftcon's GitHub account, and require us to add _**your**_ AWS Account ID to each AMI and Snapshot, therefore <a href="https://github.com/deftcon/Tetration-Virtual-Bootcamp/issues/new?template=ami_copy.md" target="_blank">fill out this form specifying your AWS Account ID</a>. You should receive an email in 24 hours or less (often much faster) indicating the permissions have been added and that you are ready to proceed with the below instructions.  
   
 ---  
-NOTE: You cannot move on and run `ami_create.py` as instructed below until _**after**_ you receive an email reply indicating the permissions have been added to allow you access to the necessary AMIs. Failure to follow this will result in both the `ami_create.py` and the `launch.py` failing miserably.
+NOTE: You cannot move on and run `launch.py` as instructed below until _**after**_ you receive an email reply indicating the permissions have been added to allow you access to the necessary AMIs. Failure to follow this will result in the `launch.py` failing miserably.
 
 ---  
 
@@ -139,77 +139,22 @@ And now you should be ready to begin executing the python scripts necessary to l
 ---  
   
 
-#### Executing the Scripts
+#### Deploying Pods
   
+Deployment of the environment is accomplished by running the `launch.py` script. The `launch.py` script first copies the AMI files that are shared by the Deft AWS account to your AWS account in the `us-east-2` (OH) region.  The AMIs will then be copied to the destination region that you choose in the interactive prompts when running the script.  Of course, if the destination region is `us-east-2` then no further copying is necessary.  
 
+The `launch.py` then executes one entire deployment of `cisco-hol-pod-cft-template.yml` per number of pods which you specify in the interactive prompts.  The pod number begins with `0000` and thus we recommend designating the first pod for the lab admin/instructor as a pristine deployment for use in demoing or troubleshooting any issues an actual student might for some reason encounter, and allowing the first student to be the second pod `pod0001`.
 
-The script to copy the necessary AMIs can then be run with the below command.  The region command-line argument is optional, and if omitted the AMIs will be created in the us-east-2 region.  If you plan to run the lab from an AWS region other than us-east-2, specify `--region` followed by the region name to have the AMIs copied to the destination region. 
+#### AMI Considerations
 
-```
-python ami_create.py --region us-east-1
-```
-
-> It may be a good time to take a break as this script will take around 10-15 minutes to complete. 
-  
-#### Files Required to Deploy to AWS
-
-Deployment of the environment for lab pod(s) requires the use of three files - namely: `parameters.yml`, `cisco-hol-pod-cft-template.yml`, and `launch.py`. 
-
-
-`launch.py` reads in the parameters unique to each deployment set from `parameters.yml`, then executes one entire deployment of `cisco-hol-pod-cft-template.yml` per number of `student_count` found in `parameters.yml`. Student count begins with `00` and thus we recommend designating the first pod for the lab admin/instructor as a pristine deployment for use in demoing or troubleshooting any issues an actual student might for some reason encounter, and allowing the first student to be the second pod, which would begin with the numbering `01`. 
-
-#### Parameters File Example
-
-Below is an example of a `parameters.yml` file. You will need to modify the file to meet your needs and save it in the `lab-env-build` directory.  Note that you can deploy into an existing VPC or a new VPC can be created.  To deploy a new VPC,  comment out the lines beginning with `vpc_id` and `internet_gateway_id` by placing a `#` symbol in front of them.  If using an existing VPC, you must retrieve the VPC ID and Internet Gateway ID from the AWS dashboard and populate those values as shown in the example below.  
-
-
-```yaml
----
----
-aws_region: us-east-2
-
-student_count: 1
-student_prefix: cisco-student
-
-# Enter the VPC ID below if using existing VPC. Comment if creating new VPC, it will be populated here upon creation.
-# vpc_id: vpc-0b60cc1d07160596b
-
-# Enter the IG_ID if using existing VPC. Comment if auto-creating new VPC by commenting out the VPC above.
-# internet_gateway_id: igw-036df93d2c7cc253b 
-subnet_range_primary: 10.1.0.0/16
-subnet_range_secondary: 198.18.0.0/16
-
-# S3 Bucket is global DNS unique name, use any arbitrary desired non-overlapping name. Will be created if doesn't exist.
-s3_bucket: 'deft2-tetration-hol-cft-template' 
-
-# This is your own private on-prem ISE instance - needs VPN with AWS VGW. If not using ISE simply give it any value, however do not comment. 
-ise_server_ip: '172.16.171.49' 
-
-asav_ami: ami-0cc6d931eeb481121
-eks_worker_ami: ami-0c12dc9171d7252ad
-ldap_ami: ami-063ca8b269537841f
-mssql_ami: ami-090a4930496cbe28a
-iis_ami: ami-02066420ce75afcb0
-mysql_ami: ami-0caaa7c0eadaec7b5
-apache_ami: ami-01d583af8e8932759
-ansible_ami: ami-02e353df2bfb03bc1
-tet_data_ami: ami-014df3ebd0af05bbe
-tet_edge_ami: ami-028c27c2b07a3aee7
-employee_ubuntu_ami: ami-08f5365f20685309f
-sysadmin_ubuntu_ami: ami-08f5365f20685309f
-attack_server_ami: ami-0011d2ead8e1e276f
-guacamole_ami: ami-0a4a0a2c7dd763d53
-
-
-```
+Note that the AMIs that are copied to `us-east-2` as well as to other regions currently will not be deleted during rollback. This ensures that the AMIs are present in the account so that they do not need to be continually copied each time `launch.py` is run,  allowing faster performance and reducing the data transfer cost which is incurred when copying the AMIs between regions.  Note that there will be a minimal cost incurred for the images and associated snapshots on a per-region basis.  If desired, you may manually delete the AMIs from a region.  However, it is imperative that you also delete the AMI ID file associated with the region.  An AMI ID file for each region is stored in the S3 bucket named `n0work-{AWS_ACCOUNT_ID}`,  where AWS_ACCOUNT_ID is your 12-digit AWS Account ID.  If AMIs have been deleted,  delete the file `{REGION_ID}-ami-ids.yml` from the S3 bucket.  The `launch.py` script obtains the AMI IDs to use for a region from this file.  If the file is present but the AMIs are not, the script will fail.  
 
 #### Requirements / Dependencies
 
 Important items to note prior to running `launch.py`:
-1. You may use an existing VPC and Internet Gateway, and if so their IDs must be specified in the `parameters.yml` file. Alternatively, you can comment out the `vpc_id` line in the `parameters.yml` file which will cause the script to create a new VPC and Internet Gateway. This VPC must have at least two CIDR blocks, one for `subnet_range_primary` and one for `subnet_range_secondary`. It is important that **no** subnets be created in this VPC whatsoever, else the script will error out. `launch.py` will create the subnets and we have a brief discussion about them below.  
+1. You may use an existing VPC and Internet Gateway. This VPC must have at least two CIDR blocks, one for `subnet_range_primary` and one for `subnet_range_secondary`. It is important that **no** subnets already exist in this VPC, else the script will error out. `launch.py` will create the subnets and we have a brief discussion about them below.  
 
-2. S3 Bucket: Due to the size of the CFT, AWS requires that we first upload it to an S3 bucket prior to calling it and executing against it. The S3 bucket will be created by `launch.py` using the bucket name defined in the `parameters.yml` file `s3_bucket` value.  
-The name must be unique globally, and must conform to standard DNS naming nomenclature.  
+2. S3 Bucket: Due to the size of the CFT, AWS requires that we first upload it to an S3 bucket prior to calling it and executing against it. The S3 bucket `n0work-{AWS_ACCOUNT_ID}` will be created by `launch.py` and will store the CFT file as well as deployment state. 
 
 3. Two (2) Elastic IPs per student pod. These must be already *allocated* to your region, but not yet *assigned* to any ENIs. This requirement exists due to AWS not allowing a Public IP to be assigned to any EC2 instance with more than a single ENI. There are currently three instances that have multiple ENIs, including Guacamole, Tet Data Ingest, and ASAv. Guac requires one so that students can access the environment from the public internet, and Tet Data Ingest requires the ability to communicate out to the internet to reach the TaaS cluster. ASAv only communicates internally, even if you have ISE running on-prem, assuming you have a VGW back to your CGW. If you need ASAv to speak externally, there is some code that can be uncommented in the `cisco-hol-pod-cft-template.yml` file. 
 
@@ -219,7 +164,6 @@ The name must be unique globally, and must conform to standard DNS naming nomenc
 #### Subnets
 
 A quick discussion on subnets to be created at launch time is in order. This VPC must have at least two CIDR blocks, one for `subnet_range_primary` and one for `subnet_range_secondary`.
-
 
 The `subnet_range_primary` and `subnet_range_secondary` field both require that you give them /16 address space. This is due to the fact that for every student pod to be created, the third octet will be used to indicate the student index #. 
 
@@ -249,7 +193,7 @@ More can be found [in the Diagrams section](../bootcamp/diagrams/){:target="_bla
 
 #### IAM Role API Credentials - Scope and Permissions
 
-The AWS API Access key and Secret key used to deploy must be stored in the local OS environment variables. The environment variables should be labeled as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, respectively. Both the `ami_create.py` and `launch.py` scripts require the environment variables to function properly.  These can be set using the `export` command in your terminal:
+The AWS API Access key and Secret key used to deploy must be stored in the local OS environment variables. The environment variables should be labeled as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, respectively. The `launch.py` script requires the environment variables to function properly.  These can be set using the `export` command in your terminal:
 
 ```
 export AWS_ACCESS_KEY_ID=<YOUR ACCCESS KEY ID>
@@ -285,109 +229,284 @@ Assuming you've filled out your desired values in `parameters.yml`, it's time to
 cd lab-env-build
 python launch.py
 ```
-> Note that you will be asked to verify most of the data in parameters before proceeding. Enter "Y" (case insensitive) to proceed. Anything other than y/Y will terminate the launch. 
+>  Enter "Y" (case insensitive) to proceed. Anything other than y/Y will terminate the launch. 
 
-Assuming everything is correct you should have output similar to the following:
 
-```bash
-INFO: Fetching Public IP Of The Orchestrator...
-INFO: Management Cidr: <--REDACTED - YOUR CURRENT IP-->/32
-INFO: Checking VPC ID: vpc-082d43bff04cd342e...
-INFO: VPC ID Verified: vpc-082d43bff04cd342e...
-INFO: Checking Existing Subnets...
-INFO: Subnet Check Completed...
+```
+A session name is required to uniquely identify your deployment
+The session name can be between 5 and 25 characters, with no special characters allowed except for a dash (-).
+Please enter the session name: deft-consult
+How many pods are needed? 1
+1: us-east-1 (N. Virginia)
+2: us-east-2 (Ohio)
+3: us-west-2 (Oregon)
+4: af-south-1 (Africa - Cape Town))
+5: ap-east-1 (Asia Pacific - Hong Kong)
+6: ap-south-1 (Asia Pacific - Mumbai)
+7: ap-northeast-3 (Asia Pacific - Osaka-Local)
+8: ap-northeast-2 (Asia Pacific - Seoul)
+9: ap-southeast-1 (Singapore)
+10: ap-southeast-2 (Asia Pacific - Sydney)
+11: ap-northeast-1 (Asia Pacific - Tokyo)
+Please enter the AWS region you would like to deploy these pods in by entering the corresponding number: 2
+
+These lab environment pods can be deployed into an existing VPC, or a new VPC can be created for you.
+It is HIGHLY encouraged to allow this process to create the VPC and all components therein, for you.
+One reason to choose the option to use an existing VPC is if you require more than two (2) pods (which require a total of 4 EIPs),
+in which case you will need to make a request to AWS to increase the number of EIPs and have them allocated to a specific VPC-Id PRIOR to running this script.
+To deploy into an existing VPC, the VPC ID and the ID of the Internet Gateway in the existing VPC will be needed,
+as well as requiring the two (2) subnets chosen in the parameters.yml file to be associated to the VPC as attached CIDR Blocks.
+
+Again, unless you require more than 2 pods to be deployed, you should allow this script to create everything for you.
+
+Do you require only 1 or 2 pods and wish to have everything, including the VPC, created for you? (Y/N) y
+
+
+Next, we require two (2) /16 CIDR blocks that will be used to create each pod's 'Inside' (or Corporate) and 'Outside' (or psuedo-Internet) subnet.
+Both CIDR blocks MUST end in /16. This is essentially due to the fact that we let you pick the first two octets, then use the third octet for each new pod #,
+and the fourth octet for the hosts in each pod.
+
+Please enter a CIDR block to be used for the 'INSIDE' subnet for each Pod (MUST be in the format x.x.0.0/16): 10.1.0.0/16
+Please enter a CIDR block to be used for the 'OUTSIDE' subnet for each Pod (MUST be in the format x.x.0.0/16): 198.18.0.0/16
+
 INFO: Checking Available Elastic IPs...
-INFO: Created Available Elastic IPs Collection...
+INFO: Number of required Elastic IPs is 2, you currently have 0 available for use
+INFO: Attempting to allocate 2 additional Elastic IPs...
+INFO: Successfully allocated 2 Elastic IPs
 INFO: Validating Subnet Range...
 INFO: 256 Subnets Are Available...
 INFO: Subnet Range Validation Completed...
-INFO: Creating Student Accounts Collection...
-INFO: [{'account_name': 'cisco-student-00', 'account_password': '8AetfFvCbUiKue', 'public_subnet_01': '10.1.0.0', 'public_subnet_02': '10.1.128.0', 'private_subnet': '198.18.0.0', 'eks_dns': '', 'guacamole_elastic_ip': '3.134.26.220', 'guacamole_elastic_ip_allocation_id': 'eipalloc-00ff1ef8b0c8562ad', 'tet_data_elastic_ip': '3.20.190.112', 'tet_data_elastic_ip_allocation_id': 'eipalloc-025e2db995a9b3751'}]
-INFO: Student Accounts Collection Created...
-You are about to deploy 1 student pod(s) to vpc-082d43bff04cd342e in the us-east-2 Region
+INFO: Creating Pod Accounts Collection...
+INFO: Pod Accounts Collection Created...
+
+************************************************************************************************************************************************************
+The lab can run continuously or you can define a schedule which allows cost savings in AWS by powering off EC2 instances when not using the lab environment.
+When setting a schedule, the instances will be deployed now and will be running at first, then upon inspection of both the defined schedule and the state
+of each EC2 instance, any running instances will be stopped (not terminated) and will spin up automatically when at the properly scheduled time.
+Note that there will still be some AWS billing incurred starting today for the resources associated with the stopped instances and other lab components.
+************************************************************************************************************************************************************
+
+Would you like to define a schedule for the lab? (Y/N) n
+You are about to deploy 1 pod(s) to a new VPC in the us-east-2 Region
 Are you sure you wish to proceed with this deployment (y/Y to continue)? y
-INFO: Uploading Template To S3...
-INFO: CFT Template Uploaded To S3...
-INFO: [{'ParameterKey': 'AccessKey', 'ParameterValue': '<--REDACTED-->'}, {'ParameterKey': 'SecretKey', 'ParameterValue': '<--REDACTED-->'}, {'ParameterKey': 'StudentIndex', 'ParameterValue': '0'}, {'ParameterKey': 'StudentName', 'ParameterValue': 'cisco-student-00'}, {'ParameterKey': 'StudentPassword', 'ParameterValue': '8AetfFvCbUiKue'}, {'ParameterKey': 'ManagementCidrBlock', 'ParameterValue': '172.116.159.56/32'}, {'ParameterKey': 'VpcID', 'ParameterValue': 'vpc-082d43bff04cd342e'}, {'ParameterKey': 'InternetGatewayId', 'ParameterValue': 'igw-0fec2ea47e798ea86'}, {'ParameterKey': 'Subnet01CidrBlock', 'ParameterValue': '10.1.0.0/24'}, {'ParameterKey': 'Subnet02CidrBlock', 'ParameterValue': '10.1.128.0/24'}, {'ParameterKey': 'Subnet03CidrBlock', 'ParameterValue': '198.18.0.0/24'}, {'ParameterKey': 'ASAvInsideSubnet', 'ParameterValue': '10.1.0.0'}, {'ParameterKey': 'ASAvOutsideSubnet', 'ParameterValue': '198.18.0.0'}, {'ParameterKey': 'GuacamoleElasticIp', 'ParameterValue': '3.134.26.220'}, {'ParameterKey': 'GuacamoleElasticIpAllocationId', 'ParameterValue': 'eipalloc-00ff1ef8b0c8562ad'}, {'ParameterKey': 'TetDataElasticIp', 'ParameterValue': '3.20.190.112'}, {'ParameterKey': 'TetDataElasticIpAllocationId', 'ParameterValue': 'eipalloc-025e2db995a9b3751'}, {'ParameterKey': 'Region', 'ParameterValue': 'us-east-2'}, {'ParameterKey': 'Subnet01AvailabilityZone', 'ParameterValue': 'a'}, {'ParameterKey': 'Subnet02AvailabilityZone', 'ParameterValue': 'b'}, {'ParameterKey': 'Subnet03AvailabilityZone', 'ParameterValue': 'a'}, {'ParameterKey': 'ISEIPAddress', 'ParameterValue': '172.16.171.49'}, {'ParameterKey': 'Win10EmployeePrivateIp', 'ParameterValue': '198.18.0.12'}, {'ParameterKey': 'Win10SysAdminPrivateIp', 'ParameterValue': '198.18.0.13'}, {'ParameterKey': 'AttackerPrivateIp', 'ParameterValue': '198.18.0.14'}, {'ParameterKey': 'IISOutsidePrivateIp', 'ParameterValue': '198.18.0.15'}, {'ParameterKey': 'ApacheOutsidePrivateIp', 'ParameterValue': '198.18.0.16'}, {'ParameterKey': 'ASAvOutsidePrivateIp01', 'ParameterValue': '198.18.0.17'}, {'ParameterKey': 'ASAvOutsidePrivateIp02', 'ParameterValue': '198.18.0.18'}, {'ParameterKey': 'Ubuntu1804EmployeePrivateIp', 'ParameterValue': '198.18.0.19'}, {'ParameterKey': 'Ubuntu1804SysAdminPrivateIp', 'ParameterValue': '198.18.0.20'}, {'ParameterKey': 'GuacamoleOutsidePrivateIp', 'ParameterValue': '198.18.0.21'}, {'ParameterKey': 'ASAvImageID', 'ParameterValue': 'ami-018637632d5e62976'}, {'ParameterKey': 'LDAPImageID', 'ParameterValue': 'ami-0273c11f1bc3fff82'}, {'ParameterKey': 'MSSQLImageID', 'ParameterValue': 'ami-090ab21d87411b44e'}, {'ParameterKey': 'IISImageID', 'ParameterValue': 'ami-0c4e857f7ec9de0dc'}, {'ParameterKey': 'MySQLImageID', 'ParameterValue': 'ami-0c170ef4a4f9b1789'}, {'ParameterKey': 'ApacheImageID', 'ParameterValue': 'ami-0bb3d60453bbc693a'}, {'ParameterKey': 'AnsibleImageID', 'ParameterValue': 'ami-08faf88a030245bd6'}, {'ParameterKey': 'TetrationDataIngestImageID', 'ParameterValue': 'ami-0c2276fc51ad25018'}, {'ParameterKey': 'TetrationEdgeImageID', 'ParameterValue': 'ami-0cb78ddba97ce6591'}, {'ParameterKey': 'Win10EmployeeImageID', 'ParameterValue': 'ami-03a948df14a70d159'}, {'ParameterKey': 'Win10SysAdminImageID', 'ParameterValue': 'ami-03a948df14a70d159'}, {'ParameterKey': 'Ubuntu1804EmployeeImageID', 'ParameterValue': 'ami-0483fe5b0c9444daa'}, {'ParameterKey': 'Ubuntu1804SysAdminImageID', 'ParameterValue': 'ami-0483fe5b0c9444daa'}, {'ParameterKey': 'AttackerImageID', 'ParameterValue': 'ami-09b253f6574754048'}, {'ParameterKey': 'GuacamoleImageID', 'ParameterValue': 'ami-04e70edcc169673d7'}, {'ParameterKey': 'EKSWorkerImageID', 'ParameterValue': 'ami-0c4c60006aa81c29b'}]
-INFO: StackName: cisco-student-00, Status: CREATE_IN_PROGRESS
-INFO: StackName: cisco-student-00, Status: CREATE_IN_PROGRESS
-INFO: StackName: cisco-student-00, Status: CREATE_IN_PROGRESS
-INFO: StackName: cisco-student-00, Status: CREATE_IN_PROGRESS
-INFO: StackName: cisco-student-00, Status: CREATE_IN_PROGRESS
-INFO: StackName: cisco-student-00, Status: CREATE_IN_PROGRESS
+INFO: Creating S3 Bucket n0work-155098718727
+INFO: Bucket n0work-155098718727 already exists, skipping
+INFO: Checking bucket n0work-155098718727 for AMI file us-east-2-ami-ids.yml
+INFO: Loading AMI IDs from us-east-2-ami-ids.yml in S3 bucket n0work-155098718727
+INFO: Created VPC with ID vpc-00b5910c7463b8bd8 and CIDR block 10.1.0.0/16
+INFO: Created Secondary CIDR block 198.18.0.0/16 on VPC vpc-00b5910c7463b8bd8
+INFO: Created Internet Gateway with ID igw-0c65f187f9cc328f9
+INFO: Associated Internet Gateway with ID igw-0c65f187f9cc328f9 to VPC vpc-00b5910c7463b8bd8
+INFO: Uploading state file n0work-deft-consult-us-east-2-state.yml To S3 bucket n0work-155098718727...
+INFO: Uploaded state file n0work-deft-consult-us-east-2-state.yml to bucket n0work-155098718727...
+INFO: Uploading CFT Template n0work-deft-consult-pod-cft-template.yml To S3...
+INFO: CFT Template n0work-deft-consult-pod-cft-template.yml Uploaded To S3...
+INFO: Creating S3 Bucket n0work-deft-consult-lambda
+INFO: Created S3 bucket n0work-deft-consult-lambda
+INFO: Uploading lambda_function/tvb-dyndns.zip To S3 bucket n0work-deft-consult-lambda
+INFO: lambda_function/tvb-dyndns.zip Uploaded To S3 bucket n0work-deft-consult-lambda
+https://n0work-155098718727.s3.amazonaws.com/n0work-deft-consult-pod-cft-template.yml
+INFO: StackName: n0work-deft-consult-pod0000, Status: CREATE_IN_PROGRESS
+INFO: StackName: n0work-deft-consult-pod0000, Status: CREATE_IN_PROGRESS
+INFO: StackName: n0work-deft-consult-pod0000, Status: CREATE_IN_PROGRESS
 .
 .
 .
-INFO: StackName: cisco-student-00, Status: CREATE_IN_PROGRESS
-INFO: StackName: cisco-student-00, Status: CREATE_IN_PROGRESS
-INFO: StackName: cisco-student-00, Status: CREATE_COMPLETE
+INFO: StackName: n0work-deft-consult-pod0000, Status: CREATE_IN_PROGRESS
+INFO: StackName: n0work-deft-consult-pod0000, Status: CREATE_COMPLETE
 INFO: CloudFormation Completed Successfully...
-INFO: Initializing EKS DNS Assembly...
+INFO: Deleting CFT file n0work-deft-consult-pod-cft-template.yml from S3 bucket n0work-155098718727
+INFO: Preparing to initialize the EKS DNS Assembly...
+INFO Initializing EKS DNS Assembly for pod pod0000...
+INFO: List of ELBs in VPC vpc-00b5910c7463b8bd8: []
+.
+.
+.
+INFO: List of ELBs in VPC vpc-00b5910c7463b8bd8: ['afb719912a9064eb9978338f1f9b0a82']
+INFO: Updating DNS for hostname: deft-consult-pod0000-sock-shop.lab.tetration.guru IP Address: 3.132.248.214
+INFO: DNS update successful
+INFO: elb afb719912a9064eb9978338f1f9b0a82 for pod pod0000 was found!
+Waiting for EKS worker node i-05837dfa2b648e8d0 to pass health checks
+EKS worker node i-05837dfa2b648e8d0 now has status of 'ok'!
+INFO: Registering instance deft-consult-pod0000-eks-worker with elb afb719912a9064eb9978338f1f9b0a82
+INFO: Checking to see if the instance attached to the ELB
+INFO: Instance i-05837dfa2b648e8d0 is attached to elb afb719912a9064eb9978338f1f9b0a82
+INFO: Instance status: OutOfService
+INFO: Instance not in service yet. Retry in 15 seconds
+INFO: Registering instance deft-consult-pod0000-eks-worker with elb afb719912a9064eb9978338f1f9b0a82
+INFO: Checking to see if the instance attached to the ELB
+INFO: Instance i-05837dfa2b648e8d0 is attached to elb afb719912a9064eb9978338f1f9b0a82
+INFO: Instance status: InService
+INFO: InService count: 1, check again in 5 sec...
+INFO: Registering instance deft-consult-pod0000-eks-worker with elb afb719912a9064eb9978338f1f9b0a82
+INFO: Checking to see if the instance attached to the ELB
+INFO: Instance i-05837dfa2b648e8d0 is attached to elb afb719912a9064eb9978338f1f9b0a82
+INFO: Instance status: InService
+INFO: InService count: 2, check again in 5 sec...
+INFO: Registering instance deft-consult-pod0000-eks-worker with elb afb719912a9064eb9978338f1f9b0a82
+INFO: Checking to see if the instance attached to the ELB
+INFO: Instance i-05837dfa2b648e8d0 is attached to elb afb719912a9064eb9978338f1f9b0a82
+INFO: Instance status: InService
 INFO: EKS DNS Assembly Completed...
-INFO: StackName: cisco-student-00, Status: Generating CSV Report...
+INFO: Beginning deployment of DNS updater stack
+INFO: Retrieving the instance IDs of the EC2 instances for Dynamic DNS
+INFO: Updating DNS for hostname: deft-consult-pod0000-nopcommerce-mssql.lab.tetration.guru IP Address: 18.216.9.10
+INFO: DNS update successful
+INFO: Updating DNS for hostname: deft-consult-pod0000-user-employee.lab.tetration.guru IP Address: 13.58.208.84
+INFO: DNS update successful
+INFO: Updating DNS for hostname: deft-consult-pod0000-microsoft-ad-dc.lab.tetration.guru IP Address: 3.15.144.105
+INFO: DNS update successful
+INFO: Updating DNS for hostname: deft-consult-pod0000-user-sysadmin.lab.tetration.guru IP Address: 3.17.187.12
+INFO: DNS update successful
+INFO: Updating DNS for hostname: deft-consult-pod0000-bad-guy.lab.tetration.guru IP Address: 18.191.218.186
+INFO: DNS update successful
+INFO: Updating DNS for hostname: deft-consult-pod0000-opencart-apache.lab.tetration.guru IP Address: 3.137.181.245
+INFO: DNS update successful
+INFO: Updating DNS for hostname: deft-consult-pod0000-nopcommerce-iis.lab.tetration.guru IP Address: 3.139.237.156
+INFO: DNS update successful
+INFO: Updating DNS for hostname: deft-consult-pod0000-rh-ansible.lab.tetration.guru IP Address: 3.22.61.199
+INFO: DNS update successful
+INFO: Updating DNS for hostname: deft-consult-pod0000-opencart-mysql.lab.tetration.guru IP Address: 18.191.162.254
+INFO: DNS update successful
+INFO: Updating DNS for hostname: deft-consult-pod0000-guac-pod-ui.lab.tetration.guru IP Address: 3.130.235.41
+INFO: DNS update successful
+INFO: Creating stack n0work-deft-consult-dns-updater
+INFO: Creating cloudformation stack n0work-deft-consult-dns-updater. Status=CREATE_IN_PROGRESS
+.
+.
+.
+INFO: Creating cloudformation stack n0work-deft-consult-dns-updater. Status=CREATE_IN_PROGRESS
+INFO: Creating cloudformation stack n0work-deft-consult-dns-updater. Status=CREATE_COMPLETE
+STACKS_LIST: ['n0work-deft-consult-pod0000']
+INFO: StackName: n0work-deft-consult-pod0000, Status: Generating CSV Report...
+INFO: Writing file: reports/n0work-deft-consult-pod0000-report.csv to reports/.
+INFO: The report was written to: reports/n0work-deft-consult-pod0000-report.csv
 Exiting! All The Tasks Are Completed Successfully...
 ```
 
-Then you should find in your project root a `reports` directory, a CSV file with every students' information. An enhancement to export a single XLS file with nicely formatted info *per student* is something we aim to do, in addition to the currently exported single CSV which is still very useful for the Lab Admin. 
+
+Then you should find in your project root a `reports` directory, a CSV file for each pod containing the information required to access the pod. 
 
 > If the script reports that the EKS Worker image could not be found,  it may be that the AMI ID has changed since this lab was developed.  The AMI ID changes from time to time as operating system patches are released and Amazon updates the images.  If this is the case,  this link has all possible region-specific AMIs for the EKS worker: - https://cloud-images.ubuntu.com/docs/aws/eks/
 
 #### Tearing Down Lab Environment
 
-Teardown is simple. **_Ensure your `parameters.yml` file is the environment you want to teardown, and ...:_**
+Teardown is simple. 
 
 ```shell
 python rollback.py
 ```
 
-> Note that you will be asked to verify most of the data in parameters before proceeding. Notice that on rollback we require a bit more stringent checking. This is for your protection. You will be asked to enter 'Y' initially and this is case sensitive, then a second verification is performed ensuring your intent, and this one requires you to type out 'YES' initially and this is case sensitive. Anything else will terminate the destruction of the environment. 
+> Notice that on rollback we require a bit more stringent checking. This is for your protection. You will be asked to enter 'Y' initially and this is case sensitive, then a second verification is performed ensuring your intent, and this one requires you to type out 'YES' initially and this is case sensitive. Anything else will terminate the destruction of the environment. 
 
 Assuming everything is correct you should have output similar to the following:
 
 
 ```bash
-INFO: Checking VPC ID: vpc-082d43bff04cd342e...
-INFO: VPC ID Verified: vpc-082d43bff04cd342e...
+SELECTION  SESSION                   REGION          VPC                       SCHEDULE                  CREATED              CREATED BY
+1          deft-consult           us-east-2       vpc-00b5910c7463b8bd8     Always-On                 Dec-05-2020 14:36    mark@deftconsult.io
+
+
+Please select the number corresponding to the deployment you would like to roll back: 1
 INFO: Validating Subnet Range...
 INFO: 256 Subnets Are Available...
 INFO: Subnet Range Validation Completed...
-INFO: Creating Student Accounts Collection...
-INFO: [{'account_name': 'cisco-student-00', 'public_subnet_01': '10.1.0.0', 'public_subnet_02': '10.1.128.0', 'private_subnet': '198.18.0.0'}]
-INFO: Student Accounts Collection Created...
-You are about to DESTROY all student pod(s) in vpc-082d43bff04cd342e in the us-east-2 Region
-Are you sure you wish to destory all of these pods (type "Y" to continue)? Y
+INFO: Creating Pod Accounts Collection...
+INFO: [{'account_name': 'pod0000', 'public_subnet_01': '10.1.0.0', 'public_subnet_02': '10.1.128.0', 'private_subnet': '198.18.0.0'}]
+INFO: Pod Accounts Collection Created...
+You are about to DESTROY all pod pod(s) in vpc-00b5910c7463b8bd8 in the us-east-2 Region
+Are you sure you wish to destroy all of these pods (type "Y" to continue)? Y
 ARE YOU ABSOLUTELY SURE (type "YES" to continue)? YES
+INFO: Looking up current IP address for deft-consult-pod0000-bad-guy.lab.tetration.guru
+INFO: found IP address 18.191.218.186
+INFO: Deleting DNS entry for hostname: deft-consult-pod0000-bad-guy.lab.tetration.guru IP Address: 18.191.218.186
+INFO: DNS update successful
+INFO: Looking up current IP address for deft-consult-pod0000-guac-pod-ui.lab.tetration.guru
+INFO: found IP address 3.130.235.41
+INFO: Deleting DNS entry for hostname: deft-consult-pod0000-guac-pod-ui.lab.tetration.guru IP Address: 3.130.235.41
+INFO: DNS update successful
+INFO: Looking up current IP address for deft-consult-pod0000-nopcommerce-mssql.lab.tetration.guru
+INFO: found IP address 18.216.9.10
+INFO: Deleting DNS entry for hostname: deft-consult-pod0000-nopcommerce-mssql.lab.tetration.guru IP Address: 18.216.9.10
+INFO: DNS update successful
+INFO: Looking up current IP address for deft-consult-pod0000-user-employee.lab.tetration.guru
+INFO: found IP address 13.58.208.84
+INFO: Deleting DNS entry for hostname: deft-consult-pod0000-user-employee.lab.tetration.guru IP Address: 13.58.208.84
+INFO: DNS update successful
+INFO: Looking up current IP address for deft-consult-pod0000-microsoft-ad-dc.lab.tetration.guru
+INFO: found IP address 3.12.123.44
+INFO: Deleting DNS entry for hostname: deft-consult-pod0000-microsoft-ad-dc.lab.tetration.guru IP Address: 3.12.123.44
+INFO: DNS update successful
+INFO: Looking up current IP address for deft-consult-pod0000-opencart-apache.lab.tetration.guru
+INFO: found IP address 3.137.181.245
+INFO: Deleting DNS entry for hostname: deft-consult-pod0000-opencart-apache.lab.tetration.guru IP Address: 3.137.181.245
+INFO: DNS update successful
+INFO: Looking up current IP address for deft-consult-pod0000-nopcommerce-iis.lab.tetration.guru
+INFO: found IP address 3.14.143.212
+INFO: Deleting DNS entry for hostname: deft-consult-pod0000-nopcommerce-iis.lab.tetration.guru IP Address: 3.14.143.212
+INFO: DNS update successful
+INFO: Looking up current IP address for deft-consult-pod0000-user-sysadmin.lab.tetration.guru
+INFO: found IP address 3.17.187.12
+INFO: Deleting DNS entry for hostname: deft-consult-pod0000-user-sysadmin.lab.tetration.guru IP Address: 3.17.187.12
+INFO: DNS update successful
+INFO: Looking up current IP address for deft-consult-pod0000-rh-ansible.lab.tetration.guru
+INFO: found IP address 3.22.61.199
+INFO: Deleting DNS entry for hostname: deft-consult-pod0000-rh-ansible.lab.tetration.guru IP Address: 3.22.61.199
+INFO: DNS update successful
+INFO: Looking up current IP address for deft-consult-pod0000-opencart-mysql.lab.tetration.guru
+INFO: found IP address 18.191.162.254
+INFO: Deleting DNS entry for hostname: deft-consult-pod0000-opencart-mysql.lab.tetration.guru IP Address: 18.191.162.254
+INFO: DNS update successful
+INFO: Disassociating EIP 3.130.235.41 from instance i-066495b086eb7b41d
+INFO: Releasing EIP 3.130.235.41
+INFO: Disassociating EIP 3.140.158.26 from instance i-0d77f0fcaadfa42b6
+INFO: Releasing EIP 3.140.158.26
 INFO: Initializing VPC Flow Logs S3 Bucket Deletion...
-INFO: S3 Bucket Deleted: cisco-hol-cisco-student-00-vpc-flow-logs-us-east-2a
+INFO: Emptying s3 bucket n0work-deft-consult-pod0000-vpc-flow-logs
+INFO: Deleting s3 bucket n0work-deft-consult-pod0000-vpc-flow-logs
+INFO: S3 Bucket Deleted: n0work-deft-consult-pod0000-vpc-flow-logs
 INFO: S3 Bucket Deletion Complete...
 INFO: Initializing EKS Load Balancers Deletion...
-INFO: ELB Deleted: a360fa1f4581311eab1f0066d929a5c5...
+INFO: ELB Deleted: afb719912a9064eb9978338f1f9b0a82...
 INFO: EKS Load Balancers Deletion Complete...
+INFO: Deleting the class schedule
+INFO: Deleted class schedule n0work-deft-consult-class-schedule
+INFO: Deleting the DNS updater Lambda function n0work-deft-consult-dns-updater
+INFO: Deleted DNS updater Lambda function n0work-deft-consult-dns-updater
+INFO: Emptying s3 bucket n0work-deft-consult-lambda
+INFO: Deleting s3 bucket n0work-deft-consult-lambda
+INFO: S3 Bucket Deleted: n0work-deft-consult-lambda
 INFO: Commencing CloudFormation Stack Deletion...
-INFO: Stack Deleted: cisco-student-00...
-INFO: CloudFormation Stacks Deletion Complete...
-INFO: StackName: cisco-student-00, Status: DELETE_IN_PROGRESS
-INFO: StackName: cisco-student-00, Status: DELETE_IN_PROGRESS
-INFO: StackName: cisco-student-00, Status: DELETE_IN_PROGRESS
-INFO: StackName: cisco-student-00, Status: DELETE_IN_PROGRESS
-INFO: StackName: cisco-student-00, Status: DELETE_IN_PROGRESS
-INFO: StackName: cisco-student-00, Status: DELETE_IN_PROGRESS
-INFO: StackName: cisco-student-00, Status: DELETE_IN_PROGRESS
+INFO: Stack deletion initiated for: n0work-deft-consult-pod0000...
+INFO: CloudFormation deletion initiated for n0work-deft-consult-pod0000...
+INFO: StackName: n0work-deft-consult-pod0000, Status: DELETE_IN_PROGRESS
 .
 .
 .
-INFO: StackName: cisco-student-00, Status: DELETE_IN_PROGRESS
-INFO: StackName: cisco-student-00, Status: DELETE_IN_PROGRESS
-INFO: StackName: cisco-student-00, Status: DELETE_IN_PROGRESS
-WARN: cisco-student-00 Does Not Exist...
+INFO: StackName: n0work-deft-consult-pod0000, Status: DELETE_IN_PROGRESS
+WARN: n0work-deft-consult-pod0000 does not exist or was deleted...
 INFO: CloudFormation Rollback Completed Successfully...
+INFO: Retrieve Internet Gateways
+INFO: Detaching Internet Gateway igw-0c65f187f9cc328f9 from vpc-00b5910c7463b8bd8
+INFO: Deleting Internet Gateway igw-0c65f187f9cc328f9
+INFO: Retrieve VPCs
+INFO: Deleting security group sg-0e8e274a2ed215a31
+INFO: Deleting vpc vpc-00b5910c7463b8bd8
+INFO: Deleting state file n0work-deft-consult-us-east-2-state.yml from S3 bucket n0work-155098718727
+INFO: State file n0work-deft-consult-us-east-2-state.yml deleted from S3 bucket n0work-155098718727
+INFO: Deleting deft-consult.lab.tetration.guru from Route53
+INFO: Response from API - Your hostname record deft-consult.lab.tetration.guru with IP 127.0.0.1has been deleted
+INFO: Retrieving IP address for deft-consult-pod0000-sock-shop.lab.tetration.guru
+INFO Deleting DNS entry from Route 53 for deft-consult-pod0000-sock-shop.lab.tetration.guru
+INFO: Your hostname record deft-consult-pod0000-sock-shop.lab.tetration.guru with IP 3.132.248.214has been deleted
+INFO: Stack deletion initiated for: n0work-instance-scheduler...
+INFO: Stack n0work-instance-scheduler was deleted...
+INFO: Rollback completed successfully!
 ```
-> Note that the VPC will not be deleted because the rollback script has no way of knowing whether an existing VPC was used or a new one created.  Also note that when the `launch.py` script was run, if you had commented the `vpc_id` line it created a new VPC and populated the new vpc_id into the `parameters.yml` un-commented.  This was done because `rollback.py` needs to know the vpc_id in order to delete other resources.
-
 
 #### Limitations
 
-Currently deploying this lab environment only supports a single 'deployment set' per region, where 'deployment set' is defined as any numerical value defined in `parameters.yml` under the `student_count` field. It essentially is the number of student pods you are deploying at any one time. You must have 2x EIPs per student allocated to your region, as per the above section labeled "Requirements / Dependencies". Removing the single deployment option per region is an enhancement that we aim to add shortly. 
+You must have 2x EIPs per pod allocated to your region, as per the above section labeled "Requirements / Dependencies". 
 
 Currently there is a limitation that prevents any ability to increment student pod count once deployed. Since it would take a bit of an effort to add, it is something we will be looking at however, don't aim to add anytime soon.  
   
