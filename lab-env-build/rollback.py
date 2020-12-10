@@ -199,7 +199,7 @@ else:
 #######################################################################
 # EIP de-association and un-allocation + DynDNS deletion
 #######################################################################
-def update_dns(public_ip, hostname):
+def delete_dns(public_ip, hostname):
     '''Your friendly neighborhood DNS cleaner upper'''
     api_key = API_GATEWAY_KEY
     api_url = API_GATEWAY_URL
@@ -251,7 +251,7 @@ for pod in PODS_LIST:
                                 hostname = tag['Value']
                                 if public_ip:
                                     print(f'INFO: Deleting DNS entry for hostname: {hostname} IP Address: {public_ip}')
-                                    response = update_dns(public_ip, hostname)
+                                    response = delete_dns(public_ip, hostname)
                                     if response.status_code == 200:
                                         print(f'INFO: DNS update successful')
                                     else:
@@ -362,7 +362,7 @@ except Exception as e:
 print(f"INFO: Deleted class schedule n0work-{SESSION_NAME}-class-schedule")
 
 #######################################################################
-# Delete DynDNS Updater
+# Delete DynDNS Updater and associated S3 bucket
 #######################################################################
 print(f'INFO: Deleting the DNS updater Lambda function n0work-{SESSION_NAME}-dns-updater')
 try:
@@ -374,6 +374,17 @@ try:
 except Exception as e:
     print('WARN: ', e)
 print(f"INFO: Deleted DNS updater Lambda function n0work-{SESSION_NAME}-dns-updater")
+
+bucket_name = f"n0work-{SESSION_NAME}-lambda"
+s3 = session.resource('s3')
+bucket = s3.Bucket(bucket_name)
+print(f"INFO: Emptying s3 bucket {bucket_name}")
+bucket.objects.delete()
+while len(list(bucket.objects.iterator())) > 0:
+    print('INFO: Waiting for object deletion to complete')
+print(f"INFO: Deleting s3 bucket {bucket_name}")
+bucket.delete()
+print(f'INFO: S3 Bucket Deleted: {bucket_name}')
 
 #######################################################################
 # Delete Pods In CloudFormation ###############################
@@ -507,5 +518,77 @@ try:
     print(f"INFO: State file {STATE_FILE} deleted from S3 bucket {S3_BUCKET}")
 except Exception as e:
     print(f'WARN: While deleting {STATE_FILE} from S3:  {e}')
+
+########################################################################
+# Delete the DNS record for the session from Route53
+########################################################################
+print(f"INFO: Deleting {SESSION_NAME}.lab.tetration.guru from Route53")
+resp = delete_dns("127.0.0.1", f"{SESSION_NAME}.lab.tetration.guru")
+if resp.status_code == 200:
+    content = json.loads(resp.content)
+    if content:
+        if "return_message" in content:
+            print(f"INFO: Response from API - {content['return_message']}")
+        else:
+            print(f"WARN: {content['errorMessage']}")
+    else:
+        print(f"ERROR: Received HTTP {resp.status_code} {resp.reason}")
+
+########################################################################
+# Delete Sock Shop DNS record(s) from Route53
+########################################################################
+for pod in PODS_LIST:
+    print(f"INFO: Retrieving IP address for {SESSION_NAME}-{pod['account_name']}-sock-shop.lab.tetration.guru")
+    public_ip = None
+    resp = query_dns(f"{SESSION_NAME}-{pod['account_name']}-sock-shop.lab.tetration.guru")
+    if resp.status_code == 200:
+        if 'return_message' in json.loads(resp.content):
+            public_ip = json.loads(resp.content)['return_message']
+    if public_ip:
+        print(f"INFO Deleting DNS entry from Route 53 for {SESSION_NAME}-{pod['account_name']}-sock-shop.lab.tetration.guru")
+        resp = delete_dns(public_ip, f"{SESSION_NAME}-{pod['account_name']}-sock-shop.lab.tetration.guru")
+        if resp.status_code == 200:
+            if 'return_message' in json.loads(resp.content):
+                print(f"INFO: {json.loads(resp.content)['return_message']}")
+
+########################################################################
+# If no more active sessions, delete the scheduler 
+########################################################################
+# Below is to delete the S3 Bucket but the files with the AMI IDs also get deleted
+# then on the next run, the program will try to create new AMIs and will fail
+# unless the existing are deleted (manually).  Possibly we should prompt the 
+# user asking if they want to delete AMIs, and if so then we can delete both
+# the AMIs and the bucket.  
+# bucket = s3.Bucket(name=S3_BUCKET)
+# state_objects = [x for x in list(bucket.objects.iterator()) if 'state' in x.key]
+# if not state_objects:
+#     print(f"INFO: No more sessions found, S3 bucket and scheuler will be deleted")
+#     print(f"INFO: Emptying S3 bucket {S3_BUCKET}")
+#     bucket.objects.delete()
+#     while len(list(bucket.objects.iterator())) > 0:
+#         print('INFO: Waiting for object deletion to complete')
+#     print(f"INFO: Deleting s3 bucket {bucket_name}")
+#     bucket.delete()
+#     print(f'INFO: S3 Bucket Deleted: {bucket_name}')
+
+    cloudformation = session.client('cloudformation')
+    print(f"INFO: Stack deletion initiated for: n0work-instance-scheduler...")
+    try:  
+        result = cloudformation.delete_stack(
+            StackName=f"n0work-instance-scheduler"
+        )
+        while True:
+            try:
+                status = cloudformation.describe_stacks(
+                    StackName="n0work-instance-scheduler"
+                )
+                print(f"INFO: CFT n0work-instance-scheduler {status['Stacks'][0]['StackStatus']}")
+                time.sleep(5)
+            except:
+                print(f'INFO: Stack n0work-instance-scheduler was deleted...')
+                break
+    except Exception as e:
+        print('WARN: ', e)
+
 
 print('INFO: Rollback completed successfully!')

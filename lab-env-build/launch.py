@@ -13,6 +13,7 @@ import urllib
 import calendar
 import sys
 import requests
+import socket
 from datetime import datetime
 from datetime import timedelta
 from botocore.config import Config
@@ -34,6 +35,43 @@ if not ACCESS_KEY or not SECRET_KEY:
 API_GATEWAY_URL = "https://fh3aao7bri.execute-api.us-east-1.amazonaws.com/prod"
 API_GATEWAY_KEY = "iBO39NUUc1401nMYkNWvM1jbA4YAHhKD1z4wpIlh"
 
+##################################################################################################
+# Functions to interact with Route53 using the API Gateway
+##################################################################################################
+
+def update_dns(public_ip, hostname):
+    '''Performs DNS update using the API gateway'''
+    api_key = API_GATEWAY_KEY
+    api_url = API_GATEWAY_URL
+    headers = {'x-api-key': api_key }
+    query_params = {'mode':'set', 'hostname': hostname, 'ipv4_address': public_ip}
+    response = requests.get(api_url, headers=headers, params=query_params)
+    return response
+
+def verify_dns(hostname):
+    '''Performs get on a Route53 record using the API gateway'''
+    api_key = API_GATEWAY_KEY
+    api_url = API_GATEWAY_URL
+    headers = {'x-api-key': api_key }
+    query_params = {'mode':'get', 'hostname': hostname }
+    response = requests.get(api_url, headers=headers, params=query_params)
+    return response
+
+def unique_session(session_name):
+    '''
+    Query Route53 for the session name. If exists then the name is in use.
+    Returns True if the session is unique (Null Query response)
+    Returns False if the session is not unique (Query success)
+    '''
+    r = verify_dns(f"{session_name}.lab.tetration.guru")
+    if json.loads(r.content):
+        content = json.loads(r.content)
+        if 'return_status' in content:
+            if content['return_status'] == 'success':
+                return False
+    else:
+        return True
+
 def get_session_name(prompt):
     while True:
         pattern = re.compile(r'^([^~+&@!#$%_?/:\']*)$')
@@ -51,7 +89,12 @@ def get_session_name(prompt):
             continue
         m = re.match(pattern, answer)
         if m:
-            return answer
+            if unique_session(answer):
+                update_dns('127.0.0.1', f"{answer}.lab.tetration.guru")
+                return answer
+            else:
+                print(f"The session name {answer} is already in use. Please ensure session name is unique.")
+                continue
         else:
             print("No special characters are allowed, except a dash (-)!")
 print('A session name is required to uniquely identify your deployment')
@@ -106,7 +149,6 @@ print("It is HIGHLY encouraged to allow this process to create the VPC and all c
 print("One reason to choose the option to use an existing VPC is if you require more than two (2) pods (which require a total of 4 EIPs),")
 print("in which case you will need to make a request to AWS to increase the number of EIPs and have them allocated to a specific VPC-Id PRIOR to running this script.")
 print("To deploy into an existing VPC, the VPC ID and the ID of the Internet Gateway in the existing VPC will be needed,")
-print("as well as requiring the two (2) subnets chosen in the parameters.yml file to be associated to the VPC as attached CIDR Blocks.")
 print(" ")
 print("Again, unless you require more than 2 pods to be deployed, you should allow this script to create everything for you.")
 print(" ")
@@ -583,12 +625,24 @@ print(f'INFO: CFT Template {CFT_POD_FILE} Uploaded To S3...')
 #######################################################################
 # Upload DNS Updater Lambda Function TO S3 Bucket #####################
 #######################################################################
-print(f'INFO: Uploading lambda_function/tvb-dyndns.zip To S3 bucket {S3_BUCKET}')
+# Lambda requires that the code be in an S3 bucket in the same region
+# as the function,  therefore we must create another bucket to store
+# the lambda code for the session
+LAMBDA_S3_BUCKET = f"n0work-{SESSION_NAME}-lambda"
+print(f"INFO: Creating S3 Bucket {LAMBDA_S3_BUCKET}")
+boto_config = Config(region_name=REGION)
+if REGION == 'us-east-1':
+    result = create_bucket(LAMBDA_S3_BUCKET, boto_config)
+else:
+    result = create_bucket(LAMBDA_S3_BUCKET, boto_config, region=REGION)
+if result:
+    print(f"INFO: Created S3 bucket {LAMBDA_S3_BUCKET}")
+print(f'INFO: Uploading lambda_function/tvb-dyndns.zip To S3 bucket {LAMBDA_S3_BUCKET}')
 DNS_UPDATER_FILE = os.path.join(os.getcwd(),'lambda_function','tvb-dyndns.zip')
 DNS_UPDATER_NAME = 'tvb-dyndns.zip'
 s3 = boto3.resource('s3', region_name=REGION)
-s3.meta.client.upload_file(DNS_UPDATER_FILE, S3_BUCKET, DNS_UPDATER_NAME)
-print(f'INFO: lambda_function/tvb-dyndns.zip Uploaded To S3 bucket {S3_BUCKET}')
+s3.meta.client.upload_file(DNS_UPDATER_FILE, LAMBDA_S3_BUCKET, DNS_UPDATER_NAME)
+print(f'INFO: lambda_function/tvb-dyndns.zip Uploaded To S3 bucket {LAMBDA_S3_BUCKET}')
 
 #######################################################################
 # Run POD Cloud Formation #############################################
@@ -763,7 +817,24 @@ try:
                     for tag in elb['Tags']:
                         for key in tag:
                             if pod['account_name'] in tag[key]:
-                                pod['eks_dns'] = list(filter(lambda e: e['LoadBalancerName'] == elb['LoadBalancerName'], eks_elbs))[0]['DNSName']
+                                dns_name = list(filter(lambda e: e['LoadBalancerName'] == elb['LoadBalancerName'], eks_elbs))[0]['DNSName']
+                                if dns_name:
+                                    elb_ip = None
+                                    while not elb_ip:
+                                        try:
+                                            elb_ip = socket.gethostbyname(dns_name)
+                                        except:
+                                            continue
+                                    hostname = f"{SESSION_NAME}-{pod['account_name']}-sock-shop.lab.tetration.guru"
+                                    pod['eks_dns'] = hostname
+                                    print(f'INFO: Updating DNS for hostname: {hostname} IP Address: {elb_ip}')
+                                    response = update_dns(elb_ip, hostname)
+                                    if response.status_code == 200:
+                                        print(f'INFO: DNS update successful')
+                                    else:
+                                        print(f'ERROR: DNS update failed for hostname {hostname} IP Address: {elb_ip}')
+                                        print(f'ERROR: Status code: {response.status_code}, Reason: {response.reason}')
+
                                 elb_name = elb['LoadBalancerName']
                                 print(f"INFO: elb {elb_name} for pod {pod['account_name']} was found!")
                                 break
@@ -793,6 +864,7 @@ try:
                                     print(f'Waiting for EKS worker node {instance_id} to pass health checks')
                                     waiter.wait(InstanceIds=[instance_id])
                                     print(f"EKS worker node {instance_id} now has status of 'ok'!")
+                                    inservice_count = 0
                                     while True:
                                         print(f"INFO: Registering instance {tag['Value']} with elb {elb_name}")
                                         client.register_instances_with_load_balancer(LoadBalancerName=elb_name, Instances=[{'InstanceId': instance_id}])
@@ -807,9 +879,15 @@ try:
                                                     if instance_id in health['InstanceStates'][0]['InstanceId']:
                                                         print(f"INFO: Instance status: {health['InstanceStates'][0]['State']}")
                                                         if health['InstanceStates'][0]['State'] == 'InService':
-                                                            break
+                                                            inservice_count += 1                                                          
+                                                            if inservice_count == 3:
+                                                                break
+                                                            else:
+                                                                print(f"INFO: InService count: {inservice_count}, check again in 5 sec...")
+                                                                time.sleep(5)
                                                         else:
                                                             print(f"INFO: Instance not in service yet. Retry in 15 seconds")
+                                                            inservice_count == 0
                                                             time.sleep(15)
                                         else:
                                             print(f"INFO: Instance {instance_id} not attached to the ELB {elb_name}, trying again")
@@ -826,43 +904,50 @@ except Exception as e:
 #######################################################################
 # Gather the list of Instance IDs to track and create DNS Updater stack
 #######################################################################
-def update_dns(public_ip, hostname):
-    '''Performs the initial DNS update during instance creation'''
-    # api_key = os.environ.get('API_GATEWAY_KEY')
-    # api_url = os.environ.get('API_GATEWAY_URL')
-    api_key = API_GATEWAY_KEY
-    api_url = API_GATEWAY_URL
-    headers = {'x-api-key': api_key }
-    query_params = {'mode':'set', 'hostname': hostname, 'ipv4_address': public_ip}
-    response = requests.get(api_url, headers=headers, params=query_params)
-    return response
 
 print("INFO: Beginning deployment of DNS updater stack")
 try:
     instance_ids = []
     ec2 = session.client('ec2',region_name=REGION)
-    print("INFO: Retrieving the instance IDs of the EC2 instances to track (Apache and IIS servers)")
+    print("INFO: Retrieving the instance IDs of the EC2 instances for Dynamic DNS")
     reservations = ec2.describe_instances()['Reservations']
     for reservation in reservations:
         instances = reservation['Instances']
         for instance in instances:
             if instance['State']['Name'] == 'running':
-                for tag in instance['Tags']:
-                    if tag['Key'] == 'Name':
-                        if 'apache' in tag['Value'] or 'iis' in tag['Value']:
-                            instance_ids.append(instance['InstanceId'])
-                    # Perform initial DNS update, reading hostname from the tag and getting Public IP from the instance
-                    if tag['Key'] == 'DNS':
-                        public_ip = instance['PublicIpAddress']
-                        hostname = tag['Value']
-                        print(f'INFO: Updating DNS for hostname: {hostname} IP Address: {public_ip}')
-                        response = update_dns(public_ip, hostname)
-                        if response.status_code == 200:
-                            print(f'INFO: DNS update successful')
-                        else:
-                            print(f'ERROR: DNS update failed for hostname {hostname} IP Address: {public_ip}')
-                            print(f'ERROR: Status code: {response.status_code}, Reason: {response.reason}')
+                if 'PublicIpAddress' in instance:
+                    instance_ids.append(instance['InstanceId'])
+                    for tag in instance['Tags']:
+                        # if tag['Key'] == 'Name':
+                        #     if 'apache' in tag['Value'] or 'iis' in tag['Value']:
+                                # instance_ids.append(instance['InstanceId'])
+                        # Perform initial DNS update, reading hostname from the tag and getting Public IP from the instance
+                        if tag['Key'] == 'DNS':
+                            public_ip = instance['PublicIpAddress']
+                            hostname = tag['Value']
+                            print(f'INFO: Updating DNS for hostname: {hostname} IP Address: {public_ip}')
+                            response = update_dns(public_ip, hostname)
+                            if response.status_code == 200:
+                                print(f'INFO: DNS update successful')
+                            else:
+                                print(f'ERROR: DNS update failed for hostname {hostname} IP Address: {public_ip}')
+                                print(f'ERROR: Status code: {response.status_code}, Reason: {response.reason}')
     
+    # add EIPs to DNS
+    for address in ec2.describe_addresses()['Addresses']:
+        resource = boto3.resource('ec2', region_name=REGION)
+        instance = resource.Instance(address['InstanceId'])
+        for tag in instance.tags:
+            if 'DNS' in tag['Key']:
+                print(f"INFO: Updating DNS for hostname: {tag['Value']} IP Address: {address['PublicIp']}")
+                response = update_dns(address['PublicIp'], tag['Value'])
+                if response.status_code == 200:
+                    print(f'INFO: DNS update successful')
+                else:
+                    print(f"ERROR: DNS update failed for hostname {tag['Value']} IP Address: {address['PublicIp']}")
+                    print(f"ERROR: Status code: {response.status_code}, Reason: {response.reason}")
+
+
     cloudformation = session.client('cloudformation', region_name=REGION)
     
     INSTANCE_IDS = ''
@@ -872,7 +957,7 @@ try:
             INSTANCE_IDS += ','     
 
     aws_parameters = [
-        {'ParameterKey': 'S3Bucket', 'ParameterValue': S3_BUCKET},
+        {'ParameterKey': 'S3Bucket', 'ParameterValue': LAMBDA_S3_BUCKET},
         {'ParameterKey': 'APIGatewayURL', 'ParameterValue': API_GATEWAY_URL},
         {'ParameterKey': 'APIGatewayKey', 'ParameterValue': API_GATEWAY_KEY},
         {'ParameterKey': 'InstanceList', 'ParameterValue': INSTANCE_IDS},
@@ -939,7 +1024,7 @@ try:
         eks_endpoint_fqdn_only = (eks_endpoint.split('//'))[1]
 
         records.append([
-            f"https://{output['n0workGuacamolePublic']}",
+            f"https://{output['n0workGuacamoleDNS']}",
             output['n0workPodName'],
             output['n0workPodPassword'],
             f"http://{output['n0workIISDNS']}",
@@ -1013,7 +1098,7 @@ try:
         ]
 
         columnar_output = [
-            f"Pod Lab Access (Guac) Web Console URL,https://{output['n0workGuacamolePublic']}\n",
+            f"Pod Lab Access (Guac) Web Console URL,https://{output['n0workGuacamoleDNS']}\n",
             f"Pod Lab Access (Guac) Username,{output['n0workPodName']}\n",
             f"Pod Lab Access (Guac) Password,{output['n0workPodPassword']}\n",
             f"nopCommerce Windows App URL,http://{output['n0workIISDNS']}\n",
