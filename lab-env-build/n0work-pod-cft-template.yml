@@ -725,6 +725,8 @@ Resources:
   # Create Tetration Appliances
   n0workEC2TetData:
     Type: AWS::EC2::Instance
+    DependsOn:
+      - n0workEC2Ansible
     Properties:
       ImageId: !Ref TetrationDataIngestImageID
       InstanceType: t2.small
@@ -747,7 +749,12 @@ Resources:
             VolumeSize: "196"
             Encrypted: "false"
             DeleteOnTermination: "true"
-  
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          cat <<EOF > /etc/profile.d/http_proxy.sh
+          export HTTP_PROXY=${n0workEC2Ansible.PrivateIp}:3128 
+          EOF
   TetNetworkInterfaces01:
       Type: AWS::EC2::NetworkInterface
       Properties:
@@ -794,11 +801,11 @@ Resources:
   #         Value: !Sub "n0work-${PodName}-eip-TetData-${Region}${Subnet01AvailabilityZone}"
   
   # Elastic IP Association  
-  n0workAssociateEIPTetData:
-    Type: AWS::EC2::EIPAssociation
-    Properties:
-      AllocationId: !Ref TetDataElasticIpAllocationId
-      NetworkInterfaceId: !Ref TetNetworkInterfaces01
+  # n0workAssociateEIPTetData:
+  #   Type: AWS::EC2::EIPAssociation
+  #   Properties:
+  #     AllocationId: !Ref TetDataElasticIpAllocationId
+  #     NetworkInterfaceId: !Ref TetNetworkInterfaces01
 
   # Create Tet Edge EC2
   n0workEC2TetEdge:
@@ -1293,7 +1300,7 @@ Resources:
         - Key: Pod
           Value: !Sub ${PodName}
         - Key: DNS
-          Value: !Sub ${SessionName}-${PodName}-rh-ansible.lab.tetration.guru
+          Value: !Sub ${SessionName}-${PodName}-guac-pod-ui.lab.tetration.guru
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash
@@ -1416,6 +1423,49 @@ Resources:
           EOF
           sshpass -p 'tet123$$!' scp -o StrictHostKeyChecking=no /home/ciscolab/anyconnect-profile.xml admin@${ASAvNetworkInterfaces03.PrimaryPrivateIpAddress}:disk0:anyconnect-profile.xml &> /tmp/anyconnect-init.log
           ansible-playbook /opt/TVB-assets/tvb-asa/asa_vpn.yml -i /opt/TVB-assets/tvb-asa/inventory/hosts
+          yum -y install squid
+          systemctl enable squid
+          systemctl start squid
+          yum -y install nginx
+          systemctl enable nginx
+          cat <<EOF > /etc/nginx/nginx.conf
+          user nginx;
+          worker_processes auto;
+          error_log /var/log/nginx/error.log;
+          pid /run/nginx.pid;
+
+          # Load dynamic modules. See /usr/share/doc/nginx/README.dynamic.
+          include /usr/share/nginx/modules/*.conf;
+
+          events {
+              worker_connections 1024;
+          }
+
+          http {
+              log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                                '$status $body_bytes_sent "$http_referer" '
+                                '"$http_user_agent" "$http_x_forwarded_for"';
+
+              access_log  /var/log/nginx/access.log  main;
+
+              sendfile            on;
+              tcp_nopush          on;
+              tcp_nodelay         on;
+              keepalive_timeout   65;
+              types_hash_max_size 2048;
+
+              include             /etc/nginx/mime.types;
+              default_type        application/octet-stream;
+
+              # Load modular configuration files from the /etc/nginx/conf.d directory.
+              # See http://nginx.org/en/docs/ngx_core_module.html#include
+              # for more information.
+              include /etc/nginx/conf.d/*.conf;
+          }
+          EOF
+          sed -i "s/^PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
+          systemctl restart sshd
+
       NetworkInterfaces: 
         - AssociatePublicIpAddress: "true"
           DeviceIndex: "0"
@@ -1448,8 +1498,6 @@ Resources:
           Value: !Sub ${PodName}
         - Key: Schedule
           Value: !Sub ${ScheduleName}
-        - Key: DNS
-          Value: !Sub ${SessionName}-${PodName}-guac-pod-ui.lab.tetration.guru
         
       UserData:
         Fn::Base64: !Sub |
@@ -1567,6 +1615,23 @@ Resources:
           systemctl restart sshd
           systemctl restart network
           systemctl restart tomcat
+          MY_IP=$(curl http://169.254.169.254/latest/meta-data/local-ipv4) 
+          cat <<EOF > nginx_guac.conf
+          upstream guac {
+            server $MY_IP;
+          }
+
+          server {
+            listen 80;
+
+          location / {
+            proxy_pass http://guac;
+          }
+          }
+          EOF
+          sshpass -p 'tet123$$!' scp -o "StrictHostKeyChecking no" nginx_guac.conf root@${n0workEC2Ansible.PrivateIp}:/etc/nginx/conf.d/guac.conf
+          sshpass -p 'tet123$$!' ssh -o "StrictHostKeyChecking no" root@${n0workEC2Ansible.PrivateIp} systemctl restart nginx
+
       NetworkInterfaces: 
         - NetworkInterfaceId: !Ref GuacamoleNetworkInterfaces02
           DeviceIndex: '0'
@@ -1611,11 +1676,11 @@ Resources:
   #         Value: !Sub "n0work-${PodName}-eip-guacamole-${Region}${Subnet01AvailabilityZone}"
   
   # Elastic IP Association  
-  n0workAssociateEIPGuacamole:
-    Type: AWS::EC2::EIPAssociation
-    Properties:
-      AllocationId: !Ref GuacamoleElasticIpAllocationId
-      NetworkInterfaceId: !Ref GuacamoleNetworkInterfaces01
+  # n0workAssociateEIPGuacamole:
+  #   Type: AWS::EC2::EIPAssociation
+  #   Properties:
+  #     AllocationId: !Ref GuacamoleElasticIpAllocationId
+  #     NetworkInterfaceId: !Ref GuacamoleNetworkInterfaces01
 
 
   # Lambda Function Basic Execution Role
@@ -1908,9 +1973,9 @@ Outputs:
   n0workAttacker:
     Description: Metasploit Attacker Private IP
     Value: !GetAtt n0workEC2Attacker.PrivateIp
-  n0workGuacamolePublic:
-    Description: Guacamole Server Public IP
-    Value: !Ref GuacamoleElasticIp
+  # n0workGuacamolePublic:
+  #   Description: Guacamole Server Public IP
+  #   Value: !Ref GuacamoleElasticIp
   n0workGuacamoleDNS:
     Description: Guacamole Server Public DNS
     Value: !Sub ${SessionName}-${PodName}-guac-pod-ui.lab.tetration.guru

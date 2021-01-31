@@ -542,8 +542,9 @@ for pod in PODS_LIST:
     public_ip = None
     resp = query_dns(f"{SESSION_NAME}-{pod['account_name']}-sock-shop.lab.tetration.guru")
     if resp.status_code == 200:
-        if 'return_message' in json.loads(resp.content):
-            public_ip = json.loads(resp.content)['return_message']
+        if json.loads(resp.content):
+            if 'return_message' in json.loads(resp.content):
+                public_ip = json.loads(resp.content)['return_message']
     if public_ip:
         print(f"INFO Deleting DNS entry from Route 53 for {SESSION_NAME}-{pod['account_name']}-sock-shop.lab.tetration.guru")
         resp = delete_dns(public_ip, f"{SESSION_NAME}-{pod['account_name']}-sock-shop.lab.tetration.guru")
