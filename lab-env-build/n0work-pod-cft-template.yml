@@ -88,9 +88,6 @@ Parameters:
     NoEcho: True
     Type: String
     Description: Please enter password
-  # ManagementCidrBlock:
-  #   Type: String
-  #   Description: Please enter the Management Cidr Block
   VpcID:
     Type: String
     Description: Please enter the VPC Id
@@ -151,18 +148,6 @@ Parameters:
   GuacamoleOutsidePrivateIp:
     Type: String
     Description: Please enter Private IP For Outside Guacamole Interface
-  GuacamoleElasticIp:
-    Type: String
-    Description: Please enter Elastic IP Guacamole Interface
-  GuacamoleElasticIpAllocationId:
-    Type: String
-    Description: Please enter Elastic IP Allocation Id for Guacamole Interface
-  TetDataElasticIp:
-    Type: String
-    Description: Please enter Elastic IP For Tet Data Interface
-  TetDataElasticIpAllocationId:
-    Type: String
-    Description: Please enter Elastic IP Allocation Id for Tet Data Interface
   ASAvImageID:
     Type: String
     Description: Please enter Image Id for ASAv
@@ -347,10 +332,6 @@ Resources:
           FromPort: 0
           ToPort: 65535
           CidrIp: !Sub "${ISEIPAddress}/32"
-        # - IpProtocol: -1
-        #   FromPort: 0
-        #   ToPort: 65535
-        #   CidrIp: !Ref ManagementCidrBlock
       SecurityGroupEgress:
         - IpProtocol: -1
           FromPort: 0
@@ -382,10 +363,6 @@ Resources:
           FromPort: 0
           ToPort: 65535
           CidrIp: !Ref Subnet03CidrBlock
-        # - IpProtocol: -1
-        #   FromPort: 0
-        #   ToPort: 65535
-        #   CidrIp: !Ref ManagementCidrBlock
       SecurityGroupEgress:
         - IpProtocol: -1
           FromPort: 0
@@ -725,8 +702,8 @@ Resources:
   # Create Tetration Appliances
   n0workEC2TetData:
     Type: AWS::EC2::Instance
-    DependsOn:
-      - n0workEC2Ansible
+    # DependsOn:
+    #   - n0workEC2Ansible
     Properties:
       ImageId: !Ref TetrationDataIngestImageID
       InstanceType: t2.small
@@ -749,12 +726,6 @@ Resources:
             VolumeSize: "196"
             Encrypted: "false"
             DeleteOnTermination: "true"
-      UserData:
-        Fn::Base64: !Sub |
-          #!/bin/bash
-          cat <<EOF > /etc/profile.d/http_proxy.sh
-          export HTTP_PROXY=${n0workEC2Ansible.PrivateIp}:3128 
-          EOF
   TetNetworkInterfaces01:
       Type: AWS::EC2::NetworkInterface
       Properties:
@@ -790,22 +761,6 @@ Resources:
         GroupSet:
         - !Ref n0workPublicSecurityGroup
         SubnetId: !Ref n0workSubnet01
-
-  # Create Elastic IP Addresses
-  # IF you have more than five (5) EIPs already associated to your AWS VPC, comment out the next 6 lines!
-  # n0workEC2TetDataEIP1:
-  #   Type: AWS::EC2::EIP
-  #   Properties:
-  #     Tags:
-  #       - Key: Name
-  #         Value: !Sub "n0work-${PodName}-eip-TetData-${Region}${Subnet01AvailabilityZone}"
-  
-  # Elastic IP Association  
-  # n0workAssociateEIPTetData:
-  #   Type: AWS::EC2::EIPAssociation
-  #   Properties:
-  #     AllocationId: !Ref TetDataElasticIpAllocationId
-  #     NetworkInterfaceId: !Ref TetNetworkInterfaces01
 
   # Create Tet Edge EC2
   n0workEC2TetEdge:
@@ -1253,20 +1208,6 @@ Resources:
           - !Ref n0workWebSecurityGroup
         SubnetId: !Ref n0workSubnet01
 
-#  We shouldn't need EIP for ASAv if contacting ISE via AWS VGW (should be case unless ISE happens to be NAT to Internet)
-#  # Create Elastic IP Addresses
-#  n0workASAvEIP:
-#    Type: AWS::EC2::EIP
-#  
-#  # Elastic IP Association  
-#  n0workAssociateEIPASAv:
-#    Type: AWS::EC2::EIPAssociation
-#    DependsOn:
-#      - n0workEC2ASAv
-#    Properties:
-#      AllocationId: !GetAtt n0workASAvEIP.AllocationId
-#      NetworkInterfaceId: !Ref ASAvNetworkInterfaces03
-
   # Ansible Server
   n0workEC2Ansible:
     Type: AWS::EC2::Instance
@@ -1462,6 +1403,7 @@ Resources:
               # for more information.
               include /etc/nginx/conf.d/*.conf;
           }
+          include /etc/nginx/passthrough.conf;
           EOF
           sed -i "s/^PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
           systemctl restart sshd
@@ -1471,6 +1413,7 @@ Resources:
           DeviceIndex: "0"
           GroupSet: 
             - !Ref n0workPublicSecurityGroup
+            - !Ref n0workWebSecurityGroup
           SubnetId: !Ref n0workSubnet01
     
   # Guacamole server
@@ -1615,23 +1558,32 @@ Resources:
           systemctl restart sshd
           systemctl restart network
           systemctl restart tomcat
-          MY_IP=$(curl http://169.254.169.254/latest/meta-data/local-ipv4) 
-          cat <<EOF > nginx_guac.conf
-          upstream guac {
-            server $MY_IP;
-          }
+          export http_proxy=${n0workEC2Ansible.PrivateIp}:3128
+          echo http_proxy=${n0workEC2Ansible.PrivateIp}:3128 >> /home/root/.bash_profile
+          echo 'proxy=http://${n0workEC2Ansible.PrivateIp}:3128' >> /etc/yum.conf
+          until yum -y install sshpass &> /dev/null
+          do
+            echo "waiting for proxy server"
+            sleep 10
+          done
+          echo -e "sshpass installed"
+          MY_IP=$(ip -4 addr show eth1 | grep -oP '(?<=inet\s)\d+(\.\d+){3}') 
+          cat <<EOF > passthrough.conf
+          ## tcp LB  and SSL passthrough for backend ##
+          stream {
+              upstream guac {
+                  server $MY_IP:443 max_fails=3 fail_timeout=10s;
+              }
 
-          server {
-            listen 80;
-
-          location / {
-            proxy_pass http://guac;
-          }
+              server {
+                  listen 443;
+                  proxy_pass guac;
+                  proxy_next_upstream on;
+              }
           }
           EOF
-          sshpass -p 'tet123$$!' scp -o "StrictHostKeyChecking no" nginx_guac.conf root@${n0workEC2Ansible.PrivateIp}:/etc/nginx/conf.d/guac.conf
-          sshpass -p 'tet123$$!' ssh -o "StrictHostKeyChecking no" root@${n0workEC2Ansible.PrivateIp} systemctl restart nginx
-
+          sshpass -p 'tet123$$!' scp -o StrictHostKeyChecking=no passthrough.conf root@${n0workEC2Ansible.PrivateIp}:/etc/nginx/passthrough.conf
+          sshpass -p 'tet123$$!' ssh -o StrictHostKeyChecking=no root@${n0workEC2Ansible.PrivateIp} systemctl restart nginx
       NetworkInterfaces: 
         - NetworkInterfaceId: !Ref GuacamoleNetworkInterfaces02
           DeviceIndex: '0'
@@ -1665,23 +1617,6 @@ Resources:
       PrivateIpAddresses:
         - PrivateIpAddress: !Ref GuacamoleOutsidePrivateIp
           Primary: 'true'
-
-  # Create Elastic IP Addresses
-  # IF you have more than five (5) EIPs already associated to your AWS VPC, comment out the next 6 lines!
-  # n0workGuacamoleEIP:
-  #   Type: AWS::EC2::EIP
-  #   Properties:
-  #     Tags:
-  #       - Key: Name
-  #         Value: !Sub "n0work-${PodName}-eip-guacamole-${Region}${Subnet01AvailabilityZone}"
-  
-  # Elastic IP Association  
-  # n0workAssociateEIPGuacamole:
-  #   Type: AWS::EC2::EIPAssociation
-  #   Properties:
-  #     AllocationId: !Ref GuacamoleElasticIpAllocationId
-  #     NetworkInterfaceId: !Ref GuacamoleNetworkInterfaces01
-
 
   # Lambda Function Basic Execution Role
   LambdaExecutionRole:
@@ -1973,9 +1908,6 @@ Outputs:
   n0workAttacker:
     Description: Metasploit Attacker Private IP
     Value: !GetAtt n0workEC2Attacker.PrivateIp
-  # n0workGuacamolePublic:
-  #   Description: Guacamole Server Public IP
-  #   Value: !Ref GuacamoleElasticIp
   n0workGuacamoleDNS:
     Description: Guacamole Server Public DNS
     Value: !Sub ${SessionName}-${PodName}-guac-pod-ui.lab.tetration.guru
