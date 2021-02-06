@@ -560,3 +560,4 @@ for pod in PODS_LIST:
 
 
 print('INFO: Rollback completed successfully!')
+
