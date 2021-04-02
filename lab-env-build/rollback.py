@@ -89,65 +89,32 @@ session = boto3.Session(
 PODS_LIST = []
 STACKS_LIST = []
 
-#######################################################################
-# Retrieve VPC_ID ##############################################
-#######################################################################
-# try:
-#     print(f'INFO: Retrieving VPC_ID...')
-#     ec2 = session.resource('ec2', region_name=REGION)
-#     vpcs = list(ec2.vpcs.all())
-#     VPC_ID = None
-#     for vpc in vpcs:
-#         if vpc.tags:
-#             for tag in vpc.tags:
-#                 name = tag.get('Value')
-#                 if name == 'Tetration HoL':
-#                     print(f"INFO: Found VPC {vpc.id} with tag 'Tetration HoL'")
-#                     answer = input(f"Do you want to delete the lab environment for VPC {vpc.id} (Y/N)? ")
-#                     if answer.upper() == 'Y':
-#                         VPC_ID = vpc.id
-#                         break
-#         if VPC_ID:
-#             break
-                        
-#     if not VPC_ID:
-#         print('ERROR: No VPCs selected for deletion')
-#         sys.exit(1)
-                                       
-#     print(f'INFO: VPC ID: {VPC_ID}')
-# except Exception as e:
-#     print(f'ERROR: While retrieving VPC_ID {e}')
-#     sys.exit(1)
-
-# SESSION_NAME = VPC_ID[-6:]
-#######################################################################
-
 
 #######################################################################
 # Calculate & Verify Subnet Range #####################################
 #######################################################################
-try:
-    print(f'INFO: Validating Subnet Range...')
-    primary_ips = list(ipaddress.ip_network(SUBNET_RANGE_PRIMARY).hosts())
-    secondary_ips = list(ipaddress.ip_network(SUBNET_RANGE_SECONDARY).hosts())
+# try:
+#     print(f'INFO: Validating Subnet Range...')
+#     primary_ips = list(ipaddress.ip_network(SUBNET_RANGE_PRIMARY).hosts())
+#     secondary_ips = list(ipaddress.ip_network(SUBNET_RANGE_SECONDARY).hosts())
 
-    primary_ips = list(set(list(map(lambda ip: str(re.sub(r'([0-9]+)$', '0', str(ip))), primary_ips))))
-    secondary_ips = list(set(list(map(lambda ip: str(re.sub(r'([0-9]+)$', '0', str(ip))), secondary_ips))))
+#     primary_ips = list(set(list(map(lambda ip: str(re.sub(r'([0-9]+)$', '0', str(ip))), primary_ips))))
+#     secondary_ips = list(set(list(map(lambda ip: str(re.sub(r'([0-9]+)$', '0', str(ip))), secondary_ips))))
 
-    print(f'INFO: {len(primary_ips)} Subnets Are Available...')
+#     print(f'INFO: {len(primary_ips)} Subnets Are Available...')
 
-    if len(primary_ips) < (POD_COUNT * 2):
-        print(f'ERROR: Number Of Required Primary Subnets Are {POD_COUNT * 2} But Only {len(primary_ips)} Are Available...')
-        sys.exit(1)
+#     if len(primary_ips) < (POD_COUNT * 2):
+#         print(f'ERROR: Number Of Required Primary Subnets Are {POD_COUNT * 2} But Only {len(primary_ips)} Are Available...')
+#         sys.exit(1)
     
-    if len(secondary_ips) < POD_COUNT:
-        print(f'ERROR: Number Of Required Secondary Subnets Are {POD_COUNT} But Only {len(secondary_ips)} Are Available...')
-        sys.exit(1)
+#     if len(secondary_ips) < POD_COUNT:
+#         print(f'ERROR: Number Of Required Secondary Subnets Are {POD_COUNT} But Only {len(secondary_ips)} Are Available...')
+#         sys.exit(1)
 
-except:
-    print(f'ERROR: Invalid Subnet! Please provide a valid subnet range...')
-    sys.exit(1)
-print(f'INFO: Subnet Range Validation Completed...')
+# except:
+#     print(f'ERROR: Invalid Subnet! Please provide a valid subnet range...')
+#     sys.exit(1)
+# print(f'INFO: Subnet Range Validation Completed...')
 #######################################################################
 
 
@@ -259,15 +226,15 @@ for pod in PODS_LIST:
                                         print(f'ERROR: Status code: {response.status_code}, Reason: {response.reason}')
 
 # Loop through all EIPs and release the ones associated with the instance IDs 
-addresses_dict = ec2.describe_addresses()
-for address in addresses_dict['Addresses']:
-    instance_id = address.get('InstanceId')
-    if instance_id:
-        if instance_id in instance_ids:
-            print(f"INFO: Disassociating EIP {address['PublicIp']} from instance {address['InstanceId']}")
-            ec2.disassociate_address(PublicIp=address['PublicIp'])
-            print(f"INFO: Releasing EIP {address['PublicIp']}")
-            ec2.release_address(AllocationId=address['AllocationId'])
+# addresses_dict = ec2.describe_addresses()
+# for address in addresses_dict['Addresses']:
+#     instance_id = address.get('InstanceId')
+#     if instance_id:
+#         if instance_id in instance_ids:
+#             print(f"INFO: Disassociating EIP {address['PublicIp']} from instance {address['InstanceId']}")
+#             ec2.disassociate_address(PublicIp=address['PublicIp'])
+#             print(f"INFO: Releasing EIP {address['PublicIp']}")
+#             ec2.release_address(AllocationId=address['AllocationId'])
 
 #######################################################################
 # Delete VPC Flow Logs S3 Buckets #####################################
@@ -542,8 +509,9 @@ for pod in PODS_LIST:
     public_ip = None
     resp = query_dns(f"{SESSION_NAME}-{pod['account_name']}-sock-shop.lab.tetration.guru")
     if resp.status_code == 200:
-        if 'return_message' in json.loads(resp.content):
-            public_ip = json.loads(resp.content)['return_message']
+        if json.loads(resp.content):
+            if 'return_message' in json.loads(resp.content):
+                public_ip = json.loads(resp.content)['return_message']
     if public_ip:
         print(f"INFO Deleting DNS entry from Route 53 for {SESSION_NAME}-{pod['account_name']}-sock-shop.lab.tetration.guru")
         resp = delete_dns(public_ip, f"{SESSION_NAME}-{pod['account_name']}-sock-shop.lab.tetration.guru")
@@ -592,3 +560,4 @@ for pod in PODS_LIST:
 
 
 print('INFO: Rollback completed successfully!')
+

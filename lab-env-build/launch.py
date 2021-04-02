@@ -144,44 +144,6 @@ def get_user_input(prompt, valid_pattern):
           return answer
 
 print(" ")
-print("These lab environment pods can be deployed into an existing VPC, or a new VPC can be created for you.")
-print("It is HIGHLY encouraged to allow this process to create the VPC and all components therein, for you.")
-print("One reason to choose the option to use an existing VPC is if you require more than two (2) pods (which require a total of 4 EIPs),")
-print("in which case you will need to make a request to AWS to increase the number of EIPs and have them allocated to a specific VPC-Id PRIOR to running this script.")
-print("To deploy into an existing VPC, the VPC ID and the ID of the Internet Gateway in the existing VPC will be needed,")
-print(" ")
-print("Again, unless you require more than 2 pods to be deployed, you should allow this script to create everything for you.")
-print(" ")
-vpc_answer = get_user_input("Do you require only 1 or 2 pods and wish to have everything, including the VPC, created for you? (Y/N) ", "^[YyNn]$")
-if vpc_answer.upper() == 'N':
-    VPC_ID = get_user_input("Enter your existing VPC ID: ", "^vpc-[0-9a-z]*")
-    INTERNET_GATEWAY_ID = get_user_input("Enter the Internet Gateway ID: ", "^igw-[0-9a-z]*")
-    use_existing_vpc = True
-elif vpc_answer.upper() == 'Y':
-    use_existing_vpc = False
-print(" ")
-
-#######################################################################
-# Verify VPC Id Provided, if using existing ###########################
-#######################################################################
-session = boto3.Session(
-    aws_access_key_id=ACCESS_KEY,
-    aws_secret_access_key=SECRET_KEY,
-    region_name=REGION
-)
-if use_existing_vpc:
-    try:
-        print(f'INFO: Checking VPC ID: {VPC_ID} in region {REGION}')
-        ec2 = session.resource('ec2', region_name=REGION)
-        vpc = ec2.Vpc(VPC_ID)
-        print(f'INFO: VPC ID Verified: {vpc.vpc_id}...')
-    except ClientError as e:
-        print(f'ERROR: VPC Check Failed with error {e}')
-        sys.exit(1)
-
-#######################################################################
-
-print(" ")
 print("Next, we require two (2) /16 CIDR blocks that will be used to create each pod's 'Inside' (or Corporate) and 'Outside' (or psuedo-Internet) subnet.")
 print("Both CIDR blocks MUST end in /16. This is essentially due to the fact that we let you pick the first two octets, then use the third octet for each new pod #,")
 print("and the fourth octet for the hosts in each pod.")
@@ -199,88 +161,6 @@ PODS_LIST = []
 
 def password_generator(size=14, chars=string.ascii_letters + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
-
-# Gets the public IP address of system running this script
-# def get_public_ip():
-#     result = json.load(urllib.request.urlopen('https://api.ipify.org/?format=json'))
-#     return result['ip']
-
-
-#######################################################################
-# Get Management Cidr Block ###########################################
-#######################################################################
-# try:
-#     print(f'INFO: Fetching Your Public IP for AWS SG Access "All Traffic" ...')
-#     MANAGEMENT_CIDR = f"{get_public_ip()}/32"
-#     print('INFO: Management Cidr:', MANAGEMENT_CIDR)
-# except:
-#     print(f'MINOR: Unable To Grab Your Public IP for the Management CIDR')
-#     print(f'MINOR: Not a major issue, so continuing ...')
-#     MANAGEMENT_CIDR = '1.1.1.1/32'
-#     pass
-
-# MANAGEMENT_CIDR = '1.1.1.1/32'
-
-#######################################################################
-# Check Existing Subnets if deploying into existing ###################
-#######################################################################
-if use_existing_vpc:
-    print(f'INFO: Checking Existing Subnets...')
-    filters = [{'Name':'vpcId', 'Values':[VPC_ID]}]
-
-    ec2 = session.resource('ec2', region_name=REGION)
-    subnets_count = len(list(ec2.subnets.filter(Filters=filters)))
-
-    if subnets_count > 0:
-        print(f'ERROR: {subnets_count} Subnets Found In Current VPC...')
-        sys.exit(1)
-
-    print(f'INFO: Subnet Check Completed...')
-
-#######################################################################
-# Check Available Elastic IPs #########################################
-#######################################################################
-
-print('INFO: Checking Available Elastic IPs...')
-
-client = session.client('ec2', region_name=REGION)
-
-addresses_dict = client.describe_addresses()
-
-eips_allocated = len(addresses_dict['Addresses'])
-eips_in_use = 0
-ELASTIC_IPS = []
-
-for eip_dict in addresses_dict['Addresses']:
-    if 'NetworkInterfaceId' not in eip_dict:
-        ELASTIC_IPS.append({
-            'public_ip': eip_dict['PublicIp'],
-            'allocation_id': eip_dict['AllocationId']
-        })
-    elif 'InstanceId' in eip_dict:
-        eips_in_use += 1
-
-allocated_and_available = eips_allocated - eips_in_use
-print(f'INFO: Number of required Elastic IPs is {POD_COUNT * 2}, you currently have {allocated_and_available} available for use')
-succeeded_count = 0
-if allocated_and_available < (POD_COUNT * 2):   
-    print(f'INFO: Attempting to allocate {(POD_COUNT * 2) - allocated_and_available} additional Elastic IPs...')
-    for i in range(1,((POD_COUNT * 2) - allocated_and_available) + 1):
-        try:
-            eip = client.allocate_address()
-            ELASTIC_IPS.append({
-            'public_ip': eip['PublicIp'],
-            'allocation_id': eip['AllocationId']})
-            succeeded_count += 1
-        except ClientError as e:
-            if 'AddressLimitExceeded' in str(e):
-                print(f'ERROR: Number of additional Elastic IPs is {(POD_COUNT * 2) - allocated_and_available} and {succeeded_count} were able to be allocated.')
-                print(f'Please go to the AWS portal to request increase of EIP limit by {(POD_COUNT * 2) - allocated_and_available - succeeded_count} or more addresses:')
-                print(f'https://console.aws.amazon.com/support/home?#/case/create?issueType=service-limit-increase&limitType=vpc')
-                sys.exit(1)
-        
-    if succeeded_count > 0:
-        print(f'INFO: Successfully allocated {succeeded_count} Elastic IPs')
 
 #######################################################################
 # Calculate & Verify Subnet Range #####################################
@@ -324,7 +204,7 @@ try:
     public_subnet_01 = primary_ips[:len(primary_ips)//2]
     public_subnet_02 = primary_ips[len(primary_ips)//2:]
 
-    eip_index = 0
+ #   eip_index = 0
 
     for i in range(POD_COUNT):
         PODS_LIST.append({
@@ -334,15 +214,7 @@ try:
             'public_subnet_02': f'{public_subnet_02[i]}',
             'private_subnet': f'{secondary_ips[i]}',
             'eks_dns': '',
-            'guacamole_elastic_ip': ELASTIC_IPS[eip_index]['public_ip'],
-            'guacamole_elastic_ip_allocation_id': ELASTIC_IPS[eip_index]['allocation_id'],
-            'tet_data_elastic_ip': ELASTIC_IPS[eip_index + 1]['public_ip'],
-            'tet_data_elastic_ip_allocation_id': ELASTIC_IPS[eip_index + 1]['allocation_id']
         })
-
-        eip_index = eip_index + 2
-
-#    print(f'INFO: {PODS_LIST}')
 
 except:
     print(f'ERROR: Invalid Subnet! Please provide a valid subnet range...')
@@ -453,10 +325,8 @@ else:
 #######################################################################
 # Confirm Deploy Before Proceeding ####################################
 #######################################################################
-if use_existing_vpc:
-    print(f'You are about to deploy {POD_COUNT} pod(s) to {VPC_ID} in the {REGION} Region')
-else:
-    print(f'You are about to deploy {POD_COUNT} pod(s) to a new VPC in the {REGION} Region')
+
+print(f'You are about to deploy {POD_COUNT} pod(s) to a new VPC in the {REGION} Region')
 if use_schedule:
     print(f"The lab will start at {BEGIN_TIME} and stop each day at {END_TIME} in the {TIMEZONE} timezone")
 rusure_response = input('Are you sure you wish to proceed with this deployment (y/Y to continue)? ')
@@ -540,55 +410,55 @@ else:
 
 
 #######################################################################
-# CREATE VPC IF NOT SPECIFIED IN PARAMETERS FILE
+# CREATE VPC 
 #######################################################################
-if not use_existing_vpc:
-    # Create VPC
-    client = boto3.client('ec2', region_name=REGION)
-    vpc = client.create_vpc(
-        CidrBlock=SUBNET_RANGE_PRIMARY,
-        TagSpecifications=[
+
+# Create VPC
+client = boto3.client('ec2', region_name=REGION)
+vpc = client.create_vpc(
+    CidrBlock=SUBNET_RANGE_PRIMARY,
+    TagSpecifications=[
+        {
+            'ResourceType': 'vpc',
+            'Tags': [
             {
-                'ResourceType': 'vpc',
-                'Tags': [
+                'Key': 'Name',
+                'Value': 'n0work'
+            },
+            ]
+        },
+    ]
+)
+VPC_ID = vpc['Vpc']['VpcId']
+print(f"INFO: Created VPC with ID {VPC_ID} and CIDR block {SUBNET_RANGE_PRIMARY}")
+#SESSION_NAME = VPC_ID[-6:]
+
+# Create Secondary CIDR
+sec_cidr = client.associate_vpc_cidr_block(CidrBlock=SUBNET_RANGE_SECONDARY, VpcId=VPC_ID)
+print(f"INFO: Created Secondary CIDR block {SUBNET_RANGE_SECONDARY} on VPC {VPC_ID}")
+
+# Create Internet Gateway
+inet_gateway = client.create_internet_gateway(
+    TagSpecifications=[
+        {
+            'ResourceType': 'internet-gateway',
+            'Tags': [
                 {
                     'Key': 'Name',
-                    'Value': 'n0work'
+                    'Value': 'n0work '
                 },
-                ]
-            },
-        ]
-    )
-    VPC_ID = vpc['Vpc']['VpcId']
-    print(f"INFO: Created VPC with ID {VPC_ID} and CIDR block {SUBNET_RANGE_PRIMARY}")
-    #SESSION_NAME = VPC_ID[-6:]
+            ]
+        },
+    ],
+)
+INTERNET_GATEWAY_ID = inet_gateway['InternetGateway']['InternetGatewayId']
+print(f"INFO: Created Internet Gateway with ID {INTERNET_GATEWAY_ID}")
 
-    # Create Secondary CIDR
-    sec_cidr = client.associate_vpc_cidr_block(CidrBlock=SUBNET_RANGE_SECONDARY, VpcId=VPC_ID)
-    print(f"INFO: Created Secondary CIDR block {SUBNET_RANGE_SECONDARY} on VPC {VPC_ID}")
-
-    # Create Internet Gateway
-    inet_gateway = client.create_internet_gateway(
-        TagSpecifications=[
-            {
-                'ResourceType': 'internet-gateway',
-                'Tags': [
-                    {
-                        'Key': 'Name',
-                        'Value': 'n0work '
-                    },
-                ]
-            },
-        ],
-    )
-    INTERNET_GATEWAY_ID = inet_gateway['InternetGateway']['InternetGatewayId']
-    print(f"INFO: Created Internet Gateway with ID {INTERNET_GATEWAY_ID}")
-
-    # Associate Internet Gateway with VPC
-    ec2 = boto3.resource('ec2', region_name=REGION)
-    ig = ec2.InternetGateway(INTERNET_GATEWAY_ID)
-    ig_associate = ig.attach_to_vpc(VpcId=VPC_ID)
-    print(f"INFO: Associated Internet Gateway with ID {INTERNET_GATEWAY_ID} to VPC {VPC_ID}")
+# Associate Internet Gateway with VPC
+ec2 = boto3.resource('ec2', region_name=REGION)
+ig = ec2.InternetGateway(INTERNET_GATEWAY_ID)
+ig_associate = ig.attach_to_vpc(VpcId=VPC_ID)
+print(f"INFO: Associated Internet Gateway with ID {INTERNET_GATEWAY_ID} to VPC {VPC_ID}")
 
 #######################################################################
 # Create state file for rollback
@@ -647,6 +517,11 @@ print(f'INFO: lambda_function/tvb-dyndns.zip Uploaded To S3 bucket {LAMBDA_S3_BU
 #######################################################################
 # Run POD Cloud Formation #############################################
 #######################################################################
+session = boto3.Session(
+    aws_access_key_id=ACCESS_KEY,
+    aws_secret_access_key=SECRET_KEY,
+    region_name=REGION
+)
 
 # Previously this was in parameters.yml.  Hard-coding for now so CFT can work.  
 params['ise_server_ip'] = '127.0.0.1'
@@ -666,7 +541,6 @@ for pod in PODS_LIST:
             {'ParameterKey': 'PodIndex', 'ParameterValue': str(PODS_LIST.index(pod))},
             {'ParameterKey': 'PodName', 'ParameterValue': pod['account_name']},
             {'ParameterKey': 'PodPassword', 'ParameterValue': pod['account_password']},
-            # {'ParameterKey': 'ManagementCidrBlock', 'ParameterValue': MANAGEMENT_CIDR},
 
             {'ParameterKey': 'Subnet01CidrBlock', 'ParameterValue': f"{pod['public_subnet_01']}/24"},
             {'ParameterKey': 'Subnet02CidrBlock', 'ParameterValue': f"{pod['public_subnet_02']}/24"},
@@ -674,12 +548,6 @@ for pod in PODS_LIST:
 
             {'ParameterKey': 'ASAvInsideSubnet', 'ParameterValue': pod['public_subnet_01']},
             {'ParameterKey': 'ASAvOutsideSubnet', 'ParameterValue': pod['private_subnet']},
-
-            {'ParameterKey': 'GuacamoleElasticIp', 'ParameterValue': pod['guacamole_elastic_ip']},
-            {'ParameterKey': 'GuacamoleElasticIpAllocationId', 'ParameterValue': pod['guacamole_elastic_ip_allocation_id']},
-
-            {'ParameterKey': 'TetDataElasticIp', 'ParameterValue': pod['tet_data_elastic_ip']},
-            {'ParameterKey': 'TetDataElasticIpAllocationId', 'ParameterValue': pod['tet_data_elastic_ip_allocation_id']},
 
             {'ParameterKey': 'Region', 'ParameterValue': REGION},
             {'ParameterKey': 'Subnet01AvailabilityZone', 'ParameterValue': 'a'},
@@ -717,9 +585,6 @@ for pod in PODS_LIST:
             {'ParameterKey': 'SessionName', 'ParameterValue': SESSION_NAME}
             ]
         
-        # aws_params_json_formatted_str = json.dumps(aws_parameters, indent=2)
-        # print('INFO:', aws_params_json_formatted_str)
-
         templateURL = f"https://{S3_BUCKET}.s3.amazonaws.com/{CFT_POD_FILE}"
         print(templateURL)
         result = cloudformation.create_stack(
@@ -785,17 +650,8 @@ s3.meta.client.delete_object(Bucket=S3_BUCKET, Key=CFT_POD_FILE)
 # Assemble EKS ELB DNS Records ########################################
 #######################################################################
 print('INFO: Preparing to initialize the EKS DNS Assembly...')
-# time.sleep(5)
-# print('INFO: Preparing to initialize the EKS DNS Assembly...')
-# time.sleep(5)
-# print('INFO: Preparing to initialize the EKS DNS Assembly...')
-# time.sleep(5)
+
 try:
-
-    # print('INFO: Initializing EKS DNS Assembly...')
-
-    # time.sleep(120)
-
     for pod in PODS_LIST:
 
         client = session.client('elb', region_name=REGION)
@@ -918,9 +774,6 @@ try:
                 if 'PublicIpAddress' in instance:
                     instance_ids.append(instance['InstanceId'])
                     for tag in instance['Tags']:
-                        # if tag['Key'] == 'Name':
-                        #     if 'apache' in tag['Value'] or 'iis' in tag['Value']:
-                                # instance_ids.append(instance['InstanceId'])
                         # Perform initial DNS update, reading hostname from the tag and getting Public IP from the instance
                         if tag['Key'] == 'DNS':
                             public_ip = instance['PublicIpAddress']
@@ -933,21 +786,6 @@ try:
                                 print(f'ERROR: DNS update failed for hostname {hostname} IP Address: {public_ip}')
                                 print(f'ERROR: Status code: {response.status_code}, Reason: {response.reason}')
     
-    # add EIPs to DNS
-    for address in ec2.describe_addresses()['Addresses']:
-        resource = boto3.resource('ec2', region_name=REGION)
-        instance = resource.Instance(address['InstanceId'])
-        for tag in instance.tags:
-            if 'DNS' in tag['Key']:
-                print(f"INFO: Updating DNS for hostname: {tag['Value']} IP Address: {address['PublicIp']}")
-                response = update_dns(address['PublicIp'], tag['Value'])
-                if response.status_code == 200:
-                    print(f'INFO: DNS update successful')
-                else:
-                    print(f"ERROR: DNS update failed for hostname {tag['Value']} IP Address: {address['PublicIp']}")
-                    print(f"ERROR: Status code: {response.status_code}, Reason: {response.reason}")
-
-
     cloudformation = session.client('cloudformation', region_name=REGION)
     
     INSTANCE_IDS = ''
@@ -1056,10 +894,6 @@ try:
             output['n0workVPCFlowLogBucket'],
             f"{eks_endpoint_fqdn_only}",
             output['EKSClusterCertificate'],
-            # output['n0work-cisco-pod-00-public-subnet-01-us-east-2a'],
-            # n0work-cisco-pod-00-vpc-flow-logs-us-east-2a
-            # aws key will need perms to read this log
-
         ])
 
         header = [
@@ -1141,12 +975,6 @@ try:
         with open(filename, 'w') as file:
             file.writelines(columnar_output)
     
-    # the old way
-    # with open(filename, 'w', newline='') as file:
-    #     writer = csv.writer(file)
-    #     writer.writerow(header)
-    #     writer.writerows(records)
-
 except Exception as e:
     print(e)
     sys.exit(1)

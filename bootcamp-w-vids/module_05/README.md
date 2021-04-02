@@ -111,7 +111,13 @@ The below information will be used to create a .iso file that we will download, 
 
 > If we were deploying an on-prem appliance, then we would mount the .iso to the virtual CD-ROM on the VM.  
 
-Fill in the appropriate details as can be found on your student worksheet.  There are three IP addresses for the appliance because it runs three Docker containers that must each have a routable IP address on the network.  The IP address of the Active Directory server should be entered as the Name Server.   
+Fill in the appropriate details as can be found on your student worksheet.  There are three IP addresses for the appliance because it runs three Docker containers that must each have a routable IP address on the network.  The IP address of the Active Directory server should be entered as the Name Server.
+  
+The Ansible server provides a proxy server which enables outbound access for the appliance.  Check the box `Use proxy server to connect to Tetration`  and enter the Ansible server IP address from the student worksheet in the `HTTP Proxy` field using the format:
+
+```
+http://YOUR_ANSIBLE_IP:3128
+```
 
 <a href="images/module_05_006.png"><img src="images/module_05_006.png" style="width:100%;height:100%;"></a>  
 
@@ -169,7 +175,9 @@ Wait for all of the files to fully copy. A status window should be displayed in 
 
 <div class="step" id="step-013"><a href="#step-013" style="font-weight:bold">Step 013</a></div>  
 
-Make sure the appliance has outbound Internet connectivity by pinging well-known web sites such as google.com.  Do an `ls -l` to make sure that the files we copied are present on the appliance.
+Do an `ls -l` to make sure that the files we copied are present on the appliance.
+
+> Please ignore the ping command in the image. You will not be able to ping outbound since we switched to using a proxy server.  The image will be fixed later.
 
 <a href="images/module_05_013.png"><img src="images/module_05_013.png" style="width:100%;height:100%;"></a>  
 
